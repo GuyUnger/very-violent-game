@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://csvdqccaap4sw"]
+
+[ext_resource type="Script" uid="uid://fvkllu317fte" path="res://game/player/player_movement.gd" id="1_1fmjf"]
+[ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
+[ext_resource type="Script" uid="uid://dox5xeqi4e85r" path="res://game/player/pickup.gd" id="3_m5hd3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lkb2c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_273ty"]
+height = 1.2
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_7hyr5")
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("1_1fmjf")
+
+[node name="Pickup" type="Node" parent="."]
+script = ExtResource("3_m5hd3")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
+
+[node name="StandingCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_lkb2c")
+
+[node name="CrouchingCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("CapsuleShape3D_273ty")
+
+[node name="Nek" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Head" type="Node3D" parent="Nek"]
+
+[node name="Eyes" type="Node3D" parent="Nek/Head"]
+
+[node name="Camera" type="Camera3D" parent="Nek/Head/Eyes"]
+
+[node name="InteractionRaycast" type="RayCast3D" parent="Nek/Head/Eyes/Camera"]
+target_position = Vector3(0, 0, -6)
+
+[node name="HoldPoint" type="Marker3D" parent="Nek/Head/Eyes/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.47826)
