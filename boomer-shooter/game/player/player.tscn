@@ -10,6 +10,7 @@
 height = 1.2
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 3
 script = ExtResource("1_7hyr5")
 
 [node name="Movement" type="Node" parent="."]
@@ -33,10 +34,12 @@ shape = SubResource("CapsuleShape3D_273ty")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="Head" type="Node3D" parent="Nek"]
+unique_name_in_owner = true
 
 [node name="Eyes" type="Node3D" parent="Nek/Head"]
 
 [node name="Camera" type="Camera3D" parent="Nek/Head/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29231, 0)
 
 [node name="InteractionRaycast" type="RayCast3D" parent="Nek/Head/Eyes/Camera"]
 target_position = Vector3(0, 0, -6)
