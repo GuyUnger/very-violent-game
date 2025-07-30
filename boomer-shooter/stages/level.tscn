@@ -1,6 +1,100 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqff16mf4lpq6"]
+[gd_scene load_steps=13 format=4 uid="uid://cqff16mf4lpq6"]
 
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_mwmwo"]
+[ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_l4ad7"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l4ad7"]
+_surfaces = [{
+"aabb": AABB(-5.5, -2.5, -1, 7, 4, 2),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AACwwAAAIMAAAIC/AADAPwAAwL8AAIC/AADAPwAAwD8AAIC/AADAPwAAwD8AAIC/AACwwAAAIMAAAIA/AADAPwAAwL8AAIA/AADAPwAAwD8AAIA/AADAPwAAwD8AAIA/")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_e0l40"]
+_surfaces = [{
+"aabb": AABB(-14.5, -1.5, -2, 29, 3, 4),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AABowQAAwL8AAADAAABoQQAAwL8AAADAAABoQQAAwD8AAADAAABowQAAwD8AAADAAABowQAAwL8AAABAAABoQQAAwL8AAABAAABoQQAAwD8AAABAAABowQAAwD8AAABA")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dgwo2"]
+_surfaces = [{
+"aabb": AABB(-13, -2.5, -3.5, 26, 5, 7),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AABQwQAAIMAAAGDAAABQQQAAIMAAAGDAAABQQQAAIEAAAGDAAABQwQAAIEAAAGDAAABQwQAAIMAAAGBAAABQQQAAIMAAAGBAAABQQQAAIEAAAGBAAABQwQAAIEAAAGBA")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_65nvc"]
+_surfaces = [{
+"aabb": AABB(-1, -2, -1.5, 2, 4, 3),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AACAvwAAAMAAAMC/AACAPwAAAMAAAMC/AACAPwAAAEAAAMC/AACAvwAAAEAAAMC/AACAvwAAAMAAAMA/AACAPwAAAMAAAMA/AACAPwAAAEAAAMA/AACAvwAAAEAAAMA/")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_udlle"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.5, 3, 3, 1),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AADAvwAAwL8AAAC/AADAPwAAwL8AAAC/AADAPwAAwD8AAAC/AADAvwAAwD8AAAC/AADAvwAAwL8AAAA/AADAPwAAwL8AAAA/AADAPwAAwD8AAAA/AADAvwAAwD8AAAA/")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iltmi"]
+_surfaces = [{
+"aabb": AABB(-1, -1.5, -3, 2, 3, 6),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AACAvwAAwL8AAEDAAACAPwAAwL8AAEDAAACAPwAAwD8AAEDAAACAvwAAwD8AAEDAAACAvwAAwL8AAEBAAACAPwAAwL8AAEBAAACAPwAAwL8AAEBAAACAvwAAwL8AAEBA")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_covs7"]
+_surfaces = [{
+"aabb": AABB(-8.5, -2, -4, 17, 4, 8),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAIwQAAAMAAAIDAAAAIQQAAAMAAAIDAAAAIQQAAAEAAAIDAAAAIwQAAAEAAAIDAAAAIwQAAAMAAAIBAAAAIQQAAAMAAAIBAAAAIQQAAAEAAAIBAAAAIwQAAAEAAAIBA")
+}]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l4ad7"]
+
+[sub_resource type="Sky" id="Sky_e0l40"]
+sky_material = SubResource("ProceduralSkyMaterial_l4ad7")
+
+[sub_resource type="Environment" id="Environment_dgwo2"]
+background_mode = 2
+sky = SubResource("Sky_e0l40")
 
 [node name="Level" type="Node3D"]
 
@@ -12,3 +106,186 @@ size = Vector3(100, 1, 100)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.0285604, -0.296195, 0.9547, -0.000397786, 0.955087, 0.296327, -0.999592, -0.00884296, 0.0271598, 0, 40.3619, 0)
+
+[node name="CubeGrid3D" type="StaticBody3D" parent="."]
+script = ExtResource("2_l4ad7")
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CubeGrid3D"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="@CSGBox3D@31290" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.5, 4)
+use_collision = true
+size = Vector3(5, 3, 10)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31295" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.5, 15)
+use_collision = true
+size = Vector3(8, 5, 4)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31304" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -7)
+operation = 2
+use_collision = true
+size = Vector3(18, 6, 16)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31306" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 5, -9)
+use_collision = true
+size = Vector3(17, 10, 18)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31312" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5.5, 1)
+use_collision = true
+size = Vector3(14, 1, 2)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31314" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 7.5, -10)
+operation = 2
+use_collision = true
+size = Vector3(13, 3, 20)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31318" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7.5, -0.5)
+use_collision = true
+size = Vector3(2, 3, 1)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31320" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 6.5, -0.5)
+use_collision = true
+size = Vector3(5, 1, 1)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31329" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -30.5, -34)
+operation = 2
+use_collision = true
+size = Vector3(4, 61, 66)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31331" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.5, 8.5)
+use_collision = true
+size = Vector3(2, 3, 21)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31333" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 7, 25.5)
+use_collision = true
+size = Vector3(19, 14, 7)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31335" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.5, 24)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 4)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31342" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 7.5, 8)
+use_collision = true
+size = Vector3(14, 15, 18)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31344" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2.5, 19.5)
+use_collision = true
+size = Vector3(2, 5, 5)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31346" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 2, 14)
+operation = 2
+use_collision = true
+size = Vector3(5, 4, 2)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@31356" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 2.5, 8)
+operation = 2
+use_collision = true
+size = Vector3(10, 7, 14)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@35107" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -9.5)
+use_collision = true
+size = Vector3(2, 3, 1)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@35109" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -13)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 8)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGMesh3D@23481" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, 7)
+use_collision = true
+mesh = SubResource("ArrayMesh_l4ad7")
+
+[node name="@CSGMesh3D@23503" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 7.5, -5)
+operation = 2
+use_collision = true
+mesh = SubResource("ArrayMesh_e0l40")
+
+[node name="@CSGMesh3D@23508" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.5, -5.5)
+operation = 2
+use_collision = true
+mesh = SubResource("ArrayMesh_dgwo2")
+
+[node name="@CSGMesh3D@24470" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.5)
+operation = 2
+use_collision = true
+mesh = SubResource("ArrayMesh_65nvc")
+
+[node name="@CSGMesh3D@31083" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 7.5, -0.5)
+use_collision = true
+mesh = SubResource("ArrayMesh_udlle")
+
+[node name="@CSGMesh3D@31084" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4.5, 3)
+use_collision = true
+mesh = SubResource("ArrayMesh_iltmi")
+
+[node name="@CSGMesh3D@31085" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2, 21)
+use_collision = true
+mesh = SubResource("ArrayMesh_covs7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dgwo2")
