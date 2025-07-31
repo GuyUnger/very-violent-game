@@ -6,6 +6,9 @@ var source_id := 0
 var is_ghost := false
 
 func _ready() -> void:
+	$Fire.pitch_scale = randf_range(1.0, 1.2)
+	$Fire.play()
+
 	if source_id == 0:
 		source_id = EventStore.next_source_id()
 		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))

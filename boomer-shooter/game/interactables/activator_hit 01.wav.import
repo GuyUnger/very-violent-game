@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://i4q8e68nr5ru"
+path="res://.godot/imported/activator_hit 01.wav-8a9c85bb26d6ae6f77061912418d7cc2.sample"
+
+[deps]
+
+source_file="res://game/interactables/activator_hit 01.wav"
+dest_files=["res://.godot/imported/activator_hit 01.wav-8a9c85bb26d6ae6f77061912418d7cc2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

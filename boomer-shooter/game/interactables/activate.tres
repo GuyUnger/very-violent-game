@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=6 format=3 uid="uid://cdmweeawyjrgv"]
+
+[ext_resource type="AudioStream" uid="uid://drhupy73nduew" path="res://game/interactables/activate 01.wav" id="0_qi0l4"]
+[ext_resource type="AudioStream" uid="uid://8frouqudbpfr" path="res://game/interactables/activate 02.wav" id="1_v88la"]
+[ext_resource type="AudioStream" uid="uid://yovn43r6aljv" path="res://game/interactables/activate 03.wav" id="2_f6flb"]
+[ext_resource type="AudioStream" uid="uid://cfpoy2jmny6is" path="res://game/interactables/activate 04.wav" id="3_4g30o"]
+[ext_resource type="AudioStream" uid="uid://r1pkeryk4hye" path="res://game/interactables/activate 05.wav" id="4_65zdg"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("0_qi0l4")
+stream_1/stream = ExtResource("1_v88la")
+stream_2/stream = ExtResource("2_f6flb")
+stream_3/stream = ExtResource("3_4g30o")
+stream_4/stream = ExtResource("4_65zdg")

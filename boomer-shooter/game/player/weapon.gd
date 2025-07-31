@@ -29,9 +29,6 @@ func process(delta: float) -> void:
 
 
 func shoot() -> void:
-	$AudioStreamPlayer3D.pitch_scale = randf_range(1.0, 1.2)
-	$AudioStreamPlayer3D.play()
-	
 	reload_t = 0.1
 	player.cam.shake_rumble(0.1, 0.15, 16.0)
 	

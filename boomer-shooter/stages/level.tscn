@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://cqff16mf4lpq6"]
+[gd_scene load_steps=18 format=4 uid="uid://cqff16mf4lpq6"]
 
 [ext_resource type="Script" uid="uid://cywxf4tybte30" path="res://stages/level.gd" id="1_e0l40"]
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_mwmwo"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_l4ad7"]
+[ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="4_dgwo2"]
+[ext_resource type="PackedScene" uid="uid://duomy14irp63p" path="res://game/doors/door_slide_wall/door_slide_wall.tscn" id="5_65nvc"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l4ad7"]
 _surfaces = [{
@@ -87,6 +89,13 @@ _surfaces = [{
 "vertex_count": 8,
 "vertex_data": PackedByteArray("AAAIwQAAAMAAAIDAAAAIQQAAAMAAAIDAAAAIQQAAAEAAAIDAAAAIwQAAAEAAAIDAAAAIwQAAAMAAAIBAAAAIQQAAAMAAAIBAAAAIQQAAAEAAAIBAAAAIwQAAAEAAAIBA")
 }]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65nvc"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_udlle"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l4ad7"]
 
@@ -290,8 +299,62 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2, 21)
 use_collision = true
 mesh = SubResource("ArrayMesh_covs7")
 
+[node name="@CSGBox3D@75787" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, 2, 8.5)
+use_collision = true
+size = Vector3(5, 4, 1)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@75790" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 2, 8.5)
+use_collision = true
+size = Vector3(5, 4, 1)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@75792" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5, 2, 11.5)
+use_collision = true
+size = Vector3(1, 4, 5)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@75794" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 13.5)
+use_collision = true
+size = Vector3(11, 4, 1)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@75796" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 11)
+use_collision = true
+size = Vector3(1, 4, 4)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@75799" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4.5, 11)
+use_collision = true
+size = Vector3(12, 1, 6)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@MeshInstance3D@82046" type="MeshInstance3D" parent="CubeGrid3D/CSGCombiner3D"]
+material_override = SubResource("StandardMaterial3D_65nvc")
+mesh = SubResource("ImmediateMesh_udlle")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dgwo2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="MeleeActivator" parent="." instance=ExtResource("4_dgwo2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 2)
+
+[node name="DoorSlideWall" parent="." instance=ExtResource("5_65nvc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 8.5)
+
+[connection signal="activated" from="MeleeActivator" to="DoorSlideWall" method="activate"]

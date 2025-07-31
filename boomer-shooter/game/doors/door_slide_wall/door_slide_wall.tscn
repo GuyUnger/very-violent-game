@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://duomy14irp63p"]
+
+[ext_resource type="Script" uid="uid://b4xrrekbx122r" path="res://game/doors/door_slide_wall/door_slide_wall.gd" id="1_fnj02"]
+[ext_resource type="AudioStream" uid="uid://bqmf85a2dhyxp" path="res://game/interactables/mechanical_door_thud.tres" id="2_bpo4e"]
+[ext_resource type="AudioStream" uid="uid://7a4ebqe3uy86" path="res://game/interactables/mechanical_stone_slide.wav" id="2_ekjhr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bnhdb"]
+size = Vector3(2, 3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ekjhr"]
+size = Vector3(2, 3, 1)
+
+[node name="DoorSlideWall" type="Node3D"]
+script = ExtResource("1_fnj02")
+
+[node name="Collider" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("BoxMesh_bnhdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_ekjhr")
+
+[node name="AudioMove" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_ekjhr")
+bus = &"SFX"
+
+[node name="AudioStop" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_bpo4e")
+bus = &"SFX"

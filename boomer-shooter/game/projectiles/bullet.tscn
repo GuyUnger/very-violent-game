@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://fuxpwithmy52"]
+[gd_scene load_steps=8 format=3 uid="uid://fuxpwithmy52"]
 
 [ext_resource type="Script" uid="uid://ba84d1ksxorgp" path="res://game/projectiles/bullet.gd" id="1_2dqbx"]
 [ext_resource type="AudioStream" uid="uid://16i2e8o0hgxj" path="res://content/sfx/bullet_whiz.wav" id="3_645c0"]
 [ext_resource type="AudioStream" uid="uid://75mkxcnngcqb" path="res://content/sfx/bullet_hot_metal.wav" id="4_tynb1"]
 [ext_resource type="AudioStream" uid="uid://cwhw047fx33ox" path="res://content/sfx/bullet_hit_meat.wav" id="5_a77ay"]
+[ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="5_xx14j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dqbx"]
 emission_enabled = true
@@ -33,3 +34,6 @@ stream = ExtResource("4_tynb1")
 [node name="HitMeat" type="AudioStreamPlayer3D" parent="."]
 top_level = true
 stream = ExtResource("5_a77ay")
+
+[node name="Fire" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_xx14j")
