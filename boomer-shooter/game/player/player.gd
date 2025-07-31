@@ -56,6 +56,7 @@ var velocity_prev: Vector3 = Vector3.ZERO
 var walk_cycle: float = 0.0
 var walk_cycle_next_step: int = 0
 
+@export var close_on_escape = false
 
 #region Initialization
 
@@ -75,8 +76,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_view"):
 		first_person = not first_person
-		%Model.visible = not first_person
-	
+	%Model.visible = not first_person
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
 	model.global_position = model_position
@@ -403,11 +403,12 @@ func _input(event: InputEvent) -> void:
 			else:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		
-		if event.pressed:
-			match event.keycode:
-				KEY_ESCAPE:
-					if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-						Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if event.is_action_pressed("exit"):
+			if close_on_escape:
+				get_tree().quit()
+			else:
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
