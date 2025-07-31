@@ -43,6 +43,10 @@ func _ready() -> void:
 	new_loop()
 
 func _physics_process(delta: float) -> void:
+	if not sources.has(1):
+		# wait for main scene to be added
+		return
+	
 	delta_sum_ += delta
 	
 	for i in range(0, loops.size() - 1):

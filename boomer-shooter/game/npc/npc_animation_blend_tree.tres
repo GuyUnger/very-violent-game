@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=15 format=3 uid="uid://dqjgomdtemo5l"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=14 format=3 uid="uid://dqjgomdtemo5l"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3ocbx"]
 animation = &"npc_animation_library/Nervously Look Around"
@@ -10,19 +10,6 @@ timeline_length = 1.0
 stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yj70c"]
-animation = &"npc_animation_library/Hit To Body"
-use_custom_timeline = true
-timeline_length = 1.0
-stretch_time_scale = true
-start_offset = 0.0
-loop_mode = 0
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ngog3"]
-filter_enabled = true
-filters = ["Armature/Skeleton3D:Arm_L", "Armature/Skeleton3D:Arm_R", "Armature/Skeleton3D:ForeArm_L", "Armature/Skeleton3D:ForeArm_R", "Armature/Skeleton3D:HandIndex1_L", "Armature/Skeleton3D:HandIndex1_R", "Armature/Skeleton3D:HandIndex2_L", "Armature/Skeleton3D:HandIndex2_R", "Armature/Skeleton3D:HandIndex3_L", "Armature/Skeleton3D:HandIndex3_R", "Armature/Skeleton3D:HandMiddle1_L", "Armature/Skeleton3D:HandMiddle1_R", "Armature/Skeleton3D:HandMiddle2_L", "Armature/Skeleton3D:HandMiddle2_R", "Armature/Skeleton3D:HandMiddle3_L", "Armature/Skeleton3D:HandMiddle3_R", "Armature/Skeleton3D:HandRing1_L", "Armature/Skeleton3D:HandRing1_R", "Armature/Skeleton3D:HandRing2_L", "Armature/Skeleton3D:HandRing2_R", "Armature/Skeleton3D:HandRing3_L", "Armature/Skeleton3D:HandRing3_R", "Armature/Skeleton3D:HandThumb1_L", "Armature/Skeleton3D:HandThumb1_R", "Armature/Skeleton3D:HandThumb2_L", "Armature/Skeleton3D:HandThumb2_R", "Armature/Skeleton3D:HandThumb3_L", "Armature/Skeleton3D:HandThumb3_R", "Armature/Skeleton3D:Hand_L", "Armature/Skeleton3D:Hand_R", "Armature/Skeleton3D:Head", "Armature/Skeleton3D:Neck", "Armature/Skeleton3D:Shoulder_L", "Armature/Skeleton3D:Shoulder_R", "Armature/Skeleton3D:Spine", "Armature/Skeleton3D:Spine1", "Armature/Skeleton3D:Spine2"]
-fadeout_time = 0.2
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_b654h"]
 filter_enabled = true
@@ -74,16 +61,14 @@ input_1/reset = true
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3ocbx"]
 
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_yj70c"]
+
 [resource]
-graph_offset = Vector2(28.8705, -381.476)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_yj70c")
-nodes/Animation/position = Vector2(200, -120)
+graph_offset = Vector2(183.871, -494.476)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_3ocbx")
 "nodes/Animation 2/position" = Vector2(-660, 140)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_e0hse")
 "nodes/Animation 3/position" = Vector2(640, -20)
-nodes/HitBody/node = SubResource("AnimationNodeOneShot_ngog3")
-nodes/HitBody/position = Vector2(740, -400)
 nodes/HitHead/node = SubResource("AnimationNodeOneShot_b654h")
 nodes/HitHead/position = Vector2(1020, -340)
 nodes/MoveDirection/node = SubResource("AnimationNodeBlendSpace2D_yxww1")
@@ -92,5 +77,7 @@ nodes/Special/node = SubResource("AnimationNodeTransition_ye2x2")
 nodes/Special/position = Vector2(-160, -180)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3ocbx")
 nodes/TimeScale/position = Vector2(1240, -440)
-nodes/output/position = Vector2(1580, -340)
-node_connections = [&"HitBody", 0, &"Special", &"HitBody", 1, &"Animation", &"HitHead", 0, &"HitBody", &"HitHead", 1, &"Animation 3", &"Special", 0, &"MoveDirection", &"Special", 1, &"Animation 2", &"TimeScale", 0, &"HitHead", &"output", 0, &"TimeScale"]
+nodes/TimeSeek/node = SubResource("AnimationNodeTimeSeek_yj70c")
+nodes/TimeSeek/position = Vector2(1180, -140)
+nodes/output/position = Vector2(1720, -420)
+node_connections = [&"HitHead", 0, &"Special", &"HitHead", 1, &"Animation 3", &"Special", 0, &"MoveDirection", &"Special", 1, &"Animation 2", &"TimeScale", 0, &"HitHead", &"output", 0, &"TimeScale"]

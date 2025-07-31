@@ -69,7 +69,8 @@ func _ready() -> void:
 		EventStoreCommandAddChild.new(
 			get_parent().source_id, 
 			source_id, 
-			preload("res://game/npc/player_ghost/npc_player_ghost.tscn")))
+			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
+			global_transform))
 	
 	
 	Main.player = self
