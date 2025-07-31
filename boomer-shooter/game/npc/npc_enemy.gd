@@ -19,6 +19,9 @@ class StateIdle extends State:
 		next_state.enemy = body
 		move_to(next_state)
 		
+	func _exit_tree() -> void:
+		get_parent().get_node("%Vision").body_entered.disconnect(_body_entered_vision)
+		
 
 class StateSpottedEnemy extends State:
 	var enemy:Node3D

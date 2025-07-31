@@ -19,7 +19,7 @@ const JUMP_STRENGTH = 12.0
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
 
-var source_id := "Player"
+var source_id := 0
 
 static var first_person: bool = true
 
@@ -63,8 +63,13 @@ var walk_cycle_next_step: int = 0
 #region Initialization
 
 func _ready() -> void:
+	source_id = EventStore.next_source_id()
+	
 	EventStore.push_event(
-		EventStoreCommandAddChild.new(get_parent().event_store_id, source_id + EventStore.loop_id, preload("res://game/npc/player_ghost/npc_player_ghost.tscn")))
+		EventStoreCommandAddChild.new(
+			get_parent().source_id, 
+			source_id, 
+			preload("res://game/npc/player_ghost/npc_player_ghost.tscn")))
 	
 	
 	Main.player = self
@@ -155,7 +160,7 @@ func _process(delta: float) -> void:
 	process_target_indicators(delta)
 	
 	
-	EventStore.push_event(EventStoreCommandSet.new(source_id + EventStore.loop_id, "global_transform", global_transform))
+	EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
 
 
 func _physics_process(delta: float) -> void:
