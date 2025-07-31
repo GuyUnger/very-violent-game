@@ -62,7 +62,6 @@ top_level = true
 stream = ExtResource("5_a77ay")
 
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
-top_level = true
 stream = ExtResource("5_xx14j")
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
