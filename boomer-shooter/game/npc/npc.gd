@@ -12,7 +12,7 @@ var speed_scale := 1.0
 
 var center_pos: Vector3:
 	get:
-		return global_position + Vector3.UP * 1.2
+		return global_position + Vector3.UP * 1.0
 
 var max_health: int = 20
 var health: int = max_health

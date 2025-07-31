@@ -324,7 +324,9 @@ func process_jump_vel_boost() -> void:
 func process_targets() -> void:
 	if first_person:
 		aim_target = null
+		aim_dir = -cam.global_basis.z
 		aim_point = cam.global_position + cam.basis.z * 100.0
+		#printt(aim_dir)
 		return
 	# Aim target
 	var target_range_sq: float = weapon.target_range ** 2

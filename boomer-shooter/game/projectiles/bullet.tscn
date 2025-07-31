@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://fuxpwithmy52"]
+[gd_scene load_steps=4 format=3 uid="uid://fuxpwithmy52"]
 
 [ext_resource type="Script" uid="uid://ba84d1ksxorgp" path="res://game/projectiles/bullet.gd" id="1_2dqbx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dqbx"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 2.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_hjs74"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -9,4 +14,6 @@ size = Vector3(0.1, 0.1, 0.1)
 script = ExtResource("1_2dqbx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 9.33853, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_2dqbx")
 mesh = SubResource("BoxMesh_hjs74")

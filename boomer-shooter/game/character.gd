@@ -39,4 +39,4 @@ func die() -> void:
 
 
 func get_center_pos() -> Vector3:
-	return global_position + Vector3.UP * 0.8
+	return global_position + Vector3.UP * 1.4
