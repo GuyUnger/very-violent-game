@@ -8,7 +8,7 @@ const MOVE_ACCEL = 6.0
 const MOVE_DECEL = 13.0
 const AIR_ACCEL = 4.0
 const AIR_DECEL = 1.0
-const EXPLORE_JUMP_STRENGTH = 12.0
+const JUMP_STRENGTH = 12.0
 
 
 # References
@@ -19,6 +19,7 @@ const EXPLORE_JUMP_STRENGTH = 12.0
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
 
+var first_person: bool = true
 
 # Camera
 var look_angle: Vector2
@@ -33,6 +34,8 @@ var since_jump_pressed: float = 999.0
 var since_on_floor: float = 0.0
 var allow_jump_vel_boost: bool = false
 
+var allow_walljump: bool = false
+
 # Shooting
 @onready var weapon: Weapon = %Weapon
 
@@ -42,6 +45,9 @@ var aim_point: Vector3
 var look_angle_prev: Vector2
 var look_vel: Vector2 = Vector2.ZERO
 @export var target_range_over_distance: Curve
+
+var since_secondary_pressed: float = 999.0
+var melee_reload_t: float = 0.0
 
 var model_position: Vector3 = Vector3.ZERO
 var velocity_prev: Vector3 = Vector3.ZERO
@@ -67,6 +73,10 @@ func _ready() -> void:
 #region Processing
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("toggle_view"):
+		first_person = not first_person
+		%Model.visible = not first_person
+	
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
 	model.global_position = model_position
@@ -86,16 +96,20 @@ func _process(delta: float) -> void:
 	cam.rotation.x = ease(absf(look_angle.y), -1.2) * sign(look_angle.y) - 0.2
 	cam.rotation.x = look_angle.y
 	
-	
 	# Camera distance
-	var cam_distance_to: float = 2.5
+	var cam_distance_to: float = 2.5 + ease(sin(melee_reload_t * PI * 0.7), 0.7) * 1.5
+	var cam_up: float = 2.0
+	
+	if first_person:
+		cam_distance_to = 0.0
+		cam_up = 1.5
+	
 	var view_up_close_in: float = clampf(-look_angle.y + 1.3, 0.0, 1.0)
 	view_up_close_in = ease(view_up_close_in, -2.0)
 	view_up_close_in = remap(view_up_close_in, 0.0, 1.0, 0.9, 1.0)
 	cam_distance_to *= view_up_close_in
 	
 	# Camera Up
-	var cam_up: float = 2.0
 	%RayUp.global_position.y = floor_pos.y + 1.0
 	%RayUp.force_raycast_update()
 	if %RayUp.is_colliding():
@@ -152,7 +166,8 @@ func _physics_process(delta: float) -> void:
 			"left", "right",
 			"forward", "backward")
 	
-	process_movement_exploring(delta)
+	_process_movement(delta)
+	_process_melee(delta)
 	
 	if is_on_floor():
 		if since_on_floor > 0.2:
@@ -176,7 +191,7 @@ func _physics_process(delta: float) -> void:
 
 #region Movement
 
-func process_movement_exploring(delta:float) -> void:
+func _process_movement(delta:float) -> void:
 	# Rotate towards view direction
 	if input_direction != Vector2.ZERO:
 		rotate_towards_view_direction()
@@ -198,6 +213,8 @@ func process_movement_exploring(delta:float) -> void:
 	if absf(velocity.y) < 3.0:
 		# Hovering at jump peak
 		gravity_scale = 0.5
+	if velocity.y < 0.2:
+		gravity_scale *= 1.0 - melee_reload_t
 	velocity.y -= GRAVITY * delta * gravity_scale
 	
 	
@@ -242,7 +259,11 @@ func apply_move_and_slide() -> void:
 	move_and_slide()
 	var collision: KinematicCollision3D = get_last_slide_collision()
 	if collision:
-		pass
+		var normal: Vector3 = collision.get_normal()
+		if since_on_floor > 0.1 and melee_reload_t > 0.0 and allow_walljump and absf(normal.y) < 0.2:
+			velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
+			allow_walljump = false
+			velocity.y = JUMP_STRENGTH
 
 
 func vel_hor_to(to:Vector2, t:float = 1.0) -> void:
@@ -254,7 +275,7 @@ func vel_hor_to(to:Vector2, t:float = 1.0) -> void:
 
 
 func jump() -> void:
-	velocity.y = EXPLORE_JUMP_STRENGTH
+	velocity.y = JUMP_STRENGTH
 	allow_jump_release = true
 	allow_jump = false
 	%AudioJump.play()
@@ -279,6 +300,10 @@ func process_jump_vel_boost() -> void:
 #region Targetting
 
 func process_targets() -> void:
+	if first_person:
+		aim_target = null
+		aim_point = cam.global_position + cam.basis.z * 100.0
+		return
 	# Aim target
 	var target_range_sq: float = weapon.target_range ** 2
 	
@@ -340,6 +365,27 @@ func process_target_indicators(delta: float) -> void:
 	var aim_target_point = aim_target.center_pos if aim_target else aim_point
 	var aim_pos: Vector2 = cam.camera.unproject_position(aim_target_point)
 	aim_indicator.process(aim_pos, delta, aim_target)
+
+#endregion
+
+#region Melee
+
+func _process_melee(delta) -> void:
+	if Input.is_action_just_pressed("secondary"):
+		since_secondary_pressed = 0.0
+	else:
+		since_secondary_pressed += delta
+	
+	melee_reload_t = move_toward(melee_reload_t, 0.0, delta / 0.8)
+	
+	if since_secondary_pressed < 0.2 and melee_reload_t <= 0.0:
+		vel_hor *= 1.5
+		allow_walljump = true
+		melee_reload_t = 1.0
+		since_secondary_pressed = 999.0
+		%MeleeAttack.show()
+		await get_tree().create_timer(0.2).timeout
+		%MeleeAttack.hide()
 
 #endregion
 
