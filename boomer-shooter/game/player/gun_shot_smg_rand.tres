@@ -1,0 +1,18 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://dlklosv5cft1n"]
+
+[ext_resource type="AudioStream" uid="uid://nfj8hvoum2jk" path="res://game/player/gun_shot_smg_rand 01.wav" id="0_z7f95"]
+[ext_resource type="AudioStream" uid="uid://jaarjtli3v3o" path="res://game/player/gun_shot_smg_rand 02.wav" id="1_uz7qg"]
+[ext_resource type="AudioStream" uid="uid://boups0nsakapl" path="res://game/player/gun_shot_smg_rand 03.wav" id="2_0g1cn"]
+[ext_resource type="AudioStream" uid="uid://gk2w7gc30oqr" path="res://game/player/gun_shot_smg_rand 04.wav" id="3_b5kiv"]
+[ext_resource type="AudioStream" uid="uid://b6u5y244gmvkb" path="res://game/player/gun_shot_smg_rand 05.wav" id="4_jivvl"]
+[ext_resource type="AudioStream" uid="uid://cbxr0xr4x32us" path="res://game/player/gun_shot_smg_rand 06.wav" id="5_tgl2z"]
+
+[resource]
+random_pitch = 1.1
+streams_count = 6
+stream_0/stream = ExtResource("0_z7f95")
+stream_1/stream = ExtResource("1_uz7qg")
+stream_2/stream = ExtResource("2_0g1cn")
+stream_3/stream = ExtResource("3_b5kiv")
+stream_4/stream = ExtResource("4_jivvl")
+stream_5/stream = ExtResource("5_tgl2z")

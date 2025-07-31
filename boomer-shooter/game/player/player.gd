@@ -6,7 +6,7 @@ signal jumped
 const MOVE_SPEED = 12.0
 const MOVE_ACCEL = 6.0
 const MOVE_DECEL = 13.0
-const AIR_ACCEL = 4.0
+const AIR_ACCEL = 5.0
 const AIR_DECEL = 1.0
 const JUMP_STRENGTH = 12.0
 
@@ -18,6 +18,7 @@ const JUMP_STRENGTH = 12.0
 @onready var ray_aim_player: RayCast3D = %RayAimPlayer
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
+@onready var area_melee: Area3D = %AreaMelee
 
 var source_id := 0
 
@@ -69,7 +70,8 @@ func _ready() -> void:
 		EventStoreCommandAddChild.new(
 			get_parent().source_id, 
 			source_id, 
-			preload("res://game/npc/player_ghost/npc_player_ghost.tscn")))
+			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
+			global_transform))
 	
 	
 	Main.player = self
@@ -80,7 +82,7 @@ func _ready() -> void:
 	
 	weapon.player = self
 	
-	%Model.visible = not first_person
+	%Person.visible = not first_person
 
 #endregion
 
@@ -89,7 +91,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_view"):
 		first_person = not first_person
-		%Model.visible = not first_person
+		%Person.visible = not first_person
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
 	model.global_position = model_position
@@ -160,7 +162,9 @@ func _process(delta: float) -> void:
 	process_target_indicators(delta)
 	
 	
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
+	var t = global_transform
+	t = t.rotated_local(Vector3.UP, PI * 0.5)
+	EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", t))
 
 
 func _physics_process(delta: float) -> void:
@@ -387,6 +391,7 @@ func process_targets() -> void:
 	
 	if aim_target:
 		aim_dir = center_pos.direction_to(aim_target.center_pos)
+		#printt(aim_dir)
 
 
 func process_target_indicators(delta: float) -> void:
@@ -408,13 +413,27 @@ func _process_melee(delta) -> void:
 	melee_reload_t = move_toward(melee_reload_t, 0.0, delta / 0.8)
 	
 	if since_secondary_pressed < 0.2 and melee_reload_t <= 0.0:
+		
 		vel_hor *= 1.5
 		allow_walljump = true
 		melee_reload_t = 1.0
 		since_secondary_pressed = 999.0
 		%AudioMelee.play()
 		%MeleeAttack.show()
+		
+		%MeleeAttack.rotation.y = 0.0
+		var tween = create_tween()
+		tween.tween_property(%MeleeAttack, "rotation:y", -TAU, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		
 		await get_tree().create_timer(0.2).timeout
+		
+		for body in area_melee.get_overlapping_bodies():
+			if "melee" in body:
+				body.melee()
+			elif "melee" in body.get_parent():
+				body.get_parent().melee()
+		await get_tree().create_timer(0.1).timeout
+		
 		%MeleeAttack.hide()
 
 #endregion

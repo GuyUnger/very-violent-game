@@ -1,11 +1,11 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://bo81sp14xbw6q"]
 
-[ext_resource type="AudioStream" uid="uid://btmvemwsjshti" path="" id="0_fuf9e"]
-[ext_resource type="AudioStream" uid="uid://c23gxwxdwcx33" path="" id="1_eajat"]
-[ext_resource type="AudioStream" uid="uid://flq1fw5ajvne" path="" id="2_d46a0"]
-[ext_resource type="AudioStream" uid="uid://mn3pewbxrnf7" path="" id="3_p6cvk"]
-[ext_resource type="AudioStream" uid="uid://hvj5kaiitgqd" path="" id="4_svrqv"]
-[ext_resource type="AudioStream" uid="uid://4hh1khk5c5v8" path="" id="5_gy25s"]
+[ext_resource type="AudioStream" uid="uid://btmvemwsjshti" path="res://game/player/walljump 01.wav" id="0_fuf9e"]
+[ext_resource type="AudioStream" uid="uid://c23gxwxdwcx33" path="res://game/player/walljump 02.wav" id="1_eajat"]
+[ext_resource type="AudioStream" uid="uid://flq1fw5ajvne" path="res://game/player/walljump 03.wav" id="2_d46a0"]
+[ext_resource type="AudioStream" uid="uid://mn3pewbxrnf7" path="res://game/player/walljump 04.wav" id="3_p6cvk"]
+[ext_resource type="AudioStream" uid="uid://hvj5kaiitgqd" path="res://game/player/walljump 05.wav" id="4_svrqv"]
+[ext_resource type="AudioStream" uid="uid://4hh1khk5c5v8" path="res://game/player/walljump 06.wav" id="5_gy25s"]
 
 [resource]
 streams_count = 6

@@ -11,9 +11,15 @@ class Loop extends  Resource:
 
 var loops:Array[Loop]
 
+
 func next_source_id() -> int:
 	source_ids += 1
 	return source_ids
+
+
+func unique_source_id(node: Node) -> int:
+	return hash(node.global_position)
+
 
 func new_loop() -> void:
 	loops.push_back(Loop.new())
@@ -26,6 +32,7 @@ func new_loop() -> void:
 	sources.clear()
 	
 	loop_id = "_" + str(loops.size())
+
 
 func register_source(source_id:int, object:Object) -> void:
 	sources[source_id] = object
@@ -42,7 +49,12 @@ func replay_event(event:EventStoreCommand) -> void:
 func _ready() -> void:
 	new_loop()
 
+
 func _physics_process(delta: float) -> void:
+	if not sources.has(1):
+		# wait for main scene to be added
+		return
+	
 	delta_sum_ += delta
 	
 	for i in range(0, loops.size() - 1):

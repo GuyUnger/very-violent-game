@@ -1,11 +1,11 @@
 [gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://b78cvnyi5skl7"]
 
-[ext_resource type="AudioStream" uid="uid://d3ecce612x0mi" path="" id="0_mbde8"]
-[ext_resource type="AudioStream" uid="uid://8t2dml06ak0l" path="" id="1_wxkcn"]
-[ext_resource type="AudioStream" uid="uid://drttvh8gh5mv" path="" id="2_8bckg"]
-[ext_resource type="AudioStream" uid="uid://c3wxkfwwss2vg" path="" id="3_wforo"]
-[ext_resource type="AudioStream" uid="uid://cecosl075nc58" path="" id="4_ugfyc"]
-[ext_resource type="AudioStream" uid="uid://dfufnpvvjbfmu" path="" id="5_9ycfm"]
+[ext_resource type="AudioStream" uid="uid://d3ecce612x0mi" path="res://game/player/land_metal 01.wav" id="0_mbde8"]
+[ext_resource type="AudioStream" uid="uid://8t2dml06ak0l" path="res://game/player/land_metal 02.wav" id="1_wxkcn"]
+[ext_resource type="AudioStream" uid="uid://drttvh8gh5mv" path="res://game/player/land_metal 03.wav" id="2_8bckg"]
+[ext_resource type="AudioStream" uid="uid://c3wxkfwwss2vg" path="res://game/player/land_metal 04.wav" id="3_wforo"]
+[ext_resource type="AudioStream" uid="uid://cecosl075nc58" path="res://game/player/land_metal 05.wav" id="4_ugfyc"]
+[ext_resource type="AudioStream" uid="uid://dfufnpvvjbfmu" path="res://game/player/land_metal 06.wav" id="5_9ycfm"]
 
 [resource]
 streams_count = 6

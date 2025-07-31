@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dlxqwxxkayce8"
+path="res://.godot/imported/bullet_ricochet 04.wav-e5fbb21e9cfe4f6f8ba6890df5c2b2d2.sample"
+
+[deps]
+
+source_file="res://game/player/bullet_ricochet 04.wav"
+dest_files=["res://.godot/imported/bullet_ricochet 04.wav-e5fbb21e9cfe4f6f8ba6890df5c2b2d2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

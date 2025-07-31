@@ -13,8 +13,7 @@ func _init(source_id:int, property:StringName, value) -> void:
 
 func replay() -> void:
 	var source:Object = EventStore.sources.get(source_id)
-	if not source:
-		push_error("EVENT SOURCE DOES NOT EXIST")
+	if not source or not is_instance_valid(source):
 		return
-	
+
 	source.set(property, value)

@@ -30,10 +30,12 @@ func process(delta: float) -> void:
 
 func shoot() -> void:
 	reload_t = 0.1
-	player.cam.shake_rumble(0.1, 0.15, 16.0)
+	player.cam.shake_rumble(0.3, 0.1, 16.0)
+	player.cam.shake_shock(0.1, 0.5)
 	
 	var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
-	Main.instance.add_child(projectile)
-	projectile.look_at(-player.aim_dir, Vector3.UP)
+	projectile.track_in_event_store = true
+	projectile.look_at_from_position(Vector3.ZERO, -player.aim_dir, Vector3.UP)
 	projectile.position = player.model_position + Vector3.UP * 1.4
-	projectile._physics_process(0.05)
+	
+	Main.instance.add_child(projectile)
