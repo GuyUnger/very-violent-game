@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=4 uid="uid://cqff16mf4lpq6"]
+[gd_scene load_steps=19 format=4 uid="uid://cqff16mf4lpq6"]
 
 [ext_resource type="Script" uid="uid://cywxf4tybte30" path="res://stages/level.gd" id="1_e0l40"]
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_mwmwo"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_l4ad7"]
 [ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="4_dgwo2"]
 [ext_resource type="PackedScene" uid="uid://duomy14irp63p" path="res://game/doors/door_slide_wall/door_slide_wall.tscn" id="5_65nvc"]
+[ext_resource type="PackedScene" uid="uid://b7g4067loq3un" path="res://game/npc/enemy_big/enemy_big.tscn" id="6_udlle"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l4ad7"]
 _surfaces = [{
@@ -356,5 +357,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 2)
 
 [node name="DoorSlideWall" parent="." instance=ExtResource("5_65nvc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 8.5)
+
+[node name="EnemyBig" parent="." instance=ExtResource("6_udlle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.175, 0, -4.515)
 
 [connection signal="activated" from="MeleeActivator" to="DoorSlideWall" method="activate"]

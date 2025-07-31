@@ -1,9 +1,12 @@
+class_name Bullet
 extends Node3D
 
 @export var speed := 30.0
 
 var source_id := 0
 var is_ghost := false
+
+var damage: int = 1
 
 
 func _ready() -> void:
@@ -51,21 +54,22 @@ func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
 	var bounce_vel = (-global_transform.basis.z).bounce(normal)
 	look_at(global_position + bounce_vel, Vector3.UP)
 	$MeshInstance3D.hide()
-	if has_node("Sparks"):
-		$Sparks.show()
-		$Sparks.emitting = true
 	
-	
+	if not is_instance_valid(npc):
+		return
 	if npc is not NPC:
 		$HitMetal.global_position = hit_position
 		#$HitMetal.pitch_scale = randf_range(0.9, 1.2)
 		$HitMetal.play()
+		if has_node("Sparks"):
+			$Sparks.show()
+			$Sparks.emitting = true
 	else:
 		$HitMeat.global_position = hit_position
 		$HitMeat.pitch_scale = randf_range(0.9, 1.2)
 		$HitMeat.play()
 		
-		npc.health -= 1
+		npc.hit(damage)
 		npc.knock_back(normal * 0.001)
 	
 	await get_tree().create_timer(1.0).timeout
