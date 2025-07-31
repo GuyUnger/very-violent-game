@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" path="res://game/player/land_metal.tres" id="6_anr75"]
 [ext_resource type="AudioStream" path="res://game/player/jump_metal.tres" id="7_epvkq"]
 [ext_resource type="AudioStream" path="res://game/player/walljump.tres" id="8_epvkq"]
-[ext_resource type="AudioStream" uid="uid://c20ji855w3s28" path="res://game/player/melee.tres" id="9_5ghna"]
+[ext_resource type="AudioStream" uid="uid://d2fsf0rpmyygk" path="res://game/player/melee.tres" id="9_5ghna"]
 
 [sub_resource type="Curve" id="Curve_a4w0n"]
 _data = [Vector2(0, 0.5361), 0.0, -19.2906, 0, 0, Vector2(0.0458453, 0.190871), -0.694639, -0.694639, 0, 0, Vector2(1, 0), -0.159803, 0.0, 0, 0]

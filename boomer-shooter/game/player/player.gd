@@ -6,7 +6,7 @@ signal jumped
 const MOVE_SPEED = 12.0
 const MOVE_ACCEL = 6.0
 const MOVE_DECEL = 13.0
-const AIR_ACCEL = 4.0
+const AIR_ACCEL = 5.0
 const AIR_DECEL = 1.0
 const JUMP_STRENGTH = 12.0
 
