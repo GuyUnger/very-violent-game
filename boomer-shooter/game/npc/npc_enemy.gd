@@ -51,6 +51,7 @@ class StateAttacking extends State:
 		
 		if ds < 1.0:
 			get_parent().speed_scale = 0.0
+			
 
 
 func _ready() -> void:

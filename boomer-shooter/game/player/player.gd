@@ -70,7 +70,8 @@ func _ready() -> void:
 		EventStoreCommandAddChild.new(
 			get_parent().source_id, 
 			source_id, 
-			preload("res://game/npc/player_ghost/npc_player_ghost.tscn")))
+			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
+			global_transform))
 	
 	
 	Main.player = self
@@ -161,7 +162,9 @@ func _process(delta: float) -> void:
 	process_target_indicators(delta)
 	
 	
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
+	var t = global_transform
+	t = t.rotated_local(Vector3.UP, PI * 0.5)
+	EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", t))
 
 
 func _physics_process(delta: float) -> void:

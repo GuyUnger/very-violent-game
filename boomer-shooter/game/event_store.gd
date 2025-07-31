@@ -13,7 +13,7 @@ var loops:Array[Loop]
 
 
 func next_source_id() -> int:
-	source_ids -= 1
+	source_ids += 1
 	return source_ids
 
 
@@ -51,6 +51,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if not sources.has(1):
+		# wait for main scene to be added
+		return
+	
 	delta_sum_ += delta
 	
 	for i in range(0, loops.size() - 1):

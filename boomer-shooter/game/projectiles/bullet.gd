@@ -7,9 +7,12 @@ var is_ghost := false
 
 
 func _ready() -> void:
+	$Fire.pitch_scale = randf_range(1.0, 1.2)
+	$Fire.play()
+
 	if source_id == 0:
 		source_id = EventStore.next_source_id()
-		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path)))
+		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
 	else:
 		is_ghost = true
 	
@@ -47,8 +50,9 @@ func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
 	var bounce_vel = (-global_transform.basis.z).bounce(normal)
 	look_at(global_position + bounce_vel, Vector3.UP)
 	$MeshInstance3D.hide()
-	$Sparks.show()
-	$Sparks.emitting = true
+	if has_node("Sparks"):
+		$Sparks.show()
+		$Sparks.emitting = true
 	
 	
 	if npc is not NPC:
@@ -64,4 +68,4 @@ func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
 		npc.knock_back(normal * 0.001)
 	
 	await get_tree().create_timer(1.0).timeout
-	hide()
+	queue_free()

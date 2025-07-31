@@ -38,6 +38,7 @@ func shoot() -> void:
 	player.cam.shake_shock(0.1, 0.5)
 	
 	var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
-	Main.instance.add_child(projectile)
-	projectile.look_at(-player.aim_dir, Vector3.UP)
+	projectile.look_at_from_position(Vector3.ZERO, -player.aim_dir, Vector3.UP)
 	projectile.position = player.model_position + Vector3.UP * 1.4
+	
+	Main.instance.add_child(projectile)

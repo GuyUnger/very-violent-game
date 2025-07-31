@@ -86,6 +86,6 @@ func knock_back(force:Vector3) -> void:
 	knock_back_tween_ = create_tween()
 	knock_back_tween_.tween_property(self, "speed_scale_knock_back", 0.1, 0.1)
 	knock_back_tween_.tween_property(self, "speed_scale_knock_back", 1.0, 1.0)
-	animation_tree.set("parameters/HitBody/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	animation_tree.set("parameters/HitHead/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-	print("HITs")
+	
