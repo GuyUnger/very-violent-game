@@ -108,19 +108,24 @@ unique_name_in_owner = true
 stream = ExtResource("5_5fytw")
 volume_db = -5.0
 pitch_scale = 0.5
+bus = &"SFX"
 
 [node name="AudioLand" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("6_anr75")
+bus = &"SFX"
 
 [node name="AudioJump" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("7_epvkq")
+bus = &"SFX"
 
 [node name="AudioWallbounce" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("8_epvkq")
+bus = &"SFX"
 
 [node name="AudioMelee" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("9_5ghna")
+bus = &"SFX"
