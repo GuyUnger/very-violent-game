@@ -1,9 +1,12 @@
 class_name Main
 extends Node3D
 
+static var instance
+
 var event_store_id := "main"
 
 func _ready() -> void:
+	instance = self
 	EventStore.register_source(event_store_id, self)
 
 

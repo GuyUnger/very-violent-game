@@ -82,6 +82,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_view"):
 		first_person = not first_person
+		first_person = false
 		%Model.visible = not first_person
 	
 	
