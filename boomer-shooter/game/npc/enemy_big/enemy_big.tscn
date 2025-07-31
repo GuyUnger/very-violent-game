@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7g4067loq3un"]
+
+[ext_resource type="Script" uid="uid://bwbjjrc3sq4rd" path="res://game/npc/enemy_big/enemy_big.gd" id="1_6bsln"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6bsln"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6bsln"]
+radius = 2.0
+
+[node name="EnemyBig" type="CharacterBody3D"]
+script = ExtResource("1_6bsln")
+speed = 0.0
+max_health = 200
+health = 200
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.8244, 0, 0, 0, 3.8244, 0, 0, 0, 3.8244, 0, 0.1, 0)
+mesh = SubResource("SphereMesh_6bsln")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_6bsln")

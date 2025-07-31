@@ -56,6 +56,7 @@ volume_db = -12.0
 [node name="HitMetal" type="AudioStreamPlayer3D" parent="."]
 top_level = true
 stream = ExtResource("3_tynb1")
+volume_db = -8.0
 
 [node name="HitMeat" type="AudioStreamPlayer3D" parent="."]
 top_level = true
@@ -63,6 +64,7 @@ stream = ExtResource("5_a77ay")
 
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_xx14j")
+volume_db = -10.0
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, 0)
