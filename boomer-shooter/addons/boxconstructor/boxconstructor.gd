@@ -160,12 +160,10 @@ func _input(event: InputEvent) -> void:
 												undo_redo.add_do_method(csg_root, "add_child", new_mesh)
 												undo_redo.add_do_method(csg_root, "remove_child", old_box)
 												undo_redo.add_do_method(new_mesh, "set_owner", old_box.owner)
-												undo_redo.add_do_reference(new_mesh)
 
 												undo_redo.add_undo_method(csg_root, "add_child", old_box)
 												undo_redo.add_undo_method(csg_root, "remove_child", new_mesh)
 												undo_redo.add_undo_method(old_box, "set_owner", old_box.owner)
-												undo_redo.add_undo_reference(old_box)
 												undo_redo.commit_action()
 		
 												dragged_mesh = new_mesh
@@ -720,16 +718,24 @@ func create_rectangle(immediate_mesh: ImmediateMesh, v1: Vector3, v2: Vector3, v
 
 
 # === CSG Management Methods ===
+
+# Returns true if the hollow checkbox is checked
+func _is_hollow_enabled() -> bool:
+	if toolbar and "hollow_checkbox" in toolbar:
+		return toolbar.hollow_checkbox.button_pressed
+	elif toolbar and toolbar.has_method("is_hollow_enabled"):
+		return toolbar.is_hollow_enabled()
+	return false
+
 func _create_CSGBox3D() -> void:
 	var new_box = CSGBox3D.new()
 	new_box.use_collision = true
 	new_box.set_meta("_edit_lock_", true)
 	new_box.set_meta("_edit_group_", true)
-	
 
 	var min_point = base_rect_points[0]
 	var max_point = base_rect_points[0]
-	
+
 	# Minimum and maximum points of the base rectangle
 	for point in base_rect_points:
 		min_point = Vector3(
@@ -746,7 +752,7 @@ func _create_CSGBox3D() -> void:
 	# Initial size and center of the box
 	var size = (max_point - min_point)
 	var center = (max_point + min_point) * 0.5
-	
+
 	# Adjust size and center based on the extrusion
 	if draw_normal.abs().is_equal_approx(Vector3.UP) or draw_normal.abs().is_equal_approx(Vector3.DOWN):
 		size.y = abs(extrude_distance)
@@ -768,10 +774,30 @@ func _create_CSGBox3D() -> void:
 	if extrude_distance < 0:
 		new_box.operation = CSGShape3D.OPERATION_SUBTRACTION
 
+	var hollow_enabled = _is_hollow_enabled()
+
 	undo_redo.create_action("Create CSGBox3D")
 	undo_redo.add_do_method(csg_root, "add_child", new_box)
 	undo_redo.add_do_method(new_box, "set_owner", get_editor_interface().get_edited_scene_root())
 	undo_redo.add_undo_method(csg_root, "remove_child", new_box)
+
+	# If hollow is enabled and this is an additive box, add a subtractive box inside
+	if hollow_enabled and (not (extrude_distance < 0)):
+		var grid_unit = selected_grid.grid_scale if selected_grid else 1.0
+		var inner_size = size - Vector3.ONE * grid_unit * 2
+		# Only add if the inner box is still valid
+		if inner_size.x > 0.0001 and inner_size.y > 0.0001 and inner_size.z > 0.0001:
+			var inner_box = CSGBox3D.new()
+			inner_box.use_collision = false
+			inner_box.set_meta("_edit_lock_", true)
+			inner_box.set_meta("_edit_group_", true)
+			inner_box.size = inner_size
+			inner_box.position = center
+			inner_box.operation = CSGShape3D.OPERATION_SUBTRACTION
+			undo_redo.add_do_method(csg_root, "add_child", inner_box)
+			undo_redo.add_do_method(inner_box, "set_owner", get_editor_interface().get_edited_scene_root())
+			undo_redo.add_undo_method(csg_root, "remove_child", inner_box)
+
 	undo_redo.commit_action()
 	_update_toolbar_states()
 	
