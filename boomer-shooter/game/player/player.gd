@@ -19,6 +19,8 @@ const JUMP_STRENGTH = 12.0
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
 
+var source_id := "Player"
+
 var first_person: bool = true
 
 # Camera
@@ -61,6 +63,10 @@ var walk_cycle_next_step: int = 0
 #region Initialization
 
 func _ready() -> void:
+	EventStore.push_event(
+		EventStoreCommandAddChild.new(get_parent().event_store_id, source_id + EventStore.loop_id, preload("res://game/npc/player_ghost/npc_player_ghost.tscn")))
+	
+	
 	Main.player = self
 	
 	await get_tree().process_frame
@@ -68,6 +74,7 @@ func _ready() -> void:
 	ray_cam.reparent(get_parent())
 	
 	weapon.player = self
+	
 
 #endregion
 
@@ -142,6 +149,9 @@ func _process(delta: float) -> void:
 	
 	process_targets()
 	process_target_indicators(delta)
+	
+	
+	EventStore.push_event(EventStoreCommandSet.new(source_id + EventStore.loop_id, "global_transform", global_transform))
 
 
 func _physics_process(delta: float) -> void:
