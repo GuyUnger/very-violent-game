@@ -35,6 +35,9 @@ func shake_shock(p_duration: float = 0.2, p_strength: float = 1.0,
 	shakes.push_back(ShakeShock.new(p_duration, p_strength, p_fps, p_curve))
 
 
+func shake_land(p_duration: float = 0.5, p_strength: float = 1.0) -> void:
+	shakes.push_back(ShakeLand.new(p_duration, p_strength))
+
 class Shake extends RefCounted:
 	var duration: float
 	var strength: float
@@ -114,7 +117,6 @@ class ShakeRumble extends Shake:
 
 
 class ShakeShock extends Shake:
-	
 	var fps: float
 	var frame_t: float = 0.0
 	var offset_prev: Vector2
@@ -164,3 +166,18 @@ class ShakeShock extends Shake:
 		
 		# Roll
 		roll = lerpf(offset_roll_prev, offset_roll_next, ease(frame_t, -2.0)) * strength_curved * 0.03
+
+
+class ShakeLand extends Shake:
+	
+	
+	func _init(p_duration: float, p_strength: float) -> void:
+		t = p_duration
+		duration = p_duration
+		strength = p_strength
+		curve = 1.0
+	
+	
+	func _process(delta: float) -> void:
+		offset_look_at.x = -sin(pct * PI) * 0.05 * pct * strength
+		offset.y = -sin(pct * PI) * 0.8 * pct * strength

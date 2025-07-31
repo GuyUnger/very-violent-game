@@ -21,7 +21,7 @@ const JUMP_STRENGTH = 12.0
 
 var source_id := "Player"
 
-var first_person: bool = true
+static var first_person: bool = true
 
 # Camera
 var look_angle: Vector2
@@ -262,6 +262,9 @@ func _process_movement(delta:float) -> void:
 func _on_land() -> void:
 	%AudioLand.play()
 	cam.shake_shock(0.2, maxf(0.0, (-velocity_prev.y * 0.2 - 3.0)))
+	
+	if first_person:
+		cam.shake_land(0.5, minf(absf(velocity_prev.y) / 20.0, 2.0))
 
 
 func _on_step(left: bool) -> void:
@@ -274,8 +277,9 @@ func apply_move_and_slide() -> void:
 	var collision: KinematicCollision3D = get_last_slide_collision()
 	if collision:
 		var normal: Vector3 = collision.get_normal()
-		if since_on_floor > 0.1 and melee_reload_t > 0.5 and allow_walljump and absf(normal.y) < 0.1:
-			velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
+		if since_on_floor > 0.1 and melee_reload_t > 0.7 and allow_walljump and absf(normal.y) < 0.1:
+			#velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
+			velocity = normal * MOVE_SPEED * 2.0
 			allow_walljump = false
 			velocity.y = JUMP_STRENGTH * 1.5
 			%AudioWallbounce.play()
@@ -295,6 +299,9 @@ func jump() -> void:
 	allow_jump = false
 	%AudioJump.play()
 	jumped.emit()
+	
+	if first_person:
+		cam.shake_land(0.4, 0.5)
 
 
 func rotate_towards_view_direction(t: float = 1.0) -> void:
