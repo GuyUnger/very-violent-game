@@ -64,4 +64,4 @@ func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
 		npc.knock_back(normal * 0.001)
 	
 	await get_tree().create_timer(1.0).timeout
-	queue_free()
+	hide()

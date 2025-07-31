@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://fuxpwithmy52"]
+[gd_scene load_steps=11 format=3 uid="uid://bnxkpf24b046p"]
 
-[ext_resource type="Script" uid="uid://ba84d1ksxorgp" path="res://game/projectiles/bullet.gd" id="1_2dqbx"]
-[ext_resource type="AudioStream" uid="uid://16i2e8o0hgxj" path="res://content/sfx/bullet_whiz.wav" id="3_645c0"]
-[ext_resource type="AudioStream" uid="uid://bp0xff2046anp" path="res://game/player/bullet_ricochet.tres" id="3_tynb1"]
-[ext_resource type="AudioStream" uid="uid://cwhw047fx33ox" path="res://content/sfx/bullet_hit_meat.wav" id="5_a77ay"]
+[ext_resource type="Script" uid="uid://ba84d1ksxorgp" path="res://game/projectiles/bullet.gd" id="1_m2upv"]
+[ext_resource type="AudioStream" uid="uid://16i2e8o0hgxj" path="res://content/sfx/bullet_whiz.wav" id="2_atk4c"]
+[ext_resource type="AudioStream" uid="uid://bp0xff2046anp" path="res://game/player/bullet_ricochet.tres" id="3_amigt"]
+[ext_resource type="AudioStream" uid="uid://cwhw047fx33ox" path="res://content/sfx/bullet_hit_meat.wav" id="4_wdva1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dqbx"]
 albedo_color = Color(1, 0.52549, 0, 1)
@@ -34,7 +34,7 @@ radial_segments = 4
 rings = 2
 
 [node name="Bullet" type="Node3D"]
-script = ExtResource("1_2dqbx")
+script = ExtResource("1_m2upv")
 speed = 100.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -43,17 +43,17 @@ material_override = SubResource("StandardMaterial3D_2dqbx")
 mesh = SubResource("CapsuleMesh_tynb1")
 
 [node name="Whiz" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_645c0")
+stream = ExtResource("2_atk4c")
 volume_db = -12.0
 
 [node name="HitMetal" type="AudioStreamPlayer3D" parent="."]
 top_level = true
-stream = ExtResource("3_tynb1")
+stream = ExtResource("3_amigt")
 bus = &"SFX"
 
 [node name="HitMeat" type="AudioStreamPlayer3D" parent="."]
 top_level = true
-stream = ExtResource("5_a77ay")
+stream = ExtResource("4_wdva1")
 bus = &"SFX"
 
 [node name="Sparks" type="GPUParticles3D" parent="."]

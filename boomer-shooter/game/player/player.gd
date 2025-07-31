@@ -81,7 +81,7 @@ func _ready() -> void:
 	
 	weapon.player = self
 	
-	%Model.visible = not first_person
+	%Person.visible = not first_person
 
 #endregion
 
@@ -90,7 +90,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_view"):
 		first_person = not first_person
-		%Model.visible = not first_person
+		%Person.visible = not first_person
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
 	model.global_position = model_position
@@ -417,6 +417,11 @@ func _process_melee(delta) -> void:
 		since_secondary_pressed = 999.0
 		%AudioMelee.play()
 		%MeleeAttack.show()
+		
+		%MeleeAttack.rotation.y = 0.0
+		var tween = create_tween()
+		tween.tween_property(%MeleeAttack, "rotation:y", -TAU, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		
 		await get_tree().create_timer(0.2).timeout
 		
 		for body in area_melee.get_overlapping_bodies():
