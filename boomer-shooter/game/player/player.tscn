@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://csvdqccaap4sw"]
+[gd_scene load_steps=16 format=3 uid="uid://csvdqccaap4sw"]
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="2_a4w0n"]
 [ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
 [ext_resource type="Script" uid="uid://de7cvkqkpjfvt" path="res://game/player/crosshair.gd" id="3_8soms"]
+[ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="3_j0mij"]
 [ext_resource type="AudioStream" uid="uid://ckg8kreql6c0e" path="res://game/player/footstep_metal.tres" id="5_5fytw"]
 [ext_resource type="AudioStream" uid="uid://b78cvnyi5skl7" path="res://game/player/land_metal.tres" id="6_anr75"]
 [ext_resource type="AudioStream" uid="uid://cf2w0k27tufdn" path="res://game/player/jump_metal.tres" id="7_epvkq"]
@@ -43,6 +44,9 @@ unique_name_in_owner = true
 [node name="Weapon" type="Node3D" parent="Model"]
 unique_name_in_owner = true
 script = ExtResource("2_a4w0n")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="Model/Weapon"]
+stream = ExtResource("3_j0mij")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

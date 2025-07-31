@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://gk2w7gc30oqr"
+path="res://.godot/imported/gun_shot_smg_rand 04.wav-fd20312ae0fad4b40c06b58f4144bd5d.sample"
+
+[deps]
+
+source_file="res://game/player/gun_shot_smg_rand 04.wav"
+dest_files=["res://.godot/imported/gun_shot_smg_rand 04.wav-fd20312ae0fad4b40c06b58f4144bd5d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

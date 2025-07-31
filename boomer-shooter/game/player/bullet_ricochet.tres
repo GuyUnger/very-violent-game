@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://bp0xff2046anp"]
+
+[ext_resource type="AudioStream" uid="uid://dxiva85olapq2" path="res://game/player/bullet_ricochet 01.wav" id="0_fs17j"]
+[ext_resource type="AudioStream" uid="uid://b0a5xj3rn865a" path="res://game/player/bullet_ricochet 02.wav" id="1_84if3"]
+[ext_resource type="AudioStream" uid="uid://dykoeq874p0ju" path="res://game/player/bullet_ricochet 03.wav" id="2_fj0se"]
+[ext_resource type="AudioStream" uid="uid://dlxqwxxkayce8" path="res://game/player/bullet_ricochet 04.wav" id="3_yudxi"]
+[ext_resource type="AudioStream" uid="uid://cfe1sy3rxc6fn" path="res://game/player/bullet_ricochet 05.wav" id="4_58fe8"]
+[ext_resource type="AudioStream" uid="uid://cljuqgijnrv00" path="res://game/player/bullet_ricochet 06.wav" id="5_b1ulc"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("0_fs17j")
+stream_1/stream = ExtResource("1_84if3")
+stream_2/stream = ExtResource("2_fj0se")
+stream_3/stream = ExtResource("3_yudxi")
+stream_4/stream = ExtResource("4_58fe8")
+stream_5/stream = ExtResource("5_b1ulc")

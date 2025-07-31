@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://fuxpwithmy52"]
+[gd_scene load_steps=8 format=3 uid="uid://bn61hhe8nalsi"]
 
 [ext_resource type="Script" uid="uid://ba84d1ksxorgp" path="res://game/projectiles/bullet.gd" id="1_2dqbx"]
 [ext_resource type="AudioStream" uid="uid://16i2e8o0hgxj" path="res://content/sfx/bullet_whiz.wav" id="3_645c0"]
