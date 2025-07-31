@@ -19,6 +19,8 @@ const JUMP_STRENGTH = 12.0
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
 
+var source_id := "Player"
+
 var first_person: bool = true
 
 # Camera
@@ -56,10 +58,15 @@ var velocity_prev: Vector3 = Vector3.ZERO
 var walk_cycle: float = 0.0
 var walk_cycle_next_step: int = 0
 
+@export var close_on_escape = false
 
 #region Initialization
 
 func _ready() -> void:
+	EventStore.push_event(
+		EventStoreCommandAddChild.new(get_parent().event_store_id, source_id + EventStore.loop_id, preload("res://game/npc/player_ghost/npc_player_ghost.tscn")))
+	
+	
 	Main.player = self
 	
 	await get_tree().process_frame
@@ -77,8 +84,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_view"):
 		first_person = not first_person
-		%Model.visible = not first_person
-	
+	%Model.visible = not first_person
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
 	model.global_position = model_position
@@ -147,6 +153,9 @@ func _process(delta: float) -> void:
 	
 	process_targets()
 	process_target_indicators(delta)
+	
+	
+	EventStore.push_event(EventStoreCommandSet.new(source_id + EventStore.loop_id, "global_transform", global_transform))
 
 
 func _physics_process(delta: float) -> void:
@@ -410,11 +419,12 @@ func _input(event: InputEvent) -> void:
 			else:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		
-		if event.pressed:
-			match event.keycode:
-				KEY_ESCAPE:
-					if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-						Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if event.is_action_pressed("exit"):
+			if close_on_escape:
+				get_tree().quit()
+			else:
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:

@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=4 uid="uid://cqff16mf4lpq6"]
+[gd_scene load_steps=14 format=4 uid="uid://cqff16mf4lpq6"]
 
+[ext_resource type="Script" uid="uid://cywxf4tybte30" path="res://stages/level.gd" id="1_e0l40"]
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_mwmwo"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_l4ad7"]
 
@@ -97,6 +98,7 @@ background_mode = 2
 sky = SubResource("Sky_e0l40")
 
 [node name="Level" type="Node3D"]
+script = ExtResource("1_e0l40")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
