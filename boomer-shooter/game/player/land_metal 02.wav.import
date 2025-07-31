@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://8t2dml06ak0l"
+path="res://.godot/imported/land_metal 02.wav-ebd531d52126de468d51e2df49cff623.sample"
+
+[deps]
+
+source_file="res://game/player/land_metal 02.wav"
+dest_files=["res://.godot/imported/land_metal 02.wav-ebd531d52126de468d51e2df49cff623.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

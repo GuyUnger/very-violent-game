@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dx1owfo1qkprv"
+path="res://.godot/imported/footstep_metal 06.wav-e2610f531bff0ca8a725796db3b51404.sample"
+
+[deps]
+
+source_file="res://game/player/footstep_metal 06.wav"
+dest_files=["res://.godot/imported/footstep_metal 06.wav-e2610f531bff0ca8a725796db3b51404.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

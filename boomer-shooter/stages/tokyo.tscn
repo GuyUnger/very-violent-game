@@ -1,0 +1,142 @@
+[gd_scene load_steps=8 format=4 uid="uid://b6o8mp0jhq1nd"]
+
+[ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_wojob"]
+[ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_o4n3f"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wojob"]
+_surfaces = [{
+"aabb": AABB(-4.5, -2.5, -3.5, 9, 5, 11),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAPwAAIMAAAGDAAACQQAAAIMAAAGDAAACQQAAAIEAAAGDAAAAAPwAAIEAAAGDAAACQwAAAIMAAAPBAAACQQAAAIMAAAPBAAACQQAAAIEAAAPBAAACQwAAAIEAAAPBA")
+}]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l4ad7"]
+
+[sub_resource type="Sky" id="Sky_e0l40"]
+sky_material = SubResource("ProceduralSkyMaterial_l4ad7")
+
+[sub_resource type="Environment" id="Environment_dgwo2"]
+background_mode = 2
+sky = SubResource("Sky_e0l40")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wojob"]
+
+[node name="Tokyo" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("1_wojob")
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.626133, -0.74642, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779372, -0.590553, 0.209347, 0, 40.3619, 0)
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.914871, -0.377242, 0.143871, 0.0231394, 0.306765, 0.951504, -0.403082, 0.873833, -0.271921, 0, 40.3619, -3)
+light_color = Color(0.205533, 0.451794, 0.625, 1)
+light_energy = 0.837
+
+[node name="Buildings" type="StaticBody3D" parent="."]
+script = ExtResource("2_o4n3f")
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Buildings"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="_CSGBox3D_36875" type="CSGBox3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 15.5, 20)
+use_collision = true
+size = Vector3(9, 5, 6)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGMesh3D@36877" type="CSGMesh3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 15.5, 9.5)
+use_collision = true
+mesh = SubResource("ArrayMesh_wojob")
+
+[node name="@CSGBox3D@43470" type="CSGBox3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 15, 25)
+use_collision = true
+size = Vector3(5, 4, 4)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@43472" type="CSGBox3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 14.5, 25)
+operation = 2
+use_collision = true
+size = Vector3(8, 3, 2)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@43474" type="CSGBox3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 19, 13)
+use_collision = true
+size = Vector3(12, 12, 18)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@43480" type="CSGBox3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 25.5, 40)
+use_collision = true
+size = Vector3(28, 25, 14)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@43486" type="CSGBox3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 13.5, 36)
+use_collision = true
+size = Vector3(2, 1, 6)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@43490" type="CSGBox3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 15.5, 36)
+operation = 2
+use_collision = true
+size = Vector3(5, 3, 4)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@47219" type="CSGBox3D" parent="Buildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 19.5, 27.5)
+use_collision = true
+size = Vector3(4, 1, 11)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+script = ExtResource("2_o4n3f")
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Ground"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="@CSGBox3D@35438" type="CSGBox3D" parent="Ground/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6.5, 0)
+use_collision = true
+size = Vector3(95, 13, 94)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dgwo2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="HeightReference" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 14, 0)
+mesh = SubResource("CapsuleMesh_wojob")

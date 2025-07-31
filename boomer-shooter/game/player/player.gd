@@ -58,6 +58,7 @@ var velocity_prev: Vector3 = Vector3.ZERO
 var walk_cycle: float = 0.0
 var walk_cycle_next_step: int = 0
 
+@export var close_on_escape = false
 
 #region Initialization
 
@@ -74,6 +75,7 @@ func _ready() -> void:
 	
 	weapon.player = self
 	
+	%Model.visible = not first_person
 
 #endregion
 
@@ -82,9 +84,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_view"):
 		first_person = not first_person
-		first_person = false
 		%Model.visible = not first_person
-	
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
 	model.global_position = model_position
@@ -141,7 +141,10 @@ func _process(delta: float) -> void:
 	
 	
 	var cam_pos_to: Vector3 = model.global_position
-	cam_pos_to.y = lerp(cam_pos_to.y, clampf(floor_pos.y, position.y - 4.0, position.y + 2.0), 0.4)
+	if first_person:
+		cam_pos_to.y = cam_pos_to.y
+	else:
+		cam_pos_to.y = lerp(cam_pos_to.y, clampf(floor_pos.y, position.y - 4.0, position.y + 2.0), 0.4)
 	cam_pos.x = cam_pos_to.x
 	cam_pos.z = cam_pos_to.z
 	cam_pos.y = lerp(cam_pos.y, cam_pos_to.y, delta * 8.0)
@@ -157,13 +160,13 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	#region Input
-	var look_vel_to: Vector2 = Input.get_vector(
-			"joy_left", "joy_right",
-			"joy_down", "joy_up")
-	if look_vel_to.length() < 0.1:
-		look_vel = lerp(look_vel, Vector2.ZERO, delta * 20.0)
-	else:
-		look_vel = lerp(look_vel, look_vel_to, delta * 10.0)
+	#var look_vel_to: Vector2 = Input.get_vector(
+	#		"joy_left", "joy_right",
+	#		"joy_down", "joy_up")
+	#if look_vel_to.length() < 0.1:
+	#	look_vel = lerp(look_vel, Vector2.ZERO, delta * 20.0)
+	#else:
+	#	look_vel = lerp(look_vel, look_vel_to, delta * 10.0)
 	
 	if Input.is_action_just_pressed("jump"):
 		since_jump_pressed = 0.0
@@ -262,7 +265,7 @@ func _on_land() -> void:
 
 
 func _on_step(left: bool) -> void:
-	%AudioStep.pitch_scale = 0.8 + (0.1 if left else -0.1)
+	%AudioStep.pitch_scale = 0.4 + (0.1 if left else -0.1)
 	%AudioStep.play()
 
 
@@ -271,10 +274,11 @@ func apply_move_and_slide() -> void:
 	var collision: KinematicCollision3D = get_last_slide_collision()
 	if collision:
 		var normal: Vector3 = collision.get_normal()
-		if since_on_floor > 0.1 and melee_reload_t > 0.0 and allow_walljump and absf(normal.y) < 0.2:
+		if since_on_floor > 0.1 and melee_reload_t > 0.5 and allow_walljump and absf(normal.y) < 0.1:
 			velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
 			allow_walljump = false
-			velocity.y = JUMP_STRENGTH
+			velocity.y = JUMP_STRENGTH * 1.5
+			%AudioWallbounce.play()
 
 
 func vel_hor_to(to:Vector2, t:float = 1.0) -> void:
@@ -394,6 +398,7 @@ func _process_melee(delta) -> void:
 		allow_walljump = true
 		melee_reload_t = 1.0
 		since_secondary_pressed = 999.0
+		%AudioMelee.play()
 		%MeleeAttack.show()
 		await get_tree().create_timer(0.2).timeout
 		%MeleeAttack.hide()
@@ -414,11 +419,12 @@ func _input(event: InputEvent) -> void:
 			else:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		
-		if event.pressed:
-			match event.keycode:
-				KEY_ESCAPE:
-					if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-						Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if event.is_action_pressed("exit"):
+			if close_on_escape:
+				get_tree().quit()
+			else:
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:

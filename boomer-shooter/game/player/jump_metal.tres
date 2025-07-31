@@ -1,0 +1,25 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=11 format=3 uid="uid://cf2w0k27tufdn"]
+
+[ext_resource type="AudioStream" uid="uid://cgwjs6e56q014" path="" id="0_la17t"]
+[ext_resource type="AudioStream" uid="uid://bh63etv0j8xee" path="" id="1_mtw44"]
+[ext_resource type="AudioStream" uid="uid://dd27xnneqswow" path="" id="2_7p19v"]
+[ext_resource type="AudioStream" uid="uid://d4gvwpjchehf8" path="" id="3_fr591"]
+[ext_resource type="AudioStream" uid="uid://cgvb4cn1tfmhh" path="" id="4_imucj"]
+[ext_resource type="AudioStream" uid="uid://n6rkqg2fw2bf" path="" id="5_tl119"]
+[ext_resource type="AudioStream" uid="uid://dblolvhqa5gaa" path="" id="6_qfmee"]
+[ext_resource type="AudioStream" uid="uid://de8tqbhjwpnjk" path="" id="7_flzzi"]
+[ext_resource type="AudioStream" uid="uid://c8ggdv0uhekew" path="" id="8_yzr8p"]
+[ext_resource type="AudioStream" uid="uid://beqbe5y1s553v" path="" id="9_h4ocd"]
+
+[resource]
+streams_count = 10
+stream_0/stream = ExtResource("0_la17t")
+stream_1/stream = ExtResource("1_mtw44")
+stream_2/stream = ExtResource("2_7p19v")
+stream_3/stream = ExtResource("3_fr591")
+stream_4/stream = ExtResource("4_imucj")
+stream_5/stream = ExtResource("5_tl119")
+stream_6/stream = ExtResource("6_qfmee")
+stream_7/stream = ExtResource("7_flzzi")
+stream_8/stream = ExtResource("8_yzr8p")
+stream_9/stream = ExtResource("9_h4ocd")
