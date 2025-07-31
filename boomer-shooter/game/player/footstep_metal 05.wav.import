@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://kript7812x47"
+path="res://.godot/imported/footstep_metal 05.wav-20ca23f819bf445c0ef5b87edb7c618a.sample"
+
+[deps]
+
+source_file="res://game/player/footstep_metal 05.wav"
+dest_files=["res://.godot/imported/footstep_metal 05.wav-20ca23f819bf445c0ef5b87edb7c618a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

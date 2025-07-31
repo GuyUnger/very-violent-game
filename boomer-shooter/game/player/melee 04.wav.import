@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://pi847sqv5vwr"
+path="res://.godot/imported/melee 04.wav-61367e3ad1ae569266d5cea7d1cac96a.sample"
+
+[deps]
+
+source_file="res://game/player/melee 04.wav"
+dest_files=["res://.godot/imported/melee 04.wav-61367e3ad1ae569266d5cea7d1cac96a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

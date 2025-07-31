@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://c20ji855w3s28"]
+
+[ext_resource type="AudioStream" uid="uid://8s1h31mso333" path="res://game/player/melee 01.wav" id="0_fo5kz"]
+[ext_resource type="AudioStream" uid="uid://71plply8oynv" path="res://game/player/melee 02.wav" id="1_8smzc"]
+[ext_resource type="AudioStream" uid="uid://cu6m6imw7wsmi" path="res://game/player/melee 03.wav" id="2_j3dhi"]
+[ext_resource type="AudioStream" uid="uid://pi847sqv5vwr" path="res://game/player/melee 04.wav" id="3_vf0jy"]
+[ext_resource type="AudioStream" uid="uid://b7b0iddrsoi8s" path="res://game/player/melee 05.wav" id="4_jxvcn"]
+[ext_resource type="AudioStream" uid="uid://ccxtg3wbnd4tr" path="res://game/player/melee 06.wav" id="5_zsccd"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("0_fo5kz")
+stream_1/stream = ExtResource("1_8smzc")
+stream_2/stream = ExtResource("2_j3dhi")
+stream_3/stream = ExtResource("3_vf0jy")
+stream_4/stream = ExtResource("4_jxvcn")
+stream_5/stream = ExtResource("5_zsccd")

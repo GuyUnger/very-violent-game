@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dblolvhqa5gaa"
+path="res://.godot/imported/jump_metal 07.wav-17927c8ee20a7bc60349aff9a68cc689.sample"
+
+[deps]
+
+source_file="res://game/player/jump_metal 07.wav"
+dest_files=["res://.godot/imported/jump_metal 07.wav-17927c8ee20a7bc60349aff9a68cc689.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

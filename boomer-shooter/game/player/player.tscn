@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://csvdqccaap4sw"]
+[gd_scene load_steps=14 format=3 uid="uid://csvdqccaap4sw"]
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="2_a4w0n"]
 [ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
 [ext_resource type="Script" uid="uid://de7cvkqkpjfvt" path="res://game/player/crosshair.gd" id="3_8soms"]
+[ext_resource type="AudioStream" uid="uid://ckg8kreql6c0e" path="res://game/player/footstep_metal.tres" id="5_5fytw"]
+[ext_resource type="AudioStream" path="res://game/player/land_metal.tres" id="6_anr75"]
+[ext_resource type="AudioStream" path="res://game/player/jump_metal.tres" id="7_epvkq"]
+[ext_resource type="AudioStream" path="res://game/player/walljump.tres" id="8_epvkq"]
+[ext_resource type="AudioStream" uid="uid://c20ji855w3s28" path="res://game/player/melee.tres" id="9_5ghna"]
 
 [sub_resource type="Curve" id="Curve_a4w0n"]
 _data = [Vector2(0, 0.5361), 0.0, -19.2906, 0, 0, Vector2(0.0458453, 0.190871), -0.694639, -0.694639, 0, 0, Vector2(1, 0), -0.159803, 0.0, 0, 0]
@@ -98,11 +103,24 @@ polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
 
 [node name="Audio" type="Node3D" parent="."]
 
-[node name="AudioStep" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="AudioStep" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
+stream = ExtResource("5_5fytw")
+volume_db = -5.0
+pitch_scale = 0.5
 
-[node name="AudioLand" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="AudioLand" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
+stream = ExtResource("6_anr75")
 
-[node name="AudioJump" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="AudioJump" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
+stream = ExtResource("7_epvkq")
+
+[node name="AudioWallbounce" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("8_epvkq")
+
+[node name="AudioMelee" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("9_5ghna")
