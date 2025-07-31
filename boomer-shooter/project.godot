@@ -123,10 +123,6 @@ joy_right={
 3d_physics/layer_3="Enemies"
 3d_physics/layer_6="Meleeable"
 
-[physics]
-
-common/physics_ticks_per_second=30
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
