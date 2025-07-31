@@ -775,6 +775,10 @@ func _create_CSGBox3D() -> void:
 	# Set the name to match its dimensions
 	new_box.name = str(prefix,int(size.x),"_",int(size.y),"_",int(size.z))
 
+	# Set the material from the CubeGrid3D export material
+	if selected_grid and selected_grid.material:
+		new_box.material = selected_grid.material
+
 	# Depending on the extrusion distance set the operation
 	if extrude_distance < 0:
 		new_box.operation = CSGShape3D.OPERATION_SUBTRACTION
@@ -799,8 +803,11 @@ func _create_CSGBox3D() -> void:
 			inner_box.size = inner_size
 			inner_box.size.y += grid_unit
 
-			inner_box.position = Vector3(0, -grid_unit, 0)
+			inner_box.position = Vector3(0, -grid_unit*0.5, 0)
 			inner_box.operation = CSGShape3D.OPERATION_SUBTRACTION
+
+			if selected_grid and selected_grid.material:
+				inner_box.material = selected_grid.material
 			# Set the name for the inner box as well
 			inner_box.name = str("Sub_",int(size.x),"_",int(size.y),"_",int(size.z))
 			undo_redo.add_do_method(new_box, "add_child", inner_box)
@@ -1235,5 +1242,6 @@ func _convert_box_to_CSGMesh(box: CSGBox3D) -> CSGMesh3D:
 	csg_mesh.operation = box.operation
 	csg_mesh.use_collision = box.use_collision
 	csg_mesh.name = str("e_", box.name)
+	csg_mesh.material = box.material if box.material else null
 	
 	return csg_mesh
