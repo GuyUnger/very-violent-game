@@ -1,10 +1,81 @@
-[gd_scene load_steps=4 format=3 uid="uid://bs15p6iks3jtm"]
+[gd_scene load_steps=9 format=3 uid="uid://bs15p6iks3jtm"]
 
+[ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_0oqm6"]
 [ext_resource type="PackedScene" uid="uid://cqff16mf4lpq6" path="res://stages/level.tscn" id="1_72s8x"]
 [ext_resource type="PackedScene" uid="uid://csvdqccaap4sw" path="res://game/player/player.tscn" id="2_43f5m"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy.tscn" id="3_7iyax"]
 
+[sub_resource type="Shader" id="Shader_0oqm6"]
+code = "shader_type canvas_item;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+uniform float fish_intensity = 1.0;
+uniform float scale_correction : hint_range(0.9, 1.1) = 0.99;
+
+void fragment() {
+	vec2 uv = SCREEN_UV;
+	uv -= 0.5;
+	uv *= scale_correction;
+	uv += 0.5;
+
+	// Convert to lens-space (-1,1) and correct for aspect ratio
+	float aspect_ratio = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+	vec2 lens_pos = (uv - 0.5) * 2.0;
+	lens_pos.x *= aspect_ratio;
+	float lens_radius = length(lens_pos);
+
+	// Equisolid-angle remap: screen radius -> source radius
+	const float max_fov_deg = 70.0; // visible field of view
+	float max_fov_rad = radians(max_fov_deg);
+	float theta = lens_radius * max_fov_rad * fish_intensity;
+	float src_radius = tan(theta * 0.5) / tan(max_fov_rad * 0.5);
+	vec2 unit_dir = lens_pos / max(lens_radius, 1e-6);
+	vec2 src_pos = unit_dir * src_radius;
+	src_pos.x /= aspect_ratio;
+	vec2 sample_uv = src_pos * 0.5 + 0.5; // back to 0,1
+
+	float center_dist = length(sample_uv - 0.5);
+
+	vec3 color = texture(SCREEN_TEXTURE, sample_uv).rgb;
+
+	// hue-shift deges
+	COLOR.rgb = mix(color, color.bgr, pow(center_dist, 1.0) * 0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fejr8"]
+shader = SubResource("Shader_0oqm6")
+shader_parameter/fish_intensity = 0.8
+shader_parameter/scale_correction = 0.961
+
+[sub_resource type="Shader" id="Shader_fejr8"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D screen_texture : hint_screen_texture;
+
+void fragment() {
+	float dither = 0.0;
+	ivec2 pixel = ivec2(SCREEN_UV / SCREEN_PIXEL_SIZE);
+	if (pixel % ivec2(4) == ivec2(0) || pixel % ivec2(4) == ivec2(2)) {
+		dither = 1.0;
+	}
+	else if (pixel % ivec2(2) == ivec2(0) || pixel % ivec2(2) == ivec2(1)) {
+		dither = 0.2;
+	}
+	float steps = mix(30.0, 12.0, dither);
+	vec3 color = texture(screen_texture, SCREEN_UV).rgb;
+
+	color = round(color * steps) / steps;
+
+	COLOR.rgb = color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5sjox"]
+shader = SubResource("Shader_fejr8")
+
 [node name="Main" type="Node3D"]
+script = ExtResource("1_0oqm6")
 
 [node name="Level" parent="." instance=ExtResource("1_72s8x")]
 
@@ -12,3 +83,25 @@
 
 [node name="CharacterEnemy" parent="." instance=ExtResource("3_7iyax")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.46375, 0.0032863, 0.154365)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Fisheye" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_fejr8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Dither" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_5sjox")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

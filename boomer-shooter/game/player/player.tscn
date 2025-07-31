@@ -1,48 +1,98 @@
-[gd_scene load_steps=6 format=3 uid="uid://csvdqccaap4sw"]
+[gd_scene load_steps=8 format=3 uid="uid://csvdqccaap4sw"]
 
-[ext_resource type="Script" uid="uid://fvkllu317fte" path="res://game/player/player_movement.gd" id="1_1fmjf"]
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
-[ext_resource type="Script" uid="uid://dox5xeqi4e85r" path="res://game/player/pickup.gd" id="3_m5hd3"]
+[ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="2_a4w0n"]
+[ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
+[ext_resource type="Script" uid="uid://de7cvkqkpjfvt" path="res://game/player/crosshair.gd" id="3_8soms"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lkb2c"]
+[sub_resource type="Curve" id="Curve_a4w0n"]
+_data = [Vector2(0, 0.670482), 0.0, -19.2906, 0, 0, Vector2(0.0372493, 0.255928), -1.10289, -1.10289, 0, 0, Vector2(1, 0), -0.159803, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_273ty"]
-height = 1.2
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8soms"]
+height = 1.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a4w0n"]
+radius = 0.3
+height = 1.6
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 script = ExtResource("1_7hyr5")
+target_range_over_distance = SubResource("Curve_a4w0n")
 
-[node name="Movement" type="Node" parent="."]
-script = ExtResource("1_1fmjf")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_8soms")
 
-[node name="Pickup" type="Node" parent="."]
-script = ExtResource("3_m5hd3")
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(0, 2, 0)
-
-[node name="StandingCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_lkb2c")
-
-[node name="CrouchingCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-shape = SubResource("CapsuleShape3D_273ty")
-
-[node name="Nek" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-
-[node name="Head" type="Node3D" parent="Nek"]
+[node name="Model" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="Eyes" type="Node3D" parent="Nek/Head"]
+[node name="Weapon" type="Node3D" parent="Model"]
+unique_name_in_owner = true
+script = ExtResource("2_a4w0n")
 
-[node name="Camera" type="Camera3D" parent="Nek/Head/Eyes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29231, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("CapsuleMesh_a4w0n")
+skeleton = NodePath("../..")
 
-[node name="InteractionRaycast" type="RayCast3D" parent="Nek/Head/Eyes/Camera"]
-target_position = Vector3(0, 0, -6)
+[node name="Cam" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+script = ExtResource("2_b2mth")
 
-[node name="HoldPoint" type="Marker3D" parent="Nek/Head/Eyes/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.47826)
+[node name="RayAimCam" type="RayCast3D" parent="Cam"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -50)
+collision_mask = 5
+
+[node name="Camera" type="Camera3D" parent="Cam"]
+unique_name_in_owner = true
+fov = 95.0
+
+[node name="RayAimPlayer" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+collision_mask = 5
+
+[node name="RayCam" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+
+[node name="RayUp" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0.5, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Crosshair" type="Node2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+script = ExtResource("3_8soms")
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Crosshair"]
+polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
+
+[node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Crosshair"]
+rotation = 1.57079
+polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
+
+[node name="Polygon2D3" type="Polygon2D" parent="CanvasLayer/Crosshair"]
+rotation = 3.14159
+polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
+
+[node name="Polygon2D4" type="Polygon2D" parent="CanvasLayer/Crosshair"]
+rotation = 4.71238
+polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="AudioStep" type="AudioStreamPlayer3D" parent="Audio"]
+unique_name_in_owner = true
+
+[node name="AudioLand" type="AudioStreamPlayer3D" parent="Audio"]
+unique_name_in_owner = true
+
+[node name="AudioJump" type="AudioStreamPlayer3D" parent="Audio"]
+unique_name_in_owner = true
