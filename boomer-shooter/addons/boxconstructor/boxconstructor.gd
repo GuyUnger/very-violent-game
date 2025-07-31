@@ -153,9 +153,22 @@ func _input(event: InputEvent) -> void:
 											if child is CSGBox3D:
 
 
-												dragged_mesh = _convert_box_to_CSGMesh(child)
-												csg_root.add_child(dragged_mesh)
-												child.queue_free()
+												var old_box = child
+												var new_mesh = _convert_box_to_CSGMesh(old_box)
+												
+												undo_redo.create_action("Convert Box to Editable Mesh")
+												undo_redo.add_do_method(csg_root, "add_child", new_mesh)
+												undo_redo.add_do_method(csg_root, "remove_child", old_box)
+												undo_redo.add_do_method(new_mesh, "set_owner", old_box.owner)
+												undo_redo.add_do_reference(new_mesh)
+
+												undo_redo.add_undo_method(csg_root, "add_child", old_box)
+												undo_redo.add_undo_method(csg_root, "remove_child", new_mesh)
+												undo_redo.add_undo_method(old_box, "set_owner", old_box.owner)
+												undo_redo.add_undo_reference(old_box)
+												undo_redo.commit_action()
+		
+												dragged_mesh = new_mesh
 
 											else:
 												dragged_mesh = child
@@ -1186,6 +1199,5 @@ func _convert_box_to_CSGMesh(box: CSGBox3D) -> CSGMesh3D:
 	csg_mesh.transform = box.transform
 	csg_mesh.operation = box.operation
 	csg_mesh.use_collision = box.use_collision
-	csg_mesh.owner = get_editor_interface().get_edited_scene_root()
 	
 	return csg_mesh
