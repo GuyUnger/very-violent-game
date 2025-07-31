@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://de7cvkqkpjfvt" path="res://game/player/crosshair.gd" id="3_8soms"]
 
 [sub_resource type="Curve" id="Curve_a4w0n"]
-_data = [Vector2(0, 0.670482), 0.0, -19.2906, 0, 0, Vector2(0.0372493, 0.255928), -1.10289, -1.10289, 0, 0, Vector2(1, 0), -0.159803, 0.0, 0, 0]
+_data = [Vector2(0, 0.5361), 0.0, -19.2906, 0, 0, Vector2(0.0458453, 0.190871), -0.694639, -0.694639, 0, 0, Vector2(1, 0), -0.159803, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8soms"]

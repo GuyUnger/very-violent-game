@@ -30,7 +30,6 @@ var cam_distance: float = 3.0
 var allow_jump: bool = true
 var allow_jump_release: bool = false
 var since_jump_pressed: float = 999.0
-var since_primary_pressed: float = 999.0
 var since_on_floor: float = 0.0
 var allow_jump_vel_boost: bool = false
 
@@ -60,6 +59,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 	cam.reparent(get_parent())
 	ray_cam.reparent(get_parent())
+	
+	weapon.player = self
 
 #endregion
 
@@ -87,7 +88,7 @@ func _process(delta: float) -> void:
 	
 	
 	# Camera distance
-	var cam_distance_to: float = 2.8
+	var cam_distance_to: float = 2.5
 	var view_up_close_in: float = clampf(-look_angle.y + 1.3, 0.0, 1.0)
 	view_up_close_in = ease(view_up_close_in, -2.0)
 	view_up_close_in = remap(view_up_close_in, 0.0, 1.0, 0.9, 1.0)
@@ -144,10 +145,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		since_jump_pressed += delta
 	
-	if Input.is_action_just_pressed("primary"):
-		since_primary_pressed = 0.0
-	else:
-		since_primary_pressed += delta
 	#endregion
 	
 	#region Movement
@@ -314,7 +311,7 @@ func process_targets() -> void:
 		var target_width = 1.0 - target_range_over_distance.sample_baked(dist_sq / target_range_sq)
 		target_width = -0.5 + pow(target_width, 0.2) * 1.5
 		var aimable_dir_flat: Vector3 = center_pos.direction_to(aimable.center_pos)
-		aimable_dir_flat = (aimable_dir_flat * Vector3(1.0, 0.8, 1.0)).normalized()
+		aimable_dir_flat = (aimable_dir_flat * Vector3(1.0, 0.5, 1.0)).normalized()
 		var dot_product: float = aimable_dir_flat.dot(aim_dir_flat)
 		if dot_product < target_width:
 			continue
@@ -371,7 +368,7 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if event is InputEventMouseMotion:
-		var mouse_speed: float = 0.12
+		var mouse_speed: float = 0.1
 		var mouse_motion: InputEventMouseMotion = event
 		look_angle.x += mouse_motion.relative.x * mouse_speed / TAU
 		look_angle.y -= mouse_motion.relative.y * mouse_speed / TAU * 0.7
