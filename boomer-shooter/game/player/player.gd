@@ -84,7 +84,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_view"):
 		first_person = not first_person
-	%Model.visible = not first_person
+		%Model.visible = not first_person
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
 	model.global_position = model_position

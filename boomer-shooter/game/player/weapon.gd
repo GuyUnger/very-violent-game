@@ -31,4 +31,10 @@ func process(delta: float) -> void:
 func shoot() -> void:
 	reload_t = 0.1
 	player.cam.shake_rumble(0.1, 0.15, 16.0)
-	printt("aa")
+
+	
+
+
+	var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
+	Main.instance.add_child(projectile)
+	
