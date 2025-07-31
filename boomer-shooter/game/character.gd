@@ -1,7 +1,7 @@
 class_name Character
 extends CharacterBody3D
 
-const GRAVITY = 48.0
+const GRAVITY = 44.0
 
 var max_health: int = 32
 var health: int = max_health

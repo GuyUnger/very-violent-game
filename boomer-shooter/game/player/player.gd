@@ -8,7 +8,7 @@ const MOVE_ACCEL = 6.0
 const MOVE_DECEL = 13.0
 const AIR_ACCEL = 4.0
 const AIR_DECEL = 1.0
-const EXPLORE_JUMP_STRENGTH = 14.0
+const EXPLORE_JUMP_STRENGTH = 12.0
 
 
 # References
@@ -53,8 +53,6 @@ var model_position: Vector3 = Vector3.ZERO
 var walk_cycle: float = 0.0
 var walk_cycle_next_step: int = 0
 
-# Animation
-var model_offset: Vector3
 
 #region Initialization
 
@@ -70,6 +68,10 @@ func _ready() -> void:
 #region Processing
 
 func _process(delta: float) -> void:
+	
+	model_position = lerp(model_position, global_position, delta * 30.0)
+	model.global_position = model_position
+	
 	#region Camera
 	# Apply look_vel (controller input)
 	look_angle += look_vel * 5.0 * delta
@@ -112,24 +114,18 @@ func _process(delta: float) -> void:
 	cam_distance = minf(cam_distance, cam_distance_to)
 	cam_distance = move_toward(cam_distance, cam_distance_to, delta * 10.0)
 	
-	# Camera position
-	cam.position = cam_pos + Vector3.UP * cam_up + cam.basis.z * cam_distance
-	
 	# Apply cam position
 	if is_on_floor() or forced_on_floor:
 		floor_pos = global_position
-	var cam_accel_hor: float = 6.0
+	
 	
 	var cam_pos_to: Vector3 = model.global_position
 	cam_pos_to.y = lerp(cam_pos_to.y, clampf(floor_pos.y, position.y - 4.0, position.y + 2.0), 0.4)
-	cam_pos_to += velocity * Vector3(1.0, 0.0, 1.0) * 0.2
-	cam_pos.x = lerp(cam_pos.x, cam_pos_to.x, delta * cam_accel_hor)
-	cam_pos.z = lerp(cam_pos.z, cam_pos_to.z, delta * cam_accel_hor)
+	cam_pos.x = cam_pos_to.x
+	cam_pos.z = cam_pos_to.z
 	cam_pos.y = lerp(cam_pos.y, cam_pos_to.y, delta * 8.0)
+	cam.global_position = cam_pos + Vector3.UP * cam_up + cam.basis.z * cam_distance
 	#endregion
-	
-	model_position = lerp(model_position, global_position + model_offset, delta * 30.0)
-	model.global_position = model_position
 	
 	process_targets()
 	process_target_indicators(delta)
