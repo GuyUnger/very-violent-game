@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://csvdqccaap4sw"]
+[gd_scene load_steps=16 format=3 uid="uid://csvdqccaap4sw"]
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="2_a4w0n"]
@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://b78cvnyi5skl7" path="res://game/player/land_metal.tres" id="6_anr75"]
 [ext_resource type="AudioStream" uid="uid://cf2w0k27tufdn" path="res://game/player/jump_metal.tres" id="7_epvkq"]
 [ext_resource type="AudioStream" uid="uid://bo81sp14xbw6q" path="res://game/player/walljump.tres" id="8_epvkq"]
-[ext_resource type="AudioStream" uid="uid://c20ji855w3s28" path="res://game/player/melee.tres" id="9_5ghna"]
+[ext_resource type="AudioStream" uid="uid://d2fsf0rpmyygk" path="res://game/player/melee.tres" id="9_5ghna"]
 
 [sub_resource type="Curve" id="Curve_a4w0n"]
 _data = [Vector2(0, 0.5361), 0.0, -19.2906, 0, 0, Vector2(0.0458453, 0.190871), -0.694639, -0.694639, 0, 0, Vector2(1, 0), -0.159803, 0.0, 0, 0]
