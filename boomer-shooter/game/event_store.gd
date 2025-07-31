@@ -3,6 +3,7 @@ extends Node
 var delta_sum_ := 0.0
 var sources := {}
 var loop_id := ""
+var source_ids := 1 # source id 1 is reserved for main scene
 
 class Loop extends  Resource:
 	var events := []
@@ -10,6 +11,9 @@ class Loop extends  Resource:
 
 var loops:Array[Loop]
 
+func next_source_id() -> int:
+	source_ids += 1
+	return source_ids
 
 func new_loop() -> void:
 	loops.push_back(Loop.new())
@@ -23,7 +27,7 @@ func new_loop() -> void:
 	
 	loop_id = "_" + str(loops.size())
 
-func register_source(source_id:String, object:Object) -> void:
+func register_source(source_id:int, object:Object) -> void:
 	sources[source_id] = object
 
 
