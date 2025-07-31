@@ -770,6 +770,11 @@ func _create_CSGBox3D() -> void:
 	new_box.size = size
 	new_box.position = center
 
+	var prefix = "Add_" if extrude_distance >= 0 else "Sub_"
+
+	# Set the name to match its dimensions
+	new_box.name = str(prefix,int(size.x),"_",int(size.y),"_",int(size.z))
+
 	# Depending on the extrusion distance set the operation
 	if extrude_distance < 0:
 		new_box.operation = CSGShape3D.OPERATION_SUBTRACTION
@@ -792,9 +797,13 @@ func _create_CSGBox3D() -> void:
 			inner_box.set_meta("_edit_lock_", true)
 			inner_box.set_meta("_edit_group_", true)
 			inner_box.size = inner_size
-			inner_box.position = center
+			inner_box.size.y += grid_unit
+
+			inner_box.position = Vector3(0, -grid_unit, 0)
 			inner_box.operation = CSGShape3D.OPERATION_SUBTRACTION
-			undo_redo.add_do_method(csg_root, "add_child", inner_box)
+			# Set the name for the inner box as well
+			inner_box.name = str("Sub_",int(size.x),"_",int(size.y),"_",int(size.z))
+			undo_redo.add_do_method(new_box, "add_child", inner_box)
 			undo_redo.add_do_method(inner_box, "set_owner", get_editor_interface().get_edited_scene_root())
 			undo_redo.add_undo_method(csg_root, "remove_child", inner_box)
 
@@ -1225,5 +1234,6 @@ func _convert_box_to_CSGMesh(box: CSGBox3D) -> CSGMesh3D:
 	csg_mesh.transform = box.transform
 	csg_mesh.operation = box.operation
 	csg_mesh.use_collision = box.use_collision
+	csg_mesh.name = str("e_", box.name)
 	
 	return csg_mesh
