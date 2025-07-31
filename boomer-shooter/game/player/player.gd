@@ -40,14 +40,12 @@ var allow_jump_vel_boost: bool = false
 var input_direction: Vector2
 var aim_target: Node3D
 var aim_point: Vector3
-var prev_look_angle: Vector2
+var look_angle_prev: Vector2
 var look_vel: Vector2 = Vector2.ZERO
 @export var target_range_over_distance: Curve
 
-var remocon: Node
-var forced_on_floor: bool = false
-
 var model_position: Vector3 = Vector3.ZERO
+var velocity_prev: Vector3 = Vector3.ZERO
 
 # Audio
 var walk_cycle: float = 0.0
@@ -89,14 +87,14 @@ func _process(delta: float) -> void:
 	
 	
 	# Camera distance
-	var cam_distance_to: float = 4.0
+	var cam_distance_to: float = 2.8
 	var view_up_close_in: float = clampf(-look_angle.y + 1.3, 0.0, 1.0)
 	view_up_close_in = ease(view_up_close_in, -2.0)
 	view_up_close_in = remap(view_up_close_in, 0.0, 1.0, 0.9, 1.0)
 	cam_distance_to *= view_up_close_in
 	
 	# Camera Up
-	var cam_up: float = 1.8
+	var cam_up: float = 2.0
 	%RayUp.global_position.y = floor_pos.y + 1.0
 	%RayUp.force_raycast_update()
 	if %RayUp.is_colliding():
@@ -115,7 +113,7 @@ func _process(delta: float) -> void:
 	cam_distance = move_toward(cam_distance, cam_distance_to, delta * 10.0)
 	
 	# Apply cam position
-	if is_on_floor() or forced_on_floor:
+	if is_on_floor():
 		floor_pos = global_position
 	
 	
@@ -153,6 +151,12 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	
 	#region Movement
+	input_direction = Input.get_vector(
+			"left", "right",
+			"forward", "backward")
+	
+	process_movement_exploring(delta)
+	
 	if is_on_floor():
 		if since_on_floor > 0.2:
 			_on_land()
@@ -161,12 +165,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		since_on_floor += delta
 	
-	input_direction = Input.get_vector(
-			"left", "right",
-			"forward", "backward")
-	
-	process_movement_exploring(delta)
-	
 	weapon.process(delta)
 	
 	# Fall out of world
@@ -174,7 +172,8 @@ func _physics_process(delta: float) -> void:
 		position = Vector3.ZERO
 		velocity = Vector3.ZERO
 	
-	prev_look_angle = look_angle
+	look_angle_prev = look_angle
+	velocity_prev = velocity
 
 #endregion
 
@@ -234,6 +233,7 @@ func process_movement_exploring(delta:float) -> void:
 
 func _on_land() -> void:
 	%AudioLand.play()
+	cam.shake_shock(0.2, maxf(0.0, (-velocity_prev.y * 0.2 - 3.0)))
 
 
 func _on_step(left: bool) -> void:
@@ -275,7 +275,7 @@ func process_jump_vel_boost() -> void:
 			and input_direction != Vector2.ZERO
 			and vel_hor.length() > MOVE_SPEED * 0.2):
 		allow_jump_vel_boost = false
-		vel_hor_to(input_direction * MOVE_SPEED * 1.1)
+		vel_hor_to(input_direction * MOVE_SPEED, 0.5)
 
 #endregion
 
@@ -291,10 +291,9 @@ func process_targets() -> void:
 	var highest_fitness: float = -INF
 	
 	ray_aim_cam.rotation.x = 0.0
-	# Keep aim more forward unless all the way up/down
-	#ray_aim_cam.rotation.x += -look_angle.y * 0.2 * cos(look_angle.y * 0.8)
+	
 	# Aim up a bit
-	ray_aim_cam.rotation.x += 0.2
+	ray_aim_cam.rotation.x += 0.1
 	
 	ray_aim_cam.force_raycast_update()
 	if ray_aim_cam.is_colliding():
