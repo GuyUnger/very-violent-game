@@ -128,7 +128,10 @@ func _input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 				if not is_dragging_edge:
 					if edge_preview and edge_preview.visible:
+						var edge_found = false
 						for child in csg_root.get_children():
+							if edge_found:
+								break
 							if child is CSGBox3D or child is CSGMesh3D:
 								# Get all of the edges of CSGBox3D or CSGMesh3D
 								var edges = _get_edges(child)
@@ -148,7 +151,11 @@ func _input(event: InputEvent) -> void:
 										if intersection:
 											# We turn the CSGBox3D into a custom mesh that allows use to move the vertecies
 											if child is CSGBox3D:
+
+
 												dragged_mesh = _convert_box_to_CSGMesh(child)
+												csg_root.add_child(dragged_mesh)
+												child.queue_free()
 
 											else:
 												dragged_mesh = child
@@ -161,6 +168,8 @@ func _input(event: InputEvent) -> void:
 											is_dragging_edge = true # Set dragging to true
 											current_edge = edge		# Set the current edge to the one we are dragging
 											drag_start_offset = _snap_to_grid(intersection) # Starting position of edge drag
+
+										edge_found = true
 										break
 				else:
 					if is_dragging_edge and dragged_mesh:
@@ -252,18 +261,47 @@ func _input(event: InputEvent) -> void:
 				var closest_node = null
 				var closest_distance = INF
 				
-				for child in csg_root.get_children():
-					if not (child is CSGBox3D or child is CSGMesh3D):
-						continue
-					
-					var node_center = child.global_position
-					var screen_pos = camera.unproject_position(node_center) # Takes the position in 3D converts it to 2D
-					var distance = screen_pos.distance_to(mouse_pos)
-					
+				# Create a ray from the camera through the mouse position
+				var from = camera.project_ray_origin(mouse_pos)
+				var dir = camera.project_ray_normal(mouse_pos)
+				# Cast a ray from the camera through the mouse position
+				var ray_length = 5000
+				var to = from + dir * ray_length
+
+				# Iterate over all CSGBox3D and CSGMesh3D children
+				for node in csg_root.get_children():
+					if node is CSGBox3D:
+						var aabb = AABB(node.global_position - node.size * 0.5, node.size)
+						var intersection = aabb.intersects_segment(from, to)
+						if intersection:
+							var hit_pos = intersection
+							var hit_distance = from.distance_to(hit_pos)
+							if hit_distance < closest_distance:
+								closest_node = node
+								closest_distance = hit_distance
+					elif node is CSGMesh3D:
+						var arr_mesh = node.mesh as ArrayMesh
+						if arr_mesh:
+							var arrays = arr_mesh.surface_get_arrays(0)
+							var vertices = arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
+							var indices = arrays[Mesh.ARRAY_INDEX] as PackedInt32Array
+							# Check intersection with each triangle
+							for i in range(0, indices.size(), 3):
+								var v0 = node.global_transform * vertices[indices[i]]
+								var v1 = node.global_transform * vertices[indices[i + 1]]
+								var v2 = node.global_transform * vertices[indices[i + 2]]
+								var hit = Geometry3D.segment_intersects_triangle(from, to, v0, v1, v2)
+								if hit:
+									var hit_distance = from.distance_to(hit)
+									if hit_distance < closest_distance:
+										closest_node = node
+										closest_distance = hit_distance
+
+					'''
 					if distance < closest_distance:
 						closest_node = child
 						closest_distance = distance
-				
+					'''
 				if closest_distance:
 					var closest_edge = _find_closest_edge(closest_node, mouse_pos)
 					current_edge = closest_edge
@@ -1047,6 +1085,7 @@ func _find_closest_edge(node: Node, mouse_pos: Vector2) -> Array:
 	var m_line1 = from
 	var m_line2 = from + dir * 5000 
 
+	
 	# Go over all of the edges
 	for edge in edges:
 		# Take the two first endpoints of the edge
@@ -1147,10 +1186,6 @@ func _convert_box_to_CSGMesh(box: CSGBox3D) -> CSGMesh3D:
 	csg_mesh.transform = box.transform
 	csg_mesh.operation = box.operation
 	csg_mesh.use_collision = box.use_collision
-	
-	csg_root.add_child(csg_mesh)
 	csg_mesh.owner = get_editor_interface().get_edited_scene_root()
-	
-	box.queue_free()
 	
 	return csg_mesh
