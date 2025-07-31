@@ -9,7 +9,7 @@ var is_ghost := false
 func _ready() -> void:
 	$Fire.pitch_scale = randf_range(1.0, 1.2)
 	$Fire.play()
-
+	
 	if source_id == 0:
 		source_id = EventStore.next_source_id()
 		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
@@ -45,7 +45,8 @@ func _physics_process(delta: float) -> void:
 
 func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
 	await get_tree().create_timer(position.distance_to(hit_position) / speed).timeout
-	speed = 0.0
+	set_physics_process(false)
+	
 	global_position = hit_position
 	var bounce_vel = (-global_transform.basis.z).bounce(normal)
 	look_at(global_position + bounce_vel, Vector3.UP)
