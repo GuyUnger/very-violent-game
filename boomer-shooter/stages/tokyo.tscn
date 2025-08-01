@@ -1,10 +1,31 @@
-[gd_scene load_steps=13 format=4 uid="uid://b6o8mp0jhq1nd"]
+[gd_scene load_steps=34 format=4 uid="uid://b6o8mp0jhq1nd"]
 
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_wojob"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_o4n3f"]
+[ext_resource type="Material" uid="uid://doapqabe7twc4" path="res://content/environment/materials/surface_0.tres" id="3_apn2u"]
 [ext_resource type="PackedScene" uid="uid://bv5a4r2yih7cd" path="res://content/environment/nodes/streets_road_1.tscn" id="3_o4n3f"]
+[ext_resource type="Material" uid="uid://buavh7fna845w" path="res://content/environment/materials/surface_1.tres" id="4_73r8o"]
 [ext_resource type="PackedScene" uid="uid://ce8utavmrgfsy" path="res://content/environment/nodes/streets_road_2.tscn" id="4_tv646"]
+[ext_resource type="Material" uid="uid://b71gxlhwanayi" path="res://content/environment/materials/surface_2.tres" id="5_3c822"]
 [ext_resource type="PackedScene" uid="uid://bn0haq34num4m" path="res://content/environment/nodes/streets_junction_1.tscn" id="5_apn2u"]
+[ext_resource type="Material" uid="uid://dcl8eha8janno" path="res://content/environment/materials/surface_3.tres" id="6_7xjh6"]
+[ext_resource type="Material" uid="uid://bfosjqjdja0e2" path="res://content/environment/materials/surface_4.tres" id="7_qo4k2"]
+[ext_resource type="Material" uid="uid://dcpe38qomrqot" path="res://content/environment/materials/surface_5.tres" id="8_43vej"]
+[ext_resource type="Material" uid="uid://cqlyvxeskbq7m" path="res://content/environment/materials/surface_6.tres" id="9_a6tfy"]
+[ext_resource type="Material" uid="uid://rt8jdtf6es70" path="res://content/environment/materials/surface_7.tres" id="10_316br"]
+[ext_resource type="Material" uid="uid://dg8yoad2wmah0" path="res://content/environment/materials/surface_8.tres" id="11_wha0p"]
+[ext_resource type="Material" uid="uid://c8am7gxht6vdq" path="res://content/environment/materials/surface_9.tres" id="12_4vkph"]
+[ext_resource type="Material" uid="uid://bxcxyqvi67jdl" path="res://content/environment/materials/surface_10.tres" id="13_d03ru"]
+[ext_resource type="Material" uid="uid://5ap84rrgvvoa" path="res://content/environment/materials/surface_11.tres" id="14_ud70m"]
+[ext_resource type="Material" uid="uid://c00744tmfikc5" path="res://content/environment/materials/surface_12.tres" id="15_yn2a4"]
+[ext_resource type="Material" uid="uid://cbqop5duvx0y6" path="res://content/environment/materials/surface_13.tres" id="16_yibng"]
+[ext_resource type="Material" uid="uid://yeq7pun4piny" path="res://content/environment/materials/surface_14.tres" id="17_nhte8"]
+[ext_resource type="Material" uid="uid://cxxkrlaqg1hq5" path="res://content/environment/materials/surface_15.tres" id="18_tjdsr"]
+[ext_resource type="Material" uid="uid://doeho6406mk7b" path="res://content/environment/materials/surface_16.tres" id="19_aodlu"]
+[ext_resource type="Material" uid="uid://h1otvpr12uoy" path="res://content/environment/materials/surface_17.tres" id="20_2is7d"]
+[ext_resource type="Material" uid="uid://cmc7f1y8anju" path="res://content/environment/materials/surface_18.tres" id="21_huau7"]
+[ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="22_i6c3o"]
+[ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="23_ifw73"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l4ad7"]
 
@@ -17,13 +38,6 @@ sky = SubResource("Sky_e0l40")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wojob"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wojob"]
-cull_mode = 2
-no_depth_test = true
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_o4n3f"]
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_wojob"]
 _surfaces = [{
 "aabb": AABB(-1.5, -1, -1.5, 3, 2, 3),
@@ -35,6 +49,13 @@ _surfaces = [{
 "vertex_count": 8,
 "vertex_data": PackedByteArray("AADAvwAAgL8AAMC/AADAPwAAgL8AAMC/AADAPwAAgD8AAMC/AADAvwAAgL8AAMC/AADAvwAAgL8AAMA/AADAPwAAgL8AAMA/AADAPwAAgD8AAMA/AADAvwAAgL8AAMA/")
 }]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73r8o"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_3c822"]
 
 [node name="Tokyo" type="Node3D"]
 
@@ -57,6 +78,7 @@ mesh = SubResource("CapsuleMesh_wojob")
 [node name="Ground" type="StaticBody3D" parent="."]
 script = ExtResource("2_o4n3f")
 material = ExtResource("1_wojob")
+materials = Array[Material]([ExtResource("3_apn2u"), ExtResource("4_73r8o"), ExtResource("5_3c822"), ExtResource("6_7xjh6"), ExtResource("7_qo4k2"), ExtResource("8_43vej"), ExtResource("9_a6tfy"), ExtResource("10_316br"), ExtResource("11_wha0p"), ExtResource("12_4vkph"), ExtResource("13_d03ru"), ExtResource("14_ud70m"), ExtResource("15_yn2a4"), ExtResource("16_yibng"), ExtResource("17_nhte8"), ExtResource("18_tjdsr"), ExtResource("19_aodlu"), ExtResource("20_2is7d"), ExtResource("21_huau7"), ExtResource("22_i6c3o"), ExtResource("23_ifw73")])
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
 metadata/_edit_lock_ = true
 
@@ -68,17 +90,14 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 4, 12.5)
 use_collision = true
 size = Vector3(157, 8, 137)
-material = ExtResource("1_wojob")
+material = ExtResource("14_ud70m")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
-
-[node name="_MeshInstance3D_25721" type="MeshInstance3D" parent="Ground/CSGCombiner3D"]
-material_override = SubResource("StandardMaterial3D_wojob")
-mesh = SubResource("ImmediateMesh_o4n3f")
 
 [node name="Buildings" type="StaticBody3D" parent="."]
 script = ExtResource("2_o4n3f")
 material = ExtResource("1_wojob")
+materials = Array[Material]([ExtResource("3_apn2u"), ExtResource("4_73r8o"), ExtResource("5_3c822"), ExtResource("6_7xjh6"), ExtResource("7_qo4k2"), ExtResource("8_43vej"), ExtResource("9_a6tfy"), ExtResource("10_316br"), ExtResource("11_wha0p"), ExtResource("12_4vkph"), ExtResource("13_d03ru"), ExtResource("14_ud70m"), ExtResource("15_yn2a4"), ExtResource("16_yibng"), ExtResource("17_nhte8"), ExtResource("18_tjdsr"), ExtResource("19_aodlu"), ExtResource("20_2is7d"), ExtResource("21_huau7"), ExtResource("22_i6c3o"), ExtResource("23_ifw73")])
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
 metadata/_edit_lock_ = true
 
@@ -90,7 +109,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.5, 12.5, 24)
 use_collision = true
 size = Vector3(9, 9, 20)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -98,7 +117,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 operation = 2
 size = Vector3(7, 8, 18)
-material = ExtResource("1_wojob")
+material = ExtResource("22_i6c3o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -107,7 +126,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 9.5, 31)
 operation = 2
 use_collision = true
 size = Vector3(2, 3, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -116,7 +135,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 10, 26.5)
 operation = 2
 use_collision = true
 size = Vector3(2, 2, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -125,7 +144,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.5, 10, 22.5)
 operation = 2
 use_collision = true
 size = Vector3(3, 2, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -134,7 +153,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.5, 10, 18.5)
 operation = 2
 use_collision = true
 size = Vector3(1, 2, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -142,7 +161,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 11, 37)
 use_collision = true
 size = Vector3(6, 6, 6)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -150,7 +169,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 operation = 2
 size = Vector3(4, 5, 4)
-material = ExtResource("1_wojob")
+material = ExtResource("22_i6c3o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -159,7 +178,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 9.5, 37)
 operation = 2
 use_collision = true
 size = Vector3(7, 3, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("22_i6c3o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -167,7 +186,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.5, 14.5, 21)
 use_collision = true
 size = Vector3(13, 13, 14)
-material = ExtResource("1_wojob")
+material = ExtResource("8_43vej")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -175,7 +194,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 operation = 2
 size = Vector3(11, 12, 12)
-material = ExtResource("1_wojob")
+material = ExtResource("23_ifw73")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -191,7 +210,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.5, 10, 43)
 use_collision = true
 size = Vector3(1, 4, 6)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -200,7 +219,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73, 9.5, 26.5)
 operation = 2
 use_collision = true
 size = Vector3(2, 3, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -208,7 +227,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83, 19, 58.5)
 use_collision = true
 size = Vector3(34, 22, 17)
-material = ExtResource("1_wojob")
+material = ExtResource("16_yibng")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -216,7 +235,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 operation = 2
 size = Vector3(32, 21, 15)
-material = ExtResource("1_wojob")
+material = ExtResource("23_ifw73")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -224,7 +243,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 9, 53.5)
 use_collision = true
 size = Vector3(4, 2, 7)
-material = ExtResource("1_wojob")
+material = ExtResource("16_yibng")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -242,7 +261,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.5, 12, 50.5)
 operation = 2
 use_collision = true
 size = Vector3(5, 4, 1)
-material = ExtResource("1_wojob")
+material = ExtResource("13_d03ru")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -282,7 +301,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98, 20.5, 21)
 use_collision = true
 size = Vector3(34, 25, 24)
-material = ExtResource("1_wojob")
+material = ExtResource("16_yibng")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -298,7 +317,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.5, 23.5, 41)
 use_collision = true
 size = Vector3(5, 1, 18)
-material = ExtResource("1_wojob")
+material = ExtResource("23_ifw73")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -340,7 +359,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.5, 24.5, 41.5)
 use_collision = true
 size = Vector3(1, 1, 17)
-material = ExtResource("1_wojob")
+material = ExtResource("23_ifw73")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -356,7 +375,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.5, 27.5, 41.5)
 use_collision = true
 size = Vector3(5, 1, 17)
-material = ExtResource("1_wojob")
+material = ExtResource("19_aodlu")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -407,7 +426,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.5, 17.5, 14.5)
 use_collision = true
 size = Vector3(9, 1, 1)
-material = ExtResource("1_wojob")
+material = ExtResource("14_ud70m")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -415,7 +434,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.5, 17.5, 24.5)
 use_collision = true
 size = Vector3(1, 1, 19)
-material = ExtResource("1_wojob")
+material = ExtResource("14_ud70m")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -423,7 +442,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 12.5, 12.5)
 use_collision = true
 size = Vector3(20, 1, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("20_2is7d")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -432,7 +451,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57, 9.5, 16)
 operation = 2
 use_collision = true
 size = Vector3(2, 3, 4)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -440,7 +459,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 89, 24, 8)
 use_collision = true
 size = Vector3(16, 18, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("22_i6c3o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -448,7 +467,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106, 16, 8)
 use_collision = true
 size = Vector3(18, 2, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("22_i6c3o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -619,7 +638,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 23.5, 28)
 use_collision = true
 size = Vector3(2, 1, 6)
-material = ExtResource("1_wojob")
+material = ExtResource("16_yibng")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -628,7 +647,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.5, 25.5, 26)
 operation = 2
 use_collision = true
 size = Vector3(3, 3, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("22_i6c3o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -637,7 +656,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.5, 26, 29.5)
 operation = 2
 use_collision = true
 size = Vector3(1, 2, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("17_nhte8")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -662,7 +681,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 11, 42.5)
 use_collision = true
 size = Vector3(9, 6, 11)
-material = ExtResource("1_wojob")
+material = ExtResource("9_a6tfy")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -670,7 +689,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 operation = 2
 size = Vector3(7, 5, 9)
-material = ExtResource("1_wojob")
+material = ExtResource("13_d03ru")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -678,7 +697,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 9, 39.5)
 use_collision = true
 size = Vector3(3, 2, 11)
-material = ExtResource("1_wojob")
+material = ExtResource("14_ud70m")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -686,7 +705,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 9, 35.5)
 use_collision = true
 size = Vector3(9, 2, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("14_ud70m")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -695,7 +714,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 11.5, 39.5)
 operation = 2
 use_collision = true
 size = Vector3(3, 3, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("9_a6tfy")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -704,7 +723,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 9.5, 15.5)
 operation = 2
 use_collision = true
 size = Vector3(2, 3, 3)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -713,7 +732,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.5, 10, 18.5)
 operation = 2
 use_collision = true
 size = Vector3(3, 2, 9)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -722,7 +741,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.5, 10, 15)
 operation = 2
 use_collision = true
 size = Vector3(3, 2, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -740,7 +759,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.5, 9.5, 22)
 operation = 2
 use_collision = true
 size = Vector3(3, 3, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("20_2is7d")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -785,7 +804,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 14.5, 26)
 operation = 2
 use_collision = true
 size = Vector3(2, 3, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -794,7 +813,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.5, 15, 28)
 operation = 2
 use_collision = true
 size = Vector3(3, 2, 2)
-material = ExtResource("1_wojob")
+material = ExtResource("4_73r8o")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -803,7 +822,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.5, 15, 27.5)
 operation = 2
 use_collision = true
 size = Vector3(3, 2, 1)
-material = ExtResource("1_wojob")
+material = ExtResource("15_yn2a4")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -812,6 +831,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.5, 9, 55.5)
 use_collision = true
 mesh = SubResource("ArrayMesh_wojob")
 material = ExtResource("1_wojob")
+
+[node name="@MeshInstance3D@25290" type="MeshInstance3D" parent="Buildings/CSGCombiner3D"]
+material_override = SubResource("StandardMaterial3D_73r8o")
+mesh = SubResource("ImmediateMesh_3c822")
 
 [node name="Streets" type="Node3D" parent="."]
 
