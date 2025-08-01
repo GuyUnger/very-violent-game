@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://b6o8mp0jhq1nd"]
+[gd_scene load_steps=13 format=4 uid="uid://b6o8mp0jhq1nd"]
 
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_wojob"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_o4n3f"]
+[ext_resource type="PackedScene" uid="uid://bv5a4r2yih7cd" path="res://content/environment/nodes/streets_road_1.tscn" id="3_o4n3f"]
+[ext_resource type="PackedScene" uid="uid://ce8utavmrgfsy" path="res://content/environment/nodes/streets_road_2.tscn" id="4_tv646"]
+[ext_resource type="PackedScene" uid="uid://bn0haq34num4m" path="res://content/environment/nodes/streets_junction_1.tscn" id="5_apn2u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l4ad7"]
 
@@ -13,6 +16,13 @@ background_mode = 2
 sky = SubResource("Sky_e0l40")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wojob"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wojob"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_o4n3f"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wojob"]
 _surfaces = [{
@@ -61,6 +71,10 @@ size = Vector3(157, 8, 137)
 material = ExtResource("1_wojob")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
+
+[node name="_MeshInstance3D_25721" type="MeshInstance3D" parent="Ground/CSGCombiner3D"]
+material_override = SubResource("StandardMaterial3D_wojob")
+mesh = SubResource("ImmediateMesh_o4n3f")
 
 [node name="Buildings" type="StaticBody3D" parent="."]
 script = ExtResource("2_o4n3f")
@@ -798,3 +812,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.5, 9, 55.5)
 use_collision = true
 mesh = SubResource("ArrayMesh_wojob")
 material = ExtResource("1_wojob")
+
+[node name="Streets" type="Node3D" parent="."]
+
+[node name="StreetsRoad1" parent="Streets" instance=ExtResource("3_o4n3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 8, 5)
+
+[node name="StreetsRoad5" parent="Streets" instance=ExtResource("3_o4n3f")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 44, 8, 45)
+
+[node name="StreetsRoad6" parent="Streets" instance=ExtResource("3_o4n3f")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 44, 8, 65)
+
+[node name="StreetsRoad7" parent="Streets" instance=ExtResource("3_o4n3f")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 44, 8, 65)
+
+[node name="StreetsRoad8" parent="Streets" instance=ExtResource("3_o4n3f")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 44, 8, -15)
+
+[node name="StreetsRoad2" parent="Streets" instance=ExtResource("4_tv646")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 8, 5)
+
+[node name="StreetsRoad4" parent="Streets" instance=ExtResource("4_tv646")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 44, 8, 25)
+
+[node name="StreetsRoad3" parent="Streets" instance=ExtResource("4_tv646")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 8, 5)
+
+[node name="StreetsJunction1" parent="Streets" instance=ExtResource("5_apn2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 8, 5)
