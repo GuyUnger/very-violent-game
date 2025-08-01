@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://yeq7pun4piny"]
+
+[ext_resource type="Texture2D" uid="uid://dk4k5mdueobj1" path="res://content/environment/surfaces/surface_Layer 14.png" id="1_30ejl"]
+
+[resource]
+specular_mode = 2
+albedo_texture = ExtResource("1_30ejl")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
