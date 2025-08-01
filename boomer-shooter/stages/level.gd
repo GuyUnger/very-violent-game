@@ -1,6 +1,6 @@
 extends Node3D
 
-var time: float = 10.0
+@export var time: float = 10.0
 
 func _process(delta: float) -> void:
 	time -= delta

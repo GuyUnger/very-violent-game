@@ -1,26 +1,45 @@
-extends Node3D
+extends CharacterBody3D
 class_name Weapon
 
 var target_range: float = 20.0
 var reload_t: float = 0.0
 var since_primary_pressed: float = 999.0
+var aim_dir := Vector3.ZERO
 
 var is_auto: bool = true
+var throwing_velocity := Vector3.ZERO
 
 var player: Player
 
+var trigger_pressed:bool :
+	set = set_trigger_pressed
+	
+func set_trigger_pressed(value:bool) -> void:
+	if value != trigger_pressed:
+		if value:
+			_trigger_just_pressed()
+	trigger_pressed = value
 
-func process(delta: float) -> void:
+
+func _trigger_just_pressed() -> void:
+	since_primary_pressed = 0.0
+
+
+func _physics_process(delta: float) -> void:
+	if velocity != Vector3.ZERO:
+		velocity.y -= 9.8 * delta
+		move_and_slide()
+		rotation.y += delta * 10.0
+		
+		return
+	
 	if reload_t > 0.0:
 		reload_t -= delta
-	
-	if Input.is_action_just_pressed("primary"):
-		since_primary_pressed = 0.0
-	else:
-		since_primary_pressed += delta
+
+	since_primary_pressed += delta
 	
 	if is_auto:
-		if Input.is_action_pressed("primary") and reload_t <= 0.0:
+		if trigger_pressed and reload_t <= 0.0:
 			shoot()
 	else:
 		if since_primary_pressed < 0.2 and reload_t <= 0.0:
@@ -30,16 +49,29 @@ func process(delta: float) -> void:
 
 func shoot() -> void:
 	reload_t = 0.1
-	if not player:
-		return
-	player.cam.shake_rumble(0.3, 0.1, 16.0)
-	player.cam.shake_shock(0.1, 0.5)
+	
+	if player:
+		player.cam.shake_rumble(0.3, 0.1, 16.0)
+		player.cam.shake_shock(0.1, 0.5)
 	
 	var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
 	projectile.track_in_event_store = true
-	projectile.look_at_from_position(Vector3.ZERO, -player.aim_dir, Vector3.UP)
-	projectile.position = player.model_position + Vector3.UP * 1.4
+	projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)
+	projectile.position = global_position
 	
 	Main.instance.add_child(projectile)
 	
 	%AudioShoot.play()
+	
+func throw(force:Vector3) -> void:
+	trigger_pressed = false
+	player = null
+	
+	reparent(Main.instance)
+	
+	collision_mask = 1
+	velocity = force
+
+	await get_tree().create_timer(0.2).timeout
+	collision_layer = 8
+	

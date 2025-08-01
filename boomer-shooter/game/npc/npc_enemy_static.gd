@@ -16,6 +16,11 @@ class State extends Node:
 		p.add_child(state)
 		
 	func _died() -> void:
+		
+		var weapon = get_parent().get_node("%Weapon")
+		if weapon:
+			weapon.throw(Vector3.UP * 5.0)
+		
 		get_parent().looking_at = Vector3.ZERO
 		get_parent().target = null
 		get_parent().moving_to = null
@@ -93,7 +98,7 @@ class StateAttacking extends State:
 		var weapon = get_parent().get_node("%Weapon")	
 		
 		if not get_parent().is_node_visible(enemy):
-			weapon.trigger_down = false
+			weapon.trigger_pressed = false
 			move_to(StateIdle.new())
 			return
 
@@ -107,12 +112,13 @@ class StateAttacking extends State:
 			get_parent().speed_scale = 0.0
 		
 		weapon.aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP)
-		weapon.trigger_down = true
+		weapon.trigger_pressed = true
 		
 		
 	func _exit_tree() -> void:
 		var weapon = get_parent().get_node("%Weapon")
-		weapon.trigger_down = false
+		if weapon:
+			weapon.trigger_pressed = false
 			
 func hit(damage:int) -> void:
 	holes += 1

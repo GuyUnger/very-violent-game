@@ -200,8 +200,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		since_on_floor += delta
 	
-	weapon.process(delta)
-	
+	if weapon:
+		weapon.aim_dir = aim_dir
+		if Input.is_action_just_pressed("primary"):
+			weapon.trigger_pressed = true
+		elif Input.is_action_just_released("primary"):
+			weapon.trigger_pressed = false
+			
+			
+		if Input.is_action_just_pressed("throw"):
+			weapon.global_position = global_position + Vector3.UP * 1.5
+			weapon.throw(aim_dir * 10.0)
+			weapon = null
+
 	# Fall out of world
 	if position.y < -20.0:
 		position = Vector3.ZERO
@@ -479,3 +490,13 @@ func is_jump_just_pressed(grace: float = 0.1) -> bool:
 
 func die() -> void:
 	EventStore.reset()
+
+
+func _pick_up_body_entered(body: Node3D) -> void:
+	if not weapon and body is Weapon:
+		weapon = body
+		weapon.player = self
+		weapon.velocity = Vector3.ZERO
+		body.collision_mask = 0
+		body.collision_layer = 0
+		body.reparent(%Model)
