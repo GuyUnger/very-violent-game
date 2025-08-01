@@ -157,3 +157,8 @@ func _told_enemy_position(enemy) -> void:
 func melee() -> void:
 	health -= 5
 	cuts += 1
+	
+	var x := preload("res://game/fx/bloot_line.tscn").instantiate()
+	$CollisionShape3D.add_child(x)
+	x.position.y += 0.5
+	x.look_at(get_viewport().get_camera_3d().global_position, Vector3.UP, true)

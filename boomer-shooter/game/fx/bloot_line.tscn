@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://dwypisklojivx"]
+
+[ext_resource type="Script" uid="uid://rlinpf1mcmp2" path="res://game/fx/bloot_line.gd" id="1_dbddn"]
+[ext_resource type="Shader" uid="uid://dsg40is1imx57" path="res://game/fx/blood_splat.gdshader" id="2_2yy3b"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v7i0e"]
+frequency = 0.0138
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h3b5g"]
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_v7i0e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3b5g"]
+render_priority = 0
+shader = ExtResource("2_2yy3b")
+shader_parameter/albedo = Color(1, 0, 0, 1)
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_h3b5g")
+shader_parameter/powderyness = 0.76
+
+[sub_resource type="Curve" id="Curve_dbddn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2yy3b"]
+curve = SubResource("Curve_dbddn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1wadu"]
+resource_local_to_scene = true
+direction = Vector3(0, 0, 0)
+spread = 0.0
+flatness = 1.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+alpha_curve = SubResource("CurveTexture_2yy3b")
+
+[sub_resource type="QuadMesh" id="QuadMesh_bngfs"]
+size = Vector2(1, 0.5)
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+script = ExtResource("1_dbddn")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_h3b5g")
+cast_shadow = 0
+amount = 20
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_1wadu")
+draw_pass_1 = SubResource("QuadMesh_bngfs")
