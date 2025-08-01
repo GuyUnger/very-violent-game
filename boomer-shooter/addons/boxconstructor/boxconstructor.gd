@@ -97,10 +97,106 @@ func _exit_tree() -> void:
 		get_editor_interface().get_selection().selection_changed.disconnect(_on_selection_changed) # Disconnect signals
 
 
+
+
+# Finds the CSGBox3D or CSGMesh3D node under the mouse cursor
+func _find_csg_node_under_cursor(mouse_pos: Vector2) -> Node:
+	if not camera or not csg_root:
+		return null
+
+	var from = camera.project_ray_origin(mouse_pos)
+	var dir = camera.project_ray_normal(mouse_pos)
+	var to = from + dir * 5000
+
+
+	# Check CSGBox3D and CSGMesh3D children for intersection
+	var closest_node = null
+	var closest_distance = INF
+
+	for node in csg_root.get_children():
+		if node is CSGBox3D:
+			if node.operation == CSGShape3D.OPERATION_SUBTRACTION:
+				continue
+			var aabb = AABB(node.global_position - node.size * 0.5, node.size)
+			var intersection = aabb.intersects_segment(from, to)
+			if intersection:
+				var dist = from.distance_to(intersection)
+				#print(str("Distance to ", node.name, ": ", dist))
+				if dist < closest_distance:
+					closest_distance = dist
+					closest_node = node
+		elif node is CSGMesh3D:
+			var arr_mesh = node.mesh as ArrayMesh
+			if arr_mesh:
+				var arrays = arr_mesh.surface_get_arrays(0)
+				var vertices = arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
+				var indices = arrays[Mesh.ARRAY_INDEX] as PackedInt32Array
+				for i in range(0, indices.size(), 3):
+					var v0 = node.global_transform * vertices[indices[i]]
+					var v1 = node.global_transform * vertices[indices[i + 1]]
+					var v2 = node.global_transform * vertices[indices[i + 2]]
+					var hit = Geometry3D.segment_intersects_triangle(from, to, v0, v1, v2)
+					if hit:
+						var dist = from.distance_to(hit)
+						if dist < closest_distance:
+							closest_distance = dist
+							closest_node = node
+
+	var closest_add_node = closest_node
+
+	for node in csg_root.get_children():
+		if node is CSGBox3D and node.operation == CSGShape3D.OPERATION_SUBTRACTION:
+			var aabb = AABB(node.global_position - node.size * 0.5, node.size)
+			var closest_add_node_aabb = AABB(closest_add_node.global_position - closest_add_node.size * 0.5, closest_add_node.size)
+			var intersection_aabb = aabb.intersection(closest_add_node_aabb)
+			if intersection_aabb and intersection_aabb.has_volume():
+				var intersection = intersection_aabb.intersects_segment(from, to)
+				if intersection:
+					var dist = from.distance_to(intersection)
+					if dist < closest_distance+0.01:
+						closest_distance = dist
+						closest_node = node
+			pass
+	
+	return closest_node
+
+# Cycles the material of the given CSG node (box or mesh)
+func _cycle_material(csg_node: Node, forward: bool) -> void:
+	if not selected_grid or selected_grid.materials.size() == 0:
+		return
+
+	var materials = selected_grid.materials
+	var current_material = csg_node.material
+	var idx = materials.find(current_material)
+	if idx == -1:
+		idx = 0
+	if forward:
+		idx = (idx + 1) % materials.size()
+	else:
+		idx = (idx - 1 + materials.size()) % materials.size()
+	csg_node.material = materials[idx]
+
+
+
+
+
 # This section handles all of the inputs
 func _input(event: InputEvent) -> void:
 	if not selected_grid or not selected_grid.is_inside_tree():
 		return
+
+	# Material cycling with Ctrl + Mouse Wheel
+	if event is InputEventMouseButton and event.pressed:
+		if Input.is_key_pressed(KEY_CTRL) and (event.button_index == MOUSE_BUTTON_WHEEL_UP or event.button_index == MOUSE_BUTTON_WHEEL_DOWN):
+			if selected_grid.materials.size() > 0:
+				var mouse_pos = editor_viewport.get_mouse_position()
+				var csg_node = _find_csg_node_under_cursor(mouse_pos)
+				if csg_node:
+					#print(str("csg_node", csg_node.name))
+					_cycle_material(csg_node, event.button_index == MOUSE_BUTTON_WHEEL_UP)
+
+				get_viewport().set_input_as_handled()
+				return
 
 	# Pressing the X key will move the grid to mouse position
 	if event is InputEventKey and event.pressed and event.keycode == KEY_X:
