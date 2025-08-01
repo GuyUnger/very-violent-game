@@ -145,7 +145,7 @@ func _find_csg_node_under_cursor(mouse_pos: Vector2) -> Node:
 	var closest_add_node = closest_node
 
 	for node in csg_root.get_children():
-		if node is CSGBox3D and node.operation == CSGShape3D.OPERATION_SUBTRACTION:
+		if closest_add_node and node is CSGBox3D and node.operation == CSGShape3D.OPERATION_SUBTRACTION:
 			var aabb = AABB(node.global_position - node.size * 0.5, node.size)
 			var closest_add_node_aabb = AABB(closest_add_node.global_position - closest_add_node.size * 0.5, closest_add_node.size)
 			var intersection_aabb = aabb.intersection(closest_add_node_aabb)
@@ -156,7 +156,24 @@ func _find_csg_node_under_cursor(mouse_pos: Vector2) -> Node:
 					if dist < closest_distance+0.01:
 						closest_distance = dist
 						closest_node = node
-			pass
+	
+	
+	if closest_node && closest_node.operation == CSGShape3D.OPERATION_SUBTRACTION:
+		var children = closest_node.get_children()
+		if closest_add_node:
+			children = closest_add_node.get_children()
+		for node in children:
+			if node is CSGBox3D and node.operation == CSGShape3D.OPERATION_SUBTRACTION:
+				var aabb = AABB(node.global_position - node.size * 0.5, node.size)
+				var closest_add_node_aabb = AABB(closest_add_node.global_position - closest_add_node.size * 0.5, closest_add_node.size)
+				var intersection_aabb = aabb.intersection(closest_add_node_aabb)
+				var closest_sub_aabb = AABB(closest_node.global_position - closest_node.size * 0.5, closest_node.size)
+				var intersection_aabb2 = aabb.intersection(closest_sub_aabb)
+				if intersection_aabb and intersection_aabb.has_volume() and intersection_aabb2 and intersection_aabb2.has_volume():
+					var intersection = intersection_aabb.intersects_segment(from, to)
+					if intersection:
+						closest_node = node
+						break
 	
 	return closest_node
 
