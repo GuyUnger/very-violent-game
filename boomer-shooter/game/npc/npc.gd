@@ -51,7 +51,8 @@ func set_target(node:Node3D) -> void:
 			%LookAtModifier3D.target_node = target.get_node("%Head").get_path()
 		else:
 			%LookAtModifier3D.target_node = target.get_path()
-
+	else:
+		%LookAtModifier3D.target_node = NodePath("")
 
 func _physics_process(delta: float) -> void:
 	if moving_to:
