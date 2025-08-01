@@ -69,7 +69,7 @@ input_2/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3ocbx"]
 
 [resource]
-graph_offset = Vector2(-1427.73, 481.799)
+graph_offset = Vector2(-57.5743, 496.741)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_yj70c")
 nodes/Animation/position = Vector2(-800, 360)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_3ocbx")
@@ -84,5 +84,5 @@ nodes/Special/node = SubResource("AnimationNodeTransition_ye2x2")
 nodes/Special/position = Vector2(-320, 560)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3ocbx")
 nodes/TimeScale/position = Vector2(140, 480)
-nodes/output/position = Vector2(380, 480)
+nodes/output/position = Vector2(560, 480)
 node_connections = [&"HitHead", 0, &"Special", &"HitHead", 1, &"Animation 3", &"Special", 0, &"MoveDirection", &"Special", 1, &"Animation 2", &"Special", 2, &"Animation", &"TimeScale", 0, &"HitHead", &"output", 0, &"TimeScale"]

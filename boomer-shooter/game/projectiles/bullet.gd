@@ -77,6 +77,11 @@ func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
 		$HitMeat.global_position = hit_position
 		$HitMeat.pitch_scale = randf_range(0.9, 1.2)
 		$HitMeat.play()
+		var x := preload("res://game/fx/blood_splat.tscn").instantiate()
+		x.position = hit_position
+		x.look_at_from_position(x.position, x.position + normal * 10.0)
+		add_child(x)
+	
 		
 		npc.hit(damage)
 		npc.knock_back(normal * 0.001)

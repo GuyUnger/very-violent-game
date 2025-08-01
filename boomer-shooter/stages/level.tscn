@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cqff16mf4lpq6"]
+[gd_scene load_steps=20 format=4 uid="uid://cqff16mf4lpq6"]
 
 [ext_resource type="Script" uid="uid://cywxf4tybte30" path="res://stages/level.gd" id="1_e0l40"]
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_mwmwo"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="4_dgwo2"]
 [ext_resource type="PackedScene" uid="uid://duomy14irp63p" path="res://game/doors/door_slide_wall/door_slide_wall.tscn" id="5_65nvc"]
 [ext_resource type="PackedScene" uid="uid://b7g4067loq3un" path="res://game/npc/enemy_big/enemy_big.tscn" id="6_udlle"]
+[ext_resource type="Script" uid="uid://8gh7wu8tphq3" path="res://stages/hud.gd" id="7_iltmi"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l4ad7"]
 _surfaces = [{
@@ -359,6 +360,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 8.5)
 
 [node name="EnemyBig" parent="." instance=ExtResource("6_udlle")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.175, 0, -4.515)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.175, 0, -6.515)
+
+[node name="EnemyBig3" parent="." instance=ExtResource("6_udlle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.825, 1.06402, 13.843)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 8
+script = ExtResource("7_iltmi")
+
+[node name="Time" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.5
+offset_top = 10.0
+offset_right = 20.5
+offset_bottom = 55.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "59"
+horizontal_alignment = 1
 
 [connection signal="activated" from="MeleeActivator" to="DoorSlideWall" method="activate"]
