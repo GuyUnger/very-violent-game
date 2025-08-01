@@ -2,18 +2,40 @@
 extends Node3D
 class_name NPC
 
+signal died
+signal heard
+signal told_enemy_position
+
+
 @export var moving_to:Node3D
+@export var looking_at:Vector3
 @export var target:Node3D : 
 	set = set_target
 @export var speed := 1.0
-@export var max_health := 100
-@export var health := 100
+@export var max_health := 5
+@export var health := 5 :
+	set = set_health
 
 var speed_scale := 1.0
 var speed_scale_knock_back := 1.0
 var knock_back_force := Vector3.ZERO
 
 @onready var animation_tree:AnimationTree = $AnimationTree
+
+func set_health(value:float) -> void:
+	var diff = health - value
+	
+	health = value
+	
+	if has_node("Armature/Skeleton3D/Skin"):
+		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("hole_damage", 1.0 - (float(health) / float(max_health)))
+	
+	if not Engine.is_editor_hint():
+		if health <= 0:
+			died.emit()
+			animation_tree.set("parameters/Special/transition_request", "Died")
+			
+	
 
 var center_pos: Vector3:
 	get:
@@ -45,17 +67,21 @@ func _physics_process(delta: float) -> void:
 			var blend_vector = Vector2(local_x, local_y)
 			blend_vector *= speed_scale * speed_scale_knock_back
 			animation_tree.set("parameters/MoveDirection/blend_position", blend_vector)
+		else:
+			animation_tree.set("parameters/MoveDirection/blend_position", Vector2.ZERO)
 		
-		look_at_node_y_axis_lerp(target, delta * 0.5)
+		look_at_node_y_axis_lerp(target.global_position, delta * 0.5)
 	
 	if knock_back_force != Vector3.ZERO:
 		global_position -= knock_back_force
 		knock_back_force = lerp(knock_back_force, Vector3.ZERO, delta)
+		
+	if not target and looking_at:
+		look_at_node_y_axis_lerp(looking_at, delta * 0.5)
 
 
-func look_at_node_y_axis_lerp(target_node: Node3D, delta: float, speed: float = 5.0) -> void:
+func look_at_node_y_axis_lerp(target_position: Vector3, delta: float, speed: float = 5.0) -> void:
 	var self_position = global_transform.origin
-	var target_position = target_node.global_transform.origin
 	
 	# Get direction to target on the XZ plane
 	var direction = target_position - self_position
@@ -88,4 +114,24 @@ func knock_back(force:Vector3) -> void:
 	knock_back_tween_.tween_property(self, "speed_scale_knock_back", 1.0, 1.0)
 	animation_tree.set("parameters/HitHead/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
+
+func is_node_visible(node) -> bool:
+	var query = PhysicsRayQueryParameters3D.new()
+	query.from = %Vision.global_position
+	query.to = node.global_position + Vector3.UP
+	query.collide_with_bodies = true
+	query.collision_mask = 1 + 2
 	
+	var res = get_world_3d().direct_space_state.intersect_ray(query)
+	if res and res.collider == node:
+		return true
+
+	return false
+	
+
+func _heard(sound_position:Vector3) -> void:
+	heard.emit(sound_position)
+
+
+func _told_enemy_position(enemy) -> void:
+	told_enemy_position.emit(enemy)

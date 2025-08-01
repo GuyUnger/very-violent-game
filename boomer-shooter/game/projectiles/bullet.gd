@@ -3,6 +3,7 @@ extends Node3D
 
 @export var speed := 30.0
 
+var track_in_event_store := false
 var source_id := 0
 var is_ghost := false
 
@@ -10,16 +11,21 @@ var damage: int = 1
 
 
 func _ready() -> void:
+	for node in get_tree().get_nodes_in_group("npc_enemies"):
+		node._heard(global_position)
+		
+	$Fire.global_position = global_position
 	$Fire.pitch_scale = randf_range(1.0, 1.2)
 	$Fire.play()
 	
-	if source_id == 0:
-		source_id = EventStore.next_source_id()
-		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
-	else:
-		is_ghost = true
-	
-	EventStore.register_source(source_id, self)
+	if track_in_event_store:
+		if source_id == 0:
+			source_id = EventStore.next_source_id()
+			EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
+		else:
+			is_ghost = true
+		
+		EventStore.register_source(source_id, self)
 	
 	await get_tree().process_frame
 	
@@ -43,12 +49,15 @@ func _physics_process(delta: float) -> void:
 		var direction = global_transform.basis.z.normalized()
 		global_position += direction * delta * speed
 		
-		EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
+		if track_in_event_store:
+			EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
 
 
 func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
 	await get_tree().create_timer(position.distance_to(hit_position) / speed).timeout
 	set_physics_process(false)
+	
+	
 	
 	global_position = hit_position
 	var bounce_vel = (-global_transform.basis.z).bounce(normal)

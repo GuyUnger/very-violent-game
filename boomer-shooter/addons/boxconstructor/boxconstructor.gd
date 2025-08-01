@@ -128,7 +128,10 @@ func _input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 				if not is_dragging_edge:
 					if edge_preview and edge_preview.visible:
+						var edge_found = false
 						for child in csg_root.get_children():
+							if edge_found:
+								break
 							if child is CSGBox3D or child is CSGMesh3D:
 								# Get all of the edges of CSGBox3D or CSGMesh3D
 								var edges = _get_edges(child)
@@ -148,7 +151,22 @@ func _input(event: InputEvent) -> void:
 										if intersection:
 											# We turn the CSGBox3D into a custom mesh that allows use to move the vertecies
 											if child is CSGBox3D:
-												dragged_mesh = _convert_box_to_CSGMesh(child)
+
+
+												var old_box = child
+												var new_mesh = _convert_box_to_CSGMesh(old_box)
+												
+												undo_redo.create_action("Convert Box to Editable Mesh")
+												undo_redo.add_do_method(csg_root, "add_child", new_mesh)
+												undo_redo.add_do_method(csg_root, "remove_child", old_box)
+												undo_redo.add_do_method(new_mesh, "set_owner", old_box.owner)
+
+												undo_redo.add_undo_method(csg_root, "add_child", old_box)
+												undo_redo.add_undo_method(csg_root, "remove_child", new_mesh)
+												undo_redo.add_undo_method(old_box, "set_owner", old_box.owner)
+												undo_redo.commit_action()
+		
+												dragged_mesh = new_mesh
 
 											else:
 												dragged_mesh = child
@@ -161,6 +179,8 @@ func _input(event: InputEvent) -> void:
 											is_dragging_edge = true # Set dragging to true
 											current_edge = edge		# Set the current edge to the one we are dragging
 											drag_start_offset = _snap_to_grid(intersection) # Starting position of edge drag
+
+										edge_found = true
 										break
 				else:
 					if is_dragging_edge and dragged_mesh:
@@ -252,18 +272,47 @@ func _input(event: InputEvent) -> void:
 				var closest_node = null
 				var closest_distance = INF
 				
-				for child in csg_root.get_children():
-					if not (child is CSGBox3D or child is CSGMesh3D):
-						continue
-					
-					var node_center = child.global_position
-					var screen_pos = camera.unproject_position(node_center) # Takes the position in 3D converts it to 2D
-					var distance = screen_pos.distance_to(mouse_pos)
-					
+				# Create a ray from the camera through the mouse position
+				var from = camera.project_ray_origin(mouse_pos)
+				var dir = camera.project_ray_normal(mouse_pos)
+				# Cast a ray from the camera through the mouse position
+				var ray_length = 5000
+				var to = from + dir * ray_length
+
+				# Iterate over all CSGBox3D and CSGMesh3D children
+				for node in csg_root.get_children():
+					if node is CSGBox3D:
+						var aabb = AABB(node.global_position - node.size * 0.5, node.size)
+						var intersection = aabb.intersects_segment(from, to)
+						if intersection:
+							var hit_pos = intersection
+							var hit_distance = from.distance_to(hit_pos)
+							if hit_distance < closest_distance:
+								closest_node = node
+								closest_distance = hit_distance
+					elif node is CSGMesh3D:
+						var arr_mesh = node.mesh as ArrayMesh
+						if arr_mesh:
+							var arrays = arr_mesh.surface_get_arrays(0)
+							var vertices = arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
+							var indices = arrays[Mesh.ARRAY_INDEX] as PackedInt32Array
+							# Check intersection with each triangle
+							for i in range(0, indices.size(), 3):
+								var v0 = node.global_transform * vertices[indices[i]]
+								var v1 = node.global_transform * vertices[indices[i + 1]]
+								var v2 = node.global_transform * vertices[indices[i + 2]]
+								var hit = Geometry3D.segment_intersects_triangle(from, to, v0, v1, v2)
+								if hit:
+									var hit_distance = from.distance_to(hit)
+									if hit_distance < closest_distance:
+										closest_node = node
+										closest_distance = hit_distance
+
+					'''
 					if distance < closest_distance:
 						closest_node = child
 						closest_distance = distance
-				
+					'''
 				if closest_distance:
 					var closest_edge = _find_closest_edge(closest_node, mouse_pos)
 					current_edge = closest_edge
@@ -669,16 +718,24 @@ func create_rectangle(immediate_mesh: ImmediateMesh, v1: Vector3, v2: Vector3, v
 
 
 # === CSG Management Methods ===
+
+# Returns true if the hollow checkbox is checked
+func _is_hollow_enabled() -> bool:
+	if toolbar and "hollow_checkbox" in toolbar:
+		return toolbar.hollow_checkbox.button_pressed
+	elif toolbar and toolbar.has_method("is_hollow_enabled"):
+		return toolbar.is_hollow_enabled()
+	return false
+
 func _create_CSGBox3D() -> void:
 	var new_box = CSGBox3D.new()
 	new_box.use_collision = true
 	new_box.set_meta("_edit_lock_", true)
 	new_box.set_meta("_edit_group_", true)
-	
 
 	var min_point = base_rect_points[0]
 	var max_point = base_rect_points[0]
-	
+
 	# Minimum and maximum points of the base rectangle
 	for point in base_rect_points:
 		min_point = Vector3(
@@ -695,7 +752,7 @@ func _create_CSGBox3D() -> void:
 	# Initial size and center of the box
 	var size = (max_point - min_point)
 	var center = (max_point + min_point) * 0.5
-	
+
 	# Adjust size and center based on the extrusion
 	if draw_normal.abs().is_equal_approx(Vector3.UP) or draw_normal.abs().is_equal_approx(Vector3.DOWN):
 		size.y = abs(extrude_distance)
@@ -713,14 +770,50 @@ func _create_CSGBox3D() -> void:
 	new_box.size = size
 	new_box.position = center
 
+	var prefix = "Add_" if extrude_distance >= 0 else "Sub_"
+
+	# Set the name to match its dimensions
+	new_box.name = str(prefix,int(size.x),"_",int(size.y),"_",int(size.z))
+
+	# Set the material from the CubeGrid3D export material
+	if selected_grid and selected_grid.material:
+		new_box.material = selected_grid.material
+
 	# Depending on the extrusion distance set the operation
 	if extrude_distance < 0:
 		new_box.operation = CSGShape3D.OPERATION_SUBTRACTION
+
+	var hollow_enabled = _is_hollow_enabled()
 
 	undo_redo.create_action("Create CSGBox3D")
 	undo_redo.add_do_method(csg_root, "add_child", new_box)
 	undo_redo.add_do_method(new_box, "set_owner", get_editor_interface().get_edited_scene_root())
 	undo_redo.add_undo_method(csg_root, "remove_child", new_box)
+
+	# If hollow is enabled and this is an additive box, add a subtractive box inside
+	if hollow_enabled and (not (extrude_distance < 0)):
+		var grid_unit = selected_grid.grid_scale if selected_grid else 1.0
+		var inner_size = size - Vector3.ONE * grid_unit * 2
+		# Only add if the inner box is still valid
+		if inner_size.x > 0.0001 and inner_size.y > 0.0001 and inner_size.z > 0.0001:
+			var inner_box = CSGBox3D.new()
+			inner_box.use_collision = false
+			inner_box.set_meta("_edit_lock_", true)
+			inner_box.set_meta("_edit_group_", true)
+			inner_box.size = inner_size
+			inner_box.size.y += grid_unit
+
+			inner_box.position = Vector3(0, -grid_unit*0.5, 0)
+			inner_box.operation = CSGShape3D.OPERATION_SUBTRACTION
+
+			if selected_grid and selected_grid.material:
+				inner_box.material = selected_grid.material
+			# Set the name for the inner box as well
+			inner_box.name = str("Sub_",int(size.x),"_",int(size.y),"_",int(size.z))
+			undo_redo.add_do_method(new_box, "add_child", inner_box)
+			undo_redo.add_do_method(inner_box, "set_owner", get_editor_interface().get_edited_scene_root())
+			undo_redo.add_undo_method(csg_root, "remove_child", inner_box)
+
 	undo_redo.commit_action()
 	_update_toolbar_states()
 	
@@ -1047,6 +1140,7 @@ func _find_closest_edge(node: Node, mouse_pos: Vector2) -> Array:
 	var m_line1 = from
 	var m_line2 = from + dir * 5000 
 
+	
 	# Go over all of the edges
 	for edge in edges:
 		# Take the two first endpoints of the edge
@@ -1147,10 +1241,7 @@ func _convert_box_to_CSGMesh(box: CSGBox3D) -> CSGMesh3D:
 	csg_mesh.transform = box.transform
 	csg_mesh.operation = box.operation
 	csg_mesh.use_collision = box.use_collision
-	
-	csg_root.add_child(csg_mesh)
-	csg_mesh.owner = get_editor_interface().get_edited_scene_root()
-	
-	box.queue_free()
+	csg_mesh.name = str("e_", box.name)
+	csg_mesh.material = box.material if box.material else null
 	
 	return csg_mesh

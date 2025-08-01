@@ -7,6 +7,7 @@ var grid_scale: float = 1:
 		_update_material()
 		emit_signal("grid_created", grid_scale)
 
+@export var material : Material;
 
 var mesh_instance: MeshInstance3D
 var grid_material: ShaderMaterial

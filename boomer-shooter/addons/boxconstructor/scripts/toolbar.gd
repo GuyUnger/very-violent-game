@@ -9,11 +9,13 @@ signal edit_mesh
 signal grid_size_changed(size: float)
 signal reset_grid_pressed
 signal merge_mesh
+signal hollow_toggled(enabled: bool)
 
 var disable_button: Button
 var merge_button: Button
 var edit_button: Button
 var tooltip_button: Button
+var hollow_checkbox: CheckBox
 var plugin: EditorPlugin
 var toolbar_buttons: HBoxContainer
 var select_button: Button
@@ -36,6 +38,7 @@ func _create_all_buttons() -> void:
 	add_button = _create_mode_button("Add Primitive", "Add", "_on_add_button_pressed")
 	_create_button("Reset Grid", "Reload", "_on_reset_button_pressed")
 	_create_grid_size_selector()
+	_create_hollow_checkbox()
 	merge_button = _create_button("Merge Mesh", "BoxMesh", "_on_merge_mesh_pressed")
 	edit_button = _create_button("Edit Mesh", "Edit", "_on_edit_pressed")
 	tooltip_button = _create_button("", "Help", "pass")
@@ -97,6 +100,8 @@ func update_button_states(is_merged: bool) -> void:
 		merge_button.visible = !is_merged
 	if edit_button:
 		edit_button.visible = is_merged
+	if hollow_checkbox:
+		hollow_checkbox.visible = !is_merged
 	
 	if add_button:
 		add_button.queue_redraw()
@@ -192,6 +197,24 @@ func _create_grid_size_selector() -> void:
 
 	toolbar_buttons.add_child(grid_size_button)
 
+func _create_hollow_checkbox() -> void:
+	hollow_checkbox = CheckBox.new()
+	hollow_checkbox.text = "Hollow"
+	hollow_checkbox.button_pressed = false  # Default to unchecked/empty
+	hollow_checkbox.tooltip_text = "Hollow\nCreates hollow boxes (subtraction operation)"
+	
+	# Apply the same styling as other buttons
+	var normal_style = _create_button_stylebox()
+	var hover_style = _create_button_stylebox(true)
+	
+	hollow_checkbox.add_theme_stylebox_override("normal", normal_style)
+	hollow_checkbox.add_theme_stylebox_override("hover", hover_style)
+	hollow_checkbox.add_theme_stylebox_override("pressed", hover_style)
+	hollow_checkbox.add_theme_stylebox_override("focus", normal_style)
+	
+	hollow_checkbox.connect("toggled", Callable(self, "_on_hollow_toggled"))
+	toolbar_buttons.add_child(hollow_checkbox)
+
 func set_active_mode(mode: int) -> void:
 	disable_button.button_pressed = (mode == 0) # DISABLE mode
 	select_button.button_pressed = (mode == 1) # SELECT mode
@@ -242,6 +265,9 @@ func _on_edit_pressed() -> void:
 	update_button_states(false)
 	emit_signal("edit_mesh")
 
+func _on_hollow_toggled(button_pressed: bool) -> void:
+	emit_signal("hollow_toggled", button_pressed)
+
 func _get_tooltip_text(button_name: String) -> String:
 	match button_name:
 		"Disable":
@@ -258,6 +284,8 @@ func _get_tooltip_text(button_name: String) -> String:
 			return "Merge Mesh\n Merges all the cubes into a single MeshInstance3D."
 		"Edit Mesh":
 			return "Edit Mesh\n Breaks the mesh into its original cubes."
+		"Hollow":
+			return "Hollow\n Creates hollow boxes."
 		"":
 			return """Box Constructor Help:
 		
