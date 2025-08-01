@@ -116,3 +116,4 @@ class StateAttacking extends State:
 			
 func hit(damage:int) -> void:
 	health -= damage
+	holes += 1
