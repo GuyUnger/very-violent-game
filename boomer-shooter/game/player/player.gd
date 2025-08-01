@@ -478,4 +478,4 @@ func is_jump_just_pressed(grace: float = 0.1) -> bool:
 
 
 func die() -> void:
-	get_tree().reload_current_scene()
+	EventStore.reset()

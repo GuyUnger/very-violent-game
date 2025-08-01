@@ -115,5 +115,5 @@ class StateAttacking extends State:
 		weapon.trigger_down = false
 			
 func hit(damage:int) -> void:
-	health -= damage
 	holes += 1
+	super(damage)

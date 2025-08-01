@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgyal7lg7rsgh"]
+
+[ext_resource type="Texture2D" uid="uid://gh082vfxdoqa" path="res://game/npc/bloodsplat1_strip16.png" id="1_uftej"]
+
+[node name="Node3D" type="Sprite3D"]
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("1_uftej")
+hframes = 16

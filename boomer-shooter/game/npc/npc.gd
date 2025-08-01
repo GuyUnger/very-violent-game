@@ -32,6 +32,9 @@ func set_health(value:float) -> void:
 	if not Engine.is_editor_hint():
 		if health <= 0:
 			died.emit()
+			if not animation_tree:
+				printerr("something wrong in npc.gd")
+				return
 			animation_tree.set("parameters/Special/transition_request", "Died")
 
 
