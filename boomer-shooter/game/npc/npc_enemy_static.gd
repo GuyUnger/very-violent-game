@@ -16,6 +16,9 @@ class State extends Node:
 		p.add_child(state)
 		
 	func _died() -> void:
+		get_parent().looking_at = Vector3.ZERO
+		get_parent().target = null
+		get_parent().moving_to = null
 		get_parent().set_physics_process(false)
 		queue_free()
 
@@ -113,3 +116,4 @@ class StateAttacking extends State:
 			
 func hit(damage:int) -> void:
 	health -= damage
+	holes += 1

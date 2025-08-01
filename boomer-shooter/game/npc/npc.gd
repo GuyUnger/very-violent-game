@@ -6,7 +6,6 @@ signal died
 signal heard
 signal told_enemy_position
 
-
 @export var moving_to:Node3D
 @export var looking_at:Vector3
 @export var target:Node3D : 
@@ -15,7 +14,10 @@ signal told_enemy_position
 @export var max_health := 5
 @export var health := 5 :
 	set = set_health
-
+@export var holes:int :
+	set = set_holes
+@export var cuts:int :
+	set = set_cuts
 var speed_scale := 1.0
 var speed_scale_knock_back := 1.0
 var knock_back_force := Vector3.ZERO
@@ -26,10 +28,7 @@ func set_health(value:float) -> void:
 	var diff = health - value
 	
 	health = value
-	
-	if has_node("Armature/Skeleton3D/Skin"):
-		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("hole_damage", 1.0 - (float(health) / float(max_health)))
-	
+
 	if not Engine.is_editor_hint():
 		if health <= 0:
 			died.emit()
@@ -37,8 +36,25 @@ func set_health(value:float) -> void:
 				printerr("something wrong in npc.gd")
 				return
 			animation_tree.set("parameters/Special/transition_request", "Died")
-			
-	
+
+
+func set_holes(value:int) -> void:
+	holes = value
+	if has_node("Armature/Skeleton3D/Skin"):
+		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("hole_damage", holes / 255.0)
+
+
+func set_cuts(value:int) -> void:
+	cuts = value
+	if has_node("Armature/Skeleton3D/Skin"):
+		if cuts == 0:
+			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_0", Vector4())
+			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_1", Vector4())
+		if cuts == 1:
+			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_0", Vector4(randf(), randf(), randf(), randf()))
+		elif cuts == 2:
+			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_1", Vector4(randf(), randf(), randf(), randf()))
+
 
 var center_pos: Vector3:
 	get:
@@ -54,7 +70,8 @@ func set_target(node:Node3D) -> void:
 			%LookAtModifier3D.target_node = target.get_node("%Head").get_path()
 		else:
 			%LookAtModifier3D.target_node = target.get_path()
-
+	else:
+		%LookAtModifier3D.target_node = NodePath("")
 
 func _physics_process(delta: float) -> void:
 	if moving_to:
@@ -130,7 +147,7 @@ func is_node_visible(node) -> bool:
 		return true
 
 	return false
-	
+
 
 func _heard(sound_position:Vector3) -> void:
 	heard.emit(sound_position)
@@ -138,3 +155,8 @@ func _heard(sound_position:Vector3) -> void:
 
 func _told_enemy_position(enemy) -> void:
 	told_enemy_position.emit(enemy)
+
+
+func melee() -> void:
+	health -= 5
+	cuts += 1

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2s031kmlvmqh"]
+[gd_scene load_steps=4 format=3 uid="uid://d2s031kmlvmqh"]
 
-[ext_resource type="Script" uid="uid://rrs50lf25072" path="res://game/npc/hole_map.gd" id="1_kn5ot"]
+[ext_resource type="Texture2D" uid="uid://4uski1qtmpov" path="res://content/models/Skin.png" id="1_kn5ot"]
+[ext_resource type="Script" uid="uid://ccxoqhi0tdgd8" path="res://game/npc/hole_map.gd" id="2_bt1ru"]
+[ext_resource type="Texture2D" uid="uid://dttnnhaf02hoc" path="res://content/textures/hole_texture.png" id="3_mqymk"]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = 15
@@ -13,6 +15,226 @@ grow_vertical = 2
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HoleMap" type="HFlowContainer" parent="."]
-layout_mode = 2
-script = ExtResource("1_kn5ot")
+[node name="Skin" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(232, 232)
+scale = Vector2(0.453613, 0.453613)
+texture = ExtResource("1_kn5ot")
+script = ExtResource("2_bt1ru")
+
+[node name="Sprite2D" type="Sprite2D" parent="Skin"]
+position = Vector2(-79.3628, -167.544)
+scale = Vector2(0.233046, 0.233046)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Skin"]
+position = Vector2(17.6362, -123.453)
+scale = Vector2(0.233046, 0.233046)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Skin"]
+position = Vector2(-2.20453, -196.202)
+scale = Vector2(0.233046, 0.233046)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Skin"]
+position = Vector2(-52.9085, -83.7718)
+scale = Vector2(0.233046, 0.233046)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Skin"]
+position = Vector2(-33.0678, 4.40903)
+scale = Vector2(0.233046, 0.233046)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Skin"]
+position = Vector2(26.4542, -41.8859)
+scale = Vector2(0.233046, 0.233046)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Skin"]
+position = Vector2(79.3628, -165.339)
+scale = Vector2(0.233046, 0.233046)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Skin"]
+position = Vector2(147.703, -169.748)
+scale = Vector2(0.15958, 0.15958)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D13" type="Sprite2D" parent="Skin"]
+position = Vector2(204.211, -166.149)
+scale = Vector2(0.148681, 0.148681)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D14" type="Sprite2D" parent="Skin"]
+position = Vector2(251.315, -165.339)
+scale = Vector2(0.148681, 0.148681)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D15" type="Sprite2D" parent="Skin"]
+position = Vector2(299.815, -167.544)
+scale = Vector2(0.100175, 0.100175)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D16" type="Sprite2D" parent="Skin"]
+position = Vector2(30.8633, 17.6362)
+scale = Vector2(0.100175, 0.100175)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D17" type="Sprite2D" parent="Skin"]
+position = Vector2(30.8633, 17.6362)
+scale = Vector2(0.100175, 0.100175)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D18" type="Sprite2D" parent="Skin"]
+position = Vector2(77.1582, -92.5899)
+scale = Vector2(0.100175, 0.100175)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D19" type="Sprite2D" parent="Skin"]
+position = Vector2(-33.0678, 77.1582)
+scale = Vector2(0.170647, 0.170647)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D20" type="Sprite2D" parent="Skin"]
+position = Vector2(46.2949, 81.5673)
+scale = Vector2(0.170647, 0.170647)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D21" type="Sprite2D" parent="Skin"]
+position = Vector2(61.7266, 145.498)
+scale = Vector2(0.170647, 0.170647)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D22" type="Sprite2D" parent="Skin"]
+position = Vector2(-53.9096, 146.702)
+scale = Vector2(0.214495, 0.197272)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D23" type="Sprite2D" parent="Skin"]
+position = Vector2(-52.9085, 207.225)
+scale = Vector2(0.214495, 0.197272)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D24" type="Sprite2D" parent="Skin"]
+position = Vector2(59.5221, 216.043)
+rotation = 0.709395
+scale = Vector2(0.214495, 0.197272)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D25" type="Sprite2D" parent="Skin"]
+position = Vector2(-52.9085, 282.179)
+rotation = 0.709395
+scale = Vector2(0.214495, 0.197272)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D26" type="Sprite2D" parent="Skin"]
+position = Vector2(55.113, 286.588)
+rotation = 0.709395
+scale = Vector2(0.214495, 0.197272)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D27" type="Sprite2D" parent="Skin"]
+position = Vector2(66.1356, 352.723)
+rotation = 0.709395
+scale = Vector2(0.158005, 0.135649)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D28" type="Sprite2D" parent="Skin"]
+position = Vector2(-52.9085, 339.496)
+rotation = 0.709395
+scale = Vector2(0.158005, 0.135649)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D29" type="Sprite2D" parent="Skin"]
+position = Vector2(-59.5221, 392.405)
+rotation = 0.709395
+scale = Vector2(0.158005, 0.135649)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D30" type="Sprite2D" parent="Skin"]
+position = Vector2(59.522, 414.45)
+rotation = 0.709395
+scale = Vector2(0.158005, 0.135649)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D31" type="Sprite2D" parent="Skin"]
+position = Vector2(-50.704, 456.336)
+rotation = 0.709395
+scale = Vector2(0.158005, 0.135649)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D32" type="Sprite2D" parent="Skin"]
+position = Vector2(57.3175, 465.154)
+rotation = 0.709395
+scale = Vector2(0.158005, 0.135649)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D33" type="Sprite2D" parent="Skin"]
+position = Vector2(-44.0903, -476.177)
+rotation = 0.709395
+scale = Vector2(0.185429, 0.1767)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D34" type="Sprite2D" parent="Skin"]
+position = Vector2(79.3628, -462.949)
+rotation = 0.709395
+scale = Vector2(0.185429, 0.1767)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D35" type="Sprite2D" parent="Skin"]
+position = Vector2(72.7492, -376.973)
+rotation = -2.69714
+scale = Vector2(0.185429, 0.1767)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D37" type="Sprite2D" parent="Skin"]
+position = Vector2(13.2272, -443.109)
+rotation = -2.69714
+scale = Vector2(0.185429, 0.1767)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D38" type="Sprite2D" parent="Skin"]
+position = Vector2(-37.4769, -324.065)
+rotation = -2.69714
+scale = Vector2(0.185429, 0.1767)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D39" type="Sprite2D" parent="Skin"]
+position = Vector2(55.113, -317.451)
+rotation = -2.69714
+scale = Vector2(0.185429, 0.1767)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D40" type="Sprite2D" parent="Skin"]
+position = Vector2(11.0226, -379.178)
+rotation = -2.69714
+scale = Vector2(0.185429, 0.1767)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D36" type="Sprite2D" parent="Skin"]
+position = Vector2(-59.6814, -397.053)
+rotation = -2.69714
+scale = Vector2(0.236816, 0.207387)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Skin"]
+position = Vector2(-156.521, -176.362)
+scale = Vector2(0.233046, 0.233046)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Skin"]
+position = Vector2(-227.066, -169.748)
+scale = Vector2(0.15958, 0.15958)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Skin"]
+position = Vector2(-284.383, -165.339)
+scale = Vector2(0.131459, 0.131459)
+texture = ExtResource("3_mqymk")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Skin"]
+position = Vector2(-365.951, -169.748)
+scale = Vector2(0.116523, 0.116523)
+texture = ExtResource("3_mqymk")
