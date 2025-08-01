@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2s031kmlvmqh"]
+
+[ext_resource type="Script" uid="uid://rrs50lf25072" path="res://game/npc/hole_map.gd" id="1_kn5ot"]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HoleMap" type="HFlowContainer" parent="."]
+layout_mode = 2
+script = ExtResource("1_kn5ot")

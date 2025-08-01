@@ -102,7 +102,6 @@ parameters/Special/current_state = "Moving"
 parameters/Special/transition_request = ""
 parameters/Special/current_index = 0
 parameters/TimeScale/scale = 1.0
-parameters/TimeSeek/seek_request = -1.0
 
 [node name="RootMotionView" type="RootMotionView" parent="." index="2"]
 animation_path = NodePath("../AnimationTree")

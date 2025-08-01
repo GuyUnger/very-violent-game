@@ -13,7 +13,8 @@ var damage: int = 1
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("npc_enemies"):
 		node._heard(global_position)
-	
+		
+	$Fire.global_position = global_position
 	$Fire.pitch_scale = randf_range(1.0, 1.2)
 	$Fire.play()
 	

@@ -6,15 +6,27 @@ func _ready() -> void:
 	add_child(StateIdle.new())
 
 class State extends Node:
+	func _ready() -> void:
+		get_parent().died.connect(_died)
+	
 	func move_to(state:State) -> void:
 		queue_free()
 		var p := get_parent()
 		p.remove_child(self)
 		p.add_child(state)
+		
+	func _died() -> void:
+		get_parent().looking_at = Vector3.ZERO
+		get_parent().target = null
+		get_parent().moving_to = null
+		get_parent().set_physics_process(false)
+		queue_free()
 
 
 class StateIdle extends State:
 	func _ready() -> void:
+		super()
+
 		get_parent().get_node("%Vision").monitoring = false
 		get_parent().get_node("%Vision").monitoring = true
 		get_parent().get_node("%Vision").body_entered.connect(_body_entered_vision)
@@ -49,9 +61,10 @@ class StateIdle extends State:
 
 class StateSpottedEnemy extends State:
 	var enemy:Node3D
-	
-	
+
 	func _ready() -> void:
+		super()
+
 		get_parent().animation_tree.set("parameters/Special/transition_request", "Panic")
 		get_parent().target = enemy
 		await get_tree().create_timer(1.0).timeout
@@ -71,6 +84,8 @@ class StateAttacking extends State:
 	
 	
 	func _ready() -> void:
+		super()
+
 		get_parent().target = enemy
 		#get_parent().moving_to = enemy
 		
@@ -93,12 +108,11 @@ class StateAttacking extends State:
 		
 		weapon.aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP)
 		weapon.trigger_down = true
+		
+		
+	func _exit_tree() -> void:
+		var weapon = get_parent().get_node("%Weapon")
+		weapon.trigger_down = false
 			
-
-
 func hit(damage:int) -> void:
 	health -= damage
-	if health <= 0:
-		set_physics_process(false)
-		await get_tree().create_timer(1.0).timeout
-		queue_free()
