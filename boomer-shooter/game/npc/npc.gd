@@ -2,6 +2,7 @@
 extends Node3D
 class_name NPC
 
+signal died
 signal heard
 signal told_enemy_position
 
@@ -26,8 +27,14 @@ func set_health(value:float) -> void:
 	
 	health = value
 	
-	if health <= 0:
-		queue_free()
+	if has_node("Armature/Skeleton3D/Skin"):
+		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("hole_damage", 1.0 - (float(health) / float(max_health)))
+	
+	if not Engine.is_editor_hint():
+		if health <= 0:
+			died.emit()
+			animation_tree.set("parameters/Special/transition_request", "Died")
+			
 	
 
 var center_pos: Vector3:
@@ -69,7 +76,7 @@ func _physics_process(delta: float) -> void:
 		global_position -= knock_back_force
 		knock_back_force = lerp(knock_back_force, Vector3.ZERO, delta)
 		
-	if looking_at:
+	if not target and looking_at:
 		look_at_node_y_axis_lerp(looking_at, delta * 0.5)
 
 

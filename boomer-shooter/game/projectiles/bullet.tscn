@@ -63,6 +63,7 @@ top_level = true
 stream = ExtResource("5_a77ay")
 
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
+top_level = true
 stream = ExtResource("5_xx14j")
 volume_db = -10.0
 

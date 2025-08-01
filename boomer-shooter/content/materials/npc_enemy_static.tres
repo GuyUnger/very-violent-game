@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bn2bbcpilqil6"]
+
+[ext_resource type="Shader" uid="uid://gwcb86082iq6" path="res://content/models/npc.gdshader" id="1_ephu2"]
+
+[sub_resource type="Gradient" id="Gradient_ephu2"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ctavr"]
+noise_type = 2
+frequency = 0.0325
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rgaes"]
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_ephu2")
+noise = SubResource("FastNoiseLite_ctavr")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ephu2")
+shader_parameter/texture_holes = SubResource("NoiseTexture2D_rgaes")
