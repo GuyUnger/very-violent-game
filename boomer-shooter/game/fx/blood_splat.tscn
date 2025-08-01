@@ -34,7 +34,6 @@ alpha_curve = SubResource("CurveTexture_h3b5g")
 [sub_resource type="QuadMesh" id="QuadMesh_bngfs"]
 
 [node name="Node3D" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 top_level = true
 script = ExtResource("1_v7i0e")
 

@@ -5,6 +5,8 @@ instance uniform float damage_left_leg : hint_range(0.0, 1.0);
 instance uniform float damage_right_leg : hint_range(0.0, 1.0);
 instance uniform float damage_left_arm : hint_range(0.0, 1.0);
 instance uniform float damage_right_arm : hint_range(0.0, 1.0);
+instance uniform float head_pop : hint_range(0.0, 1.0);
+
 instance uniform vec4 cut_0;
 instance uniform vec4 cut_1;
 
@@ -48,6 +50,9 @@ void fragment()
 	right_arm_factor *= (UV.x - 0.5) * 2.0;
 	right_arm_factor = clamp(right_arm_factor, 0.0, 1.0);
 	
+	float head_factor = 1.0 - clamp(UV.y * 2.5, 0.0, 1.0);
+	ALPHA -= head_factor * head_pop;
+
 
 	ALPHA -= (damage_left_arm * left_arm_factor);
 	ALPHA -= (damage_right_arm * right_arm_factor);

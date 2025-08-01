@@ -13,6 +13,9 @@ func hit(damage:int) -> void:
 		set_physics_process(false)
 		#await get_tree().create_timer(1.0).timeout
 		#queue_free()
+		
+		if randf() > 0.5:
+			head_pop()
 
 
 func spawn_blood_puddle() -> void:
@@ -40,3 +43,13 @@ func spawn_blood_splash() -> void:
 	tween.tween_property(blood, "frame", 15, 0.3)
 	await tween.finished
 	blood.queue_free()
+
+
+func head_pop() -> void:
+	if has_node("Armature/Skeleton3D/Skin"):
+		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("head_pop", 1.0)
+		
+		var x := preload("res://game/fx/bloot_line.tscn").instantiate()
+		$CollisionShape3D.add_child(x)
+		x.position.y += 0.5
+		x.look_at(global_position + Vector3.UP)
