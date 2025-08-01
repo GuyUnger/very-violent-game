@@ -39,3 +39,5 @@ func shoot() -> void:
 	projectile.position = player.model_position + Vector3.UP * 1.4
 	
 	Main.instance.add_child(projectile)
+	
+	%AudioShoot.play()

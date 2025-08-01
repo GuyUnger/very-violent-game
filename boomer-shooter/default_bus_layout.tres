@@ -6,10 +6,11 @@ wet = 0.03
 
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_j3pel"]
 resource_name = "Amplify"
-volume_db = 24.0
+volume_db = 5.0
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
 resource_name = "Compressor"
+gain = 10.0
 
 [resource]
 bus/1/name = &"SFX"
