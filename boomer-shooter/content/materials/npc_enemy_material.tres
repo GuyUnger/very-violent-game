@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b5w4vmvenaaft"]
 
-[ext_resource type="Shader" path="res://content/models/npc.gdshader" id="1_kstga"]
+[ext_resource type="Shader" uid="uid://gwcb86082iq6" path="res://content/models/npc.gdshader" id="1_kstga"]
 [ext_resource type="Texture2D" uid="uid://dmsaoi3kdgwba" path="res://content/textures/hole_map.png" id="2_wioqg"]
 
 [resource]
