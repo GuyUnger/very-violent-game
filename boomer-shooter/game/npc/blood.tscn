@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqu5crhrdokso"]
+
+[ext_resource type="Texture2D" uid="uid://dj0wdwoknvg6r" path="res://game/player/blud.png" id="1_rhj13"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24rxs"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("1_rhj13")
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_t66il"]
+orientation = 1
+
+[node name="Node3D" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_24rxs")
+mesh = SubResource("QuadMesh_t66il")

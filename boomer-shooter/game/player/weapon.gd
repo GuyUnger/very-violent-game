@@ -30,6 +30,8 @@ func process(delta: float) -> void:
 
 func shoot() -> void:
 	reload_t = 0.1
+	if not player:
+		return
 	player.cam.shake_rumble(0.3, 0.1, 16.0)
 	player.cam.shake_shock(0.1, 0.5)
 	
