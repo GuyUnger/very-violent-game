@@ -1,12 +1,15 @@
-[gd_scene load_steps=20 format=4 uid="uid://cqff16mf4lpq6"]
+[gd_scene load_steps=27 format=4 uid="uid://4jdwlrqptnyh"]
 
-[ext_resource type="Script" uid="uid://cywxf4tybte30" path="res://stages/level.gd" id="1_e0l40"]
-[ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_mwmwo"]
-[ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_l4ad7"]
-[ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="4_dgwo2"]
-[ext_resource type="PackedScene" uid="uid://duomy14irp63p" path="res://game/doors/door_slide_wall/door_slide_wall.tscn" id="5_65nvc"]
-[ext_resource type="PackedScene" uid="uid://b7g4067loq3un" path="res://game/npc/enemy_big/enemy_big.tscn" id="6_udlle"]
-[ext_resource type="Script" path="res://stages/hud.gd" id="7_iltmi"]
+[ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_j0kwg"]
+[ext_resource type="Script" uid="uid://cywxf4tybte30" path="res://stages/level.gd" id="2_ku073"]
+[ext_resource type="PackedScene" uid="uid://csvdqccaap4sw" path="res://game/player/player.tscn" id="3_hphqq"]
+[ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="3_uka3n"]
+[ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="4_dhagi"]
+[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy.tscn" id="4_vq2bu"]
+[ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="5_v41yi"]
+[ext_resource type="PackedScene" uid="uid://duomy14irp63p" path="res://game/doors/door_slide_wall/door_slide_wall.tscn" id="6_wyg5j"]
+[ext_resource type="PackedScene" uid="uid://b7g4067loq3un" path="res://game/npc/enemy_big/enemy_big.tscn" id="7_s2ha7"]
+[ext_resource type="Script" path="res://stages/hud.gd" id="8_dr7eq"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l4ad7"]
 _surfaces = [{
@@ -108,43 +111,116 @@ sky_material = SubResource("ProceduralSkyMaterial_l4ad7")
 background_mode = 2
 sky = SubResource("Sky_e0l40")
 
-[node name="Level" type="Node3D"]
-script = ExtResource("1_e0l40")
+[sub_resource type="Shader" id="Shader_0oqm6"]
+code = "shader_type canvas_item;
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+uniform float fish_intensity = 1.0;
+uniform float scale_correction : hint_range(0.9, 1.1) = 0.99;
+
+void fragment() {
+	vec2 uv = SCREEN_UV;
+	uv -= 0.5;
+	uv *= scale_correction;
+	uv += 0.5;
+
+	// Convert to lens-space (-1,1) and correct for aspect ratio
+	float aspect_ratio = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+	vec2 lens_pos = (uv - 0.5) * 2.0;
+	lens_pos.x *= aspect_ratio;
+	float lens_radius = length(lens_pos);
+
+	// Equisolid-angle remap: screen radius -> source radius
+	const float max_fov_deg = 70.0; // visible field of view
+	float max_fov_rad = radians(max_fov_deg);
+	float theta = lens_radius * max_fov_rad * fish_intensity;
+	float src_radius = tan(theta * 0.5) / tan(max_fov_rad * 0.5);
+	vec2 unit_dir = lens_pos / max(lens_radius, 1e-6);
+	vec2 src_pos = unit_dir * src_radius;
+	src_pos.x /= aspect_ratio;
+	vec2 sample_uv = src_pos * 0.5 + 0.5; // back to 0,1
+
+	float center_dist = length(sample_uv - 0.5);
+
+	vec3 color = texture(SCREEN_TEXTURE, sample_uv).rgb;
+
+	// hue-shift deges
+	COLOR.rgb = mix(color, color.bgr, pow(center_dist, 1.0) * 0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fejr8"]
+shader = SubResource("Shader_0oqm6")
+shader_parameter/fish_intensity = 0.8
+shader_parameter/scale_correction = 0.961
+
+[sub_resource type="Shader" id="Shader_fejr8"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D screen_texture : hint_screen_texture;
+
+void fragment() {
+	float dither = 0.0;
+	ivec2 pixel = ivec2(SCREEN_UV / SCREEN_PIXEL_SIZE);
+	if (pixel % ivec2(4) == ivec2(0) || pixel % ivec2(4) == ivec2(2)) {
+		dither = 1.0;
+	}
+	else if (pixel % ivec2(2) == ivec2(0) || pixel % ivec2(2) == ivec2(1)) {
+		dither = 0.2;
+	}
+	float steps = mix(30.0, 12.0, dither);
+	vec3 color = texture(screen_texture, SCREEN_UV).rgb;
+
+	color = round(color * steps) / steps;
+
+	COLOR.rgb = color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5sjox"]
+shader = SubResource("Shader_fejr8")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_j0kwg")
+
+[node name="Level" type="Node3D" parent="."]
+script = ExtResource("2_ku073")
+time = 20.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-material_override = ExtResource("1_mwmwo")
+material_override = ExtResource("3_uka3n")
 use_collision = true
 size = Vector3(100, 1, 100)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
 transform = Transform3D(0.626133, -0.74642, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779372, -0.590553, 0.209347, 0, 40.3619, 0)
 shadow_enabled = true
 
-[node name="CubeGrid3D" type="StaticBody3D" parent="."]
-script = ExtResource("2_l4ad7")
+[node name="CubeGrid3D" type="StaticBody3D" parent="Level"]
+script = ExtResource("4_dhagi")
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
 metadata/_edit_lock_ = true
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CubeGrid3D"]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level/CubeGrid3D"]
 use_collision = true
 metadata/_edit_lock_ = true
 
-[node name="@CSGBox3D@31290" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31290" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.5, 4)
 use_collision = true
 size = Vector3(5, 3, 10)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31295" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31295" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.5, 15)
 use_collision = true
 size = Vector3(8, 5, 4)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31304" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31304" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -7)
 operation = 2
 use_collision = true
@@ -152,21 +228,21 @@ size = Vector3(18, 6, 16)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31306" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31306" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 5, -9)
 use_collision = true
 size = Vector3(17, 10, 18)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31312" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31312" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5.5, 1)
 use_collision = true
 size = Vector3(14, 1, 2)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31314" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31314" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 7.5, -10)
 operation = 2
 use_collision = true
@@ -174,21 +250,21 @@ size = Vector3(13, 3, 20)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31318" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31318" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7.5, -0.5)
 use_collision = true
 size = Vector3(2, 3, 1)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31320" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31320" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 6.5, -0.5)
 use_collision = true
 size = Vector3(5, 1, 1)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31329" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31329" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -30.5, -34)
 operation = 2
 use_collision = true
@@ -196,21 +272,21 @@ size = Vector3(4, 61, 66)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31331" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31331" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.5, 8.5)
 use_collision = true
 size = Vector3(2, 3, 21)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31333" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31333" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 7, 25.5)
 use_collision = true
 size = Vector3(19, 14, 7)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31335" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31335" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.5, 24)
 operation = 2
 use_collision = true
@@ -218,21 +294,21 @@ size = Vector3(2, 3, 4)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31342" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31342" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 7.5, 8)
 use_collision = true
 size = Vector3(14, 15, 18)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31344" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31344" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2.5, 19.5)
 use_collision = true
 size = Vector3(2, 5, 5)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31346" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31346" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 2, 14)
 operation = 2
 use_collision = true
@@ -240,7 +316,7 @@ size = Vector3(5, 4, 2)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@31356" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@31356" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 2.5, 8)
 operation = 2
 use_collision = true
@@ -248,14 +324,14 @@ size = Vector3(10, 7, 14)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@35107" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@35107" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -9.5)
 use_collision = true
 size = Vector3(2, 3, 1)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@35109" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@35109" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -13)
 operation = 2
 use_collision = true
@@ -263,113 +339,113 @@ size = Vector3(2, 3, 8)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGMesh3D@23481" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGMesh3D@23481" type="CSGMesh3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, 7)
 use_collision = true
 mesh = SubResource("ArrayMesh_l4ad7")
 
-[node name="@CSGMesh3D@23503" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGMesh3D@23503" type="CSGMesh3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 7.5, -5)
 operation = 2
 use_collision = true
 mesh = SubResource("ArrayMesh_e0l40")
 
-[node name="@CSGMesh3D@23508" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGMesh3D@23508" type="CSGMesh3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.5, -5.5)
 operation = 2
 use_collision = true
 mesh = SubResource("ArrayMesh_dgwo2")
 
-[node name="@CSGMesh3D@24470" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGMesh3D@24470" type="CSGMesh3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.5)
 operation = 2
 use_collision = true
 mesh = SubResource("ArrayMesh_65nvc")
 
-[node name="@CSGMesh3D@31083" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGMesh3D@31083" type="CSGMesh3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 7.5, -0.5)
 use_collision = true
 mesh = SubResource("ArrayMesh_udlle")
 
-[node name="@CSGMesh3D@31084" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGMesh3D@31084" type="CSGMesh3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4.5, 3)
 use_collision = true
 mesh = SubResource("ArrayMesh_iltmi")
 
-[node name="@CSGMesh3D@31085" type="CSGMesh3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGMesh3D@31085" type="CSGMesh3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2, 21)
 use_collision = true
 mesh = SubResource("ArrayMesh_covs7")
 
-[node name="@CSGBox3D@75787" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@75787" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, 2, 8.5)
 use_collision = true
 size = Vector3(5, 4, 1)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@75790" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@75790" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 2, 8.5)
 use_collision = true
 size = Vector3(5, 4, 1)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@75792" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@75792" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5, 2, 11.5)
 use_collision = true
 size = Vector3(1, 4, 5)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@75794" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@75794" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 2, 13.5)
 use_collision = true
 size = Vector3(11, 4, 1)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@75796" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@75796" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2, 11)
 use_collision = true
 size = Vector3(1, 4, 4)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@CSGBox3D@75799" type="CSGBox3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@CSGBox3D@75799" type="CSGBox3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4.5, 11)
 use_collision = true
 size = Vector3(12, 1, 6)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@MeshInstance3D@82046" type="MeshInstance3D" parent="CubeGrid3D/CSGCombiner3D"]
+[node name="@MeshInstance3D@82046" type="MeshInstance3D" parent="Level/CubeGrid3D/CSGCombiner3D"]
 material_override = SubResource("StandardMaterial3D_65nvc")
 mesh = SubResource("ImmediateMesh_udlle")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
 environment = SubResource("Environment_dgwo2")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="MeleeActivator" parent="." instance=ExtResource("4_dgwo2")]
+[node name="MeleeActivator" parent="Level" instance=ExtResource("5_v41yi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 2)
 
-[node name="DoorSlideWall" parent="." instance=ExtResource("5_65nvc")]
+[node name="DoorSlideWall" parent="Level" instance=ExtResource("6_wyg5j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 8.5)
 
-[node name="EnemyBig" parent="." instance=ExtResource("6_udlle")]
+[node name="EnemyBig" parent="Level" instance=ExtResource("7_s2ha7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.175, 0, -6.515)
 
-[node name="EnemyBig3" parent="." instance=ExtResource("6_udlle")]
+[node name="EnemyBig3" parent="Level" instance=ExtResource("7_s2ha7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.825, 1.06402, 13.843)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="Level"]
 layer = 8
-script = ExtResource("7_iltmi")
+script = ExtResource("8_dr7eq")
 
-[node name="Time" type="Label" parent="HUD"]
+[node name="Time" type="Label" parent="Level/HUD"]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -383,4 +459,43 @@ theme_override_font_sizes/font_size = 32
 text = "59"
 horizontal_alignment = 1
 
-[connection signal="activated" from="MeleeActivator" to="DoorSlideWall" method="activate"]
+[node name="Player" parent="." instance=ExtResource("3_hphqq")]
+
+[node name="CharacterEnemy" parent="." instance=ExtResource("4_vq2bu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.46375, 0.0032863, 0.154365)
+max_health = 5
+health = 5
+
+[node name="CharacterEnemy2" parent="." instance=ExtResource("4_vq2bu")]
+transform = Transform3D(-0.667144, 0, -0.744929, 0, 1, 0, 0.744929, 0, -0.667144, -9.83714, 0.0032863, 0.154365)
+max_health = 5
+health = 5
+
+[node name="CharacterEnemy3" parent="." instance=ExtResource("4_vq2bu")]
+transform = Transform3D(-0.735033, 0, -0.678031, 0, 1, 0, 0.678031, 0, -0.735033, -11.5452, 0.0032863, 0.154365)
+max_health = 10
+health = 10
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Fisheye" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_fejr8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Dither" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_5sjox")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="activated" from="Level/MeleeActivator" to="Level/DoorSlideWall" method="activate"]

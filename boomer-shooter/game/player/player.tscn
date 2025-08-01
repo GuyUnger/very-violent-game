@@ -1,10 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://csvdqccaap4sw"]
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
-[ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="2_a4w0n"]
 [ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
+[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/smg.tscn" id="2_j0mij"]
 [ext_resource type="Script" uid="uid://de7cvkqkpjfvt" path="res://game/player/crosshair.gd" id="3_8soms"]
-[ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="3_j0mij"]
 [ext_resource type="Texture2D" uid="uid://bm7gadsp6jqal" path="res://game/player/blade_swoosh.png" id="4_gb4gm"]
 [ext_resource type="AudioStream" uid="uid://ckg8kreql6c0e" path="res://game/player/footstep_metal.tres" id="5_5fytw"]
 [ext_resource type="AudioStream" uid="uid://b78cvnyi5skl7" path="res://game/player/land_metal.tres" id="6_anr75"]
@@ -27,6 +26,9 @@ height = 1.6
 height = 0.4
 radius = 1.5
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j0mij"]
+radius = 1.0
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_7hyr5")
@@ -39,14 +41,9 @@ shape = SubResource("CapsuleShape3D_8soms")
 [node name="Model" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="Weapon" type="Node3D" parent="Model"]
+[node name="Weapon" parent="Model" instance=ExtResource("2_j0mij")]
 unique_name_in_owner = true
-script = ExtResource("2_a4w0n")
-
-[node name="AudioShoot" type="AudioStreamPlayer" parent="Model/Weapon"]
-unique_name_in_owner = true
-stream = ExtResource("3_j0mij")
-bus = &"SFX"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08947, 0)
 
 [node name="Person" type="Node3D" parent="Model"]
 unique_name_in_owner = true
@@ -146,3 +143,15 @@ collision_mask = 36
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AreaMelee"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 shape = SubResource("CylinderShape3D_5ghna")
+
+[node name="PickUp" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+shape = SubResource("CylinderShape3D_j0mij")
+
+[connection signal="body_entered" from="PickUp" to="." method="_pick_up_body_entered"]
