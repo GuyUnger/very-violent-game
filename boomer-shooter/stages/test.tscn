@@ -7,6 +7,9 @@
 
 [node name="Main" instance=ExtResource("1_u1sro")]
 
+[node name="SubViewport" parent="SubViewportContainer" index="0"]
+audio_listener_enable_3d = true
+
 [node name="Level" parent="SubViewportContainer/SubViewport" index="1" instance=ExtResource("2_2qmnm")]
 
 [node name="CharacterEnemy4" parent="SubViewportContainer/SubViewport" index="2" instance=ExtResource("3_r1nsf")]
