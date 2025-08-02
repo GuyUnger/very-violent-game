@@ -1,4 +1,4 @@
-extends NPC
+extends NPCHumanoid
 class_name NPCPlayerGhost
 
 var source_id:int

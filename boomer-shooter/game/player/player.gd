@@ -41,7 +41,6 @@ var allow_jump_vel_boost: bool = false
 var allow_walljump: bool = false
 
 # Shooting
-@onready var weapon: Weapon = %Weapon
 
 var input_direction: Vector2
 var aim_target: Node3D
@@ -60,6 +59,8 @@ var velocity_prev: Vector3 = Vector3.ZERO
 # Audio
 var walk_cycle: float = 0.0
 var walk_cycle_next_step: int = 0
+
+var weapon:Weapon
 
 @export var starting_weapon:PackedScene
 @export var close_on_escape = false

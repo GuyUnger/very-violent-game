@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_j0kwg"]
 [ext_resource type="Script" uid="uid://cywxf4tybte30" path="res://stages/level.gd" id="2_ku073"]
-[ext_resource type="PackedScene" uid="uid://csvdqccaap4sw" path="res://game/player/player.tscn" id="3_hphqq"]
+[ext_resource type="PackedScene" uid="uid://n2142e5rpapd" path="res://game/player/player.tscn" id="3_hphqq"]
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="3_uka3n"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="4_dhagi"]
-[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy.tscn" id="4_vq2bu"]
+[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="4_vq2bu"]
 [ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="5_v41yi"]
 [ext_resource type="PackedScene" uid="uid://duomy14irp63p" path="res://game/doors/door_slide_wall/door_slide_wall.tscn" id="6_wyg5j"]
 [ext_resource type="PackedScene" uid="uid://b7g4067loq3un" path="res://game/npc/enemy_big/enemy_big.tscn" id="7_s2ha7"]

@@ -1,5 +1,4 @@
-@tool
-extends NPCEnemy
+extends NPC
 class_name NPCEnemyTurret
 
 func set_target(node:Node3D) -> void:

@@ -1,6 +1,5 @@
-@tool
-extends NPCEnemy
-class_name NPCEnemySMG
+extends NPCHumanoid
+class_name NPCHumanoidGrunt
 
 func _ready() -> void:
 	add_child(StateIdle.new())
@@ -70,13 +69,6 @@ class StateSpottedEnemy extends State:
 	func _ready() -> void:
 		super()
 
-		get_parent().animation_tree.set("parameters/Special/transition_request", "Panic")
-		get_parent().target = enemy
-		await get_tree().create_timer(1.0).timeout
-		if not get_tree():
-			return
-		get_parent().animation_tree.set("parameters/Special/transition_request", "Moving")
-		
 		for node in get_tree().get_nodes_in_group("npc_enemies"):
 			if node != get_parent() and node.global_position.distance_squared_to(get_parent().global_position) < 10:
 				node._told_enemy_position(enemy)

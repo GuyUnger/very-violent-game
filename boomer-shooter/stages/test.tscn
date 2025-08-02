@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_u1sro"]
 [ext_resource type="PackedScene" uid="uid://cqff16mf4lpq6" path="res://stages/level.tscn" id="2_2qmnm"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_dp5ym"]
-[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy.tscn" id="3_r1nsf"]
+[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="3_r1nsf"]
+
 
 [node name="Main" instance=ExtResource("1_u1sro")]
 
