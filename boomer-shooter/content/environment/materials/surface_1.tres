@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://b1dsf2mgg5ya2" path="res://content/environment/materials/pbr/surface_Layer_1_roughness.png" id="3_7tr0a"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ldufu"]
-load_path = "res://.godot/imported/surface_Layer_1_height.png-083cd71764fd64dbd3f037d2b7d995e1.s3tc.ctex"
 
 [resource]
 specular_mode = 2

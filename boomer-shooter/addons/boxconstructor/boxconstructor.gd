@@ -113,18 +113,36 @@ func _find_csg_node_under_cursor(mouse_pos: Vector2) -> Node:
 	var closest_node = null
 	var closest_distance = INF
 
+	# Perform a raycast against physics objects in the scene
+	var ray_query = PhysicsRayQueryParameters3D.new()
+	ray_query.from = from
+	ray_query.to = to
+	ray_query.collide_with_bodies = true
+	var hit = get_editor_interface().get_edited_scene_root().get_world_3d().direct_space_state.intersect_ray(ray_query)
+	var collision_point = null
+	if hit:
+		collision_point = hit.position
+		#print("Hit at: ", collision_point)
+	else:
+		return null
+
+	var children = []
 	for node in csg_root.get_children():
+		children.append(node)
+		children.append_array(node.get_children())
+	children.reverse()
+
+	for node in children:
 		if node is CSGBox3D:
-			if node.operation == CSGShape3D.OPERATION_SUBTRACTION:
-				continue
+			#if node.operation == CSGShape3D.OPERATION_SUBTRACTION:
+			#	continue
 			var aabb = AABB(node.global_position - node.size * 0.5, node.size)
-			var intersection = aabb.intersects_segment(from, to)
-			if intersection:
-				var dist = from.distance_to(intersection)
-				#print(str("Distance to ", node.name, ": ", dist))
-				if dist < closest_distance:
-					closest_distance = dist
-					closest_node = node
+			var larger = aabb.abs().grow(0.001)
+			var smaller = aabb.abs().grow(-0.001)
+			if larger.has_point(collision_point) && !smaller.has_point(collision_point):
+				#var intersection = aabb.intersects_segment(from, to)
+				#print(node.name, " - ", collision_point)
+				return node
 		elif node is CSGMesh3D:
 			var arr_mesh = node.mesh as ArrayMesh
 			if arr_mesh:
@@ -135,46 +153,12 @@ func _find_csg_node_under_cursor(mouse_pos: Vector2) -> Node:
 					var v0 = node.global_transform * vertices[indices[i]]
 					var v1 = node.global_transform * vertices[indices[i + 1]]
 					var v2 = node.global_transform * vertices[indices[i + 2]]
-					var hit = Geometry3D.segment_intersects_triangle(from, to, v0, v1, v2)
-					if hit:
-						var dist = from.distance_to(hit)
+					var triangle_hit = Geometry3D.segment_intersects_triangle(from, to, v0, v1, v2)
+					if triangle_hit:
+						var dist = from.distance_to(triangle_hit)
 						if dist < closest_distance:
 							closest_distance = dist
 							closest_node = node
-
-	var closest_add_node = closest_node
-
-	for node in csg_root.get_children():
-		if closest_add_node and node is CSGBox3D and node.operation == CSGShape3D.OPERATION_SUBTRACTION:
-			var aabb = AABB(node.global_position - node.size * 0.5, node.size)
-			var closest_add_node_aabb = AABB(closest_add_node.global_position - closest_add_node.size * 0.5, closest_add_node.size)
-			var intersection_aabb = aabb.intersection(closest_add_node_aabb)
-			if intersection_aabb and intersection_aabb.has_volume():
-				var intersection = intersection_aabb.intersects_segment(from, to)
-				if intersection:
-					var dist = from.distance_to(intersection)
-					if dist < closest_distance+0.01:
-						closest_distance = dist
-						closest_node = node
-	
-	
-	if closest_node && closest_node.operation == CSGShape3D.OPERATION_SUBTRACTION:
-		var children = closest_node.get_children()
-		if closest_add_node:
-			children = closest_add_node.get_children()
-		for node in children:
-			if node is CSGBox3D and node.operation == CSGShape3D.OPERATION_SUBTRACTION:
-				var aabb = AABB(node.global_position - node.size * 0.5, node.size)
-				var closest_add_node_aabb = AABB(closest_add_node.global_position - closest_add_node.size * 0.5, closest_add_node.size)
-				var intersection_aabb = aabb.intersection(closest_add_node_aabb)
-				var closest_sub_aabb = AABB(closest_node.global_position - closest_node.size * 0.5, closest_node.size)
-				var intersection_aabb2 = aabb.intersection(closest_sub_aabb)
-				if intersection_aabb and intersection_aabb.has_volume() and intersection_aabb2 and intersection_aabb2.has_volume():
-					var intersection = intersection_aabb.intersects_segment(from, to)
-					if intersection:
-						closest_node = node
-						break
-	
 	return closest_node
 
 # Cycles the material of the given CSG node (box or mesh)

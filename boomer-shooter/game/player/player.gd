@@ -490,8 +490,9 @@ func is_jump_just_pressed(grace: float = 0.1) -> bool:
 
 #endregion
 
-
 func die() -> void:
+	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
+	
 	EventStore.reset()
 
 

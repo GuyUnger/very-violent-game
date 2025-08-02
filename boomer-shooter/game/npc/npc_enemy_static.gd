@@ -95,15 +95,18 @@ class StateAttacking extends State:
 		#get_parent().moving_to = enemy
 		
 	func _physics_process(delta: float) -> void:
-		var weapon = get_parent().get_node("%Weapon")	
+		var weapon = get_parent().get_node("%Weapon")
 		
 		if not get_parent().is_node_visible(enemy):
 			weapon.trigger_pressed = false
 			move_to(StateIdle.new())
 			return
+			
+		if enemy.health <= 0:
+			weapon.trigger_pressed = false
+			move_to(StateIdle.new())
+			return
 
-		
-		
 		var ds = enemy.global_position.distance_squared_to(get_parent().global_position)
 		
 		get_parent().speed_scale = lerp(0.0, 1.0, clamp(ds / 3.0, 0.0, 1.0))
@@ -119,7 +122,3 @@ class StateAttacking extends State:
 		var weapon = get_parent().get_node("%Weapon")
 		if weapon:
 			weapon.trigger_pressed = false
-			
-func hit(damage:int) -> void:
-	holes += 1
-	super(damage)
