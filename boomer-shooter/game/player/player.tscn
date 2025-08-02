@@ -124,7 +124,7 @@ polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
 [node name="AudioStep" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("5_5fytw")
-volume_db = -5.0
+volume_db = -3.0
 pitch_scale = 0.5
 bus = &"SFX"
 
@@ -170,7 +170,7 @@ shape = SubResource("CylinderShape3D_j0mij")
 
 [node name="AudioDie" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_gb4gm")
-pitch_scale = 1.1
+pitch_scale = 1.2
 bus = &"SFX"
 
 [node name="AudioJump" type="AudioStreamPlayer" parent="."]

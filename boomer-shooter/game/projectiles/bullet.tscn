@@ -57,7 +57,7 @@ bus = &"SFX"
 [node name="HitMetal" type="AudioStreamPlayer3D" parent="."]
 top_level = true
 stream = ExtResource("3_tynb1")
-volume_db = -8.0
+volume_db = -4.0
 bus = &"SFX"
 
 [node name="HitMeat" type="AudioStreamPlayer3D" parent="."]
@@ -68,7 +68,7 @@ bus = &"SFX"
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
 top_level = true
 stream = ExtResource("5_xx14j")
-volume_db = -10.0
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
