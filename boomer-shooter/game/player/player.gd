@@ -62,6 +62,8 @@ var walk_cycle_next_step: int = 0
 @export var starting_weapon:PackedScene
 @export var close_on_escape = false
 
+var dead: bool = false
+
 var last_transform := Transform3D()
 
 #region Initialization
@@ -154,7 +156,10 @@ func _process(delta: float) -> void:
 	
 	var cam_pos_to: Vector3 = model.global_position
 	if first_person:
-		cam_pos_to.y = cam_pos_to.y
+		cam_pos.y = cam_pos_to.y
+		if is_on_floor():
+			cam_pos.y += sin(walk_cycle * PI) * vel_hor.length() * 0.01
+			cam_pos_to += transform.basis.z * cos(walk_cycle * PI * 0.5) * vel_hor.length() * 0.01
 	else:
 		cam_pos_to.y = lerp(cam_pos_to.y, clampf(floor_pos.y, position.y - 4.0, position.y + 2.0), 0.3)
 	cam_pos.x = cam_pos_to.x
@@ -176,6 +181,9 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if dead:
+		return
+	
 	#region Input
 	#var look_vel_to: Vector2 = Input.get_vector(
 	#		"joy_left", "joy_right",
@@ -326,7 +334,9 @@ func jump() -> void:
 	allow_jump_release = true
 	allow_jump = false
 	%AudioJump.play()
+	$AudioJump.play()
 	jumped.emit()
+	EventStore.push_event(EventStoreCommandSet.new(source_id, "jump", true))
 	
 	if first_person:
 		cam.shake_land(0.4, 0.5)
@@ -496,8 +506,10 @@ func is_jump_just_pressed(grace: float = 0.1) -> bool:
 #endregion
 
 func die() -> void:
+	dead = true
 	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
-	
+	$AudioDie.play()
+	await get_tree().create_timer(1.0).timeout
 	EventStore.reset()
 
 

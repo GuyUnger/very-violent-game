@@ -25,6 +25,8 @@ func _trigger_just_pressed() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if player and player.dead:
+		return
 	if velocity != Vector3.ZERO:
 		velocity.y -= 9.8 * delta
 		move_and_slide()
