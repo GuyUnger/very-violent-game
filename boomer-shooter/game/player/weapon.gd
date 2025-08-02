@@ -9,6 +9,7 @@ enum HoldPose {
 @export var fire_rate := 0.0
 @export var auto := false
 @export var hold_pose:HoldPose
+@export var recoil := 0.0
 
 var target_range: float = 20.0
 var reload_t: float = 0.0
@@ -23,6 +24,7 @@ var trigger_pressed:bool :
 
 @export var ammo: int = 40
 
+var total_recoil: float = 0.0
 var since_thrown: float = 99.0
 
 @export var pickup_sounds: Array[AudioStream]
@@ -45,6 +47,8 @@ func _trigger_just_pressed() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	total_recoil = max(0.0, total_recoil - delta)
+	
 	if player and player.dead:
 		return
 
@@ -84,9 +88,14 @@ func shoot() -> void:
 	if has_node("Muzzleflash"):
 		$Muzzleflash.shoot()
 	
+	var r = Vector3(
+		randf_range(-total_recoil, total_recoil), 
+		randf_range(-total_recoil, total_recoil),
+		randf_range(-total_recoil, total_recoil)) * 0.5
+
 	if player:
 		var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
-		projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)
+		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
 		
 		player.cam.shake_rumble(0.3, 0.3, 16.0)
 		player.cam.shake_shock(0.2, 0.5)
@@ -96,7 +105,8 @@ func shoot() -> void:
 		#projectile.collision_mask = 1 + 4
 	else:
 		var projectile := preload("res://game/projectiles/bullet_enemy.tscn").instantiate()
-		projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)
+
+		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
 		#projectile.collision_mask = 1 + 2
 		projectile.position = global_position + Vector3.UP * 0.1
 	
@@ -106,6 +116,8 @@ func shoot() -> void:
 		%AudioShoot.play()
 	else:
 		%AudioShootNPC.play()
+		
+	total_recoil += recoil
 	
 func throw(force:Vector3) -> void:
 	trigger_pressed = false
@@ -133,6 +145,6 @@ func pickup(p_player: Player) -> void:
 	velocity = Vector3.ZERO
 	collision_mask = 0
 	collision_layer = 0
-#	await get_tree().process_frame
+	await Main.instance.get_tree().process_frame
 	position = Vector3.ZERO
 	rotation = Vector3.ZERO

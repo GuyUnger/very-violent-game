@@ -33,6 +33,7 @@ collision_mask = 0
 script = ExtResource("1_57hh3")
 fire_rate = 0.12
 auto = true
+recoil = 0.2
 pickup_sounds = Array[AudioStream]([ExtResource("2_pkk1y"), ExtResource("3_81lhf")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
