@@ -8,7 +8,7 @@ extends Node3D
 var track_in_event_store := false
 var source_id := 0
 var is_ghost := false
-var collision_mask := 1
+var collision_mask := 1 + 4
 
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("npc_enemies"):

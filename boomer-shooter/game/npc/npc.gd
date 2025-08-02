@@ -119,7 +119,7 @@ func is_node_visible(node) -> bool:
 	query.from = %Vision.global_position
 	query.to = node.global_position + Vector3.UP
 	query.collide_with_bodies = true
-	query.collision_mask = 1 + 2
+	query.collision_mask = 1 + 2 + 8
 	
 	var res = get_world_3d().direct_space_state.intersect_ray(query)
 	if res and res.collider == node:
