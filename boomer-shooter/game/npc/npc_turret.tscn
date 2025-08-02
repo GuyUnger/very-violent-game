@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://2twnqkka80to"]
+[gd_scene load_steps=9 format=3 uid="uid://cglxaun25ddhf"]
 
 [ext_resource type="Script" uid="uid://mpfflnhp4a7" path="res://game/npc/npc_turret.gd" id="1_dhxo6"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="5_evdfe"]
