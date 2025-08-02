@@ -23,7 +23,7 @@ const JUMP_STRENGTH = 12.0
 
 var source_id := 0
 
-static var first_person: bool = true
+var first_person: bool = true
 
 # Camera
 var look_angle: Vector2
@@ -98,9 +98,7 @@ func _ready() -> void:
 #region Processing
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("toggle_view"):
-		first_person = not first_person
-		%Person.visible = not first_person
+	#if Input.is_action_just_pressed("toggle_view"):
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
 	model.global_position = model_position
@@ -122,7 +120,7 @@ func _process(delta: float) -> void:
 	
 	# Camera distance
 	var cam_distance_to: float = 2.0 + ease(sin(melee_reload_t * PI * 0.7), 0.7) * 1.5
-	var cam_up: float = 2.0
+	var cam_up: float = 1.0
 	
 	if first_person:
 		cam_distance_to = 0.0
@@ -238,6 +236,8 @@ func _physics_process(delta: float) -> void:
 	velocity_prev = velocity
 
 func throw_weapon() -> void:
+	if not weapon:
+		return
 	weapon.global_position = global_position + Vector3.UP * 1.5
 	weapon.throw(aim_dir * 10.0)
 	weapon = null
@@ -373,6 +373,8 @@ func process_targets() -> void:
 		#printt(aim_dir)
 		return
 	# Aim target
+	if not weapon:
+		return
 	var target_range_sq: float = weapon.target_range ** 2
 	
 	ray_aim_player.global_rotation = Vector3.ZERO
@@ -525,6 +527,8 @@ func die() -> void:
 	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
 	$AudioDie.play()
 	throw_weapon()
+	first_person = false
+	#%Person.visible = not first_person
 	await get_tree().create_timer(1.0).timeout
 	EventStore.reset()
 
