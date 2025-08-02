@@ -228,10 +228,7 @@ func _physics_process(delta: float) -> void:
 			
 			
 		if Input.is_action_just_pressed("throw"):
-			weapon.global_position = global_position + Vector3.UP * 1.5
-			weapon.throw(aim_dir * 10.0)
-			weapon = null
-
+			throw_weapon()
 	# Fall out of world
 	if position.y < -20.0:
 		position = Vector3.ZERO
@@ -239,6 +236,12 @@ func _physics_process(delta: float) -> void:
 	
 	look_angle_prev = look_angle
 	velocity_prev = velocity
+
+func throw_weapon() -> void:
+	weapon.global_position = global_position + Vector3.UP * 1.5
+	weapon.throw(aim_dir * 10.0)
+	weapon = null
+
 
 #endregion
 
@@ -521,6 +524,7 @@ func die() -> void:
 	dead = true
 	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
 	$AudioDie.play()
+	throw_weapon()
 	await get_tree().create_timer(1.0).timeout
 	EventStore.reset()
 

@@ -48,6 +48,7 @@ unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Person"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_a4w0n")
 skeleton = NodePath("../../..")
 
