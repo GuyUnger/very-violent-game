@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cbt4a74g6fyhs" path="res://game/weapons/model/weapon_smg.glb" id="3_7w4b6"]
 [ext_resource type="PackedScene" uid="uid://dqul5y672j5k2" path="res://game/weapons/model/weapon_smg_arm.glb" id="4_ujfyf"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_8w3g1"]
-[ext_resource type="Script" uid="uid://dntd1fqlvxqh5" path="res://game/weapons/weapon_smg_animations.gd" id="6_yuge1"]
+[ext_resource type="Script" path="res://game/weapons/weapon_smg_animations.gd" id="6_yuge1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
 radius = 0.25

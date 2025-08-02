@@ -74,7 +74,8 @@ func shoot() -> void:
 	
 		Main.instance.add_child(projectile)
 	
-	%AudioShoot.play()
+	if player:
+		%AudioShoot.play()
 	
 func throw(force:Vector3) -> void:
 	trigger_pressed = false
