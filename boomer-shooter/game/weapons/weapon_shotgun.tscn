@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://kjth5n3pmvxy"]
+[gd_scene load_steps=14 format=3 uid="uid://kjth5n3pmvxy"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_1vjvc"]
+[ext_resource type="AudioStream" uid="uid://b5oybs5wceg0c" path="res://game/weapons/pickup_shotgun 01.wav" id="2_prx1q"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_qelip"]
+[ext_resource type="AudioStream" uid="uid://hgqgusivuyph" path="res://game/weapons/pickup_shotgun 02.wav" id="3_n14iq"]
 [ext_resource type="PackedScene" uid="uid://mswr2wkg0tv7" path="res://game/weapons/model/weapon_shotgun_arm_l.glb" id="3_qelip"]
 [ext_resource type="PackedScene" uid="uid://ddl7c7rea820a" path="res://game/weapons/model/weapon_shotgun.glb" id="3_ri3d7"]
 [ext_resource type="PackedScene" uid="uid://dqwnrxai3cxi8" path="res://game/weapons/model/weapon_shotgun_arm_r.glb" id="4_kc37h"]
+[ext_resource type="AudioStream" uid="uid://cw7tkeyo8v5w3" path="res://game/weapons/pickup_shotgun 03.wav" id="4_tq6aa"]
+[ext_resource type="AudioStream" uid="uid://bjsvmmbnpkgyo" path="res://game/weapons/pickup_shotgun 04.wav" id="5_baumh"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_gwt1y"]
 [ext_resource type="Script" uid="uid://cmuwwvlykmou0" path="res://game/weapons/weapon_shotgun_animations.gd" id="7_kc37h"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="8_gt5ou"]
@@ -18,6 +22,7 @@ collision_mask = 0
 script = ExtResource("1_1vjvc")
 fire_rate = 0.75
 ammo = 10
+pickup_sounds = Array[AudioStream]([ExtResource("2_prx1q"), ExtResource("3_n14iq"), ExtResource("4_tq6aa"), ExtResource("5_baumh")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7w4b6")
@@ -64,5 +69,8 @@ top_level = true
 stream = ExtResource("8_gt5ou")
 volume_db = -6.0
 bus = &"SFX"
+
+[node name="AudioPickup" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 
 [editable path="WorldModel/ShotgunContainer/weapon_shotgun"]

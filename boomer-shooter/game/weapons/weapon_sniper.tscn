@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cg5fupmfgsdtj"]
 
-[ext_resource type="Script" path="res://game/weapons/weapon_sniper.gd" id="1_24slo"]
+[ext_resource type="Script" uid="uid://coaxw8ju8bkhn" path="res://game/weapons/weapon_sniper.gd" id="1_24slo"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_qrhx1"]
 [ext_resource type="PackedScene" uid="uid://cbt4a74g6fyhs" path="res://game/weapons/model/weapon_smg.glb" id="3_brtfp"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="4_qrhx1"]
@@ -104,3 +104,6 @@ top_level = true
 stream = ExtResource("4_qrhx1")
 volume_db = -6.0
 bus = &"SFX"
+
+[node name="AudioPickup" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true

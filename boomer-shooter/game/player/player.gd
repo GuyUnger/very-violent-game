@@ -563,17 +563,12 @@ func die() -> void:
 func _pick_up_body_entered(body: Node3D) -> void:
 	if not weapon and body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
 		weapon = body
-		weapon.player = self
-		weapon.velocity = Vector3.ZERO
-		body.collision_mask = 0
-		body.collision_layer = 0
+		weapon.pickup(self)
 		if body.is_inside_tree():
 			body.reparent(fps_weapon)
 		else:
 			fps_weapon.add_child(body)
 		
-		weapon.position = Vector3.ZERO
-		weapon.rotation = Vector3.ZERO
 
 
 func animate_crosshair() -> void:

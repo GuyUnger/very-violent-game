@@ -19,6 +19,14 @@ var trigger_pressed:bool :
 
 var since_thrown: float = 99.0
 
+@export var pickup_sounds: Array[AudioStream]
+var pickup_sounds_b: Array[AudioStream] = [
+	preload("res://game/weapons/pickup_default 01.wav"),
+	preload("res://game/weapons/pickup_default 02.wav"),
+	preload("res://game/weapons/pickup_default 04.wav"),
+]
+
+
 func set_trigger_pressed(value:bool) -> void:
 	if value != trigger_pressed:
 		if value:
@@ -103,3 +111,19 @@ func throw(force:Vector3) -> void:
 	#await get_tree().create_timer(0.2).timeout
 	collision_layer = 8
 	
+
+func pickup(p_player: Player) -> void:
+	if randf() < 0.2 or pickup_sounds.size() == 0:
+		%AudioPickup.stream = pickup_sounds_b.pick_random()
+	else:
+		%AudioPickup.stream = pickup_sounds.pick_random()
+	%AudioPickup.play()
+	%AudioPickup.pitch_scale = 1.1
+	
+	player = p_player
+	velocity = Vector3.ZERO
+	collision_mask = 0
+	collision_layer = 0
+	await get_tree().process_frame
+	position = Vector3.ZERO
+	rotation = Vector3.ZERO
