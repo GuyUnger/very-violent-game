@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjnhfu1ekho3v"]
+[gd_scene load_steps=9 format=3 uid="uid://bjnhfu1ekho3v"]
 
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_0cfai"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy.tscn" id="3_0cfai"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_l0s8e"]
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="3_rsuto"]
 [ext_resource type="PackedScene" uid="uid://2twnqkka80to" path="res://game/npc/npc_turret.tscn" id="5_0cfai"]
+[ext_resource type="ArrayMesh" uid="uid://bwk3e8f81aln2" path="res://content/environment/background/fuji_MountFuji.res" id="6_4p2hb"]
+[ext_resource type="PackedScene" uid="uid://dv3alq8obmgsb" path="res://game/projectiles/fireball.tscn" id="7_6p0xd"]
+[ext_resource type="Script" uid="uid://djoomrpy0p4p0" path="res://game/projectiles/fireball.gd" id="8_aqw5h"]
 
 [node name="Main" instance=ExtResource("3_rsuto")]
 
@@ -38,3 +41,11 @@ transform = Transform3D(-0.747613, 0, -0.664135, 0, 1, 0, 0.664135, 0, -0.747613
 
 [node name="NPCEnemyTurret2" parent="." index="5" instance=ExtResource("5_0cfai")]
 transform = Transform3D(-4.37114e-08, 0, -1, 1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1.91069e-15, -13.0189, 3.99849, 32.3748)
+
+[node name="FujiMountFuji" type="MeshInstance3D" parent="." index="6"]
+transform = Transform3D(-2.36242, 0, -3.22784, 0, 4, 0, 3.22784, 0, -2.36242, 26, 192, 15)
+mesh = ExtResource("6_4p2hb")
+
+[node name="Fireball" parent="." index="7" instance=ExtResource("7_6p0xd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 34, 0)
+script = ExtResource("8_aqw5h")

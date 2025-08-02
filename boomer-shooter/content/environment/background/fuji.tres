@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cbcgvgyy15g8o"]
+
+[ext_resource type="Texture2D" uid="uid://cu4awb08y0hn1" path="res://content/environment/background/fuji.png" id="1_23t5f"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("1_23t5f")
