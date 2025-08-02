@@ -1,4 +1,3 @@
-@tool
 extends Character
 class_name NPC
 
@@ -6,8 +5,6 @@ signal died
 signal heard
 signal told_enemy_position
 signal spotted_enemy
-
-@export var poll_vision_checks := false
 
 @export var moving_to:Node3D
 @export var looking_at:Vector3
@@ -21,6 +18,7 @@ signal spotted_enemy
 var speed_scale := 1.0
 var speed_scale_knock_back := 1.0
 var knock_back_force := Vector3.ZERO
+var polling_vision := false
 
 func set_holes(value:int) -> void:
 	holes = value
@@ -32,8 +30,7 @@ func set_target(node:Node3D) -> void:
 	target = node
 	
 func _ready() -> void:
-	if poll_vision_checks:
-		%Vision.body_entered.connect(_body_entered_vision)
+	%Vision.body_entered.connect(_body_entered_vision)
 
 func look_at_node_y_axis_lerp(target_position: Vector3, delta: float, speed: float = 5.0) -> void:
 	var self_position = global_transform.origin
@@ -63,7 +60,7 @@ func knock_back(force:Vector3) -> void:
 func is_node_visible(node) -> bool:
 	var query = PhysicsRayQueryParameters3D.new()
 	query.from = %Vision.global_position
-	query.to = node.global_position + Vector3.UP
+	query.to = node.global_position + Vector3.UP * 1.
 	query.collide_with_bodies = true
 	query.collision_mask = 1 + 2 + 8
 	
@@ -113,11 +110,142 @@ func die() -> void:
 func _body_entered_vision(body) -> void:
 	if is_node_visible(body):
 		spotted_enemy.emit(body)
+	else:
+		poll_vision()
 
 func poll_vision() -> void:
-	while true:
-		var bodies = %Vision.get_overlapping_bodies()
+	if polling_vision:
+		return
+		
+	polling_vision = true
+	var bodies = %Vision.get_overlapping_bodies()
+	
+	while not bodies.is_empty():
 		for node in bodies:
+
+			await get_tree().process_frame
+			if not is_inside_tree():
+				polling_vision = false
+				return
+			
 			if is_node_visible(node):
 				spotted_enemy.emit(node)
-			await get_tree().process_frame
+				polling_vision = false
+				return
+				
+		bodies = %Vision.get_overlapping_bodies()
+	
+	polling_vision = false
+
+
+class State extends Node:
+	func _ready() -> void:
+		get_parent().died.connect(_died)
+	
+	func move_to(state:State) -> void:
+		queue_free()
+		var p := get_parent()
+		p.remove_child(self)
+		p.add_child(state)
+		
+	func _died() -> void:
+		
+		var weapon = get_parent().get_node("%Weapon")
+		if weapon:
+			weapon.throw(Vector3.UP * 5.0)
+		
+		get_parent().looking_at = Vector3.ZERO
+		get_parent().target = null
+		get_parent().moving_to = null
+		get_parent().set_physics_process(false)
+		queue_free()
+		
+	func _exit_tree() -> void:
+		get_parent().died.disconnect(_died)
+
+
+class StateIdle extends State:
+	func _ready() -> void:
+		super()
+
+		get_parent().target = null
+		get_parent().moving_to = null
+		
+		get_parent().spotted_enemy.connect(_spotted_enemy)
+		get_parent().heard.connect(_heard)
+		get_parent().told_enemy_position.connect(_told_enemy_position)
+
+		get_parent().poll_vision()
+	
+	func _heard(position:Vector3) -> void:
+		get_parent().looking_at = position
+		
+	func _told_enemy_position(enemy) -> void:
+		var next_state = StateAttacking.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+	func _spotted_enemy(enemy) -> void:
+		var next_state = StateSpottedEnemy.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+	func _exit_tree() -> void:
+		super()
+		get_parent().heard.disconnect(_heard)
+		get_parent().spotted_enemy.disconnect(_spotted_enemy)
+		get_parent().told_enemy_position.disconnect(_told_enemy_position)
+
+
+class StateSpottedEnemy extends State:
+	var enemy:Node3D
+
+	func _ready() -> void:
+		super()
+
+		for node in get_tree().get_nodes_in_group("npc_enemies"):
+			if node != get_parent() and node.global_position.distance_squared_to(get_parent().global_position) < 50:
+				node._told_enemy_position(enemy)
+
+		var next_state = StateAttacking.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+class StateAttacking extends State:
+	var enemy:Node3D
+	
+	
+	func _ready() -> void:
+		super()
+
+		get_parent().target = enemy
+		#get_parent().moving_to = enemy
+		
+	func _physics_process(delta: float) -> void:
+		var weapon = get_parent().get_node("%Weapon")
+		
+		if not get_parent().is_node_visible(enemy):
+			weapon.trigger_pressed = false
+			move_to(StateIdle.new())
+			return
+			
+		if enemy.health <= 0:
+			weapon.trigger_pressed = false
+			move_to(StateIdle.new())
+			return
+
+		var ds = enemy.global_position.distance_squared_to(get_parent().global_position)
+		
+		get_parent().speed_scale = lerp(0.0, 1.0, clamp(ds / 3.0, 0.0, 1.0))
+		
+		if ds < 1.0:
+			get_parent().speed_scale = 0.0
+		
+		weapon.aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP)
+		weapon.trigger_pressed = true
+		
+		
+	func _exit_tree() -> void:
+		var weapon = get_parent().get_node("%Weapon")
+		if weapon:
+			weapon.trigger_pressed = false
