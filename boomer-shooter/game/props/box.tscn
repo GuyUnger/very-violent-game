@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba7a7b7hxx0p0"]
+
+[ext_resource type="ArrayMesh" uid="uid://v426rcv3ntpu" path="res://content/environment/props/meshes/props_box.res" id="1_u6ulq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nmf75"]
+size = Vector3(1.235, 1.35, 1.23)
+
+[node name="Box" type="RigidBody3D"]
+
+[node name="PropsBox" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_u6ulq")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_nmf75")
