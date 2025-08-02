@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://b6o8mp0jhq1nd"]
+[gd_scene load_steps=32 format=4 uid="uid://b6o8mp0jhq1nd"]
 
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_wojob"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_o4n3f"]
@@ -26,6 +26,7 @@
 [ext_resource type="Material" uid="uid://cmc7f1y8anju" path="res://content/environment/materials/surface_18.tres" id="21_huau7"]
 [ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="22_i6c3o"]
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="23_ifw73"]
+[ext_resource type="PackedScene" uid="uid://dv3alq8obmgsb" path="res://game/projectiles/fireball.tscn" id="27_3c822"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wojob"]
 
@@ -852,3 +853,169 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 8, 5)
 
 [node name="StreetsJunction1" parent="Streets" instance=ExtResource("5_apn2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 8, 5)
+
+[node name="BackgroundBuildings" type="StaticBody3D" parent="."]
+script = ExtResource("2_o4n3f")
+material = ExtResource("13_d03ru")
+materials = Array[Material]([ExtResource("3_apn2u"), ExtResource("4_73r8o"), ExtResource("5_3c822"), ExtResource("6_7xjh6"), ExtResource("7_qo4k2"), ExtResource("8_43vej"), ExtResource("9_a6tfy"), ExtResource("10_316br"), ExtResource("11_wha0p"), ExtResource("12_4vkph"), ExtResource("13_d03ru"), ExtResource("14_ud70m"), ExtResource("15_yn2a4"), ExtResource("16_yibng"), ExtResource("17_nhte8"), ExtResource("18_tjdsr"), ExtResource("19_aodlu"), ExtResource("20_2is7d"), ExtResource("21_huau7"), ExtResource("22_i6c3o"), ExtResource("23_ifw73")])
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BackgroundBuildings"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Add_66_50_42" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108, 25, -77)
+use_collision = true
+size = Vector3(66, 50, 42)
+material = ExtResource("12_4vkph")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_54_34_52" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 182, 17, -45)
+use_collision = true
+size = Vector3(54, 34, 52)
+material = ExtResource("11_wha0p")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_45_56_59" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 201.5, 28, 22.5)
+use_collision = true
+size = Vector3(45, 56, 59)
+material = ExtResource("10_316br")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_45_65_54" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 236.5, 32.5, 94)
+use_collision = true
+size = Vector3(45, 65, 54)
+material = ExtResource("10_316br")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_55_33_74" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183.5, 16.5, 148)
+use_collision = true
+size = Vector3(55, 33, 74)
+material = ExtResource("4_73r8o")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_51_42_36" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.5, 21, -115)
+use_collision = true
+size = Vector3(51, 42, 36)
+material = ExtResource("11_wha0p")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_32_23_31" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 11.5, -121.5)
+use_collision = true
+size = Vector3(32, 23, 31)
+material = ExtResource("5_3c822")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_26_64_59" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 32, -170.5)
+use_collision = true
+size = Vector3(26, 64, 59)
+material = ExtResource("19_aodlu")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_19_83_71" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.5, 41.5, -162.5)
+use_collision = true
+size = Vector3(19, 83, 71)
+material = ExtResource("9_a6tfy")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_24_76_74" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 175, 38, -158)
+use_collision = true
+size = Vector3(24, 76, 74)
+material = ExtResource("9_a6tfy")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_35_73_90" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 278.5, 36.5, -90)
+use_collision = true
+size = Vector3(35, 73, 90)
+material = ExtResource("10_316br")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_66_73_131" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93, 36.5, 212.5)
+use_collision = true
+size = Vector3(66, 73, 131)
+material = ExtResource("22_i6c3o")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_30_69_160" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 34.5, 185)
+use_collision = true
+size = Vector3(30, 69, 160)
+material = ExtResource("7_qo4k2")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_64_147_69" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 73.5, 243.5)
+use_collision = true
+size = Vector3(64, 147, 69)
+material = ExtResource("8_43vej")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_141_128_23" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 246.5, 64, 244.5)
+use_collision = true
+size = Vector3(141, 128, 23)
+material = ExtResource("3_apn2u")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_113_112_97" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 339.5, 56, 167.5)
+use_collision = true
+size = Vector3(113, 112, 97)
+material = ExtResource("10_316br")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_80_111_61" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 319, 55.5, 31.5)
+use_collision = true
+size = Vector3(80, 111, 61)
+material = ExtResource("10_316br")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_29_98_152" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 234.5, 49, -229)
+use_collision = true
+size = Vector3(29, 98, 152)
+material = ExtResource("10_316br")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_41_57_115" type="CSGBox3D" parent="BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.5, 28.5, -236.5)
+use_collision = true
+size = Vector3(41, 57, 115)
+material = ExtResource("11_wha0p")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Fireball" parent="." instance=ExtResource("27_3c822")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57, 58, 5)
