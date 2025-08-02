@@ -1,21 +1,22 @@
-extends NPC
+extends NPCHumanoid
 class_name NPCPlayerGhost
 
 var source_id:int
 var last_position := Vector3.ZERO
-var dead:bool : 
+var dead:int = 0: 
 	set = set_dead
+
 
 var jump:
 	set(value):
 		$AudioJump.play()
 
-func set_dead(value:bool) -> void:
+func set_dead(value:int) -> void:
 	set_physics_process(false)
 	collision_layer = 0
 	animation_tree.set("parameters/Special/transition_request", "Died")
-	if value:
-		$AudioDie.play()
+	$AudioDie.stream = Player.DEAD_SOUNDS[value]
+	$AudioDie.play()
 
 
 func _ready() -> void:

@@ -2,19 +2,20 @@
 
 [ext_resource type="Script" uid="uid://ba84d1ksxorgp" path="res://game/projectiles/bullet.gd" id="1_2dqbx"]
 [ext_resource type="AudioStream" uid="uid://16i2e8o0hgxj" path="res://content/sfx/bullet_whiz.wav" id="3_645c0"]
-[ext_resource type="AudioStream" path="res://game/player/bullet_ricochet.tres" id="3_tynb1"]
+[ext_resource type="AudioStream" uid="uid://bp0xff2046anp" path="res://game/player/bullet_ricochet.tres" id="3_tynb1"]
 [ext_resource type="AudioStream" uid="uid://cwhw047fx33ox" path="res://content/sfx/bullet_hit_meat.wav" id="5_a77ay"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="5_xx14j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dqbx"]
-albedo_color = Color(1, 0.52549, 0, 1)
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
 emission_energy_multiplier = 2.0
+distance_fade_mode = 1
+distance_fade_min_distance = 1.0
+distance_fade_max_distance = 2.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_tynb1"]
-radius = 0.15
-height = 1.0
+[sub_resource type="BoxMesh" id="BoxMesh_a77ay"]
+size = Vector3(0.1, 1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tynb1"]
 emission_enabled = true
@@ -42,12 +43,14 @@ rings = 2
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_2dqbx")
-speed = 100.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
 material_override = SubResource("StandardMaterial3D_2dqbx")
-mesh = SubResource("CapsuleMesh_tynb1")
+mesh = SubResource("BoxMesh_a77ay")
+skeleton = NodePath("../..")
 
 [node name="Whiz" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_645c0")
@@ -57,7 +60,7 @@ bus = &"SFX"
 [node name="HitMetal" type="AudioStreamPlayer3D" parent="."]
 top_level = true
 stream = ExtResource("3_tynb1")
-volume_db = -8.0
+volume_db = -4.0
 bus = &"SFX"
 
 [node name="HitMeat" type="AudioStreamPlayer3D" parent="."]
@@ -68,7 +71,7 @@ bus = &"SFX"
 [node name="Fire" type="AudioStreamPlayer3D" parent="."]
 top_level = true
 stream = ExtResource("5_xx14j")
-volume_db = -10.0
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="Sparks" type="GPUParticles3D" parent="."]

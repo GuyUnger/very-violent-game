@@ -1,4 +1,4 @@
 extends CanvasLayer
 
 func _process(delta: float) -> void:
-	%Time.text = str(ceili(get_parent().time))
+	%Time.text = str(ceili(Main.instance.time))

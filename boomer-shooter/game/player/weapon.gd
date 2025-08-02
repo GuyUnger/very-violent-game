@@ -10,7 +10,6 @@ var since_primary_pressed: float = 999.0
 var aim_dir := Vector3.ZERO
 var throwing_velocity := Vector3.ZERO
 var player: Player
-var anim_tween : Tween
 var trigger_pressed:bool :
 	set = set_trigger_pressed
 
@@ -54,19 +53,15 @@ func _physics_process(delta: float) -> void:
 
 func shoot() -> void:
 	reload_t = fire_rate
-	handle.position.z = -0.055
+	$Animations.shoot()
 	$Muzzleflash.shoot()
-	if anim_tween:
-		anim_tween.kill()
-	anim_tween = create_tween()
-	anim_tween.tween_property(handle, "position:z", 0.0, 0.15)
 	
 	if player:
 		var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)
 		
-		player.cam.shake_rumble(0.3, 0.1, 16.0)
-		player.cam.shake_shock(0.1, 0.5)
+		player.cam.shake_rumble(0.3, 0.3, 16.0)
+		player.cam.shake_shock(0.2, 0.5)
 		projectile.track_in_event_store = true
 		projectile.position = player.cam.global_position
 		Main.instance.add_child(projectile)
@@ -79,7 +74,10 @@ func shoot() -> void:
 	
 		Main.instance.add_child(projectile)
 	
-	%AudioShoot.play()
+	if player:
+		%AudioShoot.play()
+	else:
+		%AudioShootNPC.play()
 	
 func throw(force:Vector3) -> void:
 	trigger_pressed = false

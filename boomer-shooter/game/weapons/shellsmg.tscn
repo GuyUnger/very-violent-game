@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5i2ji733nxat"]
+
+[ext_resource type="PackedScene" uid="uid://dv7f71frpqq68" path="res://game/weapons/shell.tscn" id="1_mh8wr"]
+[ext_resource type="PackedScene" uid="uid://dpsb04mg0ku5m" path="res://game/weapons/model/weapon_smg_shell.glb" id="2_nu4sb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nu4sb"]
+margin = 0.001
+radius = 0.015
+height = 0.07
+
+[node name="Shell" instance=ExtResource("1_mh8wr")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("CapsuleShape3D_nu4sb")
+
+[node name="weapon_shotgun_shell" parent="." index="1"]
+visible = false
+
+[node name="weapon_smg_shell" parent="." index="3" instance=ExtResource("2_nu4sb")]

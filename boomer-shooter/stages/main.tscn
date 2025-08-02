@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bs15p6iks3jtm"]
+[gd_scene load_steps=12 format=3 uid="uid://bs15p6iks3jtm"]
 
 [ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_0oqm6"]
 [ext_resource type="PackedScene" uid="uid://n2142e5rpapd" path="res://game/player/player.tscn" id="2_43f5m"]
-[ext_resource type="Environment" uid="uid://dwy0mt1yukigj" path="res://content/environment/environment.tres" id="3_7iyax"]
+[ext_resource type="Script" uid="uid://8gh7wu8tphq3" path="res://stages/hud.gd" id="3_7iyax"]
+[ext_resource type="AudioStream" uid="uid://lc5v3oph86at" path="res://game/count_down.wav" id="4_0oqm6"]
 
 [sub_resource type="Shader" id="Shader_0oqm6"]
 code = "shader_type canvas_item;
@@ -73,6 +74,26 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5sjox"]
 shader = SubResource("Shader_fejr8")
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_43f5m"]
+sky_top_color = Color(0.84352, 0.102281, 0.227823, 1)
+
+[sub_resource type="Sky" id="Sky_e0l40"]
+sky_material = SubResource("ProceduralSkyMaterial_43f5m")
+
+[sub_resource type="Environment" id="Environment_7iyax"]
+background_mode = 2
+sky = SubResource("Sky_e0l40")
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.4965, 0.43, 1)
+ambient_light_energy = 0.4
+glow_enabled = true
+glow_hdr_threshold = 1.1
+fog_enabled = true
+fog_light_color = Color(1, 0.142603, 0.205989, 1)
+fog_density = 0.005
+adjustment_enabled = true
+adjustment_contrast = 1.2
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_0oqm6")
 
@@ -115,7 +136,28 @@ size = Vector2i(854, 480)
 render_target_update_mode = 4
 
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_43f5m")]
-close_on_escape = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
-environment = ExtResource("3_7iyax")
+environment = SubResource("Environment_7iyax")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 8
+script = ExtResource("3_7iyax")
+
+[node name="Time" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.5
+offset_top = 10.0
+offset_right = 20.5
+offset_bottom = 55.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "59"
+horizontal_alignment = 1
+
+[node name="AudioCountDown" type="AudioStreamPlayer" parent="HUD"]
+unique_name_in_owner = true
+stream = ExtResource("4_0oqm6")

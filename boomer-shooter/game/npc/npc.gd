@@ -1,10 +1,10 @@
-@tool
 extends Character
 class_name NPC
 
 signal died
 signal heard
 signal told_enemy_position
+signal spotted_enemy
 
 @export var moving_to:Node3D
 @export var looking_at:Vector3
@@ -18,66 +18,19 @@ signal told_enemy_position
 var speed_scale := 1.0
 var speed_scale_knock_back := 1.0
 var knock_back_force := Vector3.ZERO
-
-@onready var animation_tree:AnimationTree = $AnimationTree
-
+var polling_vision := false
 
 func set_holes(value:int) -> void:
 	holes = value
-	if has_node("Armature/Skeleton3D/Skin"):
-		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("hole_damage", holes / 255.0)
-
 
 func set_cuts(value:int) -> void:
 	cuts = value
-	if has_node("Armature/Skeleton3D/Skin"):
-		if cuts == 0:
-			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_0", Vector4())
-			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_1", Vector4())
-		if cuts == 1:
-			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_0", Vector4(randf(), randf(), randf(), randf()))
-		elif cuts == 2:
-			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_1", Vector4(randf(), randf(), randf(), randf()))
 
 func set_target(node:Node3D) -> void:
 	target = node
-	if not is_node_ready():
-		return
 	
-	if target:
-		if target.has_node("%Head"):
-			%LookAtModifier3D.target_node = target.get_node("%Head").get_path()
-		else:
-			%LookAtModifier3D.target_node = target.get_path()
-	else:
-		%LookAtModifier3D.target_node = NodePath("")
-
-func _physics_process(delta: float) -> void:
-	if moving_to:
-		global_position = global_position.move_toward(moving_to.global_position, delta * speed * speed_scale * speed_scale_knock_back)
-	
-	if target:
-		if moving_to:
-			var world_direction = global_position.direction_to(moving_to.global_position)
-			var forward = global_transform.basis.z
-			var right = global_transform.basis.x
-			var local_x = right.dot(world_direction)
-			var local_y = forward.dot(world_direction)
-			var blend_vector = Vector2(local_x, local_y)
-			blend_vector *= speed_scale * speed_scale_knock_back
-			animation_tree.set("parameters/MoveDirection/blend_position", blend_vector)
-		else:
-			animation_tree.set("parameters/MoveDirection/blend_position", Vector2.ZERO)
-		
-		look_at_node_y_axis_lerp(target.global_position, delta * 0.5)
-	
-	if knock_back_force != Vector3.ZERO:
-		global_position -= knock_back_force
-		knock_back_force = lerp(knock_back_force, Vector3.ZERO, delta)
-		
-	if not target and looking_at:
-		look_at_node_y_axis_lerp(looking_at, delta * 0.5)
-
+func _ready() -> void:
+	%Vision.body_entered.connect(_body_entered_vision)
 
 func look_at_node_y_axis_lerp(target_position: Vector3, delta: float, speed: float = 5.0) -> void:
 	var self_position = global_transform.origin
@@ -101,23 +54,13 @@ func look_at_node_y_axis_lerp(target_position: Vector3, delta: float, speed: flo
 var knock_back_tween_:Tween
 
 func knock_back(force:Vector3) -> void:
-	force.y *= 0.0
-
-	knock_back_force += force
-	
-	if knock_back_tween_:
-		knock_back_tween_.kill()
-
-	knock_back_tween_ = create_tween()
-	knock_back_tween_.tween_property(self, "speed_scale_knock_back", 0.1, 0.1)
-	knock_back_tween_.tween_property(self, "speed_scale_knock_back", 1.0, 1.0)
-	animation_tree.set("parameters/HitHead/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	pass
 	
 
 func is_node_visible(node) -> bool:
 	var query = PhysicsRayQueryParameters3D.new()
 	query.from = %Vision.global_position
-	query.to = node.global_position + Vector3.UP
+	query.to = node.global_position + Vector3.UP * 1.
 	query.collide_with_bodies = true
 	query.collision_mask = 1 + 2 + 8
 	
@@ -139,11 +82,6 @@ func _told_enemy_position(enemy) -> void:
 func melee() -> void:
 	health -= 5
 	cuts += 1
-	
-	var x := preload("res://game/fx/bloot_line.tscn").instantiate()
-	$CollisionShape3D.add_child(x)
-	x.position.y += 0.5
-	x.look_at(Main.instance.player.global_position + Vector3.UP * 2.0, Vector3.UP, true)
 
 
 func hit(from:Node3D) -> void:
@@ -157,8 +95,7 @@ func hit(from:Node3D) -> void:
 	$AudioHurt.play()
 	
 	health -= from.damage
-	spawn_blood_puddle()
-	spawn_blood_splash()
+
 	if health <= 0:
 
 		die()
@@ -167,45 +104,148 @@ func hit(from:Node3D) -> void:
 func die() -> void:
 	set_physics_process(false)
 	remove_from_group("aimables")
-	animation_tree.set("parameters/Special/transition_request", "Died")
 	died.emit()
-	
-	if randf() > 0.5:
-		head_pop()
 
 
-func spawn_blood_puddle() -> void:
-	var blood = preload("res://game/npc/blood.tscn").instantiate()
-	get_parent().add_child(blood)
-	blood.position = position
-	blood.position.x += randf_range(-0.5, 0.5)
-	blood.position.z += randf_range(-0.5, 0.5)
-	blood.position.y += 0.01
-	blood.scale = Vector3.ONE * randf_range(0.2, 1.5)
-	var tween = create_tween()
-	tween.tween_property(blood, "scale", Vector3.ZERO, 10.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
-	await tween.finished
-	blood.queue_free()
+func _body_entered_vision(body) -> void:
+	if is_node_visible(body):
+		spotted_enemy.emit(body)
+	else:
+		poll_vision()
 
-func spawn_blood_splash() -> void:
-	var blood = preload("res://game/npc/blood_splash.tscn").instantiate()
-	get_parent().add_child(blood)
-	blood.position = position + Vector3.UP * 1.0
-	blood.position.x += randf_range(-0.5, 0.5)
-	blood.position.z += randf_range(-0.5, 0.5)
-	blood.position.y += randf_range(-0.5, 0.5)
-	blood.scale = Vector3.ONE * randf_range(0.05, 0.4)
-	var tween = create_tween()
-	tween.tween_property(blood, "frame", 15, 0.3)
-	await tween.finished
-	blood.queue_free()
-
-
-func head_pop() -> void:
-	if has_node("Armature/Skeleton3D/Skin"):
-		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("head_pop", 1.0)
+func poll_vision() -> void:
+	if polling_vision:
+		return
 		
-		var x := preload("res://game/fx/bloot_line.tscn").instantiate()
-		$CollisionShape3D.add_child(x)
-		x.position.y += 0.5
-		x.look_at(global_position + Vector3.UP)
+	polling_vision = true
+	var bodies = %Vision.get_overlapping_bodies()
+	
+	while not bodies.is_empty():
+		for node in bodies:
+
+			await get_tree().process_frame
+			if not is_inside_tree():
+				polling_vision = false
+				return
+			
+			if is_node_visible(node):
+				spotted_enemy.emit(node)
+				polling_vision = false
+				return
+				
+		bodies = %Vision.get_overlapping_bodies()
+	
+	polling_vision = false
+
+
+class State extends Node:
+	func _ready() -> void:
+		get_parent().died.connect(_died)
+	
+	func move_to(state:State) -> void:
+		queue_free()
+		var p := get_parent()
+		p.remove_child(self)
+		p.add_child(state)
+		
+	func _died() -> void:
+		
+		var weapon = get_parent().get_node("%Weapon")
+		if weapon:
+			weapon.throw(Vector3.UP * 5.0)
+		
+		get_parent().looking_at = Vector3.ZERO
+		get_parent().target = null
+		get_parent().moving_to = null
+		get_parent().set_physics_process(false)
+		queue_free()
+		
+	func _exit_tree() -> void:
+		get_parent().died.disconnect(_died)
+
+
+class StateIdle extends State:
+	func _ready() -> void:
+		super()
+
+		get_parent().target = null
+		get_parent().moving_to = null
+		
+		get_parent().spotted_enemy.connect(_spotted_enemy)
+		get_parent().heard.connect(_heard)
+		get_parent().told_enemy_position.connect(_told_enemy_position)
+
+		get_parent().poll_vision()
+	
+	func _heard(position:Vector3) -> void:
+		get_parent().looking_at = position
+		
+	func _told_enemy_position(enemy) -> void:
+		var next_state = StateAttacking.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+	func _spotted_enemy(enemy) -> void:
+		var next_state = StateSpottedEnemy.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+	func _exit_tree() -> void:
+		super()
+		get_parent().heard.disconnect(_heard)
+		get_parent().spotted_enemy.disconnect(_spotted_enemy)
+		get_parent().told_enemy_position.disconnect(_told_enemy_position)
+
+
+class StateSpottedEnemy extends State:
+	var enemy:Node3D
+
+	func _ready() -> void:
+		super()
+
+		for node in get_tree().get_nodes_in_group("npc_enemies"):
+			if node != get_parent() and node.global_position.distance_squared_to(get_parent().global_position) < 50:
+				node._told_enemy_position(enemy)
+
+		var next_state = StateAttacking.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+class StateAttacking extends State:
+	var enemy:Node3D
+	
+	
+	func _ready() -> void:
+		super()
+
+		get_parent().target = enemy
+		#get_parent().moving_to = enemy
+		
+	func _physics_process(delta: float) -> void:
+		var weapon = get_parent().get_node("%Weapon")
+		
+		if not get_parent().is_node_visible(enemy):
+			weapon.trigger_pressed = false
+			move_to(StateIdle.new())
+			return
+			
+		if enemy.health <= 0:
+			weapon.trigger_pressed = false
+			move_to(StateIdle.new())
+			return
+
+		var ds = enemy.global_position.distance_squared_to(get_parent().global_position)
+		
+		get_parent().speed_scale = lerp(0.0, 1.0, clamp(ds / 3.0, 0.0, 1.0))
+		
+		if ds < 1.0:
+			get_parent().speed_scale = 0.0
+		
+		weapon.aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP)
+		weapon.trigger_pressed = true
+		
+		
+	func _exit_tree() -> void:
+		var weapon = get_parent().get_node("%Weapon")
+		if weapon:
+			weapon.trigger_pressed = false

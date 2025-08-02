@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv7f71frpqq68"]
+
+[ext_resource type="Script" uid="uid://dd0tnakr5j7ch" path="res://game/weapons/shell.gd" id="1_7vw6a"]
+[ext_resource type="PhysicsMaterial" uid="uid://dhrl78jldpm3m" path="res://game/weapons/shell_physics_mat.tres" id="1_vqg4b"]
+[ext_resource type="PackedScene" uid="uid://d3s5de24n8o2x" path="res://game/weapons/model/weapon_shotgun_shell.glb" id="2_gqkt4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vqg4b"]
+margin = 0.001
+radius = 0.03
+height = 0.13
+
+[node name="Shell" type="RigidBody3D"]
+collision_layer = 0
+mass = 0.5
+physics_material_override = ExtResource("1_vqg4b")
+script = ExtResource("1_7vw6a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vqg4b")
+
+[node name="weapon_shotgun_shell" parent="." instance=ExtResource("2_gqkt4")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
