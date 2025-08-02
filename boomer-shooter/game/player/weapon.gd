@@ -1,16 +1,15 @@
 extends CharacterBody3D
 class_name Weapon
 
+@export var fire_rate := 0.0
+@export var auto := false
+
 var target_range: float = 20.0
 var reload_t: float = 0.0
 var since_primary_pressed: float = 999.0
 var aim_dir := Vector3.ZERO
-
-var is_auto: bool = true
 var throwing_velocity := Vector3.ZERO
-
 var player: Player
-
 var trigger_pressed:bool :
 	set = set_trigger_pressed
 	
@@ -38,7 +37,7 @@ func _physics_process(delta: float) -> void:
 
 	since_primary_pressed += delta
 	
-	if is_auto:
+	if auto:
 		if trigger_pressed and reload_t <= 0.0:
 			shoot()
 	else:
@@ -48,7 +47,7 @@ func _physics_process(delta: float) -> void:
 
 
 func shoot() -> void:
-	reload_t = 0.1
+	reload_t = fire_rate
 
 	var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
 	projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)

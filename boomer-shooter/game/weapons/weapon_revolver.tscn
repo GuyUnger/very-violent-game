@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://fk2ws4nkdayk"]
+[gd_scene load_steps=10 format=3 uid="uid://bf8scixrnmfyr"]
 
-[ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_57hh3"]
-[ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_7w4b6"]
+[ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_5ro7y"]
+[ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_kammd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lea5y"]
 size = Vector3(0.02, 0.07, 0.385)
@@ -29,16 +29,15 @@ size = Vector3(0.005, 0.07, 0.04)
 [node name="Weapon" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("1_57hh3")
-fire_rate = 0.15
-auto = true
+script = ExtResource("1_5ro7y")
+fire_rate = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_lea5y")
 
 [node name="AudioShoot" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_7w4b6")
+stream = ExtResource("2_kammd")
 bus = &"SFX"
 
 [node name="WorldModel" type="MeshInstance3D" parent="."]

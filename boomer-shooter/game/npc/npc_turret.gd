@@ -1,9 +1,19 @@
 @tool
 extends NPCEnemy
-class_name NPCEnemySMG
+class_name NPCEnemyTurret
+
+func set_target(node:Node3D) -> void:
+	target = node
+	
 
 func _ready() -> void:
 	add_child(StateIdle.new())
+
+
+func _physics_process(delta: float) -> void:
+	if target:
+		$Node3D.look_at(target.global_position)
+
 
 class State extends Node:
 	func _ready() -> void:
@@ -14,13 +24,8 @@ class State extends Node:
 		var p := get_parent()
 		p.remove_child(self)
 		p.add_child(state)
-		
+
 	func _died() -> void:
-		
-		var weapon = get_parent().get_node("%Weapon")
-		if weapon:
-			weapon.throw(Vector3.UP * 5.0)
-		
 		get_parent().looking_at = Vector3.ZERO
 		get_parent().target = null
 		get_parent().moving_to = null
@@ -37,17 +42,6 @@ class StateIdle extends State:
 		get_parent().get_node("%Vision").body_entered.connect(_body_entered_vision)
 		get_parent().target = null
 		get_parent().moving_to = null
-		
-		get_parent().heard.connect(_heard)
-		get_parent().told_enemy_position.connect(_told_enemy_position)
-
-	func _heard(position:Vector3) -> void:
-		get_parent().looking_at = position
-		
-	func _told_enemy_position(enemy) -> void:
-		var next_state = StateAttacking.new()
-		next_state.enemy = enemy
-		move_to(next_state)
 
 	func _body_entered_vision(body) -> void:
 		var next_state = StateSpottedEnemy.new()
@@ -56,9 +50,6 @@ class StateIdle extends State:
 	
 	
 	func _exit_tree() -> void:
-		get_parent().heard.disconnect(_heard)
-		get_parent().told_enemy_position.disconnect(_told_enemy_position)
-		
 		var vision := get_parent().get_node_or_null("%Vision")
 		if vision:
 			vision.body_entered.disconnect(_body_entered_vision)
@@ -69,15 +60,8 @@ class StateSpottedEnemy extends State:
 
 	func _ready() -> void:
 		super()
-
-		get_parent().animation_tree.set("parameters/Special/transition_request", "Panic")
 		get_parent().target = enemy
 		await get_tree().create_timer(1.0).timeout
-		get_parent().animation_tree.set("parameters/Special/transition_request", "Moving")
-		
-		for node in get_tree().get_nodes_in_group("npc_enemies"):
-			if node != get_parent() and node.global_position.distance_squared_to(get_parent().global_position) < 10:
-				node._told_enemy_position(enemy)
 
 		var next_state = StateAttacking.new()
 		next_state.enemy = enemy

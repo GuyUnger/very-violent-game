@@ -12,7 +12,7 @@ func _init(source_id:int, property:StringName, value) -> void:
 
 
 func replay() -> void:
-	var source:Object = EventStore.sources.get(source_id)
+	var source = EventStore.sources.get(source_id)
 	if not source or not is_instance_valid(source):
 		return
 
