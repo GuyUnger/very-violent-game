@@ -19,6 +19,7 @@ const JUMP_STRENGTH = 12.0
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
 @onready var area_melee: Area3D = %AreaMelee
+@onready var fps_weapon: Node3D = %FpsWeapon
 
 var source_id := 0
 
@@ -53,6 +54,7 @@ var since_secondary_pressed: float = 999.0
 var melee_reload_t: float = 0.0
 
 var model_position: Vector3 = Vector3.ZERO
+var last_camera_rotation: Vector3 = Vector3.ZERO
 var velocity_prev: Vector3 = Vector3.ZERO
 
 # Audio
@@ -168,6 +170,7 @@ func _process(delta: float) -> void:
 	cam.global_position = cam_pos + Vector3.UP * cam_up + cam.basis.z * cam_distance
 	#endregion
 	
+	sway_weapon(delta)
 	process_targets()
 	process_target_indicators(delta)
 	
@@ -504,6 +507,15 @@ func is_jump_just_pressed(grace: float = 0.1) -> bool:
 
 
 #endregion
+
+func sway_weapon(delta):
+	fps_weapon.position.y = sin(walk_cycle*3.2)*0.012
+	fps_weapon.position.z = sin(0.5+walk_cycle*3.2)*0.012
+	fps_weapon.position.x = lerp(fps_weapon.position.x, angle_difference(cam.rotation.y, last_camera_rotation.y)*0.5, delta*20.0)
+	fps_weapon.rotation.z = fps_weapon.position.x*3.0
+	fps_weapon.rotation.y = -fps_weapon.position.x*3.0
+	fps_weapon.rotation.x = lerp(fps_weapon.rotation.x, angle_difference(cam.rotation.x, last_camera_rotation.x)*2.5, delta*20.0)
+	last_camera_rotation = cam.rotation
 
 func die() -> void:
 	dead = true

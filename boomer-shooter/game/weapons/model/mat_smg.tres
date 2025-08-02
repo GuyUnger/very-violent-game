@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1m0dsyp0q6ke"]
+
+[ext_resource type="Texture2D" uid="uid://bljs50fritlgs" path="res://game/weapons/model/smg_new.png" id="1_311ou"]
+
+[resource]
+albedo_texture = ExtResource("1_311ou")
+texture_filter = 2

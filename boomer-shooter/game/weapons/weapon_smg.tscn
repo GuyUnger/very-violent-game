@@ -1,16 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://fk2ws4nkdayk"]
+[gd_scene load_steps=9 format=3 uid="uid://fk2ws4nkdayk"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_57hh3"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_7w4b6"]
+[ext_resource type="PackedScene" uid="uid://cbt4a74g6fyhs" path="res://game/weapons/model/weapon_smg.glb" id="3_7w4b6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lea5y"]
 size = Vector3(0.02, 0.07, 0.385)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jxv5"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lpwyq"]
-size = Vector3(0.015, 0.045, 0.355)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ml3f"]
 albedo_color = Color(0, 0, 0, 1)
@@ -41,10 +36,7 @@ unique_name_in_owner = true
 stream = ExtResource("2_7w4b6")
 bus = &"SFX"
 
-[node name="WorldModel" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_0jxv5")
-mesh = SubResource("BoxMesh_lpwyq")
-skeleton = NodePath("../..")
+[node name="WorldModel" type="Node3D" parent="."]
 
 [node name="RightHand" type="Marker3D" parent="WorldModel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
@@ -62,3 +54,5 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 0.990105, -0.140331, 0, 0.140331, 0.990105, 0, -0.0524004, -0.0874176)
 material_override = SubResource("StandardMaterial3D_on6gv")
 mesh = SubResource("BoxMesh_3pcvd")
+
+[node name="weapon_smg" parent="WorldModel" instance=ExtResource("3_7w4b6")]
