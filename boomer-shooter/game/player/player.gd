@@ -149,7 +149,10 @@ func _process(delta: float) -> void:
 	
 	var cam_pos_to: Vector3 = model.global_position
 	if first_person:
-		cam_pos_to.y = cam_pos_to.y
+		cam_pos.y = cam_pos_to.y
+		if is_on_floor():
+			cam_pos.y += sin(walk_cycle * PI) * vel_hor.length() * 0.01
+			cam_pos_to += transform.basis.z * cos(walk_cycle * PI * 0.5) * vel_hor.length() * 0.01
 	else:
 		cam_pos_to.y = lerp(cam_pos_to.y, clampf(floor_pos.y, position.y - 4.0, position.y + 2.0), 0.3)
 	cam_pos.x = cam_pos_to.x
