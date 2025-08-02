@@ -38,10 +38,17 @@ void fragment() {
 
 	float center_dist = length(sample_uv - 0.5);
 
-	vec3 color = texture(SCREEN_TEXTURE, sample_uv).rgb;
+	vec2 offset = vec2(0.003, 0.002) * length(uv - 0.5);
+	vec3 color_l = vec3(0.6, 0.6, 0.0);
+	vec3 color_r = vec3(0.0, 0.6, 0.6);
+	vec3 color_c = vec3(1.0) - color_l - color_r;
+	vec3 sample_c = texture(SCREEN_TEXTURE, sample_uv).rgb * color_c;
+	vec3 sample_l = texture(SCREEN_TEXTURE, sample_uv - offset).rgb * color_l;
+	vec3 sample_r = texture(SCREEN_TEXTURE, sample_uv + offset).rgb * color_r;
 
+	vec3 sample = sample_c + sample_l + sample_r;
 	// hue-shift deges
-	COLOR.rgb = mix(color, color.bgr, pow(center_dist, 1.0) * 0.5);
+	COLOR.rgb = mix(sample, sample.bgr, pow(center_dist, 1.0) * 0.5);
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fejr8"]

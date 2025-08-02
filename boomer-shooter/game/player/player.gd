@@ -235,8 +235,8 @@ func _physics_process(delta: float) -> void:
 
 	# Fall out of world
 	if position.y < -20.0:
-		position = Vector3.ZERO
-		velocity = Vector3.ZERO
+		die()
+		return
 	
 	look_angle_prev = look_angle
 	velocity_prev = velocity
@@ -324,13 +324,14 @@ func apply_move_and_slide() -> void:
 	move_and_slide()
 	var collision: KinematicCollision3D = get_last_slide_collision()
 	if collision:
-		var normal: Vector3 = collision.get_normal()
-		if since_on_floor > 0.1 and melee_reload_t > 0.7 and allow_walljump and absf(normal.y) < 0.1:
-			#velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
-			velocity = normal * MOVE_SPEED * 2.0
-			allow_walljump = false
-			velocity.y = JUMP_STRENGTH * 1.5
-			%AudioWallbounce.play()
+		for i in collision.get_collision_count():
+			var normal: Vector3 = collision.get_normal(i)
+			if melee_reload_t > 0.7 and allow_walljump and absf(normal.y) < 0.1:
+				#velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
+				velocity = normal * MOVE_SPEED * 2.0
+				allow_walljump = false
+				velocity.y = JUMP_STRENGTH * 1.5
+				%AudioWallbounce.play()
 
 
 func vel_hor_to(to:Vector2, t:float = 1.0) -> void:
