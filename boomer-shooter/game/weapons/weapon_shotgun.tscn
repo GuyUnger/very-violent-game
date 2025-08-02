@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://t2r06l0hr184"]
+[gd_scene load_steps=9 format=3 uid="uid://t2r06l0hr184"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_1vjvc"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_qelip"]
@@ -10,20 +10,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
 radius = 0.25
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ml3f"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ls1xp"]
-top_radius = 0.01
-bottom_radius = 0.01
-height = 0.3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_on6gv"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3pcvd"]
-size = Vector3(0.005, 0.07, 0.04)
 
 [node name="WeaponShotgun" type="CharacterBody3D"]
 collision_layer = 0
@@ -41,6 +27,25 @@ stream = ExtResource("2_qelip")
 bus = &"SFX"
 
 [node name="WorldModel" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ShotgunContainer" type="Node3D" parent="WorldModel"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="weapon_shotgun_arm_l" parent="WorldModel/ShotgunContainer" instance=ExtResource("3_qelip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
+
+[node name="weapon_shotgun_arm_r" parent="WorldModel/ShotgunContainer" instance=ExtResource("4_kc37h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
+
+[node name="ShellEjection" type="Marker3D" parent="WorldModel/ShotgunContainer"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000782948, 0.00282902, -0.0360167)
+
+[node name="weapon_shotgun" parent="WorldModel/ShotgunContainer" instance=ExtResource("3_ri3d7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
 
 [node name="RightHand" type="Marker3D" parent="WorldModel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
@@ -48,29 +53,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
 [node name="LeftHand" type="Marker3D" parent="WorldModel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.000823617, 0.0554796)
-visible = false
-material_override = SubResource("StandardMaterial3D_6ml3f")
-mesh = SubResource("CylinderMesh_ls1xp")
-skeleton = NodePath("../../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel"]
-transform = Transform3D(1, 0, 0, 0, 0.990105, -0.140331, 0, 0.140331, 0.990105, 0, -0.0524004, -0.0874176)
-visible = false
-material_override = SubResource("StandardMaterial3D_on6gv")
-mesh = SubResource("BoxMesh_3pcvd")
-
-[node name="weapon_shotgun_arm_l" parent="WorldModel" instance=ExtResource("3_qelip")]
-
-[node name="weapon_shotgun_arm_r" parent="WorldModel" instance=ExtResource("4_kc37h")]
-
-[node name="weapon_shotgun" parent="WorldModel" instance=ExtResource("3_ri3d7")]
-
 [node name="Muzzleflash" parent="." instance=ExtResource("5_gwt1y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0111252, 0.338293)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, 0.00486123, 0.303278)
 
 [node name="Animations" type="Node" parent="."]
 script = ExtResource("7_kc37h")
 
-[editable path="WorldModel/weapon_shotgun"]
+[editable path="WorldModel/ShotgunContainer/weapon_shotgun"]
