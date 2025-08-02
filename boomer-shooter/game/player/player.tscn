@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bo81sp14xbw6q" path="res://game/player/walljump.tres" id="8_epvkq"]
 [ext_resource type="AudioStream" uid="uid://d2fsf0rpmyygk" path="res://game/player/melee.tres" id="9_5ghna"]
 [ext_resource type="AudioStream" uid="uid://dsfismre384c4" path="res://game/player/die.tres" id="11_gb4gm"]
-[ext_resource type="AudioStream" uid="uid://d4goy6vijk2jc" path="res://game/player/jump.tres" id="12_uv2nh"]
+[ext_resource type="AudioStream" uid="uid://dhuda65t0d0uu" path="res://game/player/jump.tres" id="12_uv2nh"]
 
 [sub_resource type="Curve" id="Curve_a4w0n"]
 _data = [Vector2(0, 0.5361), 0.0, -19.2906, 0, 0, Vector2(0.0458453, 0.190871), -0.694639, -0.694639, 0, 0, Vector2(1, 0), -0.159803, 0.0, 0, 0]
@@ -158,7 +158,7 @@ shape = SubResource("CylinderShape3D_j0mij")
 
 [node name="AudioDie" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_gb4gm")
-pitch_scale = 1.2
+pitch_scale = 1.1
 bus = &"SFX"
 
 [node name="AudioJump" type="AudioStreamPlayer" parent="."]
