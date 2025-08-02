@@ -526,9 +526,30 @@ func sway_weapon(delta):
 	fps_weapon.rotation.x = lerp(fps_weapon.rotation.x, angle_difference(cam.rotation.x, last_camera_rotation.x)*2.5, delta*20.0)
 	last_camera_rotation = cam.rotation
 
+static var dead_sound: int = 0
+
+static var DEAD_SOUNDS: Array = [
+	preload("res://game/player/die 01.wav"),
+	preload("res://game/player/die 02.wav"),
+	preload("res://game/player/die 03.wav"),
+	preload("res://game/player/die 04.wav"),
+	preload("res://game/player/die 05.wav"),
+	preload("res://game/player/die 06.wav"),
+	preload("res://game/player/die 07.wav"),
+	preload("res://game/player/die 08.wav"),
+	preload("res://game/player/die 09.wav"),
+	preload("res://game/player/die 10.wav"),
+]
+
 func die() -> void:
 	dead = true
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
+	
+	var prev_dead_sound: int = dead_sound
+	while prev_dead_sound == dead_sound:
+		dead_sound = randi() % DEAD_SOUNDS.size()
+	printt(dead_sound)
+	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", dead_sound))
+	$AudioDie.stream = DEAD_SOUNDS[dead_sound]
 	$AudioDie.play()
 	throw_weapon()
 	first_person = false
