@@ -15,7 +15,9 @@ var trigger_pressed:bool :
 
 @onready var handle: MeshInstance3D = $WorldModel/weapon_smg/SMG/Handle
 
-@export var ammo: int = 60
+@export var ammo: int = 40
+
+var since_thrown: float = 99.0
 
 func set_trigger_pressed(value:bool) -> void:
 	if value != trigger_pressed:
@@ -32,10 +34,12 @@ func _physics_process(delta: float) -> void:
 	if player and player.dead:
 		return
 	if velocity != Vector3.ZERO:
+		since_thrown += delta
 		velocity.y -= 9.8 * delta
 		move_and_slide()
 		rotation.y += delta * 10.0
-		
+		if is_on_floor():
+			velocity -= velocity * 4.0 * delta
 		return
 	
 	if reload_t > 0.0:
@@ -58,8 +62,10 @@ func _physics_process(delta: float) -> void:
 func shoot() -> void:
 	ammo -= 1
 	reload_t = fire_rate
-	$Animations.shoot()
-	$Muzzleflash.shoot()
+	if has_node("Animations"):
+		$Animations.shoot()
+	if has_node("Muzzleflash"):
+		$Muzzleflash.shoot()
 	
 	if player:
 		var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
@@ -87,12 +93,13 @@ func shoot() -> void:
 func throw(force:Vector3) -> void:
 	trigger_pressed = false
 	player = null
+	since_thrown = 0.0
 	
 	reparent(Main.instance)
 	
 	collision_mask = 1
 	velocity = force
 
-	await get_tree().create_timer(0.2).timeout
+	#await get_tree().create_timer(0.2).timeout
 	collision_layer = 8
 	

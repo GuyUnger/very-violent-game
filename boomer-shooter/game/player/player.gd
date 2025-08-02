@@ -81,8 +81,8 @@ func _ready() -> void:
 			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
 			global_transform))
 	
-	if starting_weapon:
-		_pick_up_body_entered(starting_weapon.instantiate())
+	#if starting_weapon:
+	#	_pick_up_body_entered(starting_weapon.instantiate())
 	
 	Main.player = self
 	
@@ -243,7 +243,7 @@ func throw_weapon() -> void:
 	if not weapon:
 		return
 	weapon.global_position = global_position + Vector3.UP * 1.5
-	weapon.throw(aim_dir * 10.0)
+	weapon.throw(aim_dir * 30.0)
 	weapon = null
 
 
@@ -561,7 +561,7 @@ func die() -> void:
 
 
 func _pick_up_body_entered(body: Node3D) -> void:
-	if not weapon and body is Weapon:
+	if not weapon and body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
 		weapon = body
 		weapon.player = self
 		weapon.velocity = Vector3.ZERO

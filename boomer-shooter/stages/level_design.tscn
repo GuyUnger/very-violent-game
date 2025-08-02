@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjnhfu1ekho3v"]
+[gd_scene load_steps=6 format=3 uid="uid://bjnhfu1ekho3v"]
 
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_0cfai"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_l0s8e"]
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="3_rsuto"]
+[ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_0cfai"]
 [ext_resource type="ArrayMesh" uid="uid://bwk3e8f81aln2" path="res://content/environment/background/fuji_MountFuji.res" id="7_6p0xd"]
 
 [node name="Main" instance=ExtResource("3_rsuto")]
@@ -13,6 +14,11 @@ starting_weapon = ExtResource("2_0cfai")
 
 [node name="Tokyo" parent="SubViewportContainer/SubViewport" index="2" instance=ExtResource("3_l0s8e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -9, -16)
+
+[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="3" instance=ExtResource("4_0cfai")]
+
+[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("4_0cfai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 13)
 
 [node name="FujiMountFuji" type="MeshInstance3D" parent="." index="4"]
 transform = Transform3D(-4.27682, 0, -2.59014, 0, 5, 0, 2.59014, 0, -4.27682, 0, 228, 0)
