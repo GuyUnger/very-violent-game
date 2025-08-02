@@ -112,7 +112,7 @@ func _process(delta: float) -> void:
 	cam.rotation.x = look_angle.y
 	
 	# Camera distance
-	var cam_distance_to: float = 2.5 + ease(sin(melee_reload_t * PI * 0.7), 0.7) * 1.5
+	var cam_distance_to: float = 2.0 + ease(sin(melee_reload_t * PI * 0.7), 0.7) * 1.5
 	var cam_up: float = 2.0
 	
 	if first_person:
@@ -151,10 +151,10 @@ func _process(delta: float) -> void:
 	if first_person:
 		cam_pos_to.y = cam_pos_to.y
 	else:
-		cam_pos_to.y = lerp(cam_pos_to.y, clampf(floor_pos.y, position.y - 4.0, position.y + 2.0), 0.4)
+		cam_pos_to.y = lerp(cam_pos_to.y, clampf(floor_pos.y, position.y - 4.0, position.y + 2.0), 0.3)
 	cam_pos.x = cam_pos_to.x
 	cam_pos.z = cam_pos_to.z
-	cam_pos.y = lerp(cam_pos.y, cam_pos_to.y, delta * 8.0)
+	cam_pos.y = lerp(cam_pos.y, cam_pos_to.y, delta * 30.0)
 	cam.global_position = cam_pos + Vector3.UP * cam_up + cam.basis.z * cam_distance
 	#endregion
 	
@@ -452,7 +452,6 @@ func _process_melee(delta) -> void:
 #region Input
 
 func _input(event: InputEvent) -> void:
-	printt(event)
 	if event is InputEventKey:
 		# Toggle fullscreen
 		if Input.is_action_just_pressed("fullscreen"):

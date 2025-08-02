@@ -11,6 +11,7 @@ func hit(damage:int) -> void:
 	spawn_blood_splash()
 	if health <= 0:
 		set_physics_process(false)
+		remove_from_group("aimables")
 		#await get_tree().create_timer(1.0).timeout
 		#queue_free()
 		

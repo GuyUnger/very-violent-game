@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lmx5sff0jcjw"
-path.s3tc="res://.godot/imported/surface_Layer_7_basecolor.png-7eec25900b4bcfce67d519bc4efe1f70.s3tc.ctex"
+uid="uid://cupe6gewki167"
+path.s3tc="res://.godot/imported/surface_Layer_7_metallic.png-1971e76eaf695c4cefac9107cc7d93f3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://content/environment/materials/pbr/surface_Layer_7_basecolor.png"
-dest_files=["res://.godot/imported/surface_Layer_7_basecolor.png-7eec25900b4bcfce67d519bc4efe1f70.s3tc.ctex"]
+source_file="res://content/environment/materials/pbr/surface_Layer_7_metallic.png"
+dest_files=["res://.godot/imported/surface_Layer_7_metallic.png-1971e76eaf695c4cefac9107cc7d93f3.s3tc.ctex"]
 
 [params]
 
