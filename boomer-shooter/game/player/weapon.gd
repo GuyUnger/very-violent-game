@@ -10,7 +10,6 @@ var since_primary_pressed: float = 999.0
 var aim_dir := Vector3.ZERO
 var throwing_velocity := Vector3.ZERO
 var player: Player
-var anim_tween : Tween
 var trigger_pressed:bool :
 	set = set_trigger_pressed
 
@@ -54,12 +53,8 @@ func _physics_process(delta: float) -> void:
 
 func shoot() -> void:
 	reload_t = fire_rate
-	handle.position.z = -0.055
+	$Animations.shoot()
 	$Muzzleflash.shoot()
-	if anim_tween:
-		anim_tween.kill()
-	anim_tween = create_tween()
-	anim_tween.tween_property(handle, "position:z", 0.0, 0.15)
 	
 	if player:
 		var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()

@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://beoslwnwxgfa1"]
+
+[ext_resource type="Texture2D" uid="uid://8d41xxasek1n" path="res://game/weapons/model/shotgun.png" id="1_n7d38"]
+[ext_resource type="Texture2D" uid="uid://bljs50fritlgs" path="res://game/weapons/model/smg_new.png" id="1_nutwt"]
+
+[resource]
+diffuse_mode = 2
+albedo_texture = ExtResource("1_n7d38")
+roughness = 0.7
+emission_texture = ExtResource("1_nutwt")
+texture_filter = 2
