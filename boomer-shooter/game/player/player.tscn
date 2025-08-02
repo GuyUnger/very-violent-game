@@ -100,18 +100,22 @@ unique_name_in_owner = true
 script = ExtResource("3_8soms")
 
 [node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Crosshair"]
+scale = Vector2(2, 2)
 polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
 
 [node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Crosshair"]
 rotation = 1.57079
+scale = Vector2(2, 2)
 polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
 
 [node name="Polygon2D3" type="Polygon2D" parent="CanvasLayer/Crosshair"]
 rotation = 3.14159
+scale = Vector2(2, 2)
 polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
 
 [node name="Polygon2D4" type="Polygon2D" parent="CanvasLayer/Crosshair"]
 rotation = 4.71238
+scale = Vector2(2, 2)
 polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
 
 [node name="Audio" type="Node3D" parent="."]

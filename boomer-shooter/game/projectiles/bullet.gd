@@ -38,6 +38,8 @@ func _ready() -> void:
 	var target_position: Vector3
 	var res := get_world_3d().direct_space_state.intersect_ray(query)
 	if res:
+		if not is_ghost and res.collider is Character:
+			Main.player.animate_crosshair()
 		target_position = res.position
 	else:
 		target_position = global_position + global_transform.basis.z.normalized() * 100.0

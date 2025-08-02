@@ -547,7 +547,7 @@ func die() -> void:
 	var prev_dead_sound: int = dead_sound
 	while prev_dead_sound == dead_sound:
 		dead_sound = randi() % DEAD_SOUNDS.size()
-	printt(dead_sound)
+	
 	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", dead_sound))
 	$AudioDie.stream = DEAD_SOUNDS[dead_sound]
 	$AudioDie.play()
@@ -572,3 +572,8 @@ func _pick_up_body_entered(body: Node3D) -> void:
 		
 		weapon.position = Vector3.ZERO
 		weapon.rotation = Vector3.ZERO
+
+
+func animate_crosshair() -> void:
+	%Crosshair.since_hit = 0.0
+	printt("aaa")
