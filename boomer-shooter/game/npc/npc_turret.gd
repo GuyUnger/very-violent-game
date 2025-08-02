@@ -15,6 +15,15 @@ func _physics_process(delta: float) -> void:
 		$Node3D.look_at(target.global_position)
 
 
+func knock_back(force) -> void:
+	pass
+	
+func die() -> void:
+	set_physics_process(false)
+	remove_from_group("aimables")
+	died.emit()
+
+
 class State extends Node:
 	func _ready() -> void:
 		get_parent().died.connect(_died)

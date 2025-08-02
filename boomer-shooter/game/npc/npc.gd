@@ -160,15 +160,18 @@ func hit(from:Node3D) -> void:
 	spawn_blood_puddle()
 	spawn_blood_splash()
 	if health <= 0:
-		set_physics_process(false)
-		remove_from_group("aimables")
-		animation_tree.set("parameters/Special/transition_request", "Died")
-		died.emit()
-		#await get_tree().create_timer(1.0).timeout
-		#queue_free()
-		
-		if randf() > 0.5:
-			head_pop()
+
+		die()
+
+
+func die() -> void:
+	set_physics_process(false)
+	remove_from_group("aimables")
+	animation_tree.set("parameters/Special/transition_request", "Died")
+	died.emit()
+	
+	if randf() > 0.5:
+		head_pop()
 
 
 func spawn_blood_puddle() -> void:

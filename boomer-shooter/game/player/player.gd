@@ -170,7 +170,7 @@ func _process(delta: float) -> void:
 	cam.global_position = cam_pos + Vector3.UP * cam_up + cam.basis.z * cam_distance
 	#endregion
 	
-	sway_weapon(delta)
+
 	process_targets()
 	process_target_indicators(delta)
 	
@@ -220,6 +220,8 @@ func _physics_process(delta: float) -> void:
 		since_on_floor += delta
 	
 	if weapon:
+		sway_weapon(delta)
+		
 		weapon.aim_dir = aim_dir
 		if Input.is_action_just_pressed("primary"):
 			weapon.trigger_pressed = true
@@ -231,6 +233,9 @@ func _physics_process(delta: float) -> void:
 			weapon.global_position = global_position + Vector3.UP * 1.5
 			weapon.throw(aim_dir * 10.0)
 			weapon = null
+			
+		
+
 
 	# Fall out of world
 	if position.y < -20.0:
@@ -533,6 +538,9 @@ func _pick_up_body_entered(body: Node3D) -> void:
 		body.collision_mask = 0
 		body.collision_layer = 0
 		if body.is_inside_tree():
-			body.reparent(%Model)
+			body.reparent(fps_weapon)
 		else:
-			%Model.add_child(body)
+			fps_weapon.add_child(body)
+		
+		weapon.position = Vector3.ZERO
+		weapon.rotation = Vector3.ZERO
