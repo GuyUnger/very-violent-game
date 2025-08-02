@@ -99,6 +99,8 @@ func _ready() -> void:
 #region Processing
 
 func _process(delta: float) -> void:
+	%Crosshair.visible = weapon != null
+	
 	#if Input.is_action_just_pressed("toggle_view"):
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
@@ -446,15 +448,14 @@ func process_target_indicators(delta: float) -> void:
 #region Melee
 
 func _process_melee(delta) -> void:
-	if Input.is_action_just_pressed("secondary"):
+	if Input.is_action_just_pressed("primary"):
 		since_secondary_pressed = 0.0
 	else:
 		since_secondary_pressed += delta
 	
 	melee_reload_t = move_toward(melee_reload_t, 0.0, delta / 0.8)
 	
-	if since_secondary_pressed < 0.2 and melee_reload_t <= 0.0:
-		
+	if since_secondary_pressed < 0.2 and melee_reload_t <= 0.0 and weapon and weapon is WeaponKatana:
 		vel_hor *= 1.5
 		allow_walljump = true
 		melee_reload_t = 1.0

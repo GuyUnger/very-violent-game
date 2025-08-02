@@ -113,7 +113,7 @@ func throw(force:Vector3) -> void:
 	
 
 func pickup(p_player: Player) -> void:
-	if randf() < 0.2 or pickup_sounds.size() == 0:
+	if pickup_sounds.size() == 0:
 		%AudioPickup.stream = pickup_sounds_b.pick_random()
 	else:
 		%AudioPickup.stream = pickup_sounds.pick_random()

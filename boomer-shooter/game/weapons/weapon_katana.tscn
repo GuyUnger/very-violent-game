@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmkjerra3prvk"]
+
+[ext_resource type="Script" uid="uid://bbpc4wmq08n3" path="res://game/weapons/weapon_katana.gd" id="1_md2vn"]
+[ext_resource type="AudioStream" uid="uid://b3gscbjbxoncv" path="res://game/weapons/pickup_katana 01.wav" id="2_r6x4p"]
+[ext_resource type="AudioStream" uid="uid://jclmgjq5a3ox" path="res://game/weapons/pickup_katana 02.wav" id="3_nojjb"]
+[ext_resource type="AudioStream" uid="uid://wymh85haoo41" path="res://game/weapons/pickup_katana 03.wav" id="4_5j5ad"]
+[ext_resource type="AudioStream" uid="uid://c8upeygvs5fhl" path="res://game/weapons/pickup_katana 04.wav" id="5_haru8"]
+[ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="10_pqsha"]
+[ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="12_3kcls"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
+radius = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_esp2f"]
+size = Vector3(0.05, 0.01, 0.5)
+
+[node name="WeaponKatana" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_md2vn")
+pickup_sounds = Array[AudioStream]([ExtResource("2_r6x4p"), ExtResource("3_nojjb"), ExtResource("4_5j5ad"), ExtResource("5_haru8")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7w4b6")
+
+[node name="AudioShoot" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="WorldModel" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="RightHand" type="Marker3D" parent="WorldModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
+
+[node name="LeftHand" type="Marker3D" parent="WorldModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel"]
+mesh = SubResource("BoxMesh_esp2f")
+
+[node name="Muzzleflash" parent="." instance=ExtResource("10_pqsha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, 0.00486123, 0.303278)
+
+[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+top_level = true
+stream = ExtResource("12_3kcls")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="AudioPickup" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
