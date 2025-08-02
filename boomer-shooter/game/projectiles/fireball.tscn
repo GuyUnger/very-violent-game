@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv3alq8obmgsb"]
+[gd_scene load_steps=4 format=3 uid="uid://dv3alq8obmgsb"]
+
+[ext_resource type="Script" uid="uid://djoomrpy0p4p0" path="res://game/projectiles/fireball.gd" id="1_qc715"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_4p2hb"]
 
@@ -10,9 +12,10 @@ albedo_color = Color(1, 0.619111, 0, 1)
 [node name="Fireball" type="MeshInstance3D"]
 mesh = SubResource("SphereMesh_4p2hb")
 surface_material_override/0 = SubResource("StandardMaterial3D_4p2hb")
+script = ExtResource("1_qc715")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_color = Color(1, 0.293207, 0, 1)
+light_color = Color(1, 0.177496, 0.0803124, 1)
 light_energy = 2.724
 light_size = 1.0
 shadow_enabled = true
