@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bs15p6iks3jtm"]
 
 [ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_0oqm6"]
-[ext_resource type="PackedScene" uid="uid://csvdqccaap4sw" path="res://game/player/player.tscn" id="2_43f5m"]
+[ext_resource type="PackedScene" uid="uid://n2142e5rpapd" path="res://game/player/player.tscn" id="2_43f5m"]
 
 [sub_resource type="Shader" id="Shader_0oqm6"]
 code = "shader_type canvas_item;
@@ -80,6 +80,8 @@ sky_material = SubResource("ProceduralSkyMaterial_43f5m")
 [sub_resource type="Environment" id="Environment_7iyax"]
 background_mode = 2
 sky = SubResource("Sky_e0l40")
+glow_enabled = true
+glow_hdr_threshold = 1.1
 fog_enabled = true
 fog_light_color = Color(1, 0.142603, 0.205989, 1)
 fog_density = 0.005
