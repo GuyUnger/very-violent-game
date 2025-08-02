@@ -1,8 +1,14 @@
 extends CharacterBody3D
 class_name Weapon
 
+enum HoldPose {
+	PISTOL,
+	RIFLE
+}
+
 @export var fire_rate := 0.0
 @export var auto := false
+@export var hold_pose:HoldPose
 
 var target_range: float = 20.0
 var reload_t: float = 0.0
@@ -31,6 +37,7 @@ func _trigger_just_pressed() -> void:
 func _physics_process(delta: float) -> void:
 	if player and player.dead:
 		return
+
 	if velocity != Vector3.ZERO:
 		velocity.y -= 9.8 * delta
 		move_and_slide()
@@ -50,7 +57,9 @@ func _physics_process(delta: float) -> void:
 		if since_primary_pressed < 0.2 and reload_t <= 0.0:
 			shoot()
 			since_primary_pressed = 999.0
+	
 
+	%Hand.visible = player != null
 
 func shoot() -> void:
 	reload_t = fire_rate

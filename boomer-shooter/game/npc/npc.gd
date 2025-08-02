@@ -90,6 +90,7 @@ func hit(from:Node3D) -> void:
 	if health <= 0:
 		return
 
+	
 	knock_back(from.knock_back * 0.01 * from.transform.basis.z)
 	
 	$AudioHurt.play()
@@ -149,7 +150,6 @@ class State extends Node:
 		p.add_child(state)
 		
 	func _died() -> void:
-		
 		var weapon = get_parent().get_node("%Weapon")
 		if weapon:
 			weapon.throw(Vector3.UP * 5.0)
@@ -202,10 +202,17 @@ class StateSpottedEnemy extends State:
 
 	func _ready() -> void:
 		super()
+		
+
+		var animation_tree = get_parent().get("animation_tree")
+		if animation_tree:
+			animation_tree.set("parameters/Holding/transition_request", "Pistol")
 
 		for node in get_tree().get_nodes_in_group("npc_enemies"):
 			if node != get_parent() and node.global_position.distance_squared_to(get_parent().global_position) < 50:
 				node._told_enemy_position(enemy)
+				
+		await get_tree().create_timer(0.5).timeout
 
 		var next_state = StateAttacking.new()
 		next_state.enemy = enemy
@@ -217,12 +224,20 @@ class StateAttacking extends State:
 	
 	func _ready() -> void:
 		super()
+		
+		var animation_tree = get_parent().get("animation_tree")
+		if animation_tree:
+			animation_tree.set("parameters/Holding/transition_request", "Pistol")
 
 		get_parent().target = enemy
 		#get_parent().moving_to = enemy
 		
 	func _physics_process(delta: float) -> void:
 		var weapon = get_parent().get_node("%Weapon")
+		if not is_instance_valid(weapon):
+			return queue_free()
+		
+		weapon.look_at(enemy.global_position, Vector3.UP, true)
 		
 		if not get_parent().is_node_visible(enemy):
 			weapon.trigger_pressed = false
@@ -246,6 +261,7 @@ class StateAttacking extends State:
 		
 		
 	func _exit_tree() -> void:
+		super()
 		var weapon = get_parent().get_node("%Weapon")
 		if weapon:
 			weapon.trigger_pressed = false

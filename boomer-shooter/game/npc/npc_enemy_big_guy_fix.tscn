@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbylk0jcob8px"]
+
+[ext_resource type="PackedScene" uid="uid://34yp6180hnq6" path="res://content/models/big_guy.glb" id="1_ypy8m"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://dqjgomdtemo5l" path="res://game/npc/npc_animation_blend_tree.tres" id="2_gemsu"]
+
+[node name="big_guy" instance=ExtResource("1_ypy8m")]
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="1"]
+tree_root = ExtResource("2_gemsu")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Blend2/blend_amount = 0
+"parameters/Blend2 2/blend_amount" = 0
+parameters/HitHead/active = false
+parameters/HitHead/internal_active = false
+parameters/HitHead/request = 0
+parameters/Holding/current_state = "Pistol"
+parameters/Holding/transition_request = ""
+parameters/Holding/current_index = 0
+parameters/MoveDirection/blend_position = -1
+parameters/Special/current_state = "Moving"
+parameters/Special/transition_request = ""
+parameters/Special/current_index = 0
+parameters/TimeScale/scale = 1.0

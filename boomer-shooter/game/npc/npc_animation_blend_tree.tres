@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=14 format=3 uid="uid://dqjgomdtemo5l"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=20 format=3 uid="uid://dqjgomdtemo5l"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3ocbx"]
 animation = &"npc_animation_library/Nervously Look Around"
@@ -11,13 +11,58 @@ stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ngog3"]
+animation = &"npc_animation_library/Shooting"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b654h"]
+animation = &"npc_animation_library/Gunplay"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n2t56"]
+animation = &"npc_animation_library/firing rifle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iw88f"]
+animation = &"npc_animation_library/Standing W_Briefcase Idle"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yj70c"]
 animation = &"npc_animation_library/Falling Back Death"
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_n2t56"]
+filter_enabled = true
+filters = ["Armature/Skeleton3D:Arm_L", "Armature/Skeleton3D:ForeArm_L", "Armature/Skeleton3D:HandIndex1_L", "Armature/Skeleton3D:HandIndex2_L", "Armature/Skeleton3D:HandIndex3_L", "Armature/Skeleton3D:HandIndex4_L", "Armature/Skeleton3D:HandMiddle1_L", "Armature/Skeleton3D:HandMiddle2_L", "Armature/Skeleton3D:HandMiddle3_L", "Armature/Skeleton3D:HandMiddle4_L", "Armature/Skeleton3D:HandRing1_L", "Armature/Skeleton3D:HandRing2_L", "Armature/Skeleton3D:HandRing3_L", "Armature/Skeleton3D:HandRing4_L", "Armature/Skeleton3D:HandThumb1_L", "Armature/Skeleton3D:HandThumb2_L", "Armature/Skeleton3D:HandThumb3_L", "Armature/Skeleton3D:HandThumb4_L", "Armature/Skeleton3D:Hand_L", "Armature/Skeleton3D:Shoulder_L"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_b654h"]
+filter_enabled = true
+filters = ["Armature/Skeleton3D:Arm_L", "Armature/Skeleton3D:Arm_R", "Armature/Skeleton3D:ForeArm_L", "Armature/Skeleton3D:ForeArm_R", "Armature/Skeleton3D:HandIndex1_L", "Armature/Skeleton3D:HandIndex1_R", "Armature/Skeleton3D:HandIndex2_L", "Armature/Skeleton3D:HandIndex2_R", "Armature/Skeleton3D:HandIndex3_L", "Armature/Skeleton3D:HandIndex3_R", "Armature/Skeleton3D:HandIndex4_L", "Armature/Skeleton3D:HandIndex4_R", "Armature/Skeleton3D:HandMiddle1_L", "Armature/Skeleton3D:HandMiddle1_R", "Armature/Skeleton3D:HandMiddle2_L", "Armature/Skeleton3D:HandMiddle2_R", "Armature/Skeleton3D:HandMiddle3_L", "Armature/Skeleton3D:HandMiddle3_R", "Armature/Skeleton3D:HandMiddle4_L", "Armature/Skeleton3D:HandMiddle4_R", "Armature/Skeleton3D:HandRing1_L", "Armature/Skeleton3D:HandRing1_R", "Armature/Skeleton3D:HandRing2_L", "Armature/Skeleton3D:HandRing2_R", "Armature/Skeleton3D:HandRing3_L", "Armature/Skeleton3D:HandRing3_R", "Armature/Skeleton3D:HandRing4_L", "Armature/Skeleton3D:HandRing4_R", "Armature/Skeleton3D:HandThumb1_L", "Armature/Skeleton3D:HandThumb1_R", "Armature/Skeleton3D:HandThumb2_L", "Armature/Skeleton3D:HandThumb2_R", "Armature/Skeleton3D:HandThumb3_L", "Armature/Skeleton3D:HandThumb3_R", "Armature/Skeleton3D:HandThumb4_L", "Armature/Skeleton3D:HandThumb4_R", "Armature/Skeleton3D:Hand_L", "Armature/Skeleton3D:Hand_R", "Armature/Skeleton3D:Head", "Armature/Skeleton3D:Neck", "Armature/Skeleton3D:Shoulder_L", "Armature/Skeleton3D:Shoulder_R", "Armature/Skeleton3D:Spine", "Armature/Skeleton3D:Spine1", "Armature/Skeleton3D:Spine2"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_b654h"]
 filter_enabled = true
-filters = ["Armature/Skeleton3D:Arm_L", "Armature/Skeleton3D:Arm_R", "Armature/Skeleton3D:ForeArm_L", "Armature/Skeleton3D:ForeArm_R", "Armature/Skeleton3D:HandIndex1_L", "Armature/Skeleton3D:HandIndex1_R", "Armature/Skeleton3D:HandIndex2_L", "Armature/Skeleton3D:HandIndex2_R", "Armature/Skeleton3D:HandIndex3_L", "Armature/Skeleton3D:HandIndex3_R", "Armature/Skeleton3D:HandMiddle1_L", "Armature/Skeleton3D:HandMiddle1_R", "Armature/Skeleton3D:HandMiddle2_L", "Armature/Skeleton3D:HandMiddle2_R", "Armature/Skeleton3D:HandMiddle3_L", "Armature/Skeleton3D:HandMiddle3_R", "Armature/Skeleton3D:HandRing1_L", "Armature/Skeleton3D:HandRing1_R", "Armature/Skeleton3D:HandRing2_L", "Armature/Skeleton3D:HandRing2_R", "Armature/Skeleton3D:HandRing3_L", "Armature/Skeleton3D:HandRing3_R", "Armature/Skeleton3D:HandThumb1_L", "Armature/Skeleton3D:HandThumb1_R", "Armature/Skeleton3D:HandThumb2_L", "Armature/Skeleton3D:HandThumb2_R", "Armature/Skeleton3D:HandThumb3_L", "Armature/Skeleton3D:HandThumb3_R", "Armature/Skeleton3D:Hand_L", "Armature/Skeleton3D:Hand_R", "Armature/Skeleton3D:Head", "Armature/Skeleton3D:Neck", "Armature/Skeleton3D:Shoulder_L", "Armature/Skeleton3D:Shoulder_R", "Armature/Skeleton3D:Spine1", "Armature/Skeleton3D:Spine2"]
+filters = ["Armature/Skeleton3D:Head", "Armature/Skeleton3D:Neck", "Armature/Skeleton3D:Shoulder_L", "Armature/Skeleton3D:Shoulder_R", "Armature/Skeleton3D:Spine1", "Armature/Skeleton3D:Spine2"]
 fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_iw88f"]
+xfade_time = 0.2
+input_0/name = "Pistol"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Rifle"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Nothing"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wa5vi"]
 animation = &"npc_animation_library/strafe"
@@ -34,9 +79,6 @@ animation = &"npc_animation_library/rifle aiming idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0qfo5"]
 animation = &"npc_animation_library/rifle run"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yxww1"]
-animation = &"npc_animation_library/walking"
-
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yxww1"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_wa5vi")
 blend_point_0/pos = Vector2(-1, 0)
@@ -48,8 +90,6 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_glpr6")
 blend_point_3/pos = Vector2(0, 0)
 blend_point_4/node = SubResource("AnimationNodeAnimation_0qfo5")
 blend_point_4/pos = Vector2(0, 1)
-blend_point_5/node = SubResource("AnimationNodeAnimation_yxww1")
-blend_point_5/pos = Vector2(0, 0.5)
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ye2x2"]
 xfade_time = 0.2
@@ -69,20 +109,34 @@ input_2/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3ocbx"]
 
 [resource]
-graph_offset = Vector2(-57.5743, 496.741)
+graph_offset = Vector2(-1569.54, -178.534)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_yj70c")
-nodes/Animation/position = Vector2(-800, 360)
+nodes/Animation/position = Vector2(-880, 740)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_3ocbx")
-"nodes/Animation 2/position" = Vector2(-800, 600)
+"nodes/Animation 2/position" = Vector2(-900, 560)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_e0hse")
-"nodes/Animation 3/position" = Vector2(-780, 880)
+"nodes/Animation 3/position" = Vector2(-100, 680)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_ngog3")
+"nodes/Animation 4/position" = Vector2(-2200, -120)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_b654h")
+"nodes/Animation 5/position" = Vector2(-2200, 100)
+"nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_n2t56")
+"nodes/Animation 6/position" = Vector2(-1920, 220)
+"nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_iw88f")
+"nodes/Animation 8/position" = Vector2(-1820, 480)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_b654h")
+nodes/Blend2/position = Vector2(-560, 220)
+"nodes/Blend2 2/node" = SubResource("AnimationNodeBlend2_n2t56")
+"nodes/Blend2 2/position" = Vector2(-1760, -40)
 nodes/HitHead/node = SubResource("AnimationNodeOneShot_b654h")
-nodes/HitHead/position = Vector2(-80, 520)
+nodes/HitHead/position = Vector2(280, 540)
+nodes/Holding/node = SubResource("AnimationNodeTransition_iw88f")
+nodes/Holding/position = Vector2(-1240, -40)
 nodes/MoveDirection/node = SubResource("AnimationNodeBlendSpace2D_yxww1")
-nodes/MoveDirection/position = Vector2(-560, 1140)
+nodes/MoveDirection/position = Vector2(-960, -200)
 nodes/Special/node = SubResource("AnimationNodeTransition_ye2x2")
-nodes/Special/position = Vector2(-320, 560)
+nodes/Special/position = Vector2(-300, 520)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3ocbx")
-nodes/TimeScale/position = Vector2(140, 480)
-nodes/output/position = Vector2(560, 480)
-node_connections = [&"HitHead", 0, &"Special", &"HitHead", 1, &"Animation 3", &"Special", 0, &"MoveDirection", &"Special", 1, &"Animation 2", &"Special", 2, &"Animation", &"TimeScale", 0, &"HitHead", &"output", 0, &"TimeScale"]
+nodes/TimeScale/position = Vector2(460, 480)
+nodes/output/position = Vector2(880, 480)
+node_connections = [&"Blend2", 0, &"MoveDirection", &"Blend2", 1, &"Holding", &"Blend2 2", 0, &"Animation 4", &"Blend2 2", 1, &"Animation 5", &"HitHead", 0, &"Special", &"HitHead", 1, &"Animation 3", &"Holding", 0, &"Blend2 2", &"Holding", 1, &"Animation 6", &"Holding", 2, &"Animation 8", &"Special", 0, &"Blend2", &"Special", 1, &"Animation 2", &"Special", 2, &"Animation", &"TimeScale", 0, &"HitHead", &"output", 0, &"TimeScale"]

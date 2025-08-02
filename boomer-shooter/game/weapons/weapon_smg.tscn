@@ -61,7 +61,9 @@ mesh = SubResource("BoxMesh_3pcvd")
 
 [node name="weapon_smg" parent="WorldModel" instance=ExtResource("3_7w4b6")]
 
-[node name="weapon_smg_arm" parent="WorldModel/weapon_smg" instance=ExtResource("4_ujfyf")]
+[node name="Hand" parent="WorldModel/weapon_smg" instance=ExtResource("4_ujfyf")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Muzzleflash" parent="." instance=ExtResource("5_8w3g1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.265738)

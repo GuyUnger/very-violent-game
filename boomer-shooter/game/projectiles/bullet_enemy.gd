@@ -4,6 +4,7 @@ var source_id: int
 
 var direction: Vector3
 var speed: float = 30.0
+var knock_back := 0.0
 
 var damage: int = 5
 

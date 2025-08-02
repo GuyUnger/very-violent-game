@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_0oqm6"]
 [ext_resource type="PackedScene" uid="uid://n2142e5rpapd" path="res://game/player/player.tscn" id="2_43f5m"]
-[ext_resource type="Script" uid="uid://8gh7wu8tphq3" path="res://stages/hud.gd" id="3_7iyax"]
+[ext_resource type="Script" path="res://stages/hud.gd" id="3_7iyax"]
 
 [sub_resource type="Shader" id="Shader_0oqm6"]
 code = "shader_type canvas_item;
