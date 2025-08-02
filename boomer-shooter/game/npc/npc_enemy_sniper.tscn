@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b0mg37m0iryg8"]
 
 [ext_resource type="PackedScene" uid="uid://cpfk5dfdx54m2" path="res://content/models/character.glb" id="1_vutn1"]
-[ext_resource type="Script" uid="uid://bdvpgw8cvqdsn" path="res://game/npc/npc_enemy_grunt.gd" id="2_fhicx"]
+[ext_resource type="Script" path="res://game/npc/npc_enemy_grunt.gd" id="2_fhicx"]
 [ext_resource type="Material" uid="uid://b5w4vmvenaaft" path="res://content/materials/npc_enemy_material.tres" id="3_36t4m"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dqjgomdtemo5l" path="res://game/npc/npc_animation_blend_tree.tres" id="4_mso36"]
 [ext_resource type="PackedScene" uid="uid://cg5fupmfgsdtj" path="res://game/weapons/weapon_sniper.tscn" id="5_vutn1"]
@@ -21,6 +21,7 @@ collision_mask = 0
 script = ExtResource("2_fhicx")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
+
 bones/1/position = Vector3(-3.8147e-08, 0.652909, -0.0273547)
 bones/1/rotation = Quaternion(-0.110388, -0.340318, -0.0260157, 0.933446)
 bones/2/rotation = Quaternion(-0.00920398, -0.000205299, 0.00311768, 0.999953)
@@ -137,6 +138,7 @@ libraries = {
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="7"]
+
 transform = Transform3D(0.767014, 0.123702, -0.629593, 0.0265654, 0.974276, 0.223789, 0.64108, -0.188375, 0.743997, -3.8147e-08, 0.652909, -0.0273547)
 shape = SubResource("CapsuleShape3D_3tmsd")
 
@@ -155,3 +157,4 @@ stream = ExtResource("7_c2x8a")
 volume_db = 5.0
 unit_size = 50.0
 pitch_scale = 1.5
+bus = &"SFX"

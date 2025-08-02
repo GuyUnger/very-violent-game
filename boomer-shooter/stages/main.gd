@@ -16,8 +16,12 @@ func _ready() -> void:
 
 static var player: Player
 
+var count_down_played: bool = false
 func _process(delta: float) -> void:
 	if time > 0:
+		if time < 5.0 and not count_down_played:
+			%AudioCountDown.play()
+			count_down_played = true
 		time -= delta
 		if time <= 0:
 			player.die()

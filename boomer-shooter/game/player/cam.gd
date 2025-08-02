@@ -3,17 +3,23 @@ extends Node3D
 
 var shakes: Array = []
 @onready var camera: Camera3D = %Camera
-
+@onready var weapon_container = %FpsWeaponContainer
+@onready var weapon_container_transform_start: Transform3D = weapon_container.transform
 
 func _process(delta: float) -> void:
 	camera.transform = Transform3D.IDENTITY
+	weapon_container.transform = weapon_container_transform_start
 	
 	# Process shakes
 	for shake: Shake in shakes:
 		shake.process(delta)
 		camera.transform *= shake.transform
+		
+		var transform_cam = shake.transform
+		transform_cam.origin *= 0.3
+		weapon_container.transform *= transform_cam
+		
 		#transform.origin += shake.transform.origin
-		#transform.
 	
 	
 	# Remove completed shakes

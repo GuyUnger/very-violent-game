@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://fk2ws4nkdayk"]
+[gd_scene load_steps=15 format=3 uid="uid://fk2ws4nkdayk"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_57hh3"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_7w4b6"]
+[ext_resource type="AudioStream" uid="uid://dlefj36iolvdv" path="res://game/weapons/pickup_smg 01.wav" id="2_pkk1y"]
 [ext_resource type="PackedScene" uid="uid://cbt4a74g6fyhs" path="res://game/weapons/model/weapon_smg.glb" id="3_7w4b6"]
+[ext_resource type="AudioStream" uid="uid://c1umsegk5hevb" path="res://game/weapons/pickup_smg 02.wav" id="3_81lhf"]
 [ext_resource type="PackedScene" uid="uid://dqul5y672j5k2" path="res://game/weapons/model/weapon_smg_arm.glb" id="4_ujfyf"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_8w3g1"]
+[ext_resource type="Script" path="res://game/weapons/weapon_smg_animations.gd" id="6_yuge1"]
+[ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="7_bl6n7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
 radius = 0.25
@@ -23,12 +27,13 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_3pcvd"]
 size = Vector3(0.005, 0.07, 0.04)
 
-[node name="Weapon" type="CharacterBody3D"]
+[node name="WeaponSmg" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_57hh3")
-fire_rate = 0.15
+fire_rate = 0.12
 auto = true
+pickup_sounds = Array[AudioStream]([ExtResource("2_pkk1y"), ExtResource("3_81lhf")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7w4b6")
@@ -36,6 +41,7 @@ shape = SubResource("SphereShape3D_7w4b6")
 [node name="AudioShoot" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_7w4b6")
+volume_db = 5.0
 bus = &"SFX"
 
 [node name="WorldModel" type="Node3D" parent="."]
@@ -65,7 +71,24 @@ mesh = SubResource("BoxMesh_3pcvd")
 unique_name_in_owner = true
 visible = false
 
+[node name="ShellEjection" type="Marker3D" parent="WorldModel"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00567615, 0.00567617)
+
 [node name="Muzzleflash" parent="." instance=ExtResource("5_8w3g1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.265738)
+
+[node name="Animations" type="Node" parent="."]
+script = ExtResource("6_yuge1")
+
+[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+top_level = true
+stream = ExtResource("7_bl6n7")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="AudioPickup" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 
 [editable path="WorldModel/weapon_smg"]

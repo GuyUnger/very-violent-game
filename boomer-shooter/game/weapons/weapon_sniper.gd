@@ -19,6 +19,7 @@ func shoot() -> void:
 		projectile.track_in_event_store = true
 		projectile.position = player.cam.global_position
 		projectile.speed = 200.0
+		projectile.damage = 100
 		Main.instance.add_child(projectile)
 		#projectile.collision_mask = 1 + 4
 	else:

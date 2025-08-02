@@ -93,6 +93,12 @@ func hit(from:Node3D) -> void:
 	
 	knock_back(from.knock_back * 0.01 * from.transform.basis.z)
 	
+	if "is_ghost" in from and not from.is_ghost:
+		$AudioHurt.unit_size = 30
+		$AudioHurt.volume_db = 4.0
+	else:
+		$AudioHurt.unit_size = 10
+		$AudioHurt.volume_db = 0.0
 	$AudioHurt.play()
 	
 	health -= from.damage

@@ -55,14 +55,12 @@ func _ready() -> void:
 	var tween := create_tween()
 	tween.tween_property($Mesh, "scale:z", 0.0, duration)
 	
+	if is_ghost:
+		$Fire.global_position = from_position
+		$Fire.pitch_scale = randf_range(1.0, 1.2)
+		$Fire.play()
 	
 	await tween.finished
-	
-	
-	$Fire.global_position = from_position
-	$Fire.pitch_scale = randf_range(1.0, 1.2)
-	$Fire.play()
-	
 	
 	$Whiz.pitch_scale = randf_range(0.9, 1.3)
 	$Whiz.play()
