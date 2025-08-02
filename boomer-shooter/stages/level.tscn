@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="4_dgwo2"]
 [ext_resource type="PackedScene" uid="uid://duomy14irp63p" path="res://game/doors/door_slide_wall/door_slide_wall.tscn" id="5_65nvc"]
 [ext_resource type="PackedScene" uid="uid://b7g4067loq3un" path="res://game/npc/enemy_big/enemy_big.tscn" id="6_udlle"]
-[ext_resource type="Script" uid="uid://8gh7wu8tphq3" path="res://stages/hud.gd" id="7_iltmi"]
+[ext_resource type="Script" path="res://stages/hud.gd" id="7_iltmi"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l4ad7"]
 _surfaces = [{

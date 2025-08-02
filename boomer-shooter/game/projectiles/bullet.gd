@@ -2,13 +2,12 @@ class_name Bullet
 extends Node3D
 
 @export var speed := 30.0
+@export var damage := 1
+@export var knock_back := 1
 
 var track_in_event_store := false
 var source_id := 0
 var is_ghost := false
-
-var damage: int = 1
-
 
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("npc_enemies"):
@@ -53,20 +52,18 @@ func _physics_process(delta: float) -> void:
 			EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
 
 
-func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
+func hit(collider:Node3D, normal:Vector3, hit_position:Vector3) -> void:
 	await get_tree().create_timer(position.distance_to(hit_position) / speed).timeout
 	set_physics_process(false)
-	
-	
-	
+
 	global_position = hit_position
 	var bounce_vel = (-global_transform.basis.z).bounce(normal)
 	look_at(global_position + bounce_vel, Vector3.UP)
 	$MeshInstance3D.hide()
 	
-	if not is_instance_valid(npc):
+	if not is_instance_valid(collider):
 		return
-	if npc is not NPC:
+	if collider is not Character:
 		$HitMetal.global_position = hit_position
 		#$HitMetal.pitch_scale = randf_range(0.9, 1.2)
 		$HitMetal.play()
@@ -81,10 +78,9 @@ func hit(npc, normal:Vector3, hit_position:Vector3) -> void:
 		x.position = hit_position
 		x.look_at_from_position(x.position, x.position + normal * 10.0)
 		add_child(x)
+
+		collider.hit(self)
 	
-		
-		npc.hit(damage)
-		npc.knock_back(normal * 0.001)
-	
-	await get_tree().create_timer(1.0).timeout
-	queue_free()
+	if is_inside_tree():
+		await get_tree().create_timer(1.0).timeout
+		queue_free()
