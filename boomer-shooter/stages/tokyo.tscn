@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://b6o8mp0jhq1nd"]
+[gd_scene load_steps=31 format=4 uid="uid://b6o8mp0jhq1nd"]
 
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_wojob"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_o4n3f"]
@@ -27,8 +27,6 @@
 [ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="22_i6c3o"]
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="23_ifw73"]
 [ext_resource type="PackedScene" uid="uid://dv3alq8obmgsb" path="res://game/projectiles/fireball.tscn" id="27_3c822"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_wojob"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wojob"]
 _surfaces = [{
@@ -59,10 +57,6 @@ shadow_enabled = true
 transform = Transform3D(-0.914871, -0.377242, 0.143871, 0.0231394, 0.306765, 0.951504, -0.403082, 0.873833, -0.271921, 0, 40.3619, -3)
 light_color = Color(0.625, 0.394408, 0.087336, 1)
 light_energy = 0.837
-
-[node name="HeightReference" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 14, 0)
-mesh = SubResource("CapsuleMesh_wojob")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 script = ExtResource("2_o4n3f")
