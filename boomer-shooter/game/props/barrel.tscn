@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c464glcbycu8f"]
+
+[ext_resource type="ArrayMesh" uid="uid://bdmb7gb5ci500" path="res://content/environment/props/meshes/props_barrel.res" id="1_c6jdu"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nmf75"]
+height = 1.5
+
+[node name="Barrel" type="RigidBody3D"]
+
+[node name="PropsBarrel" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_c6jdu")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_nmf75")

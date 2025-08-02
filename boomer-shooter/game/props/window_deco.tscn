@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqeao6wkv6xen"]
+
+[ext_resource type="ArrayMesh" uid="uid://dtphcp4r4mdtx" path="res://content/environment/props/meshes/props_window_deco.res" id="1_j11e0"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8n0ix"]
+data = PackedVector3Array(-1, 0, 0.25, -1, 3, -0.25, -1, 3, 0.25, -1, 0, 0.25, -1, 0, -0.25, -1, 3, -0.25, -1, 0, -0.25, 1, 3, -0.25, -1, 3, -0.25, -1, 0, -0.25, 1, 0, -0.25, 1, 3, -0.25, 1, 0, -0.25, 1, 3, 0.25, 1, 3, -0.25, 1, 0, -0.25, 1, 0, 0.25, 1, 3, 0.25, 1, 0, 0.25, -1, 3, 0.25, 1, 3, 0.25, 1, 0, 0.25, -1, 0, 0.25, -1, 3, 0.25, -1, 0, -0.25, 1, 0, 0.25, 1, 0, -0.25, -1, 0, -0.25, -1, 0, 0.25, 1, 0, 0.25, 1, 3, -0.25, -1, 3, 0.25, -1, 3, -0.25, 1, 3, -0.25, 1, 3, 0.25, -1, 3, 0.25)
+
+[node name="WindowDeco" type="StaticBody3D"]
+
+[node name="PropsWindowDeco" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_j11e0")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_8n0ix")

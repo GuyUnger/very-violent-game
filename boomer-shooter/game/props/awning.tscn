@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7by6vbb060yn"]
+
+[ext_resource type="ArrayMesh" uid="uid://tgfo5t4crvcw" path="res://content/environment/props/meshes/props_awning.res" id="1_x710n"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nmf75"]
+data = PackedVector3Array(-2.4595, 0, 2.1791, -2.4595, 1.1872, 0, -2.4595, 0.2921, 2.1791, -2.4595, 0, 2.1791, -2.4595, 0, 0, -2.4595, 1.1872, 0, -2.4595, 0, 0, 2.4595, 1.1872, 0, -2.4595, 1.1872, 0, -2.4595, 0, 0, 2.4595, 0, 0, 2.4595, 1.1872, 0, 2.4595, 0, 0, 2.4595, 0.2921, 2.1791, 2.4595, 1.1872, 0, 2.4595, 0, 0, 2.4595, 0, 2.1791, 2.4595, 0.2921, 2.1791, 2.4595, 0, 2.1791, -2.4595, 0.2921, 2.1791, 2.4595, 0.2921, 2.1791, 2.4595, 0, 2.1791, -2.4595, 0, 2.1791, -2.4595, 0.2921, 2.1791, -2.4595, 0, 0, 2.4595, 0, 2.1791, 2.4595, 0, 0, -2.4595, 0, 0, -2.4595, 0, 2.1791, 2.4595, 0, 2.1791, 2.4595, 1.1872, 0, -2.4595, 0.2921, 2.1791, -2.4595, 1.1872, 0, 2.4595, 1.1872, 0, 2.4595, 0.2921, 2.1791, -2.4595, 0.2921, 2.1791)
+
+[node name="Awning" type="StaticBody3D"]
+
+[node name="PropsAwning" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_x710n")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_nmf75")
