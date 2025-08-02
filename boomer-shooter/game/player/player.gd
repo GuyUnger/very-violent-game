@@ -542,6 +542,8 @@ static var DEAD_SOUNDS: Array = [
 ]
 
 func die() -> void:
+	if dead:
+		return
 	dead = true
 	
 	var prev_dead_sound: int = dead_sound

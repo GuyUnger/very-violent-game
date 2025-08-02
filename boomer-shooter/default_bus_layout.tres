@@ -12,7 +12,6 @@ volume_db = 5.0
 resource_name = "Compressor"
 gain = 10.0
 release_ms = 150.0
-mix = 0.75
 
 [resource]
 bus/0/volume_db = 0.573875
