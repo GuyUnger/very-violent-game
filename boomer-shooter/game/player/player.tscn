@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://csvdqccaap4sw"]
+[gd_scene load_steps=18 format=3 uid="uid://csvdqccaap4sw"]
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
 [ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://cf2w0k27tufdn" path="res://game/player/jump_metal.tres" id="7_epvkq"]
 [ext_resource type="AudioStream" uid="uid://bo81sp14xbw6q" path="res://game/player/walljump.tres" id="8_epvkq"]
 [ext_resource type="AudioStream" uid="uid://d2fsf0rpmyygk" path="res://game/player/melee.tres" id="9_5ghna"]
+[ext_resource type="AudioStream" uid="uid://dsfismre384c4" path="res://game/player/die.tres" id="11_gb4gm"]
+[ext_resource type="AudioStream" uid="uid://d4goy6vijk2jc" path="res://game/player/jump.tres" id="12_uv2nh"]
 
 [sub_resource type="Curve" id="Curve_a4w0n"]
 _data = [Vector2(0, 0.5361), 0.0, -19.2906, 0, 0, Vector2(0.0458453, 0.190871), -0.694639, -0.694639, 0, 0, Vector2(1, 0), -0.159803, 0.0, 0, 0]
@@ -153,5 +155,14 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 shape = SubResource("CylinderShape3D_j0mij")
+
+[node name="AudioDie" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_gb4gm")
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="AudioJump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_uv2nh")
+bus = &"SFX"
 
 [connection signal="body_entered" from="PickUp" to="." method="_pick_up_body_entered"]

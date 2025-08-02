@@ -73,6 +73,8 @@ class StateSpottedEnemy extends State:
 		get_parent().animation_tree.set("parameters/Special/transition_request", "Panic")
 		get_parent().target = enemy
 		await get_tree().create_timer(1.0).timeout
+		if not get_tree():
+			return
 		get_parent().animation_tree.set("parameters/Special/transition_request", "Moving")
 		
 		for node in get_tree().get_nodes_in_group("npc_enemies"):

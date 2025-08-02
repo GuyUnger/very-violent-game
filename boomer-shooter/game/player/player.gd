@@ -61,6 +61,8 @@ var walk_cycle_next_step: int = 0
 
 @export var close_on_escape = false
 
+var dead: bool = false
+
 #region Initialization
 
 func _ready() -> void:
@@ -171,6 +173,9 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if dead:
+		return
+	
 	#region Input
 	#var look_vel_to: Vector2 = Input.get_vector(
 	#		"joy_left", "joy_right",
@@ -321,7 +326,9 @@ func jump() -> void:
 	allow_jump_release = true
 	allow_jump = false
 	%AudioJump.play()
+	$AudioJump.play()
 	jumped.emit()
+	EventStore.push_event(EventStoreCommandSet.new(source_id, "jump", true))
 	
 	if first_person:
 		cam.shake_land(0.4, 0.5)
@@ -491,8 +498,10 @@ func is_jump_just_pressed(grace: float = 0.1) -> bool:
 #endregion
 
 func die() -> void:
+	dead = true
 	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
-	
+	$AudioDie.play()
+	await get_tree().create_timer(1.0).timeout
 	EventStore.reset()
 
 

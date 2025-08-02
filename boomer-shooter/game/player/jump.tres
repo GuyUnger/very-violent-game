@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://dhuda65t0d0uu"]
+
+[ext_resource type="AudioStream" uid="uid://cx7o38m6c3ra" path="res://game/player/jump 01.wav" id="0_yn3tv"]
+[ext_resource type="AudioStream" uid="uid://cj88i65f2l3pl" path="res://game/player/jump 02.wav" id="1_wvejz"]
+[ext_resource type="AudioStream" uid="uid://b7a26v35tup6p" path="res://game/player/jump 03.wav" id="2_inhgm"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("0_yn3tv")
+stream_1/stream = ExtResource("1_wvejz")
+stream_2/stream = ExtResource("2_inhgm")

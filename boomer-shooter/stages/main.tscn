@@ -123,6 +123,7 @@ grow_vertical = 2
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 scaling_3d_scale = 2.0
+audio_listener_enable_3d = true
 size = Vector2i(854, 480)
 render_target_update_mode = 4
 

@@ -9,17 +9,17 @@
 [node name="Tokyo" parent="SubViewportContainer/SubViewport" index="2" instance=ExtResource("3_l0s8e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -9, -16)
 
-[node name="NPCEnemy" parent="." index="3" instance=ExtResource("3_0cfai")]
+[node name="NPCEnemy" parent="SubViewportContainer/SubViewport" index="3" instance=ExtResource("3_0cfai")]
 transform = Transform3D(-0.618011, 0, -0.78617, 0, 1, 0, 0.78617, 0, -0.618011, 7.57029, 8, 16.4299)
 
-[node name="NPCEnemy2" parent="." index="4" instance=ExtResource("3_0cfai")]
+[node name="NPCEnemy2" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("3_0cfai")]
 transform = Transform3D(0.408012, 0, -0.912977, 0, 1, 0, 0.912977, 0, 0.408012, 7.57029, 8, 9.71246)
 
-[node name="NPCEnemy3" parent="." index="5" instance=ExtResource("3_0cfai")]
+[node name="NPCEnemy3" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("3_0cfai")]
 transform = Transform3D(0.408012, 0, -0.912977, 0, 1, 0, 0.912977, 0, 0.408012, 7.57029, 3.00347, 9.71246)
 
-[node name="NPCEnemy4" parent="." index="6" instance=ExtResource("3_0cfai")]
+[node name="NPCEnemy4" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("3_0cfai")]
 transform = Transform3D(0.408012, 0, -0.912977, 0, 1, 0, 0.912977, 0, 0.408012, 7.57029, 3.00347, 5.73734)
 
-[node name="NPCEnemy5" parent="." index="7" instance=ExtResource("3_0cfai")]
+[node name="NPCEnemy5" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("3_0cfai")]
 transform = Transform3D(0.408012, 0, -0.912977, 0, 1, 0, 0.912977, 0, 0.408012, 5.38475, -1.22569, 5.73734)

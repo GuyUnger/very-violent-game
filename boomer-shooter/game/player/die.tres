@@ -1,0 +1,25 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=11 format=3 uid="uid://dsfismre384c4"]
+
+[ext_resource type="AudioStream" uid="uid://crpktehs8v5vg" path="res://game/player/die 01.wav" id="0_k13d0"]
+[ext_resource type="AudioStream" uid="uid://bk7xqrrxki517" path="res://game/player/die 02.wav" id="1_e1vqi"]
+[ext_resource type="AudioStream" uid="uid://r2uydsnka75e" path="res://game/player/die 03.wav" id="2_1gl3l"]
+[ext_resource type="AudioStream" uid="uid://ds42xx11iovam" path="res://game/player/die 04.wav" id="3_2dj09"]
+[ext_resource type="AudioStream" uid="uid://ddfhb344d6ade" path="res://game/player/die 05.wav" id="4_kw1dq"]
+[ext_resource type="AudioStream" uid="uid://clcqeafvy2ry3" path="res://game/player/die 06.wav" id="5_t5ks0"]
+[ext_resource type="AudioStream" uid="uid://djy4j5y45qoek" path="res://game/player/die 07.wav" id="6_y91x9"]
+[ext_resource type="AudioStream" uid="uid://hubdwvf3y80m" path="res://game/player/die 08.wav" id="7_9t7bb"]
+[ext_resource type="AudioStream" uid="uid://c82j6742pvdli" path="res://game/player/die 09.wav" id="8_n63i5"]
+[ext_resource type="AudioStream" uid="uid://7c78bshaiwdm" path="res://game/player/die 10.wav" id="9_ru71y"]
+
+[resource]
+streams_count = 10
+stream_0/stream = ExtResource("0_k13d0")
+stream_1/stream = ExtResource("1_e1vqi")
+stream_2/stream = ExtResource("2_1gl3l")
+stream_3/stream = ExtResource("3_2dj09")
+stream_4/stream = ExtResource("4_kw1dq")
+stream_5/stream = ExtResource("5_t5ks0")
+stream_6/stream = ExtResource("6_y91x9")
+stream_7/stream = ExtResource("7_9t7bb")
+stream_8/stream = ExtResource("8_n63i5")
+stream_9/stream = ExtResource("9_ru71y")

@@ -154,6 +154,8 @@ func hit(from:Node3D) -> void:
 
 	knock_back(from.knock_back * 0.01 * from.transform.basis.z)
 	
+	$AudioHurt.play()
+	
 	health -= from.damage
 	spawn_blood_puddle()
 	spawn_blood_splash()

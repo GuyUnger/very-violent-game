@@ -6,11 +6,16 @@ var last_position := Vector3.ZERO
 var dead:bool : 
 	set = set_dead
 
+var jump:
+	set(value):
+		$AudioJump.play()
 
 func set_dead(value:bool) -> void:
 	set_physics_process(false)
 	collision_layer = 0
 	animation_tree.set("parameters/Special/transition_request", "Died")
+	if value:
+		$AudioDie.play()
 
 
 func _ready() -> void:

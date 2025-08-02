@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://djsq0h71bb887"]
+
+[ext_resource type="AudioStream" uid="uid://cs1nsifgcp4q2" path="res://game/npc/hurt 01.wav" id="0_9qj0n"]
+[ext_resource type="AudioStream" uid="uid://cqeg0w88koag3" path="res://game/npc/hurt 02.wav" id="1_5l529"]
+[ext_resource type="AudioStream" uid="uid://cya6s8l8rcqdh" path="res://game/npc/hurt 03.wav" id="2_4cr8l"]
+[ext_resource type="AudioStream" uid="uid://dy2akbtbgjdxb" path="res://game/npc/hurt 04.wav" id="3_29i3t"]
+[ext_resource type="AudioStream" uid="uid://dum6dxbe810gj" path="res://game/npc/hurt 05.wav" id="4_cx3yr"]
+[ext_resource type="AudioStream" uid="uid://bs0ayr3db66yc" path="res://game/npc/hurt 06.wav" id="5_kzp0b"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("0_9qj0n")
+stream_1/stream = ExtResource("1_5l529")
+stream_2/stream = ExtResource("2_4cr8l")
+stream_3/stream = ExtResource("3_29i3t")
+stream_4/stream = ExtResource("4_cx3yr")
+stream_5/stream = ExtResource("5_kzp0b")
