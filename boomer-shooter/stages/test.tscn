@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://rkknd2jlf0p7"]
+
+[ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_u1sro"]
+[ext_resource type="PackedScene" uid="uid://cqff16mf4lpq6" path="res://stages/level.tscn" id="2_2qmnm"]
+[ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_dp5ym"]
+[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy.tscn" id="3_r1nsf"]
+
+[node name="Main" instance=ExtResource("1_u1sro")]
+
+[node name="Level" parent="SubViewportContainer/SubViewport" index="1" instance=ExtResource("2_2qmnm")]
+
+[node name="CharacterEnemy4" parent="SubViewportContainer/SubViewport" index="2" instance=ExtResource("3_r1nsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.46375, 0.0032863, 0.154365)
+max_health = 5
+health = 5
+
+[node name="CharacterEnemy5" parent="SubViewportContainer/SubViewport" index="3" instance=ExtResource("3_r1nsf")]
+transform = Transform3D(-0.667144, 0, -0.744929, 0, 1, 0, 0.744929, 0, -0.667144, -9.83714, 0.0032863, 0.154365)
+max_health = 5
+health = 5
+
+[node name="CharacterEnemy6" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("3_r1nsf")]
+transform = Transform3D(-0.735033, 0, -0.678031, 0, 1, 0, 0.678031, 0, -0.735033, -11.5452, 0.0032863, 0.154365)
+max_health = 10
+health = 10
+
+[node name="Tokyo" parent="." index="3" instance=ExtResource("3_dp5ym")]

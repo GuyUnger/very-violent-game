@@ -1,9 +1,15 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b71gxlhwanayi"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b71gxlhwanayi"]
 
-[ext_resource type="Texture2D" uid="uid://bi3gobf85k2om" path="res://content/environment/surfaces/surface_Layer 2.png" id="1_cxw74"]
+[ext_resource type="Texture2D" uid="uid://b02sk1xl1rses" path="res://content/environment/materials/pbr/surface_Layer_2_basecolor.png" id="1_jc3o5"]
+[ext_resource type="Texture2D" uid="uid://cc0tx6mlv6tob" path="res://content/environment/materials/pbr/surface_Layer_2_normal.png" id="2_qg86o"]
+[ext_resource type="Texture2D" uid="uid://dndkr521yghye" path="res://content/environment/materials/pbr/surface_Layer_2_roughness.png" id="3_e1wxc"]
 
 [resource]
 specular_mode = 2
-albedo_texture = ExtResource("1_cxw74")
+albedo_texture = ExtResource("1_jc3o5")
+roughness_texture = ExtResource("3_e1wxc")
+normal_enabled = true
+normal_texture = ExtResource("2_qg86o")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
+texture_filter = 2

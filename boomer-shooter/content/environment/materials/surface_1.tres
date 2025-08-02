@@ -1,9 +1,21 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://buavh7fna845w"]
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://buavh7fna845w"]
 
-[ext_resource type="Texture2D" uid="uid://b6v7wtbw4a73w" path="res://content/environment/surfaces/surface_Layer 1.png" id="1_baga1"]
+[ext_resource type="Texture2D" uid="uid://vs26ts3mahc4" path="res://content/environment/materials/pbr/surface_Layer_1_basecolor.png" id="1_tf3vv"]
+[ext_resource type="Texture2D" uid="uid://vnfii4ba5a3i" path="res://content/environment/materials/pbr/surface_Layer_1_normal.png" id="2_58nr0"]
+[ext_resource type="Texture2D" uid="uid://b1dsf2mgg5ya2" path="res://content/environment/materials/pbr/surface_Layer_1_roughness.png" id="3_7tr0a"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ldufu"]
+load_path = "res://.godot/imported/surface_Layer_1_height.png-083cd71764fd64dbd3f037d2b7d995e1.s3tc.ctex"
 
 [resource]
 specular_mode = 2
-albedo_texture = ExtResource("1_baga1")
+albedo_texture = ExtResource("1_tf3vv")
+roughness_texture = ExtResource("3_7tr0a")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2_58nr0")
+heightmap_scale = 6.877
+heightmap_texture = SubResource("CompressedTexture2D_ldufu")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
+texture_filter = 2

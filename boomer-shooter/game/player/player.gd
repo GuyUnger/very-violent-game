@@ -68,7 +68,7 @@ func _ready() -> void:
 	
 	EventStore.push_event(
 		EventStoreCommandAddChild.new(
-			get_parent().source_id, 
+			Main.instance.source_id, 
 			source_id, 
 			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
 			global_transform))
@@ -452,6 +452,7 @@ func _process_melee(delta) -> void:
 #region Input
 
 func _input(event: InputEvent) -> void:
+	printt(event)
 	if event is InputEventKey:
 		# Toggle fullscreen
 		if Input.is_action_just_pressed("fullscreen"):

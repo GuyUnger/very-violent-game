@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bs15p6iks3jtm"]
+[gd_scene load_steps=10 format=3 uid="uid://bs15p6iks3jtm"]
 
 [ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_0oqm6"]
-[ext_resource type="PackedScene" uid="uid://cqff16mf4lpq6" path="res://stages/level.tscn" id="1_72s8x"]
 [ext_resource type="PackedScene" uid="uid://csvdqccaap4sw" path="res://game/player/player.tscn" id="2_43f5m"]
-[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy.tscn" id="3_7iyax"]
 
 [sub_resource type="Shader" id="Shader_0oqm6"]
 code = "shader_type canvas_item;
@@ -74,27 +72,20 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5sjox"]
 shader = SubResource("Shader_fejr8")
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_43f5m"]
+
+[sub_resource type="Sky" id="Sky_e0l40"]
+sky_material = SubResource("ProceduralSkyMaterial_43f5m")
+
+[sub_resource type="Environment" id="Environment_7iyax"]
+background_mode = 2
+sky = SubResource("Sky_e0l40")
+fog_enabled = true
+fog_light_color = Color(1, 0.142603, 0.205989, 1)
+fog_density = 0.005
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_0oqm6")
-
-[node name="Level" parent="." instance=ExtResource("1_72s8x")]
-
-[node name="Player" parent="." instance=ExtResource("2_43f5m")]
-
-[node name="CharacterEnemy" parent="." instance=ExtResource("3_7iyax")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.46375, 0.0032863, 0.154365)
-max_health = 5
-health = 5
-
-[node name="CharacterEnemy2" parent="." instance=ExtResource("3_7iyax")]
-transform = Transform3D(-0.667144, 0, -0.744929, 0, 1, 0, 0.744929, 0, -0.667144, -9.83714, 0.0032863, 0.154365)
-max_health = 5
-health = 5
-
-[node name="CharacterEnemy3" parent="." instance=ExtResource("3_7iyax")]
-transform = Transform3D(-0.735033, 0, -0.678031, 0, 1, 0, 0.678031, 0, -0.735033, -11.5452, 0.0032863, 0.154365)
-max_health = 10
-health = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -106,6 +97,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 3
@@ -117,3 +109,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+scaling_3d_scale = 2.0
+size = Vector2i(854, 480)
+render_target_update_mode = 4
+
+[node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_43f5m")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_7iyax")

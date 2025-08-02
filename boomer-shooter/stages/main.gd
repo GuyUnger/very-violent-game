@@ -5,8 +5,11 @@ static var instance
 
 var source_id := 1
 
-func _ready() -> void:
+func _init() -> void:
 	instance = self
+	
+
+func _ready() -> void:
 	EventStore.register_source(source_id, self)
 
 static var player: Player
