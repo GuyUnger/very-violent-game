@@ -34,3 +34,6 @@ func _physics_process(delta: float) -> void:
 	var blend_vector = Vector2(local_x, local_y)
 	animation_tree.set("parameters/MoveDirection/blend_position", blend_vector)
 	last_position = global_position
+
+func hit(from) -> void:
+	pass

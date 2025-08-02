@@ -63,6 +63,8 @@ var walk_cycle_next_step: int = 0
 
 var dead: bool = false
 
+var last_transform := Transform3D()
+
 #region Initialization
 
 func _ready() -> void:
@@ -168,8 +170,11 @@ func _process(delta: float) -> void:
 	
 	
 	var t = global_transform
-	t = t.rotated_local(Vector3.UP, PI * 0.5)
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", t))
+	if last_transform != t:
+		last_transform = t
+		t = t.rotated_local(Vector3.UP, PI * 0.5)
+		EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", t))
+
 
 
 func _physics_process(delta: float) -> void:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
 [ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
-[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/smg.tscn" id="2_j0mij"]
+[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_j0mij"]
 [ext_resource type="Script" uid="uid://de7cvkqkpjfvt" path="res://game/player/crosshair.gd" id="3_8soms"]
 [ext_resource type="Texture2D" uid="uid://bm7gadsp6jqal" path="res://game/player/blade_swoosh.png" id="4_gb4gm"]
 [ext_resource type="AudioStream" uid="uid://ckg8kreql6c0e" path="res://game/player/footstep_metal.tres" id="5_5fytw"]
@@ -32,7 +32,7 @@ radius = 1.5
 radius = 1.0
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 6
+collision_layer = 2
 script = ExtResource("1_7hyr5")
 target_range_over_distance = SubResource("Curve_a4w0n")
 
