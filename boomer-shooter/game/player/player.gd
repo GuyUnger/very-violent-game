@@ -59,6 +59,7 @@ var velocity_prev: Vector3 = Vector3.ZERO
 var walk_cycle: float = 0.0
 var walk_cycle_next_step: int = 0
 
+@export var starting_weapon:PackedScene
 @export var close_on_escape = false
 
 var dead: bool = false
@@ -77,6 +78,8 @@ func _ready() -> void:
 			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
 			global_transform))
 	
+	if starting_weapon:
+		_pick_up_body_entered(starting_weapon.instantiate())
 	
 	Main.player = self
 	
@@ -84,7 +87,7 @@ func _ready() -> void:
 	cam.reparent(get_parent())
 	ray_cam.reparent(get_parent())
 	
-	weapon.player = self
+	
 	
 	%Person.visible = not first_person
 
@@ -517,4 +520,7 @@ func _pick_up_body_entered(body: Node3D) -> void:
 		weapon.velocity = Vector3.ZERO
 		body.collision_mask = 0
 		body.collision_layer = 0
-		body.reparent(%Model)
+		if body.is_inside_tree():
+			body.reparent(%Model)
+		else:
+			%Model.add_child(body)

@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjnhfu1ekho3v"]
+[gd_scene load_steps=6 format=3 uid="uid://bjnhfu1ekho3v"]
 
+[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_0cfai"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy.tscn" id="3_0cfai"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_l0s8e"]
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="3_rsuto"]
+[ext_resource type="PackedScene" uid="uid://2twnqkka80to" path="res://game/npc/npc_turret.tscn" id="5_0cfai"]
 
 [node name="Main" instance=ExtResource("3_rsuto")]
+
+[node name="Player" parent="SubViewportContainer/SubViewport" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.517, -0.768494, 23.1692)
+starting_weapon = ExtResource("2_0cfai")
 
 [node name="Tokyo" parent="SubViewportContainer/SubViewport" index="2" instance=ExtResource("3_l0s8e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -9, -16)
@@ -23,3 +29,12 @@ transform = Transform3D(0.408012, 0, -0.912977, 0, 1, 0, 0.912977, 0, 0.408012, 
 
 [node name="NPCEnemy5" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("3_0cfai")]
 transform = Transform3D(0.408012, 0, -0.912977, 0, 1, 0, 0.912977, 0, 0.408012, 5.38475, -1.22569, 5.73734)
+
+[node name="NPCEnemy7" parent="." index="3" instance=ExtResource("3_0cfai")]
+transform = Transform3D(0.408012, 0, -0.912977, 0, 1, 0, 0.912977, 0, 0.408012, -17.8574, -1.22569, 17.4355)
+
+[node name="NPCEnemyTurret" parent="." index="4" instance=ExtResource("5_0cfai")]
+transform = Transform3D(-0.747613, 0, -0.664135, 0, 1, 0, 0.664135, 0, -0.747613, -12.4041, 3.59572, 30.6188)
+
+[node name="NPCEnemyTurret2" parent="." index="5" instance=ExtResource("5_0cfai")]
+transform = Transform3D(-4.37114e-08, 0, -1, 1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1.91069e-15, -13.0189, 3.99849, 32.3748)
