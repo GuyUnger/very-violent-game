@@ -22,18 +22,21 @@ func process(target_pos:Vector2, delta:float, target) -> void:
 		else:
 			modulate = Color.GREEN
 	else:
-		arrow_distance = 36.0
-		#arrow_distance = -36.0
+		#arrow_distance = 36.0
+		arrow_distance = -10.0
 		modulate = Color.WHITE
 		rotation = PI * 0.25
-	
+	arrow_distance -= (1.0 - since_hit) * 40.0
 	#position = lerp(position, target_pos, delta * accel)
 	position = target_pos
 	
-	if target:
-		scale = Vector2.ONE * (0.2 + maxf(0.1 - since_hit, 0.0))
-	else:
-		scale = Vector2.ONE * 0.2
+	since_hit = move_toward(since_hit, 1.0, delta / 0.3)
+	
+	scale = Vector2.ONE * (0.2 + maxf(0.1 - since_hit, 0.0))
+	
+	#if target:
+	#else:
+	#	scale = Vector2.ONE * 0.2
 	
 	for i in 4:
 		var arrow = get_child(i)

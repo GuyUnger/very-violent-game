@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://4jdwlrqptnyh"]
+[gd_scene load_steps=26 format=4 uid="uid://4jdwlrqptnyh"]
 
 [ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_j0kwg"]
 [ext_resource type="Script" uid="uid://cywxf4tybte30" path="res://stages/level.gd" id="2_ku073"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="5_v41yi"]
 [ext_resource type="PackedScene" uid="uid://duomy14irp63p" path="res://game/doors/door_slide_wall/door_slide_wall.tscn" id="6_wyg5j"]
 [ext_resource type="PackedScene" uid="uid://b7g4067loq3un" path="res://game/npc/enemy_big/enemy_big.tscn" id="7_s2ha7"]
-[ext_resource type="Script" path="res://stages/hud.gd" id="8_dr7eq"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l4ad7"]
 _surfaces = [{
@@ -440,24 +439,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.175, 0, -6.515)
 
 [node name="EnemyBig3" parent="Level" instance=ExtResource("7_s2ha7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.825, 1.06402, 13.843)
-
-[node name="HUD" type="CanvasLayer" parent="Level"]
-layer = 8
-script = ExtResource("8_dr7eq")
-
-[node name="Time" type="Label" parent="Level/HUD"]
-unique_name_in_owner = true
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.5
-offset_top = 10.0
-offset_right = 20.5
-offset_bottom = 55.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 32
-text = "59"
-horizontal_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("3_hphqq")]
 
