@@ -51,20 +51,24 @@ func _physics_process(delta: float) -> void:
 func shoot() -> void:
 	reload_t = fire_rate
 
-	var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
-	projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)
 	
 	if player:
+		var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
+		projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)
+		
 		player.cam.shake_rumble(0.3, 0.1, 16.0)
 		player.cam.shake_shock(0.1, 0.5)
 		projectile.track_in_event_store = true
 		projectile.position = player.cam.global_position
-		projectile.collision_mask = 1 + 4
+		Main.instance.add_child(projectile)
+		#projectile.collision_mask = 1 + 4
 	else:
-		projectile.collision_mask = 1 + 2
+		var projectile := preload("res://game/projectiles/bullet_enemy.tscn").instantiate()
+		projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)
+		#projectile.collision_mask = 1 + 2
 		projectile.position = global_position + Vector3.UP * 0.1
 	
-	Main.instance.add_child(projectile)
+		Main.instance.add_child(projectile)
 	
 	%AudioShoot.play()
 	
