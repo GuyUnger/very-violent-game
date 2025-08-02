@@ -1,7 +1,7 @@
 class_name Bullet
 extends Node3D
 
-@export var speed := 30.0
+var speed := 25.0
 @export var damage := 1
 @export var knock_back := 1
 
@@ -13,10 +13,9 @@ var collision_mask := 1 + 4
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("npc_enemies"):
 		node._heard(global_position)
-		
-	$Fire.global_position = global_position
-	$Fire.pitch_scale = randf_range(1.0, 1.2)
-	$Fire.play()
+	
+	var from_position: Vector3 = global_position
+	
 	
 	if source_id != 0:
 		is_ghost = true
@@ -36,32 +35,55 @@ func _ready() -> void:
 	query.from = global_position
 	query.to = global_position + global_transform.basis.z.normalized() * 100.0
 	
+	var target_position: Vector3
 	var res := get_world_3d().direct_space_state.intersect_ray(query)
 	if res:
-		hit(res.collider, res.normal, res.position)
+		target_position = res.position
+	else:
+		target_position = global_position + global_transform.basis.z.normalized() * 100.0
 	
-	await get_tree().create_timer(randf_range(0.0, 0.1)).timeout
+	var distance := global_position.distance_to(target_position)
+	var duration: float = distance / speed
+	
+	$Mesh.scale.z = distance
+	
+	var tween := create_tween()
+	tween.tween_property($Mesh, "scale:z", 0.5, duration)
+	
+	
+	position = target_position
+	
+	await tween.finished
+	
+	
+	$Fire.global_position = from_position
+	$Fire.pitch_scale = randf_range(1.0, 1.2)
+	$Fire.play()
+	
+	
 	$Whiz.pitch_scale = randf_range(0.9, 1.3)
 	$Whiz.play()
+	if res:
+		hit(res.collider, res.normal, res.position)
 
 
-func _physics_process(delta: float) -> void:
-	if not is_ghost:
-		var direction = global_transform.basis.z.normalized()
-		global_position += direction * delta * speed
+#func _physics_process(delta: float) -> void:
+	#if not is_ghost:
+		#var direction = global_transform.basis.z.normalized()
+		#global_position += direction * delta * speed
 		
-		if track_in_event_store:
-			EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
+		#if track_in_event_store:
+			#EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
 
 
 func hit(collider:Node3D, normal:Vector3, hit_position:Vector3) -> void:
-	await get_tree().create_timer(position.distance_to(hit_position) / speed).timeout
-	set_physics_process(false)
+	#await get_tree().create_timer(position.distance_to(hit_position) / speed).timeout
+	#set_physics_process(false)
 
-	global_position = hit_position
+	#global_position = hit_position
 	var bounce_vel = (-global_transform.basis.z).bounce(normal)
 	look_at(global_position + bounce_vel, Vector3.UP)
-	$MeshInstance3D.hide()
+	#$Mesh.hide()
 	
 	if not is_instance_valid(collider):
 		return
