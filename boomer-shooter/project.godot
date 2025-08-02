@@ -39,6 +39,10 @@ import/blender/enabled=false
 aimables=""
 npc_enemies=""
 
+[gui]
+
+theme/custom_font="uid://boqhcqqhxixb3"
+
 [input]
 
 forward={

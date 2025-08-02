@@ -38,10 +38,17 @@ void fragment() {
 
 	float center_dist = length(sample_uv - 0.5);
 
-	vec3 color = texture(SCREEN_TEXTURE, sample_uv).rgb;
+	vec2 offset = vec2(0.003, 0.002) * length(uv - 0.5);
+	vec3 color_l = vec3(0.6, 0.6, 0.0);
+	vec3 color_r = vec3(0.0, 0.6, 0.6);
+	vec3 color_c = vec3(1.0) - color_l - color_r;
+	vec3 sample_c = texture(SCREEN_TEXTURE, sample_uv).rgb * color_c;
+	vec3 sample_l = texture(SCREEN_TEXTURE, sample_uv - offset).rgb * color_l;
+	vec3 sample_r = texture(SCREEN_TEXTURE, sample_uv + offset).rgb * color_r;
 
+	vec3 sample = sample_c + sample_l + sample_r;
 	// hue-shift deges
-	COLOR.rgb = mix(color, color.bgr, pow(center_dist, 1.0) * 0.5);
+	COLOR.rgb = mix(sample, sample.bgr, pow(center_dist, 1.0) * 0.5);
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fejr8"]
@@ -136,9 +143,28 @@ offset_top = 10.0
 offset_right = 20.5
 offset_bottom = 55.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 32
 text = "59"
 horizontal_alignment = 1
+
+[node name="Ammo" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -408.0
+offset_top = 438.0
+offset_right = -228.0
+offset_bottom = 473.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "Ammo: 59"
 
 [node name="AudioCountDown" type="AudioStreamPlayer" parent="HUD"]
 unique_name_in_owner = true

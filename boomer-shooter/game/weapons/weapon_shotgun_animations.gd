@@ -20,6 +20,7 @@ func shoot():
 	if anim_tween:
 		anim_tween.kill()
 	anim_tween = create_tween().set_parallel()
+	
 	#
 	anim_tween.tween_property(shotgun_container, "position", Vector3(0.0, 0.0, 0.0), 0.25)
 	anim_tween.tween_property(world_model, "position", Vector3(0.0, -0.05, 0.0), 0.25).set_delay(0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CIRC)

@@ -5,7 +5,7 @@ class_name NPCHumanoid
 
 func set_holes(value:int) -> void:
 	holes = value
-	
+
 	if not is_node_ready():
 		return
 	
@@ -25,6 +25,7 @@ func set_cuts(value:int) -> void:
 		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_0", Vector4(randf(), randf(), randf(), randf()))
 	elif cuts == 2:
 		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_1", Vector4(randf(), randf(), randf(), randf()))
+
 
 func set_target(node:Node3D) -> void:
 	target = node
@@ -90,7 +91,7 @@ func look_at_node_y_axis_lerp(target_position: Vector3, delta: float, speed: flo
 func knock_back(force:Vector3) -> void:
 	force.y *= 0.0
 
-	knock_back_force += force
+	#sknock_back_force += force
 	
 	if knock_back_tween_:
 		knock_back_tween_.kill()

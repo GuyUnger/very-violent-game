@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b7g4067loq3un"]
 
 [ext_resource type="Script" uid="uid://bwbjjrc3sq4rd" path="res://game/npc/enemy_big/enemy_big.gd" id="1_6bsln"]
-[ext_resource type="AudioStream" path="res://game/npc/hurt.tres" id="2_prdpp"]
+[ext_resource type="AudioStream" uid="uid://djsq0h71bb887" path="res://game/npc/hurt.tres" id="2_prdpp"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6bsln"]
 

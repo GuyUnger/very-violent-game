@@ -5,8 +5,6 @@ var since_hit: float = 0.0
 
 
 func process(target_pos:Vector2, delta:float, target) -> void:
-	visible = target_pos != Vector2.ZERO
-	
 	if not visible:
 		return
 	

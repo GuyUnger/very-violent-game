@@ -81,8 +81,8 @@ func _ready() -> void:
 			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
 			global_transform))
 	
-	if starting_weapon:
-		_pick_up_body_entered(starting_weapon.instantiate())
+	#if starting_weapon:
+	#	_pick_up_body_entered(starting_weapon.instantiate())
 	
 	Main.player = self
 	
@@ -99,6 +99,8 @@ func _ready() -> void:
 #region Processing
 
 func _process(delta: float) -> void:
+	%Crosshair.visible = weapon != null
+	
 	#if Input.is_action_just_pressed("toggle_view"):
 	
 	model_position = lerp(model_position, global_position, delta * 30.0)
@@ -233,8 +235,8 @@ func _physics_process(delta: float) -> void:
 
 	# Fall out of world
 	if position.y < -20.0:
-		position = Vector3.ZERO
-		velocity = Vector3.ZERO
+		die()
+		return
 	
 	look_angle_prev = look_angle
 	velocity_prev = velocity
@@ -243,7 +245,7 @@ func throw_weapon() -> void:
 	if not weapon:
 		return
 	weapon.global_position = global_position + Vector3.UP * 1.5
-	weapon.throw(aim_dir * 10.0)
+	weapon.throw(aim_dir * 30.0)
 	weapon = null
 
 
@@ -322,13 +324,14 @@ func apply_move_and_slide() -> void:
 	move_and_slide()
 	var collision: KinematicCollision3D = get_last_slide_collision()
 	if collision:
-		var normal: Vector3 = collision.get_normal()
-		if since_on_floor > 0.1 and melee_reload_t > 0.7 and allow_walljump and absf(normal.y) < 0.1:
-			#velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
-			velocity = normal * MOVE_SPEED * 2.0
-			allow_walljump = false
-			velocity.y = JUMP_STRENGTH * 1.5
-			%AudioWallbounce.play()
+		for i in collision.get_collision_count():
+			var normal: Vector3 = collision.get_normal(i)
+			if melee_reload_t > 0.7 and allow_walljump and absf(normal.y) < 0.1:
+				#velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
+				velocity = normal * MOVE_SPEED * 2.0
+				allow_walljump = false
+				velocity.y = JUMP_STRENGTH * 1.5
+				%AudioWallbounce.play()
 
 
 func vel_hor_to(to:Vector2, t:float = 1.0) -> void:
@@ -446,15 +449,14 @@ func process_target_indicators(delta: float) -> void:
 #region Melee
 
 func _process_melee(delta) -> void:
-	if Input.is_action_just_pressed("secondary"):
+	if Input.is_action_just_pressed("primary"):
 		since_secondary_pressed = 0.0
 	else:
 		since_secondary_pressed += delta
 	
 	melee_reload_t = move_toward(melee_reload_t, 0.0, delta / 0.8)
 	
-	if since_secondary_pressed < 0.2 and melee_reload_t <= 0.0:
-		
+	if since_secondary_pressed < 0.2 and melee_reload_t <= 0.0 and weapon and weapon is WeaponKatana:
 		vel_hor *= 1.5
 		allow_walljump = true
 		melee_reload_t = 1.0
@@ -561,19 +563,14 @@ func die() -> void:
 
 
 func _pick_up_body_entered(body: Node3D) -> void:
-	if not weapon and body is Weapon:
+	if not weapon and body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
 		weapon = body
-		weapon.player = self
-		weapon.velocity = Vector3.ZERO
-		body.collision_mask = 0
-		body.collision_layer = 0
+		weapon.pickup(self)
 		if body.is_inside_tree():
 			body.reparent(fps_weapon)
 		else:
 			fps_weapon.add_child(body)
 		
-		weapon.position = Vector3.ZERO
-		weapon.rotation = Vector3.ZERO
 
 
 func animate_crosshair() -> void:
