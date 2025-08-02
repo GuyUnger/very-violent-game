@@ -3,5 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://rwytq2uswa41" path="res://game/weapons/model/weapon_smg_hand.png" id="1_2aj5c"]
 
 [resource]
+diffuse_mode = 2
 albedo_texture = ExtResource("1_2aj5c")
+roughness = 0.7
 texture_filter = 2

@@ -5,7 +5,7 @@
 [resource]
 blend_mode = 1
 cull_mode = 2
-albedo_color = Color(0.50752, 0.0230444, 0, 1)
+albedo_color = Color(0.12752, 0.00579016, 0, 1)
 albedo_texture = ExtResource("1_dk1y6")
 emission_energy_multiplier = 0.0
 emission_texture = ExtResource("1_dk1y6")

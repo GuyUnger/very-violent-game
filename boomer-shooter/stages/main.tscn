@@ -73,6 +73,7 @@ void fragment() {
 shader = SubResource("Shader_fejr8")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_43f5m"]
+sky_top_color = Color(0.84352, 0.102281, 0.227823, 1)
 
 [sub_resource type="Sky" id="Sky_e0l40"]
 sky_material = SubResource("ProceduralSkyMaterial_43f5m")
@@ -80,6 +81,9 @@ sky_material = SubResource("ProceduralSkyMaterial_43f5m")
 [sub_resource type="Environment" id="Environment_7iyax"]
 background_mode = 2
 sky = SubResource("Sky_e0l40")
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.4965, 0.43, 1)
+ambient_light_energy = 0.4
 glow_enabled = true
 glow_hdr_threshold = 1.1
 fog_enabled = true

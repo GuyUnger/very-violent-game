@@ -3,5 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bljs50fritlgs" path="res://game/weapons/model/smg_new.png" id="1_311ou"]
 
 [resource]
+diffuse_mode = 2
 albedo_texture = ExtResource("1_311ou")
+roughness = 0.7
+emission_texture = ExtResource("1_311ou")
 texture_filter = 2
