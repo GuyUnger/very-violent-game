@@ -1,7 +1,7 @@
 class_name Bullet
 extends Node3D
 
-var speed := 25.0
+var speed := 40.0
 @export var damage := 1
 @export var knock_back := 1
 
@@ -43,15 +43,16 @@ func _ready() -> void:
 		target_position = global_position + global_transform.basis.z.normalized() * 100.0
 	
 	var distance := global_position.distance_to(target_position)
-	var duration: float = distance / speed
+	var duration: float = distance / 250.0
 	
 	$Mesh.scale.z = distance
 	
-	var tween := create_tween()
-	tween.tween_property($Mesh, "scale:z", 0.5, duration)
-	
-	
 	position = target_position
+	
+	await get_tree().physics_frame
+	var tween := create_tween()
+	tween.tween_property($Mesh, "scale:z", 0.0, duration)
+	
 	
 	await tween.finished
 	
