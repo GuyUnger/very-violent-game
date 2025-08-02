@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://t2r06l0hr184"]
+[gd_scene load_steps=10 format=3 uid="uid://kjth5n3pmvxy"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_1vjvc"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_qelip"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dqwnrxai3cxi8" path="res://game/weapons/model/weapon_shotgun_arm_r.glb" id="4_kc37h"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_gwt1y"]
 [ext_resource type="Script" uid="uid://cmuwwvlykmou0" path="res://game/weapons/weapon_shotgun_animations.gd" id="7_kc37h"]
+[ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="8_gt5ou"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
 radius = 0.25
@@ -28,11 +29,9 @@ bus = &"SFX"
 
 [node name="WorldModel" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="ShotgunContainer" type="Node3D" parent="WorldModel"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="weapon_shotgun_arm_l" parent="WorldModel/ShotgunContainer" instance=ExtResource("3_qelip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
@@ -58,5 +57,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, 0.00486123, 0.303
 
 [node name="Animations" type="Node" parent="."]
 script = ExtResource("7_kc37h")
+
+[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+top_level = true
+stream = ExtResource("8_gt5ou")
+volume_db = -6.0
+bus = &"SFX"
 
 [editable path="WorldModel/ShotgunContainer/weapon_shotgun"]
