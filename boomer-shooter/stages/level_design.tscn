@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjnhfu1ekho3v"]
+[gd_scene load_steps=5 format=3 uid="uid://bjnhfu1ekho3v"]
 
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_0cfai"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_l0s8e"]
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="3_rsuto"]
-[ext_resource type="PackedScene" uid="uid://cglxaun25ddhf" path="res://game/npc/npc_turret.tscn" id="5_0cfai"]
-[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="5_4p2hb"]
-[ext_resource type="PackedScene" uid="uid://cgm8gb7vnwfmh" path="res://game/npc/npc_enemy_big_guy.tscn" id="6_4p2hb"]
 [ext_resource type="ArrayMesh" uid="uid://bwk3e8f81aln2" path="res://content/environment/background/fuji_MountFuji.res" id="7_6p0xd"]
 
 [node name="Main" instance=ExtResource("3_rsuto")]
@@ -17,15 +14,6 @@ starting_weapon = ExtResource("2_0cfai")
 [node name="Tokyo" parent="SubViewportContainer/SubViewport" index="2" instance=ExtResource("3_l0s8e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -9, -16)
 
-[node name="NPCEnemyTurret" parent="SubViewportContainer/SubViewport" index="3" instance=ExtResource("5_0cfai")]
-transform = Transform3D(0, -0.453804, -0.891102, 1, -3.89513e-08, 1.98364e-08, -4.37114e-08, -0.891102, 0.453804, 6.27473, 6.04048, 18.2973)
-
-[node name="NPCEnemy" parent="." index="3" instance=ExtResource("5_4p2hb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.04048, -1.02907, 7.43412)
-
-[node name="NPCEnemy2" parent="." index="4" instance=ExtResource("6_4p2hb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04261, -0.937023, 12.7352)
-
-[node name="FujiMountFuji" type="MeshInstance3D" parent="." index="6"]
+[node name="FujiMountFuji" type="MeshInstance3D" parent="." index="4"]
 transform = Transform3D(-4.27682, 0, -2.59014, 0, 5, 0, 2.59014, 0, -4.27682, 0, 228, 0)
 mesh = ExtResource("7_6p0xd")
