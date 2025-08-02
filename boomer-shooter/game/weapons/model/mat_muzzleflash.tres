@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ce4kinkddy4em"]
+
+[ext_resource type="Texture2D" uid="uid://bti12cd3l77ca" path="res://game/weapons/model/muzzleflash.png" id="1_dk1y6"]
+
+[resource]
+blend_mode = 1
+cull_mode = 2
+albedo_color = Color(0.50752, 0.0230444, 0, 1)
+albedo_texture = ExtResource("1_dk1y6")
+emission_energy_multiplier = 0.0
+emission_texture = ExtResource("1_dk1y6")

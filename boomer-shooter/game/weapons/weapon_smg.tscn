@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://fk2ws4nkdayk"]
+[gd_scene load_steps=11 format=3 uid="uid://fk2ws4nkdayk"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_57hh3"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_7w4b6"]
 [ext_resource type="PackedScene" uid="uid://cbt4a74g6fyhs" path="res://game/weapons/model/weapon_smg.glb" id="3_7w4b6"]
+[ext_resource type="PackedScene" uid="uid://dqul5y672j5k2" path="res://game/weapons/model/weapon_smg_arm.glb" id="4_ujfyf"]
+[ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_8w3g1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
 radius = 0.25
@@ -46,13 +48,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.000823617, 0.0554796)
+visible = false
 material_override = SubResource("StandardMaterial3D_6ml3f")
 mesh = SubResource("CylinderMesh_ls1xp")
 skeleton = NodePath("../../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel"]
 transform = Transform3D(1, 0, 0, 0, 0.990105, -0.140331, 0, 0.140331, 0.990105, 0, -0.0524004, -0.0874176)
+visible = false
 material_override = SubResource("StandardMaterial3D_on6gv")
 mesh = SubResource("BoxMesh_3pcvd")
 
 [node name="weapon_smg" parent="WorldModel" instance=ExtResource("3_7w4b6")]
+
+[node name="weapon_smg_arm" parent="WorldModel/weapon_smg" instance=ExtResource("4_ujfyf")]
+
+[node name="Muzzleflash" parent="." instance=ExtResource("5_8w3g1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.308999)
+
+[editable path="WorldModel/weapon_smg"]
