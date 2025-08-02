@@ -126,9 +126,11 @@ func _find_csg_node_under_cursor(mouse_pos: Vector2) -> Node:
 	else:
 		return null
 
-	var children = csg_root.get_children()
+	var children = []
 	for node in csg_root.get_children():
+		children.append(node)
 		children.append_array(node.get_children())
+	children.reverse()
 
 	for node in children:
 		if node is CSGBox3D:
