@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjnhfu1ekho3v"]
+[gd_scene load_steps=8 format=3 uid="uid://bjnhfu1ekho3v"]
 
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_0cfai"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_l0s8e"]
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="3_rsuto"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_0cfai"]
+[ext_resource type="PackedScene" uid="uid://bldqjyp2glnyx" path="res://game/npc/npc_enemy_big_guy.tscn" id="6_6p0xd"]
 [ext_resource type="ArrayMesh" uid="uid://bwk3e8f81aln2" path="res://content/environment/background/fuji_MountFuji.res" id="7_6p0xd"]
+[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="7_aqw5h"]
 
 [node name="Main" instance=ExtResource("3_rsuto")]
 
@@ -26,3 +28,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 24)
 [node name="FujiMountFuji" type="MeshInstance3D" parent="." index="4"]
 transform = Transform3D(-4.27682, 0, -2.59014, 0, 5, 0, 2.59014, 0, -4.27682, 0, 228, 0)
 mesh = ExtResource("7_6p0xd")
+
+[node name="NPCEnemyBigGuy" parent="." index="5" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6511, -1.00463, 36.5567)
+
+[node name="npc_grunt" parent="." index="6" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6588, -0.989803, 39.5677)
+
+[node name="npc_grunt2" parent="." index="7" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.309631, 0, -0.950857, 0, 1, 0, 0.950857, 0, -0.309631, -15.5981, -0.989803, 39.5677)
+
+[node name="npc_grunt3" parent="." index="8" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.85519, -0.143011, 0.498195, -0.139052, 0.989249, 0.04528, -0.499315, -0.030552, -0.865882, -15.5981, -0.989803, 40.4878)
+
+[node name="npc_grunt4" parent="." index="9" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.85519, -0.143011, 0.498195, -0.139052, 0.989249, 0.04528, -0.499315, -0.030552, -0.865882, -16.5669, -0.989803, 41.0372)
