@@ -576,4 +576,4 @@ func _pick_up_body_entered(body: Node3D) -> void:
 
 func animate_crosshair() -> void:
 	%Crosshair.since_hit = 0.0
-	printt("aaa")
+	$AudioHit.play()

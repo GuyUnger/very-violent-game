@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://n2142e5rpapd"]
+[gd_scene load_steps=18 format=3 uid="uid://n2142e5rpapd"]
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
 [ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bo81sp14xbw6q" path="res://game/player/walljump.tres" id="8_epvkq"]
 [ext_resource type="AudioStream" uid="uid://d2fsf0rpmyygk" path="res://game/player/melee.tres" id="9_5ghna"]
 [ext_resource type="AudioStream" uid="uid://dsfismre384c4" path="res://game/player/die.tres" id="11_gb4gm"]
+[ext_resource type="AudioStream" uid="uid://ti8dxv8e1b3g" path="res://game/weapons/hit.wav" id="12_n270p"]
 [ext_resource type="AudioStream" uid="uid://dhuda65t0d0uu" path="res://game/player/jump.tres" id="12_uv2nh"]
 
 [sub_resource type="Curve" id="Curve_a4w0n"]
@@ -125,22 +126,27 @@ unique_name_in_owner = true
 stream = ExtResource("5_5fytw")
 volume_db = -5.0
 pitch_scale = 0.5
+bus = &"SFX"
 
 [node name="AudioLand" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("6_anr75")
+bus = &"SFX"
 
 [node name="AudioJump" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("7_epvkq")
+bus = &"SFX"
 
 [node name="AudioWallbounce" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("8_epvkq")
+bus = &"SFX"
 
 [node name="AudioMelee" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("9_5ghna")
+bus = &"SFX"
 
 [node name="AreaMelee" type="Area3D" parent="."]
 unique_name_in_owner = true
@@ -169,6 +175,12 @@ bus = &"SFX"
 
 [node name="AudioJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_uv2nh")
+bus = &"SFX"
+
+[node name="AudioHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_n270p")
+volume_db = 10.0
+pitch_scale = 1.5
 bus = &"SFX"
 
 [connection signal="body_entered" from="PickUp" to="." method="_pick_up_body_entered"]
