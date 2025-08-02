@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_0cfai"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_l0s8e"]
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="3_rsuto"]
-[ext_resource type="PackedScene" uid="uid://2twnqkka80to" path="res://game/npc/npc_turret.tscn" id="5_0cfai"]
+[ext_resource type="PackedScene" uid="uid://cglxaun25ddhf" path="res://game/npc/npc_turret.tscn" id="5_0cfai"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="5_4p2hb"]
 [ext_resource type="PackedScene" uid="uid://cgm8gb7vnwfmh" path="res://game/npc/npc_enemy_big_guy.tscn" id="6_4p2hb"]
 [ext_resource type="ArrayMesh" uid="uid://bwk3e8f81aln2" path="res://content/environment/background/fuji_MountFuji.res" id="7_6p0xd"]

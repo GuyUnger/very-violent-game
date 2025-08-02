@@ -15,6 +15,7 @@ var trigger_pressed:bool :
 
 @onready var handle: MeshInstance3D = $WorldModel/weapon_smg/SMG/Handle
 
+@export var ammo: int = 60
 
 func set_trigger_pressed(value:bool) -> void:
 	if value != trigger_pressed:
@@ -42,16 +43,20 @@ func _physics_process(delta: float) -> void:
 
 	since_primary_pressed += delta
 	
-	if auto:
+	if auto and ammo > 0:
 		if trigger_pressed and reload_t <= 0.0:
 			shoot()
 	else:
 		if since_primary_pressed < 0.2 and reload_t <= 0.0:
-			shoot()
+			if ammo > 0:
+				shoot()
+			elif player:
+				player.throw_weapon()
 			since_primary_pressed = 999.0
 
 
 func shoot() -> void:
+	ammo -= 1
 	reload_t = fire_rate
 	$Animations.shoot()
 	$Muzzleflash.shoot()
