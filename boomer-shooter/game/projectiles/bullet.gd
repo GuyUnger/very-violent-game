@@ -8,6 +8,7 @@ extends Node3D
 var track_in_event_store := false
 var source_id := 0
 var is_ghost := false
+var collision_mask := 1
 
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("npc_enemies"):
@@ -17,19 +18,20 @@ func _ready() -> void:
 	$Fire.pitch_scale = randf_range(1.0, 1.2)
 	$Fire.play()
 	
-	if track_in_event_store:
-		if source_id == 0:
-			source_id = EventStore.next_source_id()
-			EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
-		else:
-			is_ghost = true
-		
+	if source_id != 0:
+		is_ghost = true
+	elif track_in_event_store:
+		source_id = EventStore.next_source_id()
+		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
+		EventStore.push_event(EventStoreCommandSet.new(source_id, "collision_mask", collision_mask))
+	
+	if source_id != 0:
 		EventStore.register_source(source_id, self)
 	
 	await get_tree().process_frame
 	
 	var query := PhysicsRayQueryParameters3D.new()
-	query.collision_mask = 4 + 1
+	query.collision_mask = collision_mask
 	query.collide_with_bodies = true
 	query.from = global_position
 	query.to = global_position + global_transform.basis.z.normalized() * 100.0
