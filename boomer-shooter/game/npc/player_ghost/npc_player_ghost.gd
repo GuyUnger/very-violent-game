@@ -3,6 +3,14 @@ class_name NPCPlayerGhost
 
 var source_id:int
 var last_position := Vector3.ZERO
+var dead:bool : 
+	set = set_dead
+
+
+func set_dead(value:bool) -> void:
+	set_physics_process(false)
+	collision_layer = 0
+	animation_tree.set("parameters/Special/transition_request", "Died")
 
 
 func _ready() -> void:
@@ -10,6 +18,7 @@ func _ready() -> void:
 		EventStore.register_source(source_id, self)
 
 	animation_tree.set("parameters/TimeScale/scale", 2.0)
+
 
 func _physics_process(delta: float) -> void:
 	var world_direction = -global_position.direction_to(last_position)

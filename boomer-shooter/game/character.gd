@@ -3,10 +3,10 @@ extends CharacterBody3D
 
 const GRAVITY = 40.0
 
-var max_health: int = 32
-var health: int = max_health
-var aim_dir: Vector3
+@export var max_health: int = 2
+@export var health: int = 2
 
+var aim_dir: Vector3
 
 # Getter/Setter Utils
 var center_pos: Vector3:

@@ -1,5 +1,5 @@
 @tool
-extends Node3D
+extends Character
 class_name NPC
 
 signal died
@@ -11,9 +11,6 @@ signal told_enemy_position
 @export var target:Node3D : 
 	set = set_target
 @export var speed := 1.0
-@export var max_health := 5
-@export var health := 5 :
-	set = set_health
 @export var holes:int :
 	set = set_holes
 @export var cuts:int :
@@ -23,19 +20,6 @@ var speed_scale_knock_back := 1.0
 var knock_back_force := Vector3.ZERO
 
 @onready var animation_tree:AnimationTree = $AnimationTree
-
-func set_health(value:float) -> void:
-	var diff = health - value
-	
-	health = value
-
-	if not Engine.is_editor_hint():
-		if health <= 0:
-			died.emit()
-			if not animation_tree:
-				printerr("something wrong in npc.gd")
-				return
-			animation_tree.set("parameters/Special/transition_request", "Died")
 
 
 func set_holes(value:int) -> void:
@@ -54,11 +38,6 @@ func set_cuts(value:int) -> void:
 			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_0", Vector4(randf(), randf(), randf(), randf()))
 		elif cuts == 2:
 			$Armature/Skeleton3D/Skin.set_instance_shader_parameter("cut_1", Vector4(randf(), randf(), randf(), randf()))
-
-
-var center_pos: Vector3:
-	get:
-		return global_position + Vector3.UP * 1.0
 
 func set_target(node:Node3D) -> void:
 	target = node
@@ -164,4 +143,64 @@ func melee() -> void:
 	var x := preload("res://game/fx/bloot_line.tscn").instantiate()
 	$CollisionShape3D.add_child(x)
 	x.position.y += 0.5
-	x.look_at(get_viewport().get_camera_3d().global_position, Vector3.UP, true)
+	x.look_at(Main.instance.player.global_position + Vector3.UP * 2.0, Vector3.UP, true)
+
+
+func hit(from:Node3D) -> void:
+	holes += 1
+	
+	if health <= 0:
+		return
+
+	knock_back(from.knock_back * 0.01 * from.transform.basis.z)
+	
+	health -= from.damage
+	spawn_blood_puddle()
+	spawn_blood_splash()
+	if health <= 0:
+		set_physics_process(false)
+		remove_from_group("aimables")
+		animation_tree.set("parameters/Special/transition_request", "Died")
+		died.emit()
+		#await get_tree().create_timer(1.0).timeout
+		#queue_free()
+		
+		if randf() > 0.5:
+			head_pop()
+
+
+func spawn_blood_puddle() -> void:
+	var blood = preload("res://game/npc/blood.tscn").instantiate()
+	get_parent().add_child(blood)
+	blood.position = position
+	blood.position.x += randf_range(-0.5, 0.5)
+	blood.position.z += randf_range(-0.5, 0.5)
+	blood.position.y += 0.01
+	blood.scale = Vector3.ONE * randf_range(0.2, 1.5)
+	var tween = create_tween()
+	tween.tween_property(blood, "scale", Vector3.ZERO, 10.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	await tween.finished
+	blood.queue_free()
+
+func spawn_blood_splash() -> void:
+	var blood = preload("res://game/npc/blood_splash.tscn").instantiate()
+	get_parent().add_child(blood)
+	blood.position = position + Vector3.UP * 1.0
+	blood.position.x += randf_range(-0.5, 0.5)
+	blood.position.z += randf_range(-0.5, 0.5)
+	blood.position.y += randf_range(-0.5, 0.5)
+	blood.scale = Vector3.ONE * randf_range(0.05, 0.4)
+	var tween = create_tween()
+	tween.tween_property(blood, "frame", 15, 0.3)
+	await tween.finished
+	blood.queue_free()
+
+
+func head_pop() -> void:
+	if has_node("Armature/Skeleton3D/Skin"):
+		$Armature/Skeleton3D/Skin.set_instance_shader_parameter("head_pop", 1.0)
+		
+		var x := preload("res://game/fx/bloot_line.tscn").instantiate()
+		$CollisionShape3D.add_child(x)
+		x.position.y += 0.5
+		x.look_at(global_position + Vector3.UP)
