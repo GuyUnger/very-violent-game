@@ -20,7 +20,7 @@
 [ext_resource type="Material" uid="uid://doapqabe7twc4" path="res://content/environment/materials/surface_0.tres" id="17_tx02n"]
 [ext_resource type="Material" uid="uid://buavh7fna845w" path="res://content/environment/materials/surface_1.tres" id="18_oiqe4"]
 [ext_resource type="Material" uid="uid://b71gxlhwanayi" path="res://content/environment/materials/surface_2.tres" id="19_4kl46"]
-[ext_resource type="PackedScene" uid="uid://d12rbfqmi83d4" path="res://ui/instruction.tscn" id="19_fy2pt"]
+[ext_resource type="PackedScene" path="res://ui/instruction.tscn" id="19_fy2pt"]
 [ext_resource type="Material" uid="uid://dcl8eha8janno" path="res://content/environment/materials/surface_3.tres" id="20_wgi3a"]
 [ext_resource type="Material" uid="uid://bfosjqjdja0e2" path="res://content/environment/materials/surface_4.tres" id="21_ew1me"]
 [ext_resource type="Material" uid="uid://dcpe38qomrqot" path="res://content/environment/materials/surface_5.tres" id="22_x3drn"]
@@ -40,7 +40,7 @@
 [ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="36_v75ly"]
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="37_3lvoq"]
 
-[node name="Main" instance=ExtResource("1_57m8n")]
+[node name="Main2" instance=ExtResource("1_57m8n")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="0"]
 transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)
