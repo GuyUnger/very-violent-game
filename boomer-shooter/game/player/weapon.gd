@@ -20,8 +20,6 @@ var player: Player
 var trigger_pressed:bool :
 	set = set_trigger_pressed
 
-@onready var handle: MeshInstance3D = $WorldModel/weapon_smg/SMG/Handle
-
 @export var ammo: int = 40
 @onready var max_ammo = ammo
 

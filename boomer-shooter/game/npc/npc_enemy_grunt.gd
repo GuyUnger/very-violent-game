@@ -8,5 +8,7 @@ func _ready() -> void:
 	animation_tree.set("parameters/TimeScale/scale", randf_range(0.5, 0.8))
 	
 func _physics_process(delta: float) -> void:
+	super(delta)
+	
 	if animation_tree.active:
 		$Armature.position = animation_tree.get_root_motion_position_accumulator()

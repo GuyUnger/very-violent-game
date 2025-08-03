@@ -15,7 +15,7 @@ instance uniform float hole_damage : hint_range(0.0, 1.0);
 uniform sampler2D texture_albedo : source_color, filter_nearest;
 uniform sampler2D texture_holes : source_color;
 
-uniform vec3 skin_color : source_color;
+uniform vec3 modulate : source_color = vec3(1.0);
 uniform vec3 blood_color : source_color;
 
 float is_on_line(vec2 p, vec2 a, vec2 b, float width) 
@@ -33,7 +33,7 @@ void vertex() {
 
 void fragment() 
 {
-	ALBEDO = texture(texture_albedo, UV).rgb;
+	ALBEDO = texture(texture_albedo, UV).rgb * modulate;
 	
 	vec2 uv2 = UV2;
 	

@@ -23,6 +23,7 @@ func _ready() -> void:
 		source_id = EventStore.next_source_id()
 		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
 		EventStore.push_event(EventStoreCommandSet.new(source_id, "collision_mask", collision_mask))
+		EventStore.push_event(EventStoreCommandSet.new(source_id, "damage", damage))
 	
 	if source_id != 0:
 		EventStore.register_source(source_id, self)

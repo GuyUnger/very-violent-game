@@ -1,34 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://crruv3fy0bbv7"]
+[gd_scene load_steps=12 format=3 uid="uid://crruv3fy0bbv7"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_5ro7y"]
 [ext_resource type="AudioStream" uid="uid://bxq2fxhorumdn" path="res://game/weapons/pickup_revolver 01.wav" id="2_enli4"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_kammd"]
 [ext_resource type="AudioStream" uid="uid://fffigebllhan" path="res://game/weapons/pickup_revolver 02.wav" id="3_4mobr"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="3_kammd"]
+[ext_resource type="PackedScene" uid="uid://dbbhoit78n2uc" path="res://game/weapons/model/weapon_revolver.glb" id="5_b8m8k"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="6_4mobr"]
+[ext_resource type="PackedScene" uid="uid://by7a00rd5o3fx" path="res://game/weapons/model/weapon_revolver_arm.glb" id="6_h4bbw"]
+[ext_resource type="Script" uid="uid://5im22xi16vfl" path="res://game/weapons/weapon_revolver_animations.gd" id="9_w5rom"]
+[ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="10_w5rom"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lea5y"]
-size = Vector3(0.02, 0.07, 0.385)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jxv5"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lpwyq"]
-size = Vector3(0.015, 0.045, 0.355)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ml3f"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ls1xp"]
-top_radius = 0.01
-bottom_radius = 0.01
-height = 0.3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_on6gv"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3pcvd"]
-size = Vector3(0.005, 0.07, 0.04)
+size = Vector3(0.079834, 0.150635, 0.385)
 
 [node name="Weapon" type="CharacterBody3D"]
 collision_layer = 0
@@ -46,10 +30,7 @@ unique_name_in_owner = true
 stream = ExtResource("2_kammd")
 bus = &"SFX"
 
-[node name="WorldModel" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_0jxv5")
-mesh = SubResource("BoxMesh_lpwyq")
-skeleton = NodePath("../..")
+[node name="WorldModel" type="Node3D" parent="."]
 
 [node name="RightHand" type="Marker3D" parent="WorldModel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
@@ -57,16 +38,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
 [node name="LeftHand" type="Marker3D" parent="WorldModel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.000823617, 0.0554796)
-material_override = SubResource("StandardMaterial3D_6ml3f")
-mesh = SubResource("CylinderMesh_ls1xp")
-skeleton = NodePath("../../..")
+[node name="Revolver" parent="WorldModel" instance=ExtResource("5_b8m8k")]
+transform = Transform3D(1, 0, 0, 0, 0.981121, 0.193395, 0, -0.193395, 0.981121, 0, 0, -0.0425274)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel"]
-transform = Transform3D(1, 0, 0, 0, 0.990105, -0.140331, 0, 0.140331, 0.990105, 0, -0.0524004, -0.0874176)
-material_override = SubResource("StandardMaterial3D_on6gv")
-mesh = SubResource("BoxMesh_3pcvd")
+[node name="Hand" parent="WorldModel/Revolver" instance=ExtResource("6_h4bbw")]
+unique_name_in_owner = true
+visible = false
 
 [node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
@@ -80,3 +57,9 @@ unique_name_in_owner = true
 
 [node name="PickupGlow" parent="." instance=ExtResource("6_4mobr")]
 modulate = Color(0, 0.840797, 0.863915, 1)
+
+[node name="Animations" type="Node" parent="."]
+script = ExtResource("9_w5rom")
+
+[node name="Muzzleflash" parent="." instance=ExtResource("10_w5rom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0122675, 0.148788)
