@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://snae31wna7f5"]
+[gd_scene load_steps=54 format=4 uid="uid://snae31wna7f5"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_0tv5r"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_apt5p"]
@@ -44,6 +44,8 @@
 [ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="36_qw4b3"]
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="37_s6by0"]
 [ext_resource type="PackedScene" uid="uid://ba7a7b7hxx0p0" path="res://game/props/box.tscn" id="42_rws5q"]
+[ext_resource type="AudioStream" uid="uid://c8fruuvl4hl7i" path="res://content/sfx/liam.wav" id="45_gfb7o"]
+[ext_resource type="Script" uid="uid://rs0r2fpjx06w" path="res://stages/liam_says.gd" id="46_lg8mm"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pus1d"]
 _surfaces = [{
@@ -78,7 +80,7 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_3usft"]
 
-[node name="Main" instance=ExtResource("1_0tv5r")]
+[node name="Main3" instance=ExtResource("1_0tv5r")]
 time = 20.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="0"]
@@ -308,5 +310,11 @@ stream = ExtResource("8_phylu")
 
 [node name="npc_grunt" parent="." index="5" instance=ExtResource("21_4tmal")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25253, 0.145303, -8.53593)
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource("45_gfb7o")
+volume_db = 1.0
+bus = &"SFX"
+script = ExtResource("46_lg8mm")
 
 [connection signal="activated" from="SubViewportContainer/SubViewport/MeleeActivator" to="SubViewportContainer/SubViewport/DoorSlideWall" method="activate"]
