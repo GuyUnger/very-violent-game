@@ -232,36 +232,47 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 0, 7.4)
 
 [node name="npc_grunt2" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -8)
+target_lock_time = 0.3
 
 [node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -11)
+target_lock_time = 0.3
 
 [node name="npc_grunt5" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -10)
+target_lock_time = 0.3
 
 [node name="npc_grunt6" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
+target_lock_time = 0.3
 
 [node name="npc_grunt7" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
+target_lock_time = 0.3
 
 [node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.22968, 0, -14.9145)
+target_lock_time = 0.3
 
 [node name="npc_grunt9" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62127, 0, -13.4033)
+target_lock_time = 0.3
 
 [node name="npc_grunt10" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.41944, 0, -15.8776)
+target_lock_time = 0.3
 
 [node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43855, 0, -15.8856)
+target_lock_time = 0.3
 
 [node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9648, 0, -14.8746)
+target_lock_time = 0.3
 
 [node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32017, -0.0194693, -13.9608)
+target_lock_time = 0.3
 
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("20_3usft")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.86416, 0, -15.3144)
@@ -272,5 +283,6 @@ stream = ExtResource("8_phylu")
 
 [node name="npc_grunt" parent="." index="5" instance=ExtResource("21_4tmal")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25253, 0.145303, -8.53593)
+target_lock_time = 0.3
 
 [connection signal="activated" from="SubViewportContainer/SubViewport/MeleeActivator" to="SubViewportContainer/SubViewport/DoorSlideWall" method="activate"]
