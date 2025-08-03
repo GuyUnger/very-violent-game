@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://8gh7wu8tphq3" path="res://stages/hud.gd" id="3_7iyax"]
 [ext_resource type="Environment" uid="uid://dwy0mt1yukigj" path="res://content/environment/environment.tres" id="3_fejr8"]
 [ext_resource type="AudioStream" uid="uid://lc5v3oph86at" path="res://game/count_down.wav" id="4_0oqm6"]
-[ext_resource type="AudioStream" uid="uid://bkwt4xitefytt" path="res://game/kill.tres" id="6_5sjox"]
+[ext_resource type="AudioStream" uid="uid://bi4e28jxmil2m" path="res://game/kill 01.wav" id="6_byaf2"]
 [ext_resource type="AudioStream" uid="uid://bpy78hrxwsp4t" path="res://game/all_kills.wav" id="7_byaf2"]
 
 [sub_resource type="Shader" id="Shader_0oqm6"]
@@ -199,8 +199,8 @@ horizontal_alignment = 1
 
 [node name="AudioKill" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("6_5sjox")
-volume_db = -10.0
+stream = ExtResource("6_byaf2")
+volume_db = -6.0
 
 [node name="AudioKillComplete" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

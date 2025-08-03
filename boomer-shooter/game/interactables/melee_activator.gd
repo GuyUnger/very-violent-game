@@ -25,3 +25,10 @@ func shoot_activate() -> void:
 func melee() -> void:
 	enabled = true
 	EventStore.push_event(EventStoreCommandSet.new(source_id, "enabled", enabled))
+
+
+func _process(delta: float) -> void:
+	if enabled:
+		$Button.rotation.y += delta * TAU * 2.0
+	else:
+		$Button.rotation.y += delta * PI

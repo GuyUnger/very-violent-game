@@ -4,13 +4,15 @@
 [ext_resource type="Material" uid="uid://dcl8eha8janno" path="res://content/environment/materials/surface_3.tres" id="2_bjxry"]
 [ext_resource type="AudioStream" uid="uid://cdmweeawyjrgv" path="res://game/interactables/activate.tres" id="2_re2vk"]
 [ext_resource type="AudioStream" uid="uid://coxcfk2eh2ne1" path="res://game/interactables/activator_hit.tres" id="3_rj67i"]
-[ext_resource type="Material" uid="uid://yeq7pun4piny" path="res://content/environment/materials/surface_14.tres" id="3_t6otw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w1ybp"]
 size = Vector3(0.7, 1, 0.7)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w1ybp"]
 size = Vector3(1, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2e51u"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_63vvw"]
 size = Vector3(0.8, 0.8, 0.8)
@@ -40,7 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
 transform = Transform3D(0.799358, 0, 0, 0, 1.3, 0, 0, 0, 0.799358, 0, 0.4, 0)
-material_override = ExtResource("3_t6otw")
+material_override = SubResource("StandardMaterial3D_2e51u")
 mesh = SubResource("BoxMesh_63vvw")
 
 [node name="Activated" type="MeshInstance3D" parent="Button"]
