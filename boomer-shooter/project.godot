@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="boomer shooter"
-run/main_scene="uid://dlicy8u6yn8a3"
+run/main_scene="uid://bjnhfu1ekho3v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
