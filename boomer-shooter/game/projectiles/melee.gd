@@ -12,8 +12,14 @@ func _ready() -> void:
 		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
 	
 	await get_tree().physics_frame
+	if not get_tree():
+		return
 	await get_tree().physics_frame
+	if not get_tree():
+		return
 	await get_tree().physics_frame
+	if not get_tree():
+		return
 	
 	for body in get_overlapping_bodies():
 		if "melee" in body:
