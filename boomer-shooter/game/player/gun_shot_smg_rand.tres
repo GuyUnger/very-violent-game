@@ -1,8 +1,14 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://dlklosv5cft1n"]
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://dlklosv5cft1n"]
 
-[ext_resource type="AudioStream" uid="uid://b127x7jjphk6k" path="res://content/sfx/gun_shot_glock.wav" id="1_p6ikn"]
+[ext_resource type="AudioStream" uid="uid://dv5h0wv6unoq7" path="res://game/weapons/sfx/smg_shot_1.ogg" id="1_ifoq4"]
+[ext_resource type="AudioStream" uid="uid://cincsr6sfia1f" path="res://game/weapons/sfx/smg_shot_2.ogg" id="2_qc487"]
+[ext_resource type="AudioStream" uid="uid://cnx7m8ptgvyhf" path="res://game/weapons/sfx/smg_shot_3.ogg" id="3_f8ekn"]
+[ext_resource type="AudioStream" uid="uid://cruvop7d020nj" path="res://game/weapons/sfx/smg_shot_4.ogg" id="4_nn8uh"]
 
 [resource]
 random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("1_p6ikn")
+streams_count = 4
+stream_0/stream = ExtResource("1_ifoq4")
+stream_1/stream = ExtResource("2_qc487")
+stream_2/stream = ExtResource("3_f8ekn")
+stream_3/stream = ExtResource("4_nn8uh")

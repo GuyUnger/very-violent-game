@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://jclmgjq5a3ox"
-path="res://.godot/imported/pickup_katana 02.wav-45395f5ba359e21659328db772184ffd.sample"
+path="res://.godot/imported/pickup_katana 02.wav-2a5671575cef92298d16866c63431286.sample"
 
 [deps]
 
-source_file="res://game/weapons/pickup_katana 02.wav"
-dest_files=["res://.godot/imported/pickup_katana 02.wav-45395f5ba359e21659328db772184ffd.sample"]
+source_file="res://game/weapons/pickup_sfx/pickup_katana 02.wav"
+dest_files=["res://.godot/imported/pickup_katana 02.wav-2a5671575cef92298d16866c63431286.sample"]
 
 [params]
 
