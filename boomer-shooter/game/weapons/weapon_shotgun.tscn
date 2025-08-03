@@ -1,21 +1,29 @@
-[gd_scene load_steps=15 format=3 uid="uid://kjth5n3pmvxy"]
+[gd_scene load_steps=18 format=3 uid="uid://kjth5n3pmvxy"]
 
 [ext_resource type="Script" uid="uid://co641dg8s4n86" path="res://game/weapons/weapon_shotgun.gd" id="1_prx1q"]
-[ext_resource type="AudioStream" uid="uid://b5oybs5wceg0c" path="res://game/weapons/pickup_shotgun 01.wav" id="2_prx1q"]
-[ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_qelip"]
-[ext_resource type="AudioStream" uid="uid://hgqgusivuyph" path="res://game/weapons/pickup_shotgun 02.wav" id="3_n14iq"]
+[ext_resource type="AudioStream" uid="uid://b5oybs5wceg0c" path="res://game/weapons/pickup_sfx/pickup_shotgun 01.wav" id="2_prx1q"]
+[ext_resource type="AudioStream" uid="uid://hgqgusivuyph" path="res://game/weapons/pickup_sfx/pickup_shotgun 02.wav" id="3_n14iq"]
 [ext_resource type="PackedScene" uid="uid://mswr2wkg0tv7" path="res://game/weapons/model/weapon_shotgun_arm_l.glb" id="3_qelip"]
 [ext_resource type="PackedScene" uid="uid://ddl7c7rea820a" path="res://game/weapons/model/weapon_shotgun.glb" id="3_ri3d7"]
 [ext_resource type="PackedScene" uid="uid://dqwnrxai3cxi8" path="res://game/weapons/model/weapon_shotgun_arm_r.glb" id="4_kc37h"]
-[ext_resource type="AudioStream" uid="uid://cw7tkeyo8v5w3" path="res://game/weapons/pickup_shotgun 03.wav" id="4_tq6aa"]
-[ext_resource type="AudioStream" uid="uid://bjsvmmbnpkgyo" path="res://game/weapons/pickup_shotgun 04.wav" id="5_baumh"]
+[ext_resource type="AudioStream" uid="uid://cw7tkeyo8v5w3" path="res://game/weapons/pickup_sfx/pickup_shotgun 03.wav" id="4_tq6aa"]
+[ext_resource type="AudioStream" uid="uid://bjsvmmbnpkgyo" path="res://game/weapons/pickup_sfx/pickup_shotgun 04.wav" id="5_baumh"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_gwt1y"]
+[ext_resource type="AudioStream" uid="uid://bj7teeseyb1eg" path="res://game/weapons/sfx/weapon_shotgun_shoot_sfx_rand.tres" id="6_n14iq"]
+[ext_resource type="AudioStream" uid="uid://hm10cfgagauh" path="res://game/weapons/sfx/shotgun_reload_1.ogg" id="7_baumh"]
 [ext_resource type="Script" uid="uid://cmuwwvlykmou0" path="res://game/weapons/weapon_shotgun_animations.gd" id="7_kc37h"]
+[ext_resource type="AudioStream" uid="uid://cv78so5jridw4" path="res://game/weapons/sfx/shotgun_reload_2.ogg" id="8_4p3ji"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="8_gt5ou"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="13_n14iq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
 radius = 0.25
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qhrax"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("7_baumh")
+stream_1/stream = ExtResource("8_4p3ji")
 
 [node name="WeaponShotgun" type="CharacterBody3D"]
 collision_layer = 0
@@ -30,7 +38,12 @@ shape = SubResource("SphereShape3D_7w4b6")
 
 [node name="AudioShoot" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_qelip")
+stream = ExtResource("6_n14iq")
+bus = &"SFX"
+
+[node name="AudioReload" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_qhrax")
 bus = &"SFX"
 
 [node name="WorldModel" type="Node3D" parent="."]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://crruv3fy0bbv7"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_5ro7y"]
-[ext_resource type="AudioStream" uid="uid://bxq2fxhorumdn" path="res://game/weapons/pickup_revolver 01.wav" id="2_enli4"]
-[ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_kammd"]
-[ext_resource type="AudioStream" uid="uid://fffigebllhan" path="res://game/weapons/pickup_revolver 02.wav" id="3_4mobr"]
+[ext_resource type="AudioStream" uid="uid://bxq2fxhorumdn" path="res://game/weapons/pickup_sfx/pickup_revolver 01.wav" id="2_enli4"]
+[ext_resource type="AudioStream" uid="uid://fffigebllhan" path="res://game/weapons/pickup_sfx/pickup_revolver 02.wav" id="3_4mobr"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="3_kammd"]
+[ext_resource type="AudioStream" uid="uid://bv7hqumm0g7hk" path="res://game/weapons/sfx/weapon_revolver_shoot_sfx_rand.tres" id="4_w5rom"]
 [ext_resource type="PackedScene" uid="uid://dbbhoit78n2uc" path="res://game/weapons/model/weapon_revolver.glb" id="5_b8m8k"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="6_4mobr"]
 [ext_resource type="PackedScene" uid="uid://by7a00rd5o3fx" path="res://game/weapons/model/weapon_revolver_arm.glb" id="6_h4bbw"]
@@ -14,7 +14,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_lea5y"]
 size = Vector3(0.079834, 0.150635, 0.385)
 
-[node name="Weapon" type="CharacterBody3D"]
+[node name="WeaponRevolver" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_5ro7y")
@@ -27,7 +27,8 @@ shape = SubResource("BoxShape3D_lea5y")
 
 [node name="AudioShoot" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_kammd")
+stream = ExtResource("4_w5rom")
+max_polyphony = 5
 bus = &"SFX"
 
 [node name="WorldModel" type="Node3D" parent="."]

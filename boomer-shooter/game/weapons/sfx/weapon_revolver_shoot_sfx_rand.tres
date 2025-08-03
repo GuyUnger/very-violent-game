@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://bv7hqumm0g7hk"]
+
+[ext_resource type="AudioStream" uid="uid://cuf53psmfua58" path="res://game/weapons/sfx/revolver_shot_1.ogg" id="1_6v5w7"]
+[ext_resource type="AudioStream" uid="uid://bhvtbwmdew57n" path="res://game/weapons/sfx/revolver_shot_2.ogg" id="2_3fa1g"]
+[ext_resource type="AudioStream" uid="uid://car060rtokxvy" path="res://game/weapons/sfx/revolver_shot_3.ogg" id="3_2h3p8"]
+[ext_resource type="AudioStream" uid="uid://ddgafil3rvde" path="res://game/weapons/sfx/revolver_shot_4.ogg" id="4_13apu"]
+
+[resource]
+random_pitch = 1.1
+streams_count = 4
+stream_0/stream = ExtResource("1_6v5w7")
+stream_1/stream = ExtResource("2_3fa1g")
+stream_2/stream = ExtResource("3_2h3p8")
+stream_3/stream = ExtResource("4_13apu")
