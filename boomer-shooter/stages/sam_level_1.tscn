@@ -135,6 +135,7 @@ allow_sniper = false
 allow_revolver = false
 allow_katana = false
 allow_smg = false
+allow_double_smg = true
 
 [node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="5"]
 script = ExtResource("16_18dln")
