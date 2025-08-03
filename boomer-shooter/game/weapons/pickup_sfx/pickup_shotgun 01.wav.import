@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b5oybs5wceg0c"
-path="res://.godot/imported/pickup_shotgun 01.wav-ece6006b608c04031e0409fb542e03fd.sample"
+path="res://.godot/imported/pickup_shotgun 01.wav-6cfad02f261b22857a7642780d7ff13c.sample"
 
 [deps]
 
-source_file="res://game/weapons/pickup_shotgun 01.wav"
-dest_files=["res://.godot/imported/pickup_shotgun 01.wav-ece6006b608c04031e0409fb542e03fd.sample"]
+source_file="res://game/weapons/pickup_sfx/pickup_shotgun 01.wav"
+dest_files=["res://.godot/imported/pickup_shotgun 01.wav-6cfad02f261b22857a7642780d7ff13c.sample"]
 
 [params]
 

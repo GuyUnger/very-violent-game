@@ -155,9 +155,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -408.0
-offset_top = 438.0
+offset_top = 21.0
 offset_right = -228.0
-offset_bottom = 473.0
+offset_bottom = 56.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 0
@@ -168,3 +168,29 @@ text = "Ammo: 59"
 [node name="AudioCountDown" type="AudioStreamPlayer" parent="HUD"]
 unique_name_in_owner = true
 stream = ExtResource("4_0oqm6")
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0, 0, 1)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false
+
+[node name="LabelEnemies" type="Label" parent="HUD/ProgressBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 22
+text = "0/5"
+horizontal_alignment = 1

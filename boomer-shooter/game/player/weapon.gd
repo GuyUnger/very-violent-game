@@ -28,9 +28,9 @@ var since_thrown: float = 99.0
 
 @export var pickup_sounds: Array[AudioStream]
 var pickup_sounds_b: Array[AudioStream] = [
-	preload("res://game/weapons/pickup_default 01.wav"),
-	preload("res://game/weapons/pickup_default 02.wav"),
-	preload("res://game/weapons/pickup_default 04.wav"),
+	preload("res://game/weapons/pickup_sfx/pickup_default 01.wav"),
+	preload("res://game/weapons/pickup_sfx/pickup_default 02.wav"),
+	preload("res://game/weapons/pickup_sfx/pickup_default 04.wav"),
 ]
 
 

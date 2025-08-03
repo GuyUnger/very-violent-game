@@ -179,6 +179,7 @@ max_health = 1
 health = 1
 
 [node name="Skeleton3D" parent="Armature" index="0"]
+
 bones/1/position = Vector3(-3.8147e-08, 0.295833, -0.0273547)
 bones/1/rotation = Quaternion(0.103972, 0.330011, 0.0666991, 0.93586)
 bones/2/position = Vector3(-5.82087e-11, 0.10784, -0.0137727)
@@ -193,6 +194,7 @@ bones/6/position = Vector3(-1.86264e-09, 0.0965832, 0.0312217)
 bones/6/rotation = Quaternion(0.028022, -0.0141492, -0.00915139, 0.999465)
 bones/7/position = Vector3(1.86264e-09, 0.371135, 0.119973)
 bones/8/position = Vector3(0.0698422, 0.0674356, -0.00737499)
+
 bones/8/rotation = Quaternion(0.684267, 0.27426, -0.598596, 0.313438)
 bones/9/position = Vector3(-5.94584e-10, 0.0861985, 4.60668e-08)
 bones/9/rotation = Quaternion(0.309789, 0.0720282, 0.104481, 0.942299)
@@ -227,6 +229,7 @@ bones/25/position = Vector3(-1.88154e-09, 0.0195015, -4.42006e-09)
 bones/25/rotation = Quaternion(0.647004, 0.023551, 0.00310879, 0.762117)
 bones/26/position = Vector3(-4.6006e-08, 0.0119781, -1.00261e-08)
 bones/26/rotation = Quaternion(0.377911, -0.024832, 0.00805927, 0.925474)
+
 bones/27/position = Vector3(1.58092e-08, 0.0169014, -4.03878e-08)
 bones/28/position = Vector3(-0.0698421, 0.0674355, -0.00737502)
 bones/28/rotation = Quaternion(0.707438, -0.267108, 0.533934, 0.378285)
@@ -265,6 +268,7 @@ bones/46/position = Vector3(-3.54211e-08, 0.0119782, -4.90394e-09)
 bones/46/rotation = Quaternion(0.645404, 0.010751, -0.00392788, 0.763755)
 bones/47/position = Vector3(-3.6708e-08, 0.0169014, -7.54243e-09)
 bones/48/position = Vector3(0.075523, -0.0298323, -0.000493249)
+
 bones/48/rotation = Quaternion(-0.00423938, 0.239195, 0.970114, -0.0405881)
 bones/49/position = Vector3(-3.2088e-09, 0.105324, -8.58295e-09)
 bones/49/rotation = Quaternion(-0.365039, 0.0851896, -0.025466, 0.926736)
@@ -281,6 +285,7 @@ bones/55/position = Vector3(-2.75894e-09, 0.137354, 5.34283e-09)
 bones/55/rotation = Quaternion(0.702363, -0.0121001, -0.0791127, 0.707305)
 bones/56/position = Vector3(-2.20513e-09, 0.190872, -1.68581e-08)
 bones/56/rotation = Quaternion(0.299729, 0.165927, -0.172095, 0.923588)
+
 bones/57/position = Vector3(7.57659e-10, 0.0707696, 5.65552e-09)
 
 [node name="Skin" parent="Armature/Skeleton3D" index="0"]
@@ -324,6 +329,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 shape = SubResource("CapsuleShape3D_og1ev")
 
 [node name="RightHandBoneAttachment2" type="BoneAttachment3D" parent="." index="4"]
+
 transform = Transform3D(0.920281, -0.209404, -0.330503, -0.0417838, 0.78729, -0.615166, 0.38902, 0.579935, 0.715778, -0.125482, 0.419295, 0.0764748)
 bone_name = "HandMiddle4_R"
 bone_idx = 43
@@ -334,6 +340,7 @@ external_skeleton = NodePath("../Armature/Skeleton3D")
 unique_name_in_owner = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
+
 transform = Transform3D(0.773287, -0.0562178, 0.631558, 0.193466, 0.969482, -0.150584, -0.603819, 0.23863, 0.760565, -3.8147e-08, 0.295833, -0.0273547)
 shape = SubResource("CapsuleShape3D_ggclt")
 

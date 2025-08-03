@@ -56,7 +56,7 @@ var knock_back_tween_:Tween
 
 func knock_back(force:Vector3) -> void:
 	pass
-	
+
 
 func is_node_visible(node) -> bool:
 	var query = PhysicsRayQueryParameters3D.new()
@@ -115,6 +115,11 @@ func die() -> void:
 	set_physics_process(false)
 	remove_from_group("aimables")
 	died.emit()
+	
+	var weapon = get_parent().get_node("%Weapon")
+	if is_instance_valid(weapon):
+		weapon.trigger_pressed = false
+	Main.instance.enemy_killed.emit()
 
 
 func _body_entered_vision(body) -> void:

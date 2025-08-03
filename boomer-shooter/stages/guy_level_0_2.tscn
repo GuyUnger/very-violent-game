@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cy2l414msbsos"]
+[gd_scene load_steps=22 format=3 uid="uid://cy2l414msbsos"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_j0cmv"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_kpc0v"]
@@ -18,7 +18,6 @@
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_4ovxa"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="18_elmn4"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="18_j0cmv"]
-[ext_resource type="PackedScene" uid="uid://d12rbfqmi83d4" path="res://ui/instruction.tscn" id="19_s1ya0"]
 [ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="20_mxwxx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8bc4"]
@@ -92,14 +91,7 @@ allow_sniper = false
 allow_katana = false
 allow_smg = false
 
-[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("15_vptxf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1166, 1, 7.72642)
-allow_sniper = false
-allow_revolver = false
-allow_katana = false
-allow_smg = false
-
-[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="7"]
+[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="6"]
 script = ExtResource("16_4ovxa")
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
 metadata/_edit_lock_ = true
@@ -193,28 +185,20 @@ size = Vector3(4, 4, 3)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="npc_grunt" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("18_j0cmv")]
+[node name="npc_grunt" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("18_j0cmv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1029, 1, 1.60809)
-target_lock_time = 0.3
 
-[node name="npc_grunt2" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("18_j0cmv")]
+[node name="npc_grunt2" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("18_j0cmv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11555, 1, 1.34132)
-target_lock_time = 0.3
 
-[node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("18_j0cmv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133492, 1, 2.37654)
-target_lock_time = 0.3
+[node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("18_j0cmv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0861, 1, 9.40178)
 
-[node name="npc_grunt4" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("18_j0cmv")]
+[node name="npc_grunt4" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("18_j0cmv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27948, 1, 2.82336)
-target_lock_time = 0.3
 
-[node name="npc_grunt5" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("18_j0cmv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95214, 1, 3.06806)
-target_lock_time = 0.3
+[node name="npc_grunt5" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("18_j0cmv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733611, 1, 8.0314)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("20_mxwxx")
-
-[node name="Instruction" parent="." index="5" instance=ExtResource("19_s1ya0")]
-text = "RMB to throw weapon"
