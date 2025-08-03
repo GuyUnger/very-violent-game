@@ -10,8 +10,9 @@ var damage: int = 5
 
 
 var dead: bool = false:
-	set(value):
-		if value:
+	set(v):
+		dead = v
+		if dead:
 			queue_free()
 
 

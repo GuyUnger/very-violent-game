@@ -335,6 +335,5 @@ class StateAttacking extends State:
 		
 	func _exit_tree() -> void:
 		super()
-		if not is_instance_valid(weapon):
-			return
-		weapon.trigger_pressed = false
+		if is_instance_valid(weapon):
+			weapon.trigger_pressed = false
