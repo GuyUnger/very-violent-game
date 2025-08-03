@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bubokaw6tm32t"]
+[gd_scene load_steps=41 format=3 uid="uid://bubokaw6tm32t"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_57m8n"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_4p0ku"]
@@ -14,10 +14,32 @@
 [ext_resource type="PackedScene" uid="uid://bbk7tjem838g0" path="res://game/props/stairs.tscn" id="12_3pnwo"]
 [ext_resource type="PackedScene" uid="uid://c1lda3esnwkcq" path="res://game/props/stairs_short.tscn" id="13_ujt78"]
 [ext_resource type="PackedScene" uid="uid://c32xofphq7in5" path="res://game/props/platform.tscn" id="14_284op"]
+[ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="15_qwhps"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_7b0k1"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="17_4p0ku"]
 [ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="17_l1iw5"]
-[ext_resource type="PackedScene" uid="uid://d12rbfqmi83d4" path="res://ui/instruction.tscn" id="19_fy2pt"]
+[ext_resource type="Material" uid="uid://doapqabe7twc4" path="res://content/environment/materials/surface_0.tres" id="17_tx02n"]
+[ext_resource type="Material" uid="uid://buavh7fna845w" path="res://content/environment/materials/surface_1.tres" id="18_oiqe4"]
+[ext_resource type="Material" uid="uid://b71gxlhwanayi" path="res://content/environment/materials/surface_2.tres" id="19_4kl46"]
+[ext_resource type="PackedScene" path="res://ui/instruction.tscn" id="19_fy2pt"]
+[ext_resource type="Material" uid="uid://dcl8eha8janno" path="res://content/environment/materials/surface_3.tres" id="20_wgi3a"]
+[ext_resource type="Material" uid="uid://bfosjqjdja0e2" path="res://content/environment/materials/surface_4.tres" id="21_ew1me"]
+[ext_resource type="Material" uid="uid://dcpe38qomrqot" path="res://content/environment/materials/surface_5.tres" id="22_x3drn"]
+[ext_resource type="Material" uid="uid://cqlyvxeskbq7m" path="res://content/environment/materials/surface_6.tres" id="23_6k18k"]
+[ext_resource type="Material" uid="uid://rt8jdtf6es70" path="res://content/environment/materials/surface_7.tres" id="24_24hvn"]
+[ext_resource type="Material" uid="uid://dg8yoad2wmah0" path="res://content/environment/materials/surface_8.tres" id="25_8oosv"]
+[ext_resource type="Material" uid="uid://c8am7gxht6vdq" path="res://content/environment/materials/surface_9.tres" id="26_pwj7g"]
+[ext_resource type="Material" uid="uid://bxcxyqvi67jdl" path="res://content/environment/materials/surface_10.tres" id="27_mwe2g"]
+[ext_resource type="Material" uid="uid://5ap84rrgvvoa" path="res://content/environment/materials/surface_11.tres" id="28_x68l5"]
+[ext_resource type="Material" uid="uid://c00744tmfikc5" path="res://content/environment/materials/surface_12.tres" id="29_fyvi1"]
+[ext_resource type="Material" uid="uid://cbqop5duvx0y6" path="res://content/environment/materials/surface_13.tres" id="30_u8ahj"]
+[ext_resource type="Material" uid="uid://yeq7pun4piny" path="res://content/environment/materials/surface_14.tres" id="31_m3t23"]
+[ext_resource type="Material" uid="uid://cxxkrlaqg1hq5" path="res://content/environment/materials/surface_15.tres" id="32_mgexe"]
+[ext_resource type="Material" uid="uid://doeho6406mk7b" path="res://content/environment/materials/surface_16.tres" id="33_1evs5"]
+[ext_resource type="Material" uid="uid://h1otvpr12uoy" path="res://content/environment/materials/surface_17.tres" id="34_0jepe"]
+[ext_resource type="Material" uid="uid://cmc7f1y8anju" path="res://content/environment/materials/surface_18.tres" id="35_kibs5"]
+[ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="36_v75ly"]
+[ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="37_3lvoq"]
 
 [node name="Main" instance=ExtResource("1_57m8n")]
 
@@ -71,8 +93,11 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 60.824
 [node name="Platform3" parent="SubViewportContainer/SubViewport/Props" index="12" instance=ExtResource("14_284op")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 49.7192, 13.794, 13.6424)
 
-[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="4"]
+[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("15_qwhps")]
+
+[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="5"]
 script = ExtResource("16_7b0k1")
+materials = Array[Material]([ExtResource("17_tx02n"), ExtResource("18_oiqe4"), ExtResource("19_4kl46"), ExtResource("20_wgi3a"), ExtResource("21_ew1me"), ExtResource("22_x3drn"), ExtResource("23_6k18k"), ExtResource("24_24hvn"), ExtResource("25_8oosv"), ExtResource("26_pwj7g"), ExtResource("27_mwe2g"), ExtResource("28_x68l5"), ExtResource("29_fyvi1"), ExtResource("30_u8ahj"), ExtResource("31_m3t23"), ExtResource("32_mgexe"), ExtResource("33_1evs5"), ExtResource("34_0jepe"), ExtResource("35_kibs5"), ExtResource("36_v75ly"), ExtResource("37_3lvoq")])
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
 metadata/_edit_lock_ = true
 
@@ -84,21 +109,24 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
 use_collision = true
 size = Vector3(6, 1, 6)
+material = ExtResource("36_v75ly")
 metadata/_edit_group_ = true
 
 [node name="Add_4_1_10" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -9)
 use_collision = true
 size = Vector3(4, 1, 10)
+material = ExtResource("21_ew1me")
 metadata/_edit_group_ = true
 
 [node name="Add_4_1_11" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -23)
 use_collision = true
 size = Vector3(4, 1, 10)
+material = ExtResource("36_v75ly")
 metadata/_edit_group_ = true
 
-[node name="Finish" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("17_4p0ku")]
+[node name="Finish" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("17_4p0ku")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0893483, 1, -26.2618)
 next_level = "res://stages/guy_level_0_1.tscn"
 

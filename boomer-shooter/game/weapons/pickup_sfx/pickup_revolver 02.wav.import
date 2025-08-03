@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://fffigebllhan"
-path="res://.godot/imported/pickup_revolver 02.wav-3f82ceeb5e7f06fbfc2b0fbb6c94aa9c.sample"
+path="res://.godot/imported/pickup_revolver 02.wav-cae53ccf70db192bc5dbd839a897db9b.sample"
 
 [deps]
 
-source_file="res://game/weapons/pickup_revolver 02.wav"
-dest_files=["res://.godot/imported/pickup_revolver 02.wav-3f82ceeb5e7f06fbfc2b0fbb6c94aa9c.sample"]
+source_file="res://game/weapons/pickup_sfx/pickup_revolver 02.wav"
+dest_files=["res://.godot/imported/pickup_revolver 02.wav-cae53ccf70db192bc5dbd839a897db9b.sample"]
 
 [params]
 

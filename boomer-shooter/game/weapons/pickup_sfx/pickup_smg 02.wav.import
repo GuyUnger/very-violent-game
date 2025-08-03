@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c1umsegk5hevb"
-path="res://.godot/imported/pickup_smg 02.wav-df4b1ab654135c9c46665e044547236c.sample"
+path="res://.godot/imported/pickup_smg 02.wav-c5b906ec68386d24138e96d6b45f1e88.sample"
 
 [deps]
 
-source_file="res://game/weapons/pickup_smg 02.wav"
-dest_files=["res://.godot/imported/pickup_smg 02.wav-df4b1ab654135c9c46665e044547236c.sample"]
+source_file="res://game/weapons/pickup_sfx/pickup_smg 02.wav"
+dest_files=["res://.godot/imported/pickup_smg 02.wav-c5b906ec68386d24138e96d6b45f1e88.sample"]
 
 [params]
 

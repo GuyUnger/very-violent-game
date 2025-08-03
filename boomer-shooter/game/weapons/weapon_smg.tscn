@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_57hh3"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_7w4b6"]
-[ext_resource type="AudioStream" uid="uid://dlefj36iolvdv" path="res://game/weapons/pickup_smg 01.wav" id="2_pkk1y"]
+[ext_resource type="AudioStream" uid="uid://dlefj36iolvdv" path="res://game/weapons/pickup_sfx/pickup_smg 01.wav" id="2_pkk1y"]
 [ext_resource type="PackedScene" uid="uid://cbt4a74g6fyhs" path="res://game/weapons/model/weapon_smg.glb" id="3_7w4b6"]
-[ext_resource type="AudioStream" uid="uid://c1umsegk5hevb" path="res://game/weapons/pickup_smg 02.wav" id="3_81lhf"]
+[ext_resource type="AudioStream" uid="uid://c1umsegk5hevb" path="res://game/weapons/pickup_sfx/pickup_smg 02.wav" id="3_81lhf"]
 [ext_resource type="PackedScene" uid="uid://dqul5y672j5k2" path="res://game/weapons/model/weapon_smg_arm.glb" id="4_ujfyf"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_8w3g1"]
 [ext_resource type="Script" uid="uid://dntd1fqlvxqh5" path="res://game/weapons/weapon_smg_animations.gd" id="6_yuge1"]
@@ -45,6 +45,7 @@ shape = SubResource("SphereShape3D_7w4b6")
 unique_name_in_owner = true
 stream = ExtResource("2_7w4b6")
 volume_db = 5.0
+max_polyphony = 5
 bus = &"SFX"
 
 [node name="WorldModel" type="Node3D" parent="."]
