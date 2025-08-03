@@ -26,3 +26,8 @@ func open() -> void:
 	tween = create_tween()
 	tween.tween_property(self, "t", 1.0, 0.3)
 	await tween.finished
+
+
+func _on_music_finished() -> void:
+	$Music.stream = preload("res://game/gameplay01_loop.ogg")
+	$Music.play()
