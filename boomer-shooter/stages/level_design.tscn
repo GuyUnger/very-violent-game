@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://v0boycsgos0n" path="res://game/npc/npc_enemy_grunt_smg.tscn" id="12_55831"]
 
 [node name="Main" instance=ExtResource("3_rsuto")]
+time = 60.0
 
 [node name="Player" parent="SubViewportContainer/SubViewport" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.6411, 4.06139, 67.4628)
