@@ -5,7 +5,7 @@ extends Node3D
 @export var allow_revolver: bool = true
 @export var allow_katana: bool = true
 @export var allow_smg: bool = true
-@export var allow_double_smg: bool = true
+@export var allow_double_smg: bool = false
 
 const WEAPON_SCENES = [
 	preload("res://game/weapons/weapon_smg.tscn"),
