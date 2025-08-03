@@ -65,9 +65,9 @@ func _physics_process(delta: float) -> void:
 			loop.play_back_cursor += 1
 
 
-#func _unhandled_input(event: InputEvent) -> void:
-#	if event.is_action_pressed("reset"):
-#		reset()
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("reset"):
+		reset()
 
 
 func reset() -> void:

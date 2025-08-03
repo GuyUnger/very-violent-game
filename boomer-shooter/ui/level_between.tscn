@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c58snso3lh168"]
+[gd_scene load_steps=6 format=3 uid="uid://c58snso3lh168"]
 
 [ext_resource type="Script" uid="uid://w3jlujywnuvd" path="res://ui/level_between.gd" id="1_2e5i2"]
 [ext_resource type="AudioStream" path="res://ui/start.tres" id="2_pma06"]
+[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="3_nsxtn"]
 
 [sub_resource type="Shader" id="Shader_w4fll"]
 code = "shader_type canvas_item;
@@ -34,3 +35,7 @@ mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_pma06")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nsxtn")
+autoplay = true
