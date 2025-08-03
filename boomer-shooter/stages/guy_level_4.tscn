@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://e68x1aph6xqv"]
+[gd_scene load_steps=22 format=3 uid="uid://e68x1aph6xqv"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_nnfrx"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="2_jgrif"]
@@ -18,10 +18,19 @@
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="15_0xg6i"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_buwyk"]
 [ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="17_1qsqi"]
+[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="19_jgrif"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp2wm"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_jgrif"]
 
 [node name="Main" instance=ExtResource("1_nnfrx")]
 
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("2_jgrif")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11, 15, -3)
 next_level = "res://stages/guy_level_2.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="1"]
@@ -29,6 +38,7 @@ transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.95
 shadow_enabled = true
 
 [node name="Player" parent="SubViewportContainer/SubViewport" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 starting_weapon = ExtResource("2_pp2wm")
 
 [node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" index="4"]
@@ -85,5 +95,67 @@ metadata/_edit_lock_ = true
 use_collision = true
 metadata/_edit_lock_ = true
 
+[node name="Add_6_1_13" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
+use_collision = true
+size = Vector3(6, 1, 7)
+metadata/_edit_group_ = true
+
+[node name="Add_6_1_14" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 1.5)
+use_collision = true
+size = Vector3(2, 8, 7)
+metadata/_edit_group_ = true
+
+[node name="Add_6_1_15" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 1.5)
+use_collision = true
+size = Vector3(2, 8, 7)
+metadata/_edit_group_ = true
+
+[node name="Add_6_1_16" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 6)
+use_collision = true
+size = Vector3(10, 8, 2)
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.396584, 2.5, -4)
+use_collision = true
+size = Vector3(9, 5, 8)
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_6" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39658, 2.5, -0.5)
+use_collision = true
+size = Vector3(9, 5, 15)
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_7" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8966, 9, -2)
+use_collision = true
+size = Vector3(6, 10, 6)
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4549, 16.5, -2.5)
+use_collision = true
+size = Vector3(2.8833, 5, 5)
+metadata/_edit_group_ = true
+
+[node name="@MeshInstance3D@40893" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="8"]
+material_override = SubResource("StandardMaterial3D_pp2wm")
+mesh = SubResource("ImmediateMesh_jgrif")
+
+[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("15_0xg6i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41959, 1.11252, 1.59108)
+allow_shotgun = false
+allow_sniper = false
+allow_revolver = false
+allow_smg = false
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("17_1qsqi")
+
+[node name="npc_grunt" parent="." index="5" instance=ExtResource("19_jgrif")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0771046, 5.11574, -3.69017)
