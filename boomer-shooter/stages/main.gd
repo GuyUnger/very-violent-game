@@ -5,7 +5,7 @@ static var instance
 
 var source_id := 1
 
-var time: float = 30.0
+@export var time: float = 30.0
 
 func _init() -> void:
 	instance = self

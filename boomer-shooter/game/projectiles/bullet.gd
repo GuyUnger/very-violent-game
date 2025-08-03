@@ -89,6 +89,10 @@ func hit(collider:Node3D, normal:Vector3, hit_position:Vector3) -> void:
 	if not is_instance_valid(collider):
 		return
 	if collider is not Character:
+		if "shoot_active" in collider:
+			collider.shoot_activate() 
+		if "shoot_activate" in collider.get_parent():
+			collider.get_parent().shoot_activate()
 		$HitMetal.global_position = hit_position
 		#$HitMetal.pitch_scale = randf_range(0.9, 1.2)
 		$HitMetal.play()

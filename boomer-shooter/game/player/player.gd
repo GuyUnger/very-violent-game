@@ -74,6 +74,8 @@ var last_transform := Transform3D()
 func _ready() -> void:
 	source_id = EventStore.next_source_id()
 	
+	look_angle.x = rotation.y
+	
 	EventStore.push_event(
 		EventStoreCommandAddChild.new(
 			Main.instance.source_id, 

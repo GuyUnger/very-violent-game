@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct8vytijeramr"]
+
+[ext_resource type="Script" uid="uid://didoril3vpi01" path="res://game/misc/finish.gd" id="1_nrt5p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4tmal"]
+size = Vector3(2.06738, 1.78882, 2.23242)
+
+[node name="Finish" type="Area3D"]
+collision_mask = 2
+script = ExtResource("1_nrt5p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_4tmal")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
