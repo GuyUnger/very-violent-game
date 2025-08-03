@@ -57,6 +57,7 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_3usft"]
 
 [node name="Main" instance=ExtResource("1_0tv5r")]
+time = 20.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="0"]
 transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)
@@ -230,46 +231,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -6)
 [node name="MeleeActivator" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("19_m8a5v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 0, 7.4)
 
-[node name="npc_grunt" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -9)
-
-[node name="npc_grunt2" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt2" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -8)
 
-[node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -11)
 
-[node name="npc_grunt4" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -11)
-
-[node name="npc_grunt5" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt5" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -10)
 
-[node name="npc_grunt6" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt6" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
 
-[node name="npc_grunt7" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt7" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
 
-[node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.65103, 0, -13.4224)
+[node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.22968, 0, -14.9145)
 
-[node name="npc_grunt9" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.37873, 0, -15.4033)
+[node name="npc_grunt9" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("7_hs8q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62127, 0, -13.4033)
 
-[node name="npc_grunt10" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40256, 0, -16.4421)
+[node name="npc_grunt10" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("7_hs8q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.41944, 0, -15.8776)
 
-[node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56145, 0, -14.8856)
+[node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("7_hs8q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43855, 0, -15.8856)
 
-[node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0352, 0, -14.8746)
+[node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("7_hs8q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9648, 0, -14.8746)
 
-[node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="21" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32693, 0, -16.8887)
+[node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("7_hs8q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32017, -0.0194693, -13.9608)
 
-[node name="Finish" parent="SubViewportContainer/SubViewport" index="22" instance=ExtResource("20_3usft")]
+[node name="Finish" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("20_3usft")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -15)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]

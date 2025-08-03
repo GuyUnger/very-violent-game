@@ -109,6 +109,8 @@ func hit(from:Node3D) -> void:
 
 
 func die() -> void:
+	if has_node("CollisionShape3D"):
+		$CollisionShape3D.disabled = true
 	set_physics_process(false)
 	remove_from_group("aimables")
 	died.emit()

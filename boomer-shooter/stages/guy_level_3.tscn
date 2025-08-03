@@ -1,0 +1,85 @@
+[gd_scene load_steps=18 format=3 uid="uid://dy8pwj167lwyq"]
+
+[ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_7lqqu"]
+[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_2s067"]
+[ext_resource type="PackedScene" uid="uid://csfp8t30e7u6m" path="res://game/props/plane_crash.tscn" id="3_1jgw7"]
+[ext_resource type="PackedScene" uid="uid://bhwigbhxgn45k" path="res://game/props/pole.tscn" id="4_bhdou"]
+[ext_resource type="PackedScene" uid="uid://3xpj0l2cqkiq" path="res://game/props/conditioner.tscn" id="5_htp5b"]
+[ext_resource type="PackedScene" uid="uid://c7by6vbb060yn" path="res://game/props/awning.tscn" id="6_vuy7i"]
+[ext_resource type="PackedScene" uid="uid://cqeao6wkv6xen" path="res://game/props/window_deco.tscn" id="7_trne4"]
+[ext_resource type="PackedScene" uid="uid://cgw3r72e1dnxp" path="res://game/props/car_1.tscn" id="8_0qjy2"]
+[ext_resource type="PackedScene" uid="uid://ddgjm2qbdejwa" path="res://game/props/car_2.tscn" id="9_cfnd4"]
+[ext_resource type="PackedScene" uid="uid://cvkxvvl5qllmb" path="res://game/props/doorway.tscn" id="10_nagsq"]
+[ext_resource type="PackedScene" uid="uid://c464glcbycu8f" path="res://game/props/barrel.tscn" id="11_yiddv"]
+[ext_resource type="PackedScene" uid="uid://bbk7tjem838g0" path="res://game/props/stairs.tscn" id="12_jt2kb"]
+[ext_resource type="PackedScene" uid="uid://c1lda3esnwkcq" path="res://game/props/stairs_short.tscn" id="13_q0c5r"]
+[ext_resource type="PackedScene" uid="uid://c32xofphq7in5" path="res://game/props/platform.tscn" id="14_yr20t"]
+[ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="15_d2rvp"]
+[ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_55tbj"]
+[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="17_c87ue"]
+
+[node name="Main" instance=ExtResource("1_7lqqu")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="0"]
+transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)
+shadow_enabled = true
+
+[node name="Player" parent="SubViewportContainer/SubViewport" index="1"]
+starting_weapon = ExtResource("2_2s067")
+
+[node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -9, -16)
+visible = false
+
+[node name="PlaneCrash" parent="SubViewportContainer/SubViewport/Props" index="0" instance=ExtResource("3_1jgw7")]
+transform = Transform3D(0.88271, -0.0137399, -0.469717, 0.0458108, 0.997327, 0.0569162, 0.46768, -0.0717587, 0.88098, -4, 7, 51)
+
+[node name="Pole2" parent="SubViewportContainer/SubViewport/Props" index="1" instance=ExtResource("4_bhdou")]
+transform = Transform3D(-0.917824, 0, 0.396988, 0, 1, 0, -0.396988, 0, -0.917824, 53, 8, 11)
+
+[node name="Pole3" parent="SubViewportContainer/SubViewport/Props" index="2" instance=ExtResource("4_bhdou")]
+transform = Transform3D(-0.894076, 0, -0.447915, 0, 1, 0, 0.447915, 0, -0.894076, -2, 8, 11)
+
+[node name="Conditioner" parent="SubViewportContainer/SubViewport/Props" index="3" instance=ExtResource("5_htp5b")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 44.812, 14.7875, 17.9813)
+
+[node name="Awning" parent="SubViewportContainer/SubViewport/Props" index="4" instance=ExtResource("6_vuy7i")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 54.0311, 15.616, 18.6558)
+
+[node name="WindowDeco" parent="SubViewportContainer/SubViewport/Props" index="5" instance=ExtResource("7_trne4")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57.2131, 12.8235, 33.474)
+
+[node name="Car1" parent="SubViewportContainer/SubViewport/Props" index="6" instance=ExtResource("8_0qjy2")]
+transform = Transform3D(0.962744, 0, -0.270416, 0, 1, 0, 0.270416, 0, 0.962744, 50.0187, 8.1318, 12.7343)
+
+[node name="Car2" parent="SubViewportContainer/SubViewport/Props" index="7" instance=ExtResource("9_cfnd4")]
+transform = Transform3D(-0.556339, 0, -0.830955, 0, 1, 0, 0.830955, 0, -0.556339, 50.7848, 8.0132, 30.9605)
+
+[node name="Doorway" parent="SubViewportContainer/SubViewport/Props" index="8" instance=ExtResource("10_nagsq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 55.4628, 8.075, 15.9868)
+
+[node name="Barrel4" parent="SubViewportContainer/SubViewport/Props" index="9" instance=ExtResource("11_yiddv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.7486, 8.74199, 22.1875)
+
+[node name="Stairs2" parent="SubViewportContainer/SubViewport/Props" index="10" instance=ExtResource("12_jt2kb")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 40.8014, 8, 6.38413)
+
+[node name="StairsShort" parent="SubViewportContainer/SubViewport/Props" index="11" instance=ExtResource("13_q0c5r")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 60.8243, 8, 25.7702)
+
+[node name="Platform3" parent="SubViewportContainer/SubViewport/Props" index="12" instance=ExtResource("14_yr20t")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 49.7192, 13.794, 13.6424)
+
+[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("15_d2rvp")]
+
+[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="5"]
+script = ExtResource("16_55tbj")
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="SubViewportContainer/SubViewport/Blockout" index="1"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource("17_c87ue")

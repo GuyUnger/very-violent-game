@@ -36,7 +36,7 @@ collision_mask = 0
 script = ExtResource("1_24slo")
 fire_rate = 1.0
 auto = true
-ammo = 8
+ammo = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7w4b6")
