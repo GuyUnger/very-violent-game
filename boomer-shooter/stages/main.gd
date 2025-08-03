@@ -10,7 +10,11 @@ var source_id := 1
 @export var time: float = 30.0
 
 var total_enemies: int
+var actual_enemies: int
 var enemies_left: int
+
+var max_enemies: int = 30
+var completed: bool= false
 
 
 static var clones: int = 0
@@ -27,6 +31,8 @@ func _ready() -> void:
 	clones += 1
 	await get_tree().process_frame
 	total_enemies = get_tree().get_nodes_in_group("npc_enemies").size()
+	actual_enemies = total_enemies
+	total_enemies = min(total_enemies, max_enemies)
 
 	enemies_left = total_enemies
 	enemy_killed.connect(_on_enemy_killed)
@@ -40,16 +46,17 @@ func _on_enemy_killed() -> void:
 	for enemy in get_tree().get_nodes_in_group("npc_enemies"):
 		if enemy.health > 0:
 			enemies_left += 1
-			
-	#enemies_left = max(enemies_left-20, 0)
+	
+	enemies_left = max(enemies_left - (actual_enemies - total_enemies), 0)
 	
 	var pitch: float = 0.6 + (1.0 - (enemies_left / float(total_enemies))) * 2.0
 	
 	await get_tree().create_timer(0.5).timeout
 	if not get_tree():
 		return
-	if enemies_left == 0:
+	if enemies_left == 0 and !completed:
 		$AudioKillComplete.play()
+		completed = true
 	else:
 		%AudioKill.pitch_scale = pitch
 		%AudioKill.play()

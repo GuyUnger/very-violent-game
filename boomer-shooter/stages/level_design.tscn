@@ -17,7 +17,7 @@
 time = 60.0
 
 [node name="Finish" parent="." index="0" instance=ExtResource("5_55831")]
-transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -12.2595, -0.895572, 58.9856)
+transform = Transform3D(-1, 0, 0.000872763, 0, 1, 0, -0.000872763, 0, -1, -12.2595, -0.895572, 58.8682)
 next_level = "res://ui/end_screen.tscn"
 
 [node name="Player" parent="SubViewportContainer/SubViewport" index="0"]
