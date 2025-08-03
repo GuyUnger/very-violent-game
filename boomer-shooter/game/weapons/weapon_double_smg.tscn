@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=4 uid="uid://cyh2low0pjdxx"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_1lbga"]
-[ext_resource type="AudioStream" uid="uid://dlefj36iolvdv" path="res://game/weapons/pickup_sfx/pickup_smg 01.wav" id="2_bjki7"]
-[ext_resource type="AudioStream" uid="uid://c1umsegk5hevb" path="res://game/weapons/pickup_sfx/pickup_smg 02.wav" id="3_g4h8n"]
+[ext_resource type="AudioStream" uid="uid://u0e0wulvi65p" path="res://game/weapons/pickup_double_smg 01.wav" id="2_bjki7"]
+[ext_resource type="AudioStream" uid="uid://ci0d3vucvr5xv" path="res://game/weapons/pickup_double_smg 02.wav" id="3_g4h8n"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="4_itu1m"]
 [ext_resource type="PackedScene" uid="uid://cbt4a74g6fyhs" path="res://game/weapons/model/weapon_smg.glb" id="5_c5y5n"]
 [ext_resource type="PackedScene" uid="uid://dqul5y672j5k2" path="res://game/weapons/model/weapon_smg_arm.glb" id="6_8dkhk"]
