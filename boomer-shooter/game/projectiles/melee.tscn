@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://p54xj8bewa1q"]
+
+[ext_resource type="Script" uid="uid://d3b5576toy6a8" path="res://game/projectiles/melee.gd" id="1_rryft"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5ghna"]
+height = 0.4
+radius = 1.5
+
+[node name="AreaMelee" type="Area3D"]
+collision_layer = 0
+collision_mask = 36
+script = ExtResource("1_rryft")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.191245, 0)
+shape = SubResource("CylinderShape3D_5ghna")
+debug_color = Color(0.965054, 0, 0.491947, 1)
