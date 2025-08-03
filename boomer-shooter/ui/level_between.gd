@@ -31,3 +31,8 @@ func open() -> void:
 func _on_music_finished() -> void:
 	$Music.stream = preload("res://game/gameplay01_loop.ogg")
 	$Music.play()
+
+
+func play_end() -> void:
+	$Music.stream = preload("res://end_loop.ogg")
+	$Music.play()

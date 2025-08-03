@@ -4,6 +4,7 @@ var last_life: int = 0
 
 
 func _ready() -> void:
+	Transition.play_end()
 	get_tree().paused = false
 	await get_tree().create_timer(1.0).timeout
 	$AudioContinue.play()
