@@ -102,10 +102,7 @@ metadata/_edit_group_ = true
 
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("17_4p0ku")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0893483, 1, -26.2618)
-next_level = "res://stages/guy_level_1.tscn"
+next_level = "res://stages/guy_level_0_1.tscn"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("17_l1iw5")
-
-[node name="Label" parent="Unpauser" index="1"]
-horizontal_alignment = 1

@@ -21,6 +21,11 @@ func unique_source_id(node: Node) -> int:
 	return hash(node.global_position)
 
 
+func clear() -> void:
+	loops.clear()
+	new_loop()
+
+
 func new_loop() -> void:
 	loops.push_back(Loop.new())
 	
@@ -65,9 +70,9 @@ func _physics_process(delta: float) -> void:
 			loop.play_back_cursor += 1
 
 
-#func _unhandled_input(event: InputEvent) -> void:
-#	if event.is_action_pressed("reset"):
-#		reset()
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("reset"):
+		reset()
 
 
 func reset() -> void:
