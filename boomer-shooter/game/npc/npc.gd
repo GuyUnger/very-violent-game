@@ -268,6 +268,7 @@ class StateAttacking extends State:
 		
 		weapon.aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP)
 		weapon.trigger_pressed = true
+		weapon.ammo = weapon.max_ammo
 		
 		
 	func _exit_tree() -> void:

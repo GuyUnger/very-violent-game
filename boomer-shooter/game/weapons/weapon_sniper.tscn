@@ -110,3 +110,4 @@ bus = &"SFX"
 unique_name_in_owner = true
 
 [node name="PickupGlow" parent="." instance=ExtResource("5_brtfp")]
+modulate = Color(0.905492, 0.001272, 0.986046, 1)

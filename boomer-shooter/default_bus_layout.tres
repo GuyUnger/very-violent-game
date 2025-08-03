@@ -10,7 +10,6 @@ volume_db = 5.0
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
 resource_name = "Compressor"
-gain = 10.0
 mix = 0.75
 
 [resource]
