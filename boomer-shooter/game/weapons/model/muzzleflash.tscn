@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dn8qcdsnyofpu"]
 
-[ext_resource type="ArrayMesh" uid="uid://dfo46mw4et0q4" path="res://game/weapons/model/mesh_muzzleflash.res" id="1_gqu1p"]
+[ext_resource type="ArrayMesh" uid="uid://x2uglqsopfrx" path="res://game/weapons/model/mesh_muzzleflash.res" id="1_gqu1p"]
 [ext_resource type="Script" uid="uid://dimwskculi2rm" path="res://game/weapons/model/muzzleflash.gd" id="1_rfdu2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfdu2"]

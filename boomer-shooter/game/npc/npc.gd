@@ -237,6 +237,11 @@ class StateSpottedEnemy extends State:
 		next_state.enemy = enemy
 		move_to(next_state)
 		
+	func _physics_process(delta: float) -> void:
+		var weapon = get_parent().get_node("%Weapon")
+		if weapon:
+			weapon.look_at(enemy.global_position, Vector3.UP, true)
+		
 	func _exit_tree() -> void:
 		super()
 	
@@ -248,6 +253,8 @@ class StateWasToldEnemyPosition extends State:
 		super()
 		
 		get_parent().target = enemy
+		
+	
 
 		var animation_tree = get_parent().get("animation_tree")
 		if animation_tree:
@@ -258,6 +265,11 @@ class StateWasToldEnemyPosition extends State:
 		var next_state = StateAttacking.new()
 		next_state.enemy = enemy
 		move_to(next_state)
+		
+	func _physics_process(delta: float) -> void:
+		var weapon = get_parent().get_node("%Weapon")
+		if weapon:
+			weapon.look_at(enemy.global_position, Vector3.UP, true)
 
 
 class StateAttacking extends State:
