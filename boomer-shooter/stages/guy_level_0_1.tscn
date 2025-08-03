@@ -40,8 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 starting_weapon = ExtResource("2_hmnp2")
 
 [node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -9, -16)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80, -9, -16)
 
 [node name="PlaneCrash" parent="SubViewportContainer/SubViewport/Props" index="0" instance=ExtResource("3_k4s86")]
 transform = Transform3D(0.88271, -0.0137399, -0.469717, 0.0458108, 0.997327, 0.0569162, 0.46768, -0.0717587, 0.88098, -4, 7, 51)
@@ -130,9 +129,9 @@ size = Vector3(12, 1, 9)
 metadata/_edit_group_ = true
 
 [node name="Add_9_1_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0.5, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0.5, 3)
 use_collision = true
-size = Vector3(9, 1, 2)
+size = Vector3(9, 1, 4)
 metadata/_edit_group_ = true
 
 [node name="@CSGBox3D@93139" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="6"]
@@ -178,103 +177,109 @@ size = Vector3(3, 1, 17)
 metadata/_edit_group_ = true
 
 [node name="Add_9_4_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 5)
 use_collision = true
-size = Vector3(9, 8, 4)
+size = Vector3(4, 8, 4)
 metadata/_edit_group_ = true
 
-[node name="Add_4_3_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="14"]
+[node name="Add_9_4_5" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 1, 6)
+use_collision = true
+size = Vector3(5, 8, 2)
+metadata/_edit_group_ = true
+
+[node name="Add_4_3_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, -1)
 use_collision = true
 size = Vector3(4, 3, 4)
 metadata/_edit_group_ = true
 
-[node name="Add_6_4_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="15"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2, -2.5)
+[node name="Add_6_4_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2, -2)
 use_collision = true
-size = Vector3(6, 4, 1)
+size = Vector3(6, 4, 2)
 metadata/_edit_group_ = true
 
-[node name="Add_1_5_16" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="16"]
+[node name="Add_1_5_16" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 2.5, 6)
 use_collision = true
 size = Vector3(1, 5, 16)
 metadata/_edit_group_ = true
 
-[node name="Add_29_5_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="17"]
+[node name="Add_29_5_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2.5, 13)
 use_collision = true
 size = Vector3(25, 5, 2)
 metadata/_edit_group_ = true
 
-[node name="Add_1_5_17" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="18"]
+[node name="Add_1_5_17" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 2.5, 10.5)
 use_collision = true
 size = Vector3(1, 5, 31)
 metadata/_edit_group_ = true
 
-[node name="Add_1_5_18" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="19"]
+[node name="Add_1_5_18" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 2.5, 20)
 use_collision = true
 size = Vector3(1, 5, 12)
 metadata/_edit_group_ = true
 
-[node name="Add_1_5_19" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="20"]
+[node name="Add_1_5_19" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 2.5, 26.5)
 use_collision = true
 size = Vector3(5, 5, 1)
 metadata/_edit_group_ = true
 
-[node name="Add_7_4_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="21"]
+[node name="Add_7_4_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="22"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 2, -4)
 use_collision = true
 size = Vector3(7, 4, 4)
 metadata/_edit_group_ = true
 
-[node name="Add_4_3_3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="22"]
+[node name="Add_4_3_3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="23"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -0.5)
 use_collision = true
 size = Vector3(4, 4, 3)
 metadata/_edit_group_ = true
 
-[node name="Add_4_3_5" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="23"]
+[node name="Add_4_3_5" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="24"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 2, 5)
 use_collision = true
 size = Vector3(7, 4, 4)
 metadata/_edit_group_ = true
 
-[node name="Add_4_3_6" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="24"]
+[node name="Add_4_3_6" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="25"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.5, 11)
 use_collision = true
 size = Vector3(4, 5, 4)
 metadata/_edit_group_ = true
 
-[node name="Add_4_3_7" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="25"]
+[node name="Add_4_3_7" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="26"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, 11)
 use_collision = true
 size = Vector3(5, 10, 4)
 metadata/_edit_group_ = true
 
-[node name="MeleeActivator" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="26" instance=ExtResource("17_tcdd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 0)
+[node name="MeleeActivator" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="27" instance=ExtResource("17_tcdd8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 2)
 
-[node name="MeleeActivator2" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="27" instance=ExtResource("17_tcdd8")]
+[node name="MeleeActivator2" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="28" instance=ExtResource("17_tcdd8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2657, 1, 10.286)
 
-[node name="MeleeActivator3" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="28" instance=ExtResource("17_tcdd8")]
+[node name="MeleeActivator3" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="29" instance=ExtResource("17_tcdd8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6192, 0.999999, 23.4091)
 
-[node name="MeleeActivator4" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="29" instance=ExtResource("17_tcdd8")]
+[node name="MeleeActivator4" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="30" instance=ExtResource("17_tcdd8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8286, 0.999998, -0.521259)
 
-[node name="Add_2_1_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="30"]
+[node name="Add_2_1_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="31"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.5, 2)
 use_collision = true
 size = Vector3(2, 1, 2)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@MeshInstance3D@126147" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="31"]
+[node name="@MeshInstance3D@126147" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="32"]
 material_override = SubResource("StandardMaterial3D_tcdd8")
 mesh = SubResource("ImmediateMesh_bcoy1")
 
@@ -283,16 +288,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0893483, 1, -7.26178)
 next_level = "res://stages/guy_level_0_2.tscn"
 
 [node name="DoorSlideWall" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("18_k4s86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
-
-[node name="DoorSlideWall2" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("18_k4s86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
-
-[node name="DoorSlideWall3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("18_k4s86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
 
+[node name="DoorSlideWall2" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("18_k4s86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+
+[node name="DoorSlideWall3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("18_k4s86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
+
 [node name="DoorSlideWall4" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("18_k4s86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00167632, 0.985087, -2.98139)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00167632, 0.985087, -4.98139)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("17_c1kxu")
