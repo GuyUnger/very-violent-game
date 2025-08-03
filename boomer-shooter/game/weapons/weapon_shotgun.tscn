@@ -39,17 +39,21 @@ unique_name_in_owner = true
 [node name="ShotgunContainer" type="Node3D" parent="WorldModel"]
 unique_name_in_owner = true
 
-[node name="weapon_shotgun_arm_l" parent="WorldModel/ShotgunContainer" instance=ExtResource("3_qelip")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
-
-[node name="weapon_shotgun_arm_r" parent="WorldModel/ShotgunContainer" instance=ExtResource("4_kc37h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
-
 [node name="ShellEjection" type="Marker3D" parent="WorldModel/ShotgunContainer"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000782948, 0.00282902, -0.0360167)
 
 [node name="weapon_shotgun" parent="WorldModel/ShotgunContainer" instance=ExtResource("3_ri3d7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
+
+[node name="Hand" type="Node3D" parent="WorldModel/ShotgunContainer"]
+unique_name_in_owner = true
+visible = false
+
+[node name="weapon_shotgun_arm_l" parent="WorldModel/ShotgunContainer/Hand" instance=ExtResource("3_qelip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
+
+[node name="weapon_shotgun_arm_r" parent="WorldModel/ShotgunContainer/Hand" instance=ExtResource("4_kc37h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
 
 [node name="RightHand" type="Marker3D" parent="WorldModel"]

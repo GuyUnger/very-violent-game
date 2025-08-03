@@ -8,4 +8,5 @@ diffuse_mode = 2
 albedo_texture = ExtResource("1_3dodc")
 roughness = 0.7
 emission_texture = ExtResource("1_311ou")
-texture_filter = 2
+texture_filter = 0
+texture_repeat = false

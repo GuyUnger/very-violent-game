@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bubokaw6tm32t"]
+[gd_scene load_steps=20 format=3 uid="uid://bubokaw6tm32t"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_57m8n"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_4p0ku"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_7b0k1"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="17_4p0ku"]
 [ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="17_l1iw5"]
+[ext_resource type="PackedScene" uid="uid://d12rbfqmi83d4" path="res://ui/instruction.tscn" id="19_fy2pt"]
 
 [node name="Main" instance=ExtResource("1_57m8n")]
 
@@ -106,3 +107,6 @@ next_level = "res://stages/guy_level_0_1.tscn"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("17_l1iw5")
+
+[node name="Instruction" parent="." index="5" instance=ExtResource("19_fy2pt")]
+text = "Space to jump"
