@@ -75,5 +75,6 @@ bus = &"SFX"
 unique_name_in_owner = true
 
 [node name="PickupGlow" parent="." instance=ExtResource("13_n14iq")]
+modulate = Color(0.0637082, 0.893431, 0, 1)
 
 [editable path="WorldModel/ShotgunContainer/weapon_shotgun"]

@@ -109,6 +109,8 @@ func hit(from:Node3D) -> void:
 
 
 func die() -> void:
+	if has_node("CollisionShape3D"):
+		$CollisionShape3D.disabled = true
 	set_physics_process(false)
 	remove_from_group("aimables")
 	died.emit()
@@ -268,6 +270,7 @@ class StateAttacking extends State:
 		
 		weapon.aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP)
 		weapon.trigger_pressed = true
+		weapon.ammo = weapon.max_ammo
 		
 		
 	func _exit_tree() -> void:
