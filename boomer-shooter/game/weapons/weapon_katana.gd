@@ -3,4 +3,4 @@ extends Weapon
 
 
 func shoot() -> void:
-	pass
+	$AnimationPlayer.play("attack")
