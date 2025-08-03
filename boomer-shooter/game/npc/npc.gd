@@ -254,8 +254,6 @@ class StateWasToldEnemyPosition extends State:
 		super()
 		
 		get_parent().target = enemy
-		
-	
 
 		var animation_tree = get_parent().get("animation_tree")
 		if animation_tree:
@@ -276,9 +274,19 @@ class StateWasToldEnemyPosition extends State:
 class StateAttacking extends State:
 	var enemy:Node3D
 	var target_lock := 0.0
+	var weapon
 
 	func _ready() -> void:
 		super()
+		
+		weapon = get_parent().get_node_or_null("%Weapon")
+		if not weapon:
+			queue_free()
+			return
+			
+		if get_parent().health <= 0:
+			queue_free()
+			return
 		
 		target_lock = get_parent().target_lock_time
 		var animation_tree = get_parent().get("animation_tree")
@@ -287,16 +295,13 @@ class StateAttacking extends State:
 
 		get_parent().target = enemy
 		
+		
 	
 		#get_parent().moving_to = enemy
 		
 	func _physics_process(delta: float) -> void:
 		target_lock = max(0, target_lock - delta)
-		
-		var weapon = get_parent().get_node("%Weapon")
-		if not is_instance_valid(weapon):
-			return queue_free()
-		
+
 		weapon.look_at(enemy.global_position, Vector3.UP, true)
 		
 		if not get_parent().is_node_visible(enemy):
@@ -330,7 +335,4 @@ class StateAttacking extends State:
 		
 	func _exit_tree() -> void:
 		super()
-		
-		var weapon = get_parent().get_node("%Weapon")
-		if weapon:
-			weapon.trigger_pressed = false
+		weapon.trigger_pressed = false
