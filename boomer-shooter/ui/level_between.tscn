@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c58snso3lh168"]
+
+[ext_resource type="Script" uid="uid://w3jlujywnuvd" path="res://ui/level_between.gd" id="1_2e5i2"]
+[ext_resource type="AudioStream" path="res://ui/start.tres" id="2_pma06"]
+
+[sub_resource type="Shader" id="Shader_w4fll"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float time = 0.0;
+
+void fragment() {
+	float dist = length(UV - 0.5);
+	float a = round(sin(dist + time * PI * 1.25 - PI * 0.25) * 4.0) / 4.0;
+	COLOR.a = a;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2e5i2"]
+shader = SubResource("Shader_w4fll")
+shader_parameter/time = 0.0
+
+[node name="Control" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_2e5i2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_2e5i2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pma06")

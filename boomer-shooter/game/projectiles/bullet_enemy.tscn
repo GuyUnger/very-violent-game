@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bkgxmrwcpqn4q" path="res://game/projectiles/bullet_enemy.gd" id="1_rrtqo"]
 [ext_resource type="AudioStream" uid="uid://16i2e8o0hgxj" path="res://content/sfx/bullet_whiz.wav" id="2_bsw0i"]
-[ext_resource type="AudioStream" path="res://game/player/bullet_ricochet.tres" id="3_lcx68"]
+[ext_resource type="AudioStream" uid="uid://bp0xff2046anp" path="res://game/player/bullet_ricochet.tres" id="3_lcx68"]
 [ext_resource type="AudioStream" uid="uid://cwhw047fx33ox" path="res://content/sfx/bullet_hit_meat.wav" id="4_4brcg"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="5_sdqk6"]
 
@@ -41,8 +41,8 @@ radial_segments = 4
 rings = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rrtqo"]
-radius = 0.2
-height = 0.8
+radius = 0.124314
+height = 0.617805
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_rrtqo")

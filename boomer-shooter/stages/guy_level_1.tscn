@@ -64,7 +64,7 @@ transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.95
 shadow_enabled = true
 
 [node name="Player" parent="SubViewportContainer/SubViewport" index="1"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.509219, 0, 7.23507)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0.509219, 0, 7.23507)
 starting_weapon = ExtResource("2_apt5p")
 
 [node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" index="3"]
@@ -218,7 +218,6 @@ mesh = SubResource("ImmediateMesh_4tmal")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -17.5)
 use_collision = true
 size = Vector3(21, 3, 1)
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="@MeshInstance3D@89887" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="15"]
@@ -265,7 +264,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9648, 0, -14.8746)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32017, -0.0194693, -13.9608)
 
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("20_3usft")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -15)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.86416, 0, -15.3144)
+next_level = "res://stages/guy_level_2.tscn"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("8_phylu")
