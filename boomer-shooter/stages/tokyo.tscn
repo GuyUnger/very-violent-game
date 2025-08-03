@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://b6o8mp0jhq1nd"]
+[gd_scene load_steps=48 format=4 uid="uid://b6o8mp0jhq1nd"]
 
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_wojob"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_o4n3f"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://c7by6vbb060yn" path="res://game/props/awning.tscn" id="33_yn2a4"]
 [ext_resource type="PackedScene" uid="uid://djy0m2q1rxf4m" path="res://game/props/stairs_medium.tscn" id="34_d03ru"]
 [ext_resource type="PackedScene" uid="uid://c32xofphq7in5" path="res://game/props/platform.tscn" id="35_ud70m"]
+[ext_resource type="PackedScene" uid="uid://dfneqe3bb7y62" path="res://game/props/plane.tscn" id="36_aodlu"]
 [ext_resource type="PackedScene" uid="uid://3xpj0l2cqkiq" path="res://game/props/conditioner.tscn" id="36_ud70m"]
 [ext_resource type="PackedScene" uid="uid://cvkxvvl5qllmb" path="res://game/props/doorway.tscn" id="38_yibng"]
 [ext_resource type="PackedScene" uid="uid://cqeao6wkv6xen" path="res://game/props/window_deco.tscn" id="39_nhte8"]
@@ -53,19 +54,31 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AADAvwAAgL8AAMC/AADAPwAAgL8AAMC/AADAPwAAgD8AAMC/AADAvwAAgL8AAMC/AADAvwAAgL8AAMA/AADAPwAAgL8AAMA/AADAPwAAgD8AAMA/AADAvwAAgL8AAMA/")
 }]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjdsr"]
-cull_mode = 2
-no_depth_test = true
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_aodlu"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aodlu"]
 cull_mode = 2
 no_depth_test = true
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_2is7d"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_aodlu"]
+_surfaces = [{
+"aabb": AABB(-6, -3, -6, 12, 6, 12),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAFAAYABgACAAEABQAEAAcABwAGAAUABAAAAAMAAwAHAAQAAwACAAYABgAHAAMABAAFAAEAAQAAAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AACgwAAAQMAAAKDAAACgQAAAQMAAAKDAAADAQAAAQEAAAMDAAADAwAAAQEAAAMDAAACgwAAAQMAAAKBAAACgQAAAQMAAAKBAAADAQAAAQEAAAMBAAADAwAAAQEAAAMBA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2is7d"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_huau7"]
 
 [node name="Tokyo" type="Node3D"]
 
@@ -180,10 +193,26 @@ metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="Add_66_73_131" type="CSGBox3D" parent="Global/BackgroundBuildings/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93, 36.5, 212.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 46, 484.5)
 use_collision = true
-size = Vector3(66, 73, 131)
+size = Vector3(54, 92, 107)
 material = ExtResource("22_i6c3o")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_66_73_133" type="CSGBox3D" parent="Global/BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 26.5, 677.5)
+use_collision = true
+size = Vector3(82, 53, 211)
+material = ExtResource("19_aodlu")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_66_73_132" type="CSGBox3D" parent="Global/BackgroundBuildings/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 211, 46, 402)
+use_collision = true
+size = Vector3(102, 92, 154)
+material = ExtResource("15_yn2a4")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -249,6 +278,97 @@ operation = 2
 use_collision = true
 size = Vector3(15, 7, 128)
 material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BackgroundBuildingsBehind" type="StaticBody3D" parent="Global"]
+script = ExtResource("2_o4n3f")
+material = ExtResource("13_d03ru")
+materials = Array[Material]([ExtResource("3_apn2u"), ExtResource("4_73r8o"), ExtResource("5_3c822"), ExtResource("6_7xjh6"), ExtResource("7_qo4k2"), ExtResource("8_43vej"), ExtResource("9_a6tfy"), ExtResource("10_316br"), ExtResource("11_wha0p"), ExtResource("12_4vkph"), ExtResource("13_d03ru"), ExtResource("14_ud70m"), ExtResource("15_yn2a4"), ExtResource("16_yibng"), ExtResource("17_nhte8"), ExtResource("18_tjdsr"), ExtResource("19_aodlu"), ExtResource("20_2is7d"), ExtResource("21_huau7"), ExtResource("22_i6c3o"), ExtResource("23_ifw73")])
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Global/BackgroundBuildingsBehind"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Add_66_50_42" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -211.079, 41.0547, -120.722)
+use_collision = true
+size = Vector3(109.667, 82.1093, 100.325)
+material = ExtResource("12_4vkph")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_54_34_52" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.8279, 69.1916, -333.822)
+use_collision = true
+size = Vector3(114.075, 138.383, 64.0846)
+material = ExtResource("11_wha0p")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_45_56_59" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -173.177, 24.9492, 44.5308)
+use_collision = true
+size = Vector3(78.353, 49.8985, 194.201)
+material = ExtResource("8_43vej")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_45_65_54" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -275.094, 100.095, -225.209)
+use_collision = true
+size = Vector3(117.54, 200.189, 73.0504)
+material = ExtResource("10_316br")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_66_73_131" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -315.845, 85.2651, 206.478)
+use_collision = true
+size = Vector3(87.5542, 170.53, 143.044)
+material = ExtResource("22_i6c3o")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_30_69_160" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -320.769, 65.1379, -67.3594)
+use_collision = true
+size = Vector3(78.4248, 140.865, 81.9609)
+material = ExtResource("7_qo4k2")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_64_147_69" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -156.5, 73.5, 243.5)
+use_collision = true
+size = Vector3(64, 147, 69)
+material = ExtResource("8_43vej")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_141_128_23" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -156.5, 64, 244.5)
+use_collision = true
+size = Vector3(141, 128, 23)
+material = ExtResource("3_apn2u")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_113_112_97" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -156.5, 56, 167.5)
+use_collision = true
+size = Vector3(113, 112, 97)
+material = ExtResource("10_316br")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_80_111_61" type="CSGBox3D" parent="Global/BackgroundBuildingsBehind/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.2899, 55.5, -198.815)
+use_collision = true
+size = Vector3(75.3633, 111, 93.8889)
+material = ExtResource("10_316br")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -1307,10 +1427,6 @@ material = ExtResource("9_a6tfy")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@MeshInstance3D@64252" type="MeshInstance3D" parent="Sector1/BehindPlane/CSGCombiner3D"]
-material_override = SubResource("StandardMaterial3D_tjdsr")
-mesh = SubResource("ImmediateMesh_aodlu")
-
 [node name="Props" type="Node3D" parent="Sector1"]
 
 [node name="PlaneCrash" parent="Sector1/Props" instance=ExtResource("30_43vej")]
@@ -1742,6 +1858,679 @@ metadata/_edit_group_ = true
 material_override = SubResource("StandardMaterial3D_aodlu")
 mesh = SubResource("ImmediateMesh_2is7d")
 
+[node name="Airport" type="Node3D" parent="."]
+
+[node name="LandingArea" type="StaticBody3D" parent="Airport"]
+script = ExtResource("2_o4n3f")
+material = ExtResource("13_d03ru")
+materials = Array[Material]([ExtResource("3_apn2u"), ExtResource("4_73r8o"), ExtResource("5_3c822"), ExtResource("6_7xjh6"), ExtResource("7_qo4k2"), ExtResource("8_43vej"), ExtResource("9_a6tfy"), ExtResource("10_316br"), ExtResource("11_wha0p"), ExtResource("12_4vkph"), ExtResource("13_d03ru"), ExtResource("14_ud70m"), ExtResource("15_yn2a4"), ExtResource("16_yibng"), ExtResource("17_nhte8"), ExtResource("18_tjdsr"), ExtResource("19_aodlu"), ExtResource("20_2is7d"), ExtResource("21_huau7"), ExtResource("22_i6c3o"), ExtResource("23_ifw73")])
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Airport/LandingArea"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Add_38_1_33" type="CSGBox3D" parent="Airport/LandingArea/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71, 8.5, 186.5)
+use_collision = true
+size = Vector3(100, 1, 33)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_38_1_34" type="CSGBox3D" parent="Airport/LandingArea/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.5, 6.5, 352)
+use_collision = true
+size = Vector3(67, 5, 298)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_38_1_35" type="CSGBox3D" parent="Airport/LandingArea/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 211, 6.5, 335.5)
+use_collision = true
+size = Vector3(180, 5, 331)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="MainBuilding" type="StaticBody3D" parent="Airport"]
+script = ExtResource("2_o4n3f")
+material = ExtResource("13_d03ru")
+materials = Array[Material]([ExtResource("3_apn2u"), ExtResource("4_73r8o"), ExtResource("5_3c822"), ExtResource("6_7xjh6"), ExtResource("7_qo4k2"), ExtResource("8_43vej"), ExtResource("9_a6tfy"), ExtResource("10_316br"), ExtResource("11_wha0p"), ExtResource("12_4vkph"), ExtResource("13_d03ru"), ExtResource("14_ud70m"), ExtResource("15_yn2a4"), ExtResource("16_yibng"), ExtResource("17_nhte8"), ExtResource("18_tjdsr"), ExtResource("19_aodlu"), ExtResource("20_2is7d"), ExtResource("21_huau7"), ExtResource("22_i6c3o"), ExtResource("23_ifw73")])
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Airport/MainBuilding"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Add_83_6_42" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 115.5, 13, 149)
+use_collision = true
+size = Vector3(83, 10, 42)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_83_6_42" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_83_6_42"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+operation = 2
+size = Vector3(79, 6, 40)
+material = ExtResource("15_yn2a4")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_77_6_34" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.5, 21.5, 153)
+use_collision = true
+size = Vector3(59, 7, 34)
+material = ExtResource("15_yn2a4")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_77_6_34" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_77_6_34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -1, 0)
+operation = 2
+size = Vector3(66, 6, 32)
+material = ExtResource("17_nhte8")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_33_16_36" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 16, 156)
+use_collision = true
+size = Vector3(33, 16, 36)
+material = ExtResource("16_yibng")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_33_16_36" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_33_16_36"]
+operation = 2
+size = Vector3(31, 14, 34)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_21_6_3" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.5, 11, 147.5)
+use_collision = true
+size = Vector3(21, 6, 3)
+material = ExtResource("8_43vej")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_21_6_3" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_21_6_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(19, 5, 1)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="e_Add_8_4_8" type="CSGMesh3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 37, 163)
+use_collision = true
+mesh = SubResource("ArrayMesh_aodlu")
+material = ExtResource("13_d03ru")
+
+[node name="Sub_6_16_7" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/e_Add_8_4_8"]
+operation = 2
+size = Vector3(10, 4, 10)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_7_3_2" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.5, 10.5, 141)
+operation = 2
+use_collision = true
+size = Vector3(7, 3, 2)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_6_16_6" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 26, 163)
+use_collision = true
+size = Vector3(6, 16, 6)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_6_16_6" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_6_16_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(4, 15, 4)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_2_3_2" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81, 19.5, 163)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 2)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_4_2_4" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 34, 163)
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 4)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_3_2_6" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.5, 37, 163)
+operation = 2
+use_collision = true
+size = Vector3(3, 2, 6)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_6_2_2" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 37, 168)
+operation = 2
+use_collision = true
+size = Vector3(6, 2, 2)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_4_2_6" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73, 37, 163)
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 6)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_6_2_3" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 37, 157.5)
+operation = 2
+use_collision = true
+size = Vector3(6, 2, 3)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@130694" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 40, 163)
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 4)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_65_2_11" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.5, 9, 123)
+use_collision = true
+size = Vector3(65, 2, 10)
+material = ExtResource("14_ud70m")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_66_1_1" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 124, 8.5, 117)
+use_collision = true
+size = Vector3(66, 1, 2)
+material = ExtResource("14_ud70m")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_5_3_5" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.5, 12.5, 126.5)
+operation = 2
+use_collision = true
+size = Vector3(5, 3, 5)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_5_3_2" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 124.5, 12.5, 129)
+operation = 2
+use_collision = true
+size = Vector3(5, 3, 2)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_15_5_18" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114, 16.5, 150)
+operation = 2
+use_collision = true
+size = Vector3(16, 5, 18)
+material = ExtResource("19_aodlu")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_55_1_8" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.5, 10.5, 124)
+use_collision = true
+size = Vector3(65, 1, 8)
+material = ExtResource("7_qo4k2")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_3_3_5" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.5, 19.5, 159.5)
+operation = 2
+use_collision = true
+size = Vector3(3, 3, 5)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@153173" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.5, 19.5, 149.5)
+operation = 2
+use_collision = true
+size = Vector3(5, 3, 5)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_9_6_8" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.5, 20, 174)
+use_collision = true
+size = Vector3(9, 6, 8)
+material = ExtResource("7_qo4k2")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@153219" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.5, 20, 174)
+use_collision = true
+size = Vector3(9, 6, 8)
+material = ExtResource("7_qo4k2")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_9_6_9" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.5, 20, 172.5)
+operation = 2
+size = Vector3(7, 4, 9)
+material = ExtResource("16_yibng")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_9_6_8" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.5, 20, 172.5)
+operation = 2
+size = Vector3(7, 4, 9)
+material = ExtResource("16_yibng")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_36_2_6" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119, 20, 174)
+operation = 2
+use_collision = true
+size = Vector3(36, 2, 6)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_3_3_7" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.5, 19.5, 180.5)
+operation = 2
+use_collision = true
+size = Vector3(3, 3, 7)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_5_5_14" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.5, 19.5, 185)
+use_collision = true
+size = Vector3(5, 5, 14)
+material = ExtResource("18_tjdsr")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_5_5_14" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.5, 19.5, 185)
+operation = 2
+size = Vector3(3, 3, 16)
+material = ExtResource("18_tjdsr")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_7_1_7" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.5, 16.5, 157.5)
+use_collision = true
+size = Vector3(19, 1, 9)
+material = ExtResource("16_yibng")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_5_1_5" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.645, 24.0813, 139.107)
+operation = 2
+use_collision = true
+size = Vector3(16.8116, 1.8374, 3.78613)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_13_8_15" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 149.5, 13, 177.5)
+use_collision = true
+size = Vector3(13, 8, 15)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_13_8_15" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_13_8_15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+operation = 2
+size = Vector3(11, 5, 13)
+material = ExtResource("3_apn2u")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_4_3_3" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 149, 12.5, 170)
+operation = 2
+use_collision = true
+size = Vector3(4, 3, 6)
+material = ExtResource("5_3c822")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_2_2_4" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 143, 14, 181)
+operation = 2
+use_collision = true
+size = Vector3(2, 2, 4)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_3_2_4" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 142.5, 14, 176)
+operation = 2
+use_collision = true
+size = Vector3(3, 2, 4)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_67_14_50" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 183.5, 16, 217)
+use_collision = true
+size = Vector3(67, 14, 50)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_67_14_50" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_67_14_50"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 0)
+operation = 2
+size = Vector3(67, 13, 48)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_2_3_6" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 152, 12.5, 187)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 6)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@186727" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153, 10.5, 193)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 2)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_18_4_16" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 142, 27, 154)
+use_collision = true
+size = Vector3(18, 4, 16)
+material = ExtResource("16_yibng")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_18_4_16" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_18_4_16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(16, 3, 14)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_2_3_3" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136, 26.5, 147.5)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 3)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_5_2_3" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 145.5, 27, 162.5)
+operation = 2
+use_collision = true
+size = Vector3(5, 2, 3)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_5_2_4" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 137.5, 27, 163)
+operation = 2
+use_collision = true
+size = Vector3(5, 2, 4)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_25_4_24" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.5, 27, 158)
+use_collision = true
+size = Vector3(25, 4, 24)
+material = ExtResource("16_yibng")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_25_4_24" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_25_4_24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(23, 3, 22)
+material = ExtResource("11_wha0p")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_2_3_5" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122, 26.5, 150.5)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 5)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_8_2_3" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116, 27, 170.5)
+operation = 2
+use_collision = true
+size = Vector3(8, 2, 3)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_7_2_2" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.5, 27, 170)
+operation = 2
+use_collision = true
+size = Vector3(7, 2, 2)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_4_2_8" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97, 27, 163)
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 8)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_23_7_30" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 143.5, 14.5, 143)
+use_collision = true
+size = Vector3(23, 7, 30)
+material = ExtResource("8_43vej")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_23_7_30" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_23_7_30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(21, 6, 28)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@186826" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 137, 12.5, 156.5)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 3)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_19_6_29" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83, 14, 159.5)
+use_collision = true
+size = Vector3(18, 6, 35)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_19_6_29" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_19_6_29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(17, 5, 27)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_19_6_30" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83, 14, 159.5)
+use_collision = true
+size = Vector3(18, 6, 35)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_19_6_29" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D/Add_19_6_30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(17, 5, 27)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@186836" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 12.5, 146)
+operation = 2
+use_collision = true
+size = Vector3(2, 3, 2)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_9_3_2" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 12.5, 150)
+operation = 2
+use_collision = true
+size = Vector3(12, 3, 2)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_6_2_7" type="CSGBox3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72, 13, 163.5)
+operation = 2
+use_collision = true
+size = Vector3(6, 2, 7)
+material = ExtResource("13_d03ru")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@MeshInstance3D@186845" type="MeshInstance3D" parent="Airport/MainBuilding/CSGCombiner3D"]
+material_override = SubResource("StandardMaterial3D_2is7d")
+mesh = SubResource("ImmediateMesh_huau7")
+
+[node name="Props" type="Node3D" parent="Airport"]
+
+[node name="StreetsRoad20" parent="Airport/Props" instance=ExtResource("3_o4n3f")]
+transform = Transform3D(-2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 105, 8, 253)
+
+[node name="StreetsRoad21" parent="Airport/Props" instance=ExtResource("3_o4n3f")]
+transform = Transform3D(-2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 105, 8, 353)
+
+[node name="StreetsRoad22" parent="Airport/Props" instance=ExtResource("3_o4n3f")]
+transform = Transform3D(-2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 105, 8, 453)
+
+[node name="Plane" parent="Airport/Props" instance=ExtResource("36_aodlu")]
+transform = Transform3D(0.992325, 0, 0.123653, 0, 1, 0, -0.123653, 0, 0.992325, 104, 8, 236.115)
+
+[node name="Plane2" parent="Airport/Props" instance=ExtResource("36_aodlu")]
+transform = Transform3D(-0.0871558, 0, -0.996195, 0, 1, 0, 0.996195, 0, -0.0871558, 166, 9.03671, 221)
+
+[node name="Stairs" type="Node3D" parent="Airport"]
+
+[node name="StairsMedium" parent="Airport/Stairs" instance=ExtResource("34_d03ru")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 107, 11, 147)
+
+[node name="StairsMedium2" parent="Airport/Stairs" instance=ExtResource("34_d03ru")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 111, 11, 147)
+
+[node name="StairsMedium3" parent="Airport/Stairs" instance=ExtResource("34_d03ru")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 115, 11, 147)
+
+[node name="StairsMedium4" parent="Airport/Stairs" instance=ExtResource("34_d03ru")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 119, 11, 147)
+
+[node name="StairsMedium5" parent="Airport/Stairs" instance=ExtResource("34_d03ru")]
+transform = Transform3D(1.31134e-07, 0, -1.6064, 0, 1.15573, 0, 1, 0, 2.10654e-07, 126.76, 18, 138)
+
+[node name="StairsMedium6" parent="Airport/Stairs" instance=ExtResource("34_d03ru")]
+transform = Transform3D(1.31134e-07, 0, -1.6064, 0, 1.15573, 0, 1, 0, 2.10654e-07, 126.76, 18, 140)
+
+[node name="StairsShort" parent="Airport/Stairs" instance=ExtResource("29_qo4k2")]
+transform = Transform3D(-4.37114e-08, 0, 0.7, 0, 1, 0, -1, 0, -3.0598e-08, 80.0154, 18.0573, 162)
+
+[node name="StairsShort2" parent="Airport/Stairs" instance=ExtResource("29_qo4k2")]
+transform = Transform3D(7.54979e-08, 0, -0.7, 0, 1, 0, 1, 0, 5.28485e-08, 77.9091, 22.0573, 164.291)
+
+[node name="StairsShort4" parent="Airport/Stairs" instance=ExtResource("29_qo4k2")]
+transform = Transform3D(-4.37114e-08, 0, 0.7, 0, 1, 0, -1, 0, -3.0598e-08, 79.9825, 26.6376, 161.75)
+
+[node name="StairsShort5" parent="Airport/Stairs" instance=ExtResource("29_qo4k2")]
+transform = Transform3D(7.54979e-08, 0, -0.7, 0, 1, 0, 1, 0, 5.28485e-08, 78.0751, 30.8928, 164.179)
+
 [node name="Ground" type="StaticBody3D" parent="."]
 script = ExtResource("2_o4n3f")
 material = ExtResource("1_wojob")
@@ -1855,9 +2644,9 @@ metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="Add_166_7_74" type="CSGBox3D" parent="Ground/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103, 4.5, 118.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.5, 4.5, 315.5)
 use_collision = true
-size = Vector3(166, 7, 75)
+size = Vector3(241, 7, 469)
 material = ExtResource("14_ud70m")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
@@ -1949,6 +2738,9 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 44, 14, 
 
 [node name="StreetsJunction1" parent="Streets" instance=ExtResource("5_apn2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.1316, 8, 5)
+
+[node name="StreetsJunction4" parent="Streets" instance=ExtResource("5_apn2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.8684, 8, 5)
 
 [node name="StreetsJunction2" parent="Streets" instance=ExtResource("5_apn2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 8, 105)
