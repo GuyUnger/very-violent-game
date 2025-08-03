@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cy2l414msbsos"]
+[gd_scene load_steps=43 format=3 uid="uid://npsi3v750s7c"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_j0cmv"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_kpc0v"]
@@ -18,7 +18,28 @@
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_4ovxa"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="18_elmn4"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="18_j0cmv"]
+[ext_resource type="Material" uid="uid://doapqabe7twc4" path="res://content/environment/materials/surface_0.tres" id="18_xm2mw"]
+[ext_resource type="Material" uid="uid://buavh7fna845w" path="res://content/environment/materials/surface_1.tres" id="19_mlgc6"]
 [ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="20_mxwxx"]
+[ext_resource type="Material" uid="uid://b71gxlhwanayi" path="res://content/environment/materials/surface_2.tres" id="20_wqu2v"]
+[ext_resource type="Material" uid="uid://dcl8eha8janno" path="res://content/environment/materials/surface_3.tres" id="21_0fds8"]
+[ext_resource type="Material" uid="uid://bfosjqjdja0e2" path="res://content/environment/materials/surface_4.tres" id="22_p7ly5"]
+[ext_resource type="Material" uid="uid://dcpe38qomrqot" path="res://content/environment/materials/surface_5.tres" id="23_vygcc"]
+[ext_resource type="Material" uid="uid://cqlyvxeskbq7m" path="res://content/environment/materials/surface_6.tres" id="24_5wxyc"]
+[ext_resource type="Material" uid="uid://rt8jdtf6es70" path="res://content/environment/materials/surface_7.tres" id="25_c35pg"]
+[ext_resource type="Material" uid="uid://dg8yoad2wmah0" path="res://content/environment/materials/surface_8.tres" id="26_p3vp7"]
+[ext_resource type="Material" uid="uid://c8am7gxht6vdq" path="res://content/environment/materials/surface_9.tres" id="27_lc5t7"]
+[ext_resource type="Material" uid="uid://bxcxyqvi67jdl" path="res://content/environment/materials/surface_10.tres" id="28_0g2n4"]
+[ext_resource type="Material" uid="uid://5ap84rrgvvoa" path="res://content/environment/materials/surface_11.tres" id="29_qbk40"]
+[ext_resource type="Material" uid="uid://c00744tmfikc5" path="res://content/environment/materials/surface_12.tres" id="30_khvba"]
+[ext_resource type="Material" uid="uid://cbqop5duvx0y6" path="res://content/environment/materials/surface_13.tres" id="31_6kufn"]
+[ext_resource type="Material" uid="uid://yeq7pun4piny" path="res://content/environment/materials/surface_14.tres" id="32_o70yj"]
+[ext_resource type="Material" uid="uid://cxxkrlaqg1hq5" path="res://content/environment/materials/surface_15.tres" id="33_mv6ou"]
+[ext_resource type="Material" uid="uid://doeho6406mk7b" path="res://content/environment/materials/surface_16.tres" id="34_n4x72"]
+[ext_resource type="Material" uid="uid://h1otvpr12uoy" path="res://content/environment/materials/surface_17.tres" id="35_eoof5"]
+[ext_resource type="Material" uid="uid://cmc7f1y8anju" path="res://content/environment/materials/surface_18.tres" id="36_qk312"]
+[ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="37_3d0v7"]
+[ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="38_hrmbc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8bc4"]
 cull_mode = 2
@@ -93,6 +114,7 @@ allow_smg = false
 
 [node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="6"]
 script = ExtResource("16_4ovxa")
+materials = Array[Material]([ExtResource("18_xm2mw"), ExtResource("19_mlgc6"), ExtResource("20_wqu2v"), ExtResource("21_0fds8"), ExtResource("22_p7ly5"), ExtResource("23_vygcc"), ExtResource("24_5wxyc"), ExtResource("25_c35pg"), ExtResource("26_p3vp7"), ExtResource("27_lc5t7"), ExtResource("28_0g2n4"), ExtResource("29_qbk40"), ExtResource("30_khvba"), ExtResource("31_6kufn"), ExtResource("32_o70yj"), ExtResource("33_mv6ou"), ExtResource("34_n4x72"), ExtResource("35_eoof5"), ExtResource("36_qk312"), ExtResource("37_3d0v7"), ExtResource("38_hrmbc")])
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
 metadata/_edit_lock_ = true
 
@@ -104,18 +126,21 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 4.5)
 use_collision = true
 size = Vector3(4, 1, 11)
+material = ExtResource("26_p3vp7")
 metadata/_edit_group_ = true
 
 [node name="Add_7_1_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.5, 8)
 use_collision = true
 size = Vector3(7, 1, 4)
+material = ExtResource("26_p3vp7")
 metadata/_edit_group_ = true
 
 [node name="Add_3_1_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.5, 13.5)
 use_collision = true
 size = Vector3(2, 1, 7)
+material = ExtResource("26_p3vp7")
 metadata/_edit_group_ = true
 
 [node name="@MeshInstance3D@110255" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="3"]
@@ -126,6 +151,7 @@ mesh = SubResource("ImmediateMesh_s1ya0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 11)
 use_collision = true
 size = Vector3(10, 4, 2)
+material = ExtResource("18_xm2mw")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -133,6 +159,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 15)
 use_collision = true
 size = Vector3(2, 4, 6)
+material = ExtResource("35_eoof5")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -140,6 +167,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 17.5)
 use_collision = true
 size = Vector3(4, 4, 1)
+material = ExtResource("36_qk312")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -147,6 +175,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 2, 13.5)
 use_collision = true
 size = Vector3(3, 4, 7)
+material = ExtResource("36_qk312")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -154,6 +183,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 2, 7.5)
 use_collision = true
 size = Vector3(3, 4, 5)
+material = ExtResource("18_xm2mw")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -161,6 +191,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2, 4)
 use_collision = true
 size = Vector3(7, 4, 4)
+material = ExtResource("18_xm2mw")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -168,6 +199,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 0.5)
 use_collision = true
 size = Vector3(2, 4, 5)
+material = ExtResource("18_xm2mw")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -175,6 +207,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 3.5)
 use_collision = true
 size = Vector3(2, 4, 13)
+material = ExtResource("18_xm2mw")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -182,6 +215,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2.5)
 use_collision = true
 size = Vector3(4, 4, 3)
+material = ExtResource("18_xm2mw")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 

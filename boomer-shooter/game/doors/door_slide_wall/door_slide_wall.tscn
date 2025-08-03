@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://duomy14irp63p"]
+[gd_scene load_steps=7 format=3 uid="uid://duomy14irp63p"]
 
 [ext_resource type="Script" uid="uid://b4xrrekbx122r" path="res://game/doors/door_slide_wall/door_slide_wall.gd" id="1_fnj02"]
+[ext_resource type="Material" uid="uid://buavh7fna845w" path="res://content/environment/materials/surface_1.tres" id="2_87hv4"]
 [ext_resource type="AudioStream" uid="uid://bqmf85a2dhyxp" path="res://game/interactables/mechanical_door_thud.tres" id="2_bpo4e"]
 [ext_resource type="AudioStream" uid="uid://7a4ebqe3uy86" path="res://game/interactables/mechanical_stone_slide.wav" id="2_ekjhr"]
 
@@ -17,6 +18,7 @@ script = ExtResource("1_fnj02")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Collider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = ExtResource("2_87hv4")
 mesh = SubResource("BoxMesh_bnhdb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collider"]
