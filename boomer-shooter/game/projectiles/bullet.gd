@@ -61,12 +61,12 @@ func _ready() -> void:
 		$Fire.pitch_scale = randf_range(1.0, 1.2)
 		$Fire.play()
 	
+	if res:
+		hit(res.collider, res.normal, res.position)
 	await tween.finished
 	
 	$Whiz.pitch_scale = randf_range(0.9, 1.3)
 	$Whiz.play()
-	if res:
-		hit(res.collider, res.normal, res.position)
 
 
 #func _physics_process(delta: float) -> void:
