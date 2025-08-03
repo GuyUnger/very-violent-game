@@ -18,7 +18,6 @@ const JUMP_STRENGTH = 12.0
 @onready var ray_aim_player: RayCast3D = %RayAimPlayer
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
-@onready var area_melee: Area3D = %AreaMelee
 @onready var fps_weapon: Node3D = %FpsWeapon
 
 var source_id := 0
@@ -488,11 +487,10 @@ func _process_melee(delta) -> void:
 		
 		await get_tree().create_timer(0.2).timeout
 		
-		for body in area_melee.get_overlapping_bodies():
-			if "melee" in body:
-				body.melee()
-			elif "melee" in body.get_parent():
-				body.get_parent().melee()
+		var melee := preload("res://game/projectiles/melee.tscn").instantiate()
+		melee.position = global_position
+		Main.instance.add_child(melee)
+		
 		await get_tree().create_timer(0.1).timeout
 		
 		%MeleeAttack.hide()
