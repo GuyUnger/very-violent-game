@@ -13,6 +13,9 @@ var total_enemies: int
 var enemies_left: int
 
 
+static var clones: int = 0
+
+
 func _init() -> void:
 	instance = self
 	
@@ -21,12 +24,15 @@ func _ready() -> void:
 	EventStore.register_source(source_id, self)
 	get_tree().paused = true
 	
+	clones += 1
 	await get_tree().process_frame
 	total_enemies = get_tree().get_nodes_in_group("npc_enemies").size()
 	enemies_left = total_enemies
 	enemy_killed.connect(_on_enemy_killed)
 	await get_tree().create_timer(0.3).timeout
 	get_tree().paused = false
+	printt(clones)
+	
 
 func _on_enemy_killed() -> void:
 	enemies_left = 0

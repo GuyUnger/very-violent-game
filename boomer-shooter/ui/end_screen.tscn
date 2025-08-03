@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6r7h7wlre1q6"]
+
+[ext_resource type="Script" uid="uid://dmcbfcxevx7s3" path="res://ui/end_screen.gd" id="1_70k24"]
+[ext_resource type="AudioStream" uid="uid://cyjxr4romq8r1" path="res://game/kill 02.wav" id="2_s243q"]
+[ext_resource type="AudioStream" uid="uid://bv7hqumm0g7hk" path="res://game/weapons/sfx/weapon_revolver_shoot_sfx_rand.tres" id="3_7ibj4"]
+
+[node name="Control" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_70k24")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LabelComplete" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_top = 123.0
+offset_right = 851.0
+offset_bottom = 173.0
+text = "You did it
+And all it took was..."
+horizontal_alignment = 1
+
+[node name="LabelLife" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_top = 188.0
+offset_right = 851.0
+offset_bottom = 238.0
+text = "0 lifes"
+horizontal_alignment = 1
+
+[node name="LabelThanks" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_top = 239.0
+offset_right = 851.0
+offset_bottom = 289.0
+text = "Thank you for playing!"
+horizontal_alignment = 1
+
+[node name="LabelCredits" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_top = 300.0
+offset_right = 851.0
+offset_bottom = 407.0
+text = "a game by:
+Cameron Paxton - Picster - Perfoon - Samsface - Supabubba - Guy Unger
+
+For GMTK game jam 2025
+"
+horizontal_alignment = 1
+
+[node name="AudioLife" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_s243q")
+
+[node name="AudioContinue" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_7ibj4")

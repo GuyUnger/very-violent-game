@@ -31,7 +31,7 @@ albedo_color = Color(0, 1, 0, 1)
 
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("2_jgrif")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11, 15, -3)
-next_level = "res://stages/guy_level_2.tscn"
+next_level = "res://ui/end_screen.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="1"]
 transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)

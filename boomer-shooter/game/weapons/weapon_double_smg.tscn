@@ -70,7 +70,7 @@ script = ExtResource("1_1lbga")
 fire_rate = 0.01
 auto = true
 recoil = 0.1
-ammo = 90
+ammo = 300
 pickup_sounds = Array[AudioStream]([ExtResource("2_bjki7"), ExtResource("3_g4h8n")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
