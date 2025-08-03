@@ -42,7 +42,7 @@ rings = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rrtqo"]
 radius = 0.124314
-height = 0.617805
+height = 0.470643
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_rrtqo")
