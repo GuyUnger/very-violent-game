@@ -411,6 +411,7 @@ mesh = SubResource("ImmediateMesh_w1bwj")
 
 [node name="NPCEnemySniper" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("17_42o8f")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -33.475, 7, -10.5215)
+target_lock_time = 0.3
 looking_at = Vector3(10, 0, 0)
 metadata/_edit_group_ = true
 
@@ -460,6 +461,7 @@ transform = Transform3D(0.767051, 0.127685, -0.628752, 0.0233659, 0.973787, 0.22
 
 [node name="NPCEnemySniper2" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("17_42o8f")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -34.475, 7, -11.6092)
+target_lock_time = 0.3
 looking_at = Vector3(10, 0, 0)
 metadata/_edit_group_ = true
 
@@ -509,6 +511,7 @@ transform = Transform3D(0.767051, 0.127685, -0.628752, 0.0233659, 0.973787, 0.22
 
 [node name="NPCEnemySniper3" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("17_42o8f")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -35.475, 7, -13.0129)
+target_lock_time = 0.3
 looking_at = Vector3(10, 0, 0)
 metadata/_edit_group_ = true
 
@@ -558,6 +561,7 @@ transform = Transform3D(0.767051, 0.127685, -0.628752, 0.0233659, 0.973787, 0.22
 
 [node name="NPCEnemySniper4" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("17_42o8f")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -36.475, 7, -14.443)
+target_lock_time = 0.3
 looking_at = Vector3(10, 0, 0)
 metadata/_edit_group_ = true
 
@@ -630,6 +634,7 @@ stream = ExtResource("17_5ekby")
 
 [node name="NPCEnemyBigGuy" parent="." index="5" instance=ExtResource("22_0usrl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1402, 6.00756, -22.81)
+target_lock_time = 0.3
 
 [editable path="SubViewportContainer/SubViewport/NPCEnemySniper"]
 [editable path="SubViewportContainer/SubViewport/NPCEnemySniper2"]
