@@ -1,24 +1,34 @@
-[gd_scene load_steps=22 format=3 uid="uid://bpqroc2by042y"]
+[gd_scene load_steps=32 format=3 uid="uid://bpqroc2by042y"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_nnfrx"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="2_jgrif"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_pp2wm"]
-[ext_resource type="PackedScene" uid="uid://csfp8t30e7u6m" path="res://game/props/plane_crash.tscn" id="3_jgrif"]
-[ext_resource type="PackedScene" uid="uid://bhwigbhxgn45k" path="res://game/props/pole.tscn" id="4_l7w3k"]
-[ext_resource type="PackedScene" uid="uid://3xpj0l2cqkiq" path="res://game/props/conditioner.tscn" id="5_wvbax"]
-[ext_resource type="PackedScene" uid="uid://c7by6vbb060yn" path="res://game/props/awning.tscn" id="6_l1kkq"]
-[ext_resource type="PackedScene" uid="uid://cqeao6wkv6xen" path="res://game/props/window_deco.tscn" id="7_0pjbo"]
-[ext_resource type="PackedScene" uid="uid://cgw3r72e1dnxp" path="res://game/props/car_1.tscn" id="8_vo51x"]
-[ext_resource type="PackedScene" uid="uid://ddgjm2qbdejwa" path="res://game/props/car_2.tscn" id="9_h4ix6"]
-[ext_resource type="PackedScene" uid="uid://cvkxvvl5qllmb" path="res://game/props/doorway.tscn" id="10_sowav"]
-[ext_resource type="PackedScene" uid="uid://c464glcbycu8f" path="res://game/props/barrel.tscn" id="11_376f5"]
-[ext_resource type="PackedScene" uid="uid://bbk7tjem838g0" path="res://game/props/stairs.tscn" id="12_52ex8"]
-[ext_resource type="PackedScene" uid="uid://c1lda3esnwkcq" path="res://game/props/stairs_short.tscn" id="13_j01qj"]
-[ext_resource type="PackedScene" uid="uid://c32xofphq7in5" path="res://game/props/platform.tscn" id="14_8isnq"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="15_0xg6i"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_buwyk"]
 [ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="17_1qsqi"]
-[ext_resource type="PackedScene" uid="uid://bldqjyp2glnyx" path="res://game/npc/npc_enemy_big_guy.tscn" id="19_jgrif"]
+[ext_resource type="Material" uid="uid://doapqabe7twc4" path="res://content/environment/materials/surface_0.tres" id="18_x0vaw"]
+[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="19_jgrif"]
+[ext_resource type="Material" uid="uid://buavh7fna845w" path="res://content/environment/materials/surface_1.tres" id="19_vs7xm"]
+[ext_resource type="Material" uid="uid://b71gxlhwanayi" path="res://content/environment/materials/surface_2.tres" id="20_x4tfy"]
+[ext_resource type="Material" uid="uid://dcl8eha8janno" path="res://content/environment/materials/surface_3.tres" id="21_bmib7"]
+[ext_resource type="Material" uid="uid://bfosjqjdja0e2" path="res://content/environment/materials/surface_4.tres" id="22_0cags"]
+[ext_resource type="Material" uid="uid://dcpe38qomrqot" path="res://content/environment/materials/surface_5.tres" id="23_1d0ho"]
+[ext_resource type="Material" uid="uid://cqlyvxeskbq7m" path="res://content/environment/materials/surface_6.tres" id="24_8f13q"]
+[ext_resource type="Material" uid="uid://rt8jdtf6es70" path="res://content/environment/materials/surface_7.tres" id="25_yc0yx"]
+[ext_resource type="Material" uid="uid://dg8yoad2wmah0" path="res://content/environment/materials/surface_8.tres" id="26_6p7on"]
+[ext_resource type="Material" uid="uid://c8am7gxht6vdq" path="res://content/environment/materials/surface_9.tres" id="27_5f6c3"]
+[ext_resource type="PackedScene" uid="uid://bldqjyp2glnyx" path="res://game/npc/npc_enemy_big_guy.tscn" id="27_j01qj"]
+[ext_resource type="Material" uid="uid://bxcxyqvi67jdl" path="res://content/environment/materials/surface_10.tres" id="28_us334"]
+[ext_resource type="Material" uid="uid://5ap84rrgvvoa" path="res://content/environment/materials/surface_11.tres" id="29_l5vw1"]
+[ext_resource type="Material" uid="uid://c00744tmfikc5" path="res://content/environment/materials/surface_12.tres" id="30_457mv"]
+[ext_resource type="Material" uid="uid://cbqop5duvx0y6" path="res://content/environment/materials/surface_13.tres" id="31_145jy"]
+[ext_resource type="Material" uid="uid://yeq7pun4piny" path="res://content/environment/materials/surface_14.tres" id="32_ukx6i"]
+[ext_resource type="Material" uid="uid://cxxkrlaqg1hq5" path="res://content/environment/materials/surface_15.tres" id="33_gy3n6"]
+[ext_resource type="Material" uid="uid://doeho6406mk7b" path="res://content/environment/materials/surface_16.tres" id="34_otnbk"]
+[ext_resource type="Material" uid="uid://h1otvpr12uoy" path="res://content/environment/materials/surface_17.tres" id="35_5ocha"]
+[ext_resource type="Material" uid="uid://cmc7f1y8anju" path="res://content/environment/materials/surface_18.tres" id="36_e61iy"]
+[ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="37_1ny0j"]
+[ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="38_spsdj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp2wm"]
 cull_mode = 2
@@ -30,7 +40,7 @@ albedo_color = Color(0, 1, 0, 1)
 [node name="Main" instance=ExtResource("1_nnfrx")]
 
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("2_jgrif")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11, 15, -3)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 34.9496, 12.6499, 0.401221)
 next_level = "res://stages/level_design.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="1"]
@@ -41,53 +51,11 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 starting_weapon = ExtResource("2_pp2wm")
 
-[node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -9, -16)
-visible = false
+[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("15_0xg6i")]
 
-[node name="PlaneCrash" parent="SubViewportContainer/SubViewport/Props" index="0" instance=ExtResource("3_jgrif")]
-transform = Transform3D(0.88271, -0.0137399, -0.469717, 0.0458108, 0.997327, 0.0569162, 0.46768, -0.0717587, 0.88098, -4, 7, 51)
-
-[node name="Pole2" parent="SubViewportContainer/SubViewport/Props" index="1" instance=ExtResource("4_l7w3k")]
-transform = Transform3D(-0.917824, 0, 0.396988, 0, 1, 0, -0.396988, 0, -0.917824, 53, 8, 11)
-
-[node name="Pole3" parent="SubViewportContainer/SubViewport/Props" index="2" instance=ExtResource("4_l7w3k")]
-transform = Transform3D(-0.894076, 0, -0.447915, 0, 1, 0, 0.447915, 0, -0.894076, -2, 8, 11)
-
-[node name="Conditioner" parent="SubViewportContainer/SubViewport/Props" index="3" instance=ExtResource("5_wvbax")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 44.812, 14.7875, 17.9813)
-
-[node name="Awning" parent="SubViewportContainer/SubViewport/Props" index="4" instance=ExtResource("6_l1kkq")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 54.0311, 15.616, 18.6558)
-
-[node name="WindowDeco" parent="SubViewportContainer/SubViewport/Props" index="5" instance=ExtResource("7_0pjbo")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57.2131, 12.8235, 33.474)
-
-[node name="Car1" parent="SubViewportContainer/SubViewport/Props" index="6" instance=ExtResource("8_vo51x")]
-transform = Transform3D(0.962744, 0, -0.270416, 0, 1, 0, 0.270416, 0, 0.962744, 50.0187, 8.1318, 12.7343)
-
-[node name="Car2" parent="SubViewportContainer/SubViewport/Props" index="7" instance=ExtResource("9_h4ix6")]
-transform = Transform3D(-0.556339, 0, -0.830955, 0, 1, 0, 0.830955, 0, -0.556339, 50.7848, 8.0132, 30.9605)
-
-[node name="Doorway" parent="SubViewportContainer/SubViewport/Props" index="8" instance=ExtResource("10_sowav")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 55.4628, 8.075, 15.9868)
-
-[node name="Barrel4" parent="SubViewportContainer/SubViewport/Props" index="9" instance=ExtResource("11_376f5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.7486, 8.74199, 22.1875)
-
-[node name="Stairs2" parent="SubViewportContainer/SubViewport/Props" index="10" instance=ExtResource("12_52ex8")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 40.8014, 8, 6.38413)
-
-[node name="StairsShort" parent="SubViewportContainer/SubViewport/Props" index="11" instance=ExtResource("13_j01qj")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 60.8243, 8, 25.7702)
-
-[node name="Platform3" parent="SubViewportContainer/SubViewport/Props" index="12" instance=ExtResource("14_8isnq")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 49.7192, 13.794, 13.6424)
-
-[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("15_0xg6i")]
-
-[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="6"]
+[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="5"]
 script = ExtResource("16_buwyk")
+materials = Array[Material]([ExtResource("18_x0vaw"), ExtResource("19_vs7xm"), ExtResource("20_x4tfy"), ExtResource("21_bmib7"), ExtResource("22_0cags"), ExtResource("23_1d0ho"), ExtResource("24_8f13q"), ExtResource("25_yc0yx"), ExtResource("26_6p7on"), ExtResource("27_5f6c3"), ExtResource("28_us334"), ExtResource("29_l5vw1"), ExtResource("30_457mv"), ExtResource("31_145jy"), ExtResource("32_ukx6i"), ExtResource("33_gy3n6"), ExtResource("34_otnbk"), ExtResource("35_5ocha"), ExtResource("36_e61iy"), ExtResource("37_1ny0j"), ExtResource("38_spsdj")])
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
 metadata/_edit_lock_ = true
 
@@ -99,63 +67,129 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
 use_collision = true
 size = Vector3(6, 1, 7)
+material = ExtResource("22_0cags")
 metadata/_edit_group_ = true
 
 [node name="Add_6_1_14" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 1.5)
 use_collision = true
 size = Vector3(2, 8, 7)
+material = ExtResource("36_e61iy")
 metadata/_edit_group_ = true
 
 [node name="Add_6_1_15" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 1.5)
 use_collision = true
 size = Vector3(2, 8, 7)
+material = ExtResource("36_e61iy")
 metadata/_edit_group_ = true
 
 [node name="Add_6_1_16" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 6)
 use_collision = true
 size = Vector3(10, 8, 2)
+material = ExtResource("36_e61iy")
 metadata/_edit_group_ = true
 
 [node name="Add_9_2_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.396584, 2.5, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0548396, 2.5, -4)
 use_collision = true
-size = Vector3(9, 5, 8)
+size = Vector3(10.1113, 5, 8)
+material = ExtResource("29_l5vw1")
 metadata/_edit_group_ = true
 
 [node name="Add_9_2_6" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39658, 2.5, -0.5)
 use_collision = true
 size = Vector3(9, 5, 15)
+material = ExtResource("29_l5vw1")
 metadata/_edit_group_ = true
 
 [node name="Add_9_2_7" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8966, 9, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4661, 4.54712, 0.526978)
 use_collision = true
-size = Vector3(6, 10, 6)
+size = Vector3(6, 9.82373, 15.0217)
+material = ExtResource("35_5ocha")
 metadata/_edit_group_ = true
 
-[node name="Add_9_2_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4549, 16.5, -2.5)
+[node name="Add_9_2_12" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.9693, 1.15588, 0.526978)
 use_collision = true
-size = Vector3(2.8833, 5, 5)
+size = Vector3(17.4005, 3.04126, 15.0217)
+material = ExtResource("35_5ocha")
 metadata/_edit_group_ = true
 
-[node name="@MeshInstance3D@40893" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="8"]
+[node name="Add_9_2_9" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90627, 8.99542, -13.6838)
+use_collision = true
+size = Vector3(29.1196, 18.7203, 15.0217)
+material = ExtResource("35_5ocha")
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_11" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.90627, 8.99542, 14.3162)
+use_collision = true
+size = Vector3(29.1196, 18.7203, 15.0217)
+material = ExtResource("35_5ocha")
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_10" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2841, 7.78949, 0.0104609)
+use_collision = true
+size = Vector3(29.1196, 16.3085, 15.0217)
+material = ExtResource("35_5ocha")
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.2691, 7.08795, 0.5)
+use_collision = true
+size = Vector3(7.24976, 11.1648, 13)
+material = ExtResource("36_e61iy")
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_15" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.1936, 12.3914, 0.5)
+use_collision = true
+size = Vector3(7.24976, 11.1648, 13)
+material = ExtResource("36_e61iy")
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_13" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5266, 9.44584, 7.49521)
+use_collision = true
+size = Vector3(16.6447, 13.7056, 2.9585)
+material = ExtResource("36_e61iy")
+metadata/_edit_group_ = true
+
+[node name="Add_9_2_14" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5733, 9.31419, -7.14257)
+use_collision = true
+size = Vector3(15.9084, 15.6172, 2.9585)
+material = ExtResource("36_e61iy")
+metadata/_edit_group_ = true
+
+[node name="@MeshInstance3D@40893" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="15"]
 material_override = SubResource("StandardMaterial3D_pp2wm")
 mesh = SubResource("ImmediateMesh_jgrif")
 
-[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("15_0xg6i")]
+[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("15_0xg6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41959, 1.11252, 1.59108)
 allow_shotgun = false
 allow_sniper = false
 allow_revolver = false
 allow_smg = false
 
+[node name="NPCEnemyBigGuy" parent="SubViewportContainer" index="1" instance=ExtResource("27_j01qj")]
+transform = Transform3D(-0.0780241, 0, -0.996951, 0, 1, 0, 0.996951, 0, -0.0780241, 30.9858, 2.94639, 0.232307)
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("17_1qsqi")
 
-[node name="NPCEnemyBigGuy" parent="." index="7" instance=ExtResource("19_jgrif")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.258441, 5.02467, -3.45307)
+[node name="npc_grunt" parent="." index="5" instance=ExtResource("19_jgrif")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0771046, 5.11574, -3.69017)
+
+[node name="npc_grunt2" parent="." index="6" instance=ExtResource("19_jgrif")]
+transform = Transform3D(0.020384, 0, -0.999792, 0, 1, 0, 0.999792, 0, 0.020384, 10.2406, 5.11574, 3.005)
+
+[node name="npc_grunt3" parent="." index="7" instance=ExtResource("19_jgrif")]
+transform = Transform3D(-0.966859, 0, -0.255311, 0, 1, 0, 0.255311, 0, -0.966859, 14.9898, 9.536, 4.01739)

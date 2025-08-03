@@ -484,13 +484,14 @@ func _process_melee(delta) -> void:
 		%MeleeAttack.rotation.y = 0.0
 		var tween = create_tween()
 		tween.tween_property(%MeleeAttack, "rotation:y", -TAU, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-		
-		await get_tree().create_timer(0.2).timeout
+
+		await get_tree().create_timer(0.1).timeout
 		
 		var melee := preload("res://game/projectiles/melee.tscn").instantiate()
 		melee.position = global_position
 		Main.instance.add_child(melee)
 		
+
 		await get_tree().create_timer(0.1).timeout
 		
 		%MeleeAttack.hide()

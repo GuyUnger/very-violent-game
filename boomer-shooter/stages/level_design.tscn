@@ -14,6 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://v0boycsgos0n" path="res://game/npc/npc_enemy_grunt_smg.tscn" id="12_55831"]
 
 [node name="Main2" instance=ExtResource("3_rsuto")]
+time = 60.0
+
+[node name="Finish" parent="." index="0" instance=ExtResource("5_55831")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -12.2595, -0.895572, 58.9856)
+next_level = "res://ui/end_screen.tscn"
 
 [node name="Player" parent="SubViewportContainer/SubViewport" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.6411, 4.06139, 67.4628)
@@ -91,11 +96,11 @@ allow_double_smg = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.629, 4, 56.2377)
 next_level = "res://ui/end_screen.tscn"
 
-[node name="FujiMountFuji" type="MeshInstance3D" parent="." index="4"]
+[node name="FujiMountFuji" type="MeshInstance3D" parent="." index="5"]
 transform = Transform3D(-4.27682, 0, -2.59014, 0, 5, 0, 2.59014, 0, -4.27682, 0, 228, 0)
 mesh = ExtResource("7_6p0xd")
 
-[node name="NPCS" type="Node3D" parent="." index="5"]
+[node name="NPCS" type="Node3D" parent="." index="6"]
 
 [node name="NPCEnemyBigGuy" parent="NPCS" index="0" instance=ExtResource("6_6p0xd")]
 transform = Transform3D(0.718394, 0, 0.695637, 0, 1, 0, -0.695637, 0, 0.718394, -15.6511, -1.00463, 36.5567)
@@ -299,5 +304,5 @@ transform = Transform3D(-0.506606, 0, -0.862178, 0, 1, 0, 0.862178, 0, -0.506606
 [node name="npc_grunt61" parent="NPCS" index="62" instance=ExtResource("12_55831")]
 transform = Transform3D(0.0522663, 0, 0.998634, 0, 1, 0, -0.998634, 0, 0.0522663, -35.1191, -0.497973, 16.0696)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource("8_aqw5h")

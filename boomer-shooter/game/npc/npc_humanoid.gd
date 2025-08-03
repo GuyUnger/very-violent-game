@@ -105,6 +105,10 @@ func knock_back(force:Vector3) -> void:
 func melee() -> void:
 	super()
 	
+	$AudioHurt.unit_size = 10
+	$AudioHurt.volume_db = 5.0
+	$AudioHurt.play()
+	
 	var x := preload("res://game/fx/bloot_line.tscn").instantiate()
 	$CollisionShape3D.add_child(x)
 	x.position.y += 0.5
