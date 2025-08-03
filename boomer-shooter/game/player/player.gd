@@ -486,13 +486,13 @@ func _process_melee(delta) -> void:
 		var tween = create_tween()
 		tween.tween_property(%MeleeAttack, "rotation:y", -TAU, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		
-		await get_tree().create_timer(0.2).timeout
-		
-		for body in area_melee.get_overlapping_bodies():
-			if "melee" in body:
-				body.melee()
-			elif "melee" in body.get_parent():
-				body.get_parent().melee()
+		for i in 10:
+			await get_tree().create_timer(0.03).timeout
+			for body in area_melee.get_overlapping_bodies():
+				if "melee" in body:
+					body.melee()
+				elif "melee" in body.get_parent():
+					body.get_parent().melee()
 		await get_tree().create_timer(0.1).timeout
 		
 		%MeleeAttack.hide()
