@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjnhfu1ekho3v"]
+[gd_scene load_steps=13 format=3 uid="uid://bjnhfu1ekho3v"]
 
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_0cfai"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_l0s8e"]
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="3_rsuto"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_0cfai"]
+[ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="5_55831"]
 [ext_resource type="PackedScene" uid="uid://bldqjyp2glnyx" path="res://game/npc/npc_enemy_big_guy.tscn" id="6_6p0xd"]
 [ext_resource type="ArrayMesh" uid="uid://bwk3e8f81aln2" path="res://content/environment/background/fuji_MountFuji.res" id="7_6p0xd"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="7_aqw5h"]
@@ -12,8 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cglxaun25ddhf" path="res://game/npc/npc_turret.tscn" id="11_v6np0"]
 [ext_resource type="PackedScene" uid="uid://v0boycsgos0n" path="res://game/npc/npc_enemy_grunt_smg.tscn" id="12_55831"]
 
-[node name="Main" instance=ExtResource("3_rsuto")]
-time = 60.0
+[node name="Main2" instance=ExtResource("3_rsuto")]
 
 [node name="Player" parent="SubViewportContainer/SubViewport" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.6411, 4.06139, 67.4628)
@@ -42,10 +42,12 @@ allow_katana = false
 
 [node name="WeaponSpawn5" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("4_0cfai")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.473, 12.4838, -0.158592)
+allow_shotgun = false
 allow_sniper = false
 allow_revolver = false
 allow_katana = false
 allow_smg = false
+allow_double_smg = true
 
 [node name="WeaponSpawn6" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("4_0cfai")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.9813, 7.06921, 41.2712)
@@ -78,10 +80,16 @@ allow_katana = false
 
 [node name="WeaponSpawn10" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("4_0cfai")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0167, 4, -3.50324)
+allow_shotgun = false
 allow_sniper = false
 allow_revolver = false
 allow_katana = false
 allow_smg = false
+allow_double_smg = true
+
+[node name="Finish" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("5_55831")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.629, 4, 56.2377)
+next_level = "res://ui/end_screen.tscn"
 
 [node name="FujiMountFuji" type="MeshInstance3D" parent="." index="4"]
 transform = Transform3D(-4.27682, 0, -2.59014, 0, 5, 0, 2.59014, 0, -4.27682, 0, 228, 0)

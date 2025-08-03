@@ -69,6 +69,8 @@ var dead: bool = false
 
 var last_transform := Transform3D()
 
+var invincible_t: float = 0.0
+
 #region Initialization
 
 func _ready() -> void:
@@ -101,6 +103,8 @@ func _ready() -> void:
 #region Processing
 
 func _process(delta: float) -> void:
+	if invincible_t > 0.0:
+		invincible_t -= delta
 	%Crosshair.visible = weapon != null
 	
 	#if Input.is_action_just_pressed("toggle_view"):
@@ -470,7 +474,8 @@ func _process_melee(delta) -> void:
 	melee_reload_t = move_toward(melee_reload_t, 0.0, delta / 0.8)
 	
 	if since_secondary_pressed < 0.2 and melee_reload_t <= 0.0 and weapon and weapon is WeaponKatana:
-		vel_hor *= 1.5
+		vel_hor *= 3.5
+		invincible_t = 0.3
 		allow_walljump = true
 		melee_reload_t = 1.0
 		since_secondary_pressed = 999.0
@@ -594,3 +599,9 @@ func _pick_up_body_entered(body: Node3D) -> void:
 func animate_crosshair() -> void:
 	%Crosshair.since_hit = 0.0
 	$AudioHit.play()
+
+
+func hit(from) -> void:
+	if invincible_t > 0.0:
+		return
+	super(from)
