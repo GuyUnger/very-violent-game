@@ -20,7 +20,7 @@
 [ext_resource type="Material" uid="uid://doapqabe7twc4" path="res://content/environment/materials/surface_0.tres" id="17_tx02n"]
 [ext_resource type="Material" uid="uid://buavh7fna845w" path="res://content/environment/materials/surface_1.tres" id="18_oiqe4"]
 [ext_resource type="Material" uid="uid://b71gxlhwanayi" path="res://content/environment/materials/surface_2.tres" id="19_4kl46"]
-[ext_resource type="PackedScene" path="res://ui/instruction.tscn" id="19_fy2pt"]
+[ext_resource type="PackedScene" uid="uid://d12rbfqmi83d4" path="res://ui/instruction.tscn" id="19_fy2pt"]
 [ext_resource type="Material" uid="uid://dcl8eha8janno" path="res://content/environment/materials/surface_3.tres" id="20_wgi3a"]
 [ext_resource type="Material" uid="uid://bfosjqjdja0e2" path="res://content/environment/materials/surface_4.tres" id="21_ew1me"]
 [ext_resource type="Material" uid="uid://dcpe38qomrqot" path="res://content/environment/materials/surface_5.tres" id="22_x3drn"]
