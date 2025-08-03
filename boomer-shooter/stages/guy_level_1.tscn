@@ -269,44 +269,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 0, 7.4)
 [node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -11)
 
-[node name="npc_grunt5" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21927, 0, -10.3638)
-
-[node name="npc_grunt6" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt6" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
 
-[node name="npc_grunt7" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt7" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
 
-[node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29925, -0.0259438, -15.03)
 
-[node name="npc_grunt9" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62127, 0, -13.4033)
-
-[node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43855, 0, -15.8856)
 
-[node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9648, 0, -14.8746)
 
-[node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32017, -0.0194693, -13.9608)
+[node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("7_hs8q1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80213, -0.0194693, -14.5708)
 
-[node name="Finish" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("20_3usft")]
+[node name="Finish" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("20_3usft")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.86416, 0, -15.3144)
 next_level = "res://stages/guy_level_2.tscn"
 
-[node name="Box" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("42_rws5q")]
+[node name="Box" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.880138, 0, -0.474718, 0, 1, 0, 0.474718, 0, 0.880138, -3.40502, 0.665051, -7.52027)
 
-[node name="Box2" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("42_rws5q")]
+[node name="Box2" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.941541, 0, 0.336898, 0, 1, 0, -0.336898, 0, 0.941541, -8.7607, 0.681949, -10.6084)
 
-[node name="Box3" parent="SubViewportContainer/SubViewport" index="21" instance=ExtResource("42_rws5q")]
+[node name="Box3" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.875709, 0, -0.482839, 0, 1, 0, 0.482839, 0, 0.875709, -8.7607, 0.681949, -8.7651)
 
-[node name="Conditioner" parent="SubViewportContainer/SubViewport" index="22" instance=ExtResource("5_iq0yp")]
+[node name="Conditioner" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("5_iq0yp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60485, 1.83366, -4.48801)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
