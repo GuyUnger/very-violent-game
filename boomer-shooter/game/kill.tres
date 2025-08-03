@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://bkwt4xitefytt"]
+
+[ext_resource type="AudioStream" uid="uid://bi4e28jxmil2m" path="res://game/kill 01.wav" id="0_w0dro"]
+[ext_resource type="AudioStream" uid="uid://cyjxr4romq8r1" path="res://game/kill 02.wav" id="1_y0rbi"]
+[ext_resource type="AudioStream" uid="uid://duf5xj575apxh" path="res://game/kill 03.wav" id="2_p7ki0"]
+[ext_resource type="AudioStream" uid="uid://dt6pik0rgwr22" path="res://game/kill 04.wav" id="3_ehwuz"]
+[ext_resource type="AudioStream" uid="uid://cndihuhr0o7se" path="res://game/kill 05.wav" id="4_93hrw"]
+[ext_resource type="AudioStream" uid="uid://q1w2okgarq2l" path="res://game/kill 06.wav" id="5_gkfh2"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("0_w0dro")
+stream_1/stream = ExtResource("1_y0rbi")
+stream_2/stream = ExtResource("2_p7ki0")
+stream_3/stream = ExtResource("3_ehwuz")
+stream_4/stream = ExtResource("4_93hrw")
+stream_5/stream = ExtResource("5_gkfh2")

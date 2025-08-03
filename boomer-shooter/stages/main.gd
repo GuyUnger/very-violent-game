@@ -33,6 +33,17 @@ func _on_enemy_killed() -> void:
 	for enemy in get_tree().get_nodes_in_group("npc_enemies"):
 		if enemy.health > 0:
 			enemies_left +=1
+	
+	var pitch: float = 0.6 + (1.0 - (enemies_left / float(total_enemies))) * 2.0
+	
+	await get_tree().create_timer(0.5).timeout
+	if not get_tree():
+		return
+	if enemies_left == 0:
+		$AudioKillComplete.play()
+	else:
+		%AudioKill.pitch_scale = pitch
+		%AudioKill.play()
 
 static var player: Player
 
