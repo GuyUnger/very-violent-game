@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bubokaw6tm32t"]
+[gd_scene load_steps=19 format=3 uid="uid://bubokaw6tm32t"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_57m8n"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_4p0ku"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://bbk7tjem838g0" path="res://game/props/stairs.tscn" id="12_3pnwo"]
 [ext_resource type="PackedScene" uid="uid://c1lda3esnwkcq" path="res://game/props/stairs_short.tscn" id="13_ujt78"]
 [ext_resource type="PackedScene" uid="uid://c32xofphq7in5" path="res://game/props/platform.tscn" id="14_284op"]
-[ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="15_qwhps"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_7b0k1"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="17_4p0ku"]
 [ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="17_l1iw5"]
@@ -72,9 +71,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 60.824
 [node name="Platform3" parent="SubViewportContainer/SubViewport/Props" index="12" instance=ExtResource("14_284op")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 49.7192, 13.794, 13.6424)
 
-[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("15_qwhps")]
-
-[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="5"]
+[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="4"]
 script = ExtResource("16_7b0k1")
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
 metadata/_edit_lock_ = true
@@ -101,7 +98,7 @@ use_collision = true
 size = Vector3(4, 1, 10)
 metadata/_edit_group_ = true
 
-[node name="Finish" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("17_4p0ku")]
+[node name="Finish" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("17_4p0ku")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0893483, 1, -26.2618)
 next_level = "res://stages/guy_level_0_1.tscn"
 
