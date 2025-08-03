@@ -231,6 +231,10 @@ class StateSpottedEnemy extends State:
 		var next_state = StateAttacking.new()
 		next_state.enemy = enemy
 		move_to(next_state)
+		
+	func _exit_tree() -> void:
+		super()
+	
 
 class StateWasToldEnemyPosition extends State:
 	var enemy:Node3D
@@ -244,7 +248,7 @@ class StateWasToldEnemyPosition extends State:
 		if animation_tree:
 			animation_tree.set("parameters/Holding/transition_request", "Pistol")
 
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.3).timeout
 
 		var next_state = StateAttacking.new()
 		next_state.enemy = enemy
@@ -264,6 +268,8 @@ class StateAttacking extends State:
 			animation_tree.set("parameters/Holding/transition_request", "Pistol")
 
 		get_parent().target = enemy
+		
+	
 		#get_parent().moving_to = enemy
 		
 	func _physics_process(delta: float) -> void:
@@ -306,6 +312,7 @@ class StateAttacking extends State:
 		
 	func _exit_tree() -> void:
 		super()
+		
 		var weapon = get_parent().get_node("%Weapon")
 		if weapon:
 			weapon.trigger_pressed = false
