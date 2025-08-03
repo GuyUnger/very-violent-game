@@ -71,7 +71,7 @@ void fragment() {
 	else if (pixel % ivec2(2) == ivec2(0) || pixel % ivec2(2) == ivec2(1)) {
 		dither = 0.2;
 	}
-	float steps = mix(20.0, 8.0, dither);
+	float steps = mix(30.0, 5.0, dither);
 	vec3 color = texture(screen_texture, SCREEN_UV).rgb;
 
 	color = round(color * steps) / steps;

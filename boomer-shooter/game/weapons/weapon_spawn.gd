@@ -2,11 +2,11 @@ extends Node3D
 
 
 const WEAPON_SCENES = [
-	preload("res://game/weapons/weapon_smg.tscn"),
+	#preload("res://game/weapons/weapon_smg.tscn"),
 	preload("res://game/weapons/weapon_shotgun.tscn"),
-	preload("res://game/weapons/weapon_sniper.tscn"),
-	preload("res://game/weapons/weapon_revolver.tscn"),
-	preload("res://game/weapons/weapon_katana.tscn"),
+	#preload("res://game/weapons/weapon_sniper.tscn"),
+	#preload("res://game/weapons/weapon_revolver.tscn"),
+	#preload("res://game/weapons/weapon_katana.tscn"),
 ]
 
 static var previous_weapon: int = -1

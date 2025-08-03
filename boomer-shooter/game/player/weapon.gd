@@ -69,12 +69,15 @@ func _physics_process(delta: float) -> void:
 	if auto and ammo > 0:
 		if trigger_pressed and reload_t <= 0.0:
 			shoot()
+			if ammo <= 0:
+				if is_instance_valid(player):
+					player.throw_weapon()
 	else:
 		if since_primary_pressed < 0.2 and reload_t <= 0.0:
-			if ammo > 0:
-				shoot()
-			elif player:
-				player.throw_weapon()
+			shoot()
+			if ammo <= 0:
+				if is_instance_valid(player):
+					player.throw_weapon()
 			since_primary_pressed = 999.0
 	
 	if has_node("%Hand"):
@@ -90,7 +93,7 @@ func shoot() -> void:
 	
 	var r = Vector3(
 		randf_range(-total_recoil, total_recoil), 
-		randf_range(-total_recoil, total_recoil),
+		randf_range(-total_recoil, total_recoil) * 0.4,
 		randf_range(-total_recoil, total_recoil)) * 0.5
 
 	if player:
@@ -124,13 +127,17 @@ func throw(force:Vector3) -> void:
 	player = null
 	since_thrown = 0.0
 	
+	
 	reparent(Main.instance)
 	
 	collision_mask = 1
 	velocity = force
 
-	#await get_tree().create_timer(0.2).timeout
 	collision_layer = 8
+	await get_tree().create_timer(0.2).timeout
+	
+	if ammo > 0:
+		$PickupGlow.show()
 	
 
 func pickup(p_player: Player) -> void:
@@ -140,7 +147,7 @@ func pickup(p_player: Player) -> void:
 		%AudioPickup.stream = pickup_sounds.pick_random()
 	%AudioPickup.play()
 	%AudioPickup.pitch_scale = 1.1
-	
+	hide_glow()
 	player = p_player
 	velocity = Vector3.ZERO
 	collision_mask = 0
@@ -148,3 +155,6 @@ func pickup(p_player: Player) -> void:
 	await Main.instance.get_tree().process_frame
 	position = Vector3.ZERO
 	rotation = Vector3.ZERO
+
+func hide_glow() -> void:
+	$PickupGlow.hide()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmkjerra3prvk"]
+[gd_scene load_steps=11 format=3 uid="uid://cmkjerra3prvk"]
 
 [ext_resource type="Script" uid="uid://bbpc4wmq08n3" path="res://game/weapons/weapon_katana.gd" id="1_md2vn"]
 [ext_resource type="AudioStream" uid="uid://b3gscbjbxoncv" path="res://game/weapons/pickup_katana 01.wav" id="2_r6x4p"]
 [ext_resource type="AudioStream" uid="uid://jclmgjq5a3ox" path="res://game/weapons/pickup_katana 02.wav" id="3_nojjb"]
 [ext_resource type="AudioStream" uid="uid://wymh85haoo41" path="res://game/weapons/pickup_katana 03.wav" id="4_5j5ad"]
 [ext_resource type="AudioStream" uid="uid://c8upeygvs5fhl" path="res://game/weapons/pickup_katana 04.wav" id="5_haru8"]
+[ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="8_esp2f"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="10_pqsha"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="12_3kcls"]
 
@@ -51,3 +52,5 @@ bus = &"SFX"
 
 [node name="AudioPickup" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+
+[node name="PickupGlow" parent="." instance=ExtResource("8_esp2f")]

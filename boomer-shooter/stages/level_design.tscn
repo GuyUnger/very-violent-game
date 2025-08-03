@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjnhfu1ekho3v"]
+[gd_scene load_steps=9 format=3 uid="uid://bjnhfu1ekho3v"]
 
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_0cfai"]
 [ext_resource type="PackedScene" uid="uid://b6o8mp0jhq1nd" path="res://stages/tokyo.tscn" id="3_l0s8e"]
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="3_rsuto"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_0cfai"]
-[ext_resource type="PackedScene" path="res://game/npc/npc_enemy_big_guy.tscn" id="6_6p0xd"]
+[ext_resource type="PackedScene" uid="uid://bldqjyp2glnyx" path="res://game/npc/npc_enemy_big_guy.tscn" id="6_6p0xd"]
 [ext_resource type="ArrayMesh" uid="uid://bwk3e8f81aln2" path="res://content/environment/background/fuji_MountFuji.res" id="7_6p0xd"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="7_aqw5h"]
+[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="8_aqw5h"]
 
 [node name="Main" instance=ExtResource("3_rsuto")]
 
@@ -43,3 +44,7 @@ transform = Transform3D(-0.85519, -0.143011, 0.498195, -0.139052, 0.989249, 0.04
 
 [node name="npc_grunt4" parent="." index="9" instance=ExtResource("7_aqw5h")]
 transform = Transform3D(-0.85519, -0.143011, 0.498195, -0.139052, 0.989249, 0.04528, -0.499315, -0.030552, -0.865882, -16.5669, -0.989803, 41.0372)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource("8_aqw5h")
+autoplay = true

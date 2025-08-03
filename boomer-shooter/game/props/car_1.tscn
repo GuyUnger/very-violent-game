@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgw3r72e1dnxp"]
+[gd_scene load_steps=4 format=3 uid="uid://cgw3r72e1dnxp"]
 
+[ext_resource type="Material" uid="uid://bx1raua3nmkri" path="res://content/environment/materials/vehicle_sheet.tres" id="1_ib3cb"]
 [ext_resource type="ArrayMesh" uid="uid://dqivcs4bevax7" path="res://content/environment/props/meshes/props_car1.res" id="1_j0fms"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nmf75"]
@@ -8,6 +9,7 @@ points = PackedVector3Array(-1.37558, -0.0131965, -1.40154, -1.37558, 0.0233187,
 [node name="Car1" type="RigidBody3D"]
 
 [node name="PropsCar1" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_ib3cb")
 mesh = ExtResource("1_j0fms")
 skeleton = NodePath("../..")
 

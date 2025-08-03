@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://bldqjyp2glnyx"]
 
 [ext_resource type="PackedScene" uid="uid://34yp6180hnq6" path="res://content/models/big_guy.glb" id="1_hgcb5"]
-[ext_resource type="Script" uid="uid://bqomtihiljg2x" path="res://game/npc/npc_enemy_big_guy.gd" id="2_ypsrb"]
+[ext_resource type="Script" path="res://game/npc/npc_enemy_big_guy.gd" id="2_ypsrb"]
 [ext_resource type="Material" uid="uid://b5w4vmvenaaft" path="res://content/materials/npc_enemy_material.tres" id="3_hbebb"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="5_f5wr7"]
 [ext_resource type="AnimationLibrary" uid="uid://dvugmh8lvf11s" path="res://content/models/npc_big_guy_animation_library.glb" id="5_qpu7t"]

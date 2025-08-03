@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://b6o8mp0jhq1nd"]
+[gd_scene load_steps=44 format=4 uid="uid://b6o8mp0jhq1nd"]
 
 [ext_resource type="Material" uid="uid://d1pbs3ydvjhir" path="res://content/materials/prototype_material.tres" id="1_wojob"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="2_o4n3f"]
@@ -26,7 +26,6 @@
 [ext_resource type="Material" uid="uid://cmc7f1y8anju" path="res://content/environment/materials/surface_18.tres" id="21_huau7"]
 [ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="22_i6c3o"]
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="23_ifw73"]
-[ext_resource type="PackedScene" uid="uid://dv3alq8obmgsb" path="res://game/projectiles/fireball.tscn" id="27_3c822"]
 [ext_resource type="PackedScene" uid="uid://bbk7tjem838g0" path="res://game/props/stairs.tscn" id="28_7xjh6"]
 [ext_resource type="PackedScene" uid="uid://bhwigbhxgn45k" path="res://game/props/pole.tscn" id="29_a6tfy"]
 [ext_resource type="PackedScene" uid="uid://c1lda3esnwkcq" path="res://game/props/stairs_short.tscn" id="29_qo4k2"]
@@ -245,10 +244,6 @@ size = Vector3(15, 7, 128)
 material = ExtResource("13_d03ru")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
-
-[node name="Fireball" parent="Global" instance=ExtResource("27_3c822")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57, 58, 5)
-skeleton = NodePath("../..")
 
 [node name="Sector1" type="Node3D" parent="."]
 

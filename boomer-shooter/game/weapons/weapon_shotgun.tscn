@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://kjth5n3pmvxy"]
+[gd_scene load_steps=15 format=3 uid="uid://kjth5n3pmvxy"]
 
-[ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_1vjvc"]
+[ext_resource type="Script" uid="uid://co641dg8s4n86" path="res://game/weapons/weapon_shotgun.gd" id="1_prx1q"]
 [ext_resource type="AudioStream" uid="uid://b5oybs5wceg0c" path="res://game/weapons/pickup_shotgun 01.wav" id="2_prx1q"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_qelip"]
 [ext_resource type="AudioStream" uid="uid://hgqgusivuyph" path="res://game/weapons/pickup_shotgun 02.wav" id="3_n14iq"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_gwt1y"]
 [ext_resource type="Script" uid="uid://cmuwwvlykmou0" path="res://game/weapons/weapon_shotgun_animations.gd" id="7_kc37h"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="8_gt5ou"]
+[ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="13_n14iq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
 radius = 0.25
@@ -19,9 +20,9 @@ radius = 0.25
 [node name="WeaponShotgun" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("1_1vjvc")
+script = ExtResource("1_prx1q")
 fire_rate = 0.75
-ammo = 10
+ammo = 6
 pickup_sounds = Array[AudioStream]([ExtResource("2_prx1q"), ExtResource("3_n14iq"), ExtResource("4_tq6aa"), ExtResource("5_baumh")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -72,5 +73,7 @@ bus = &"SFX"
 
 [node name="AudioPickup" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+
+[node name="PickupGlow" parent="." instance=ExtResource("13_n14iq")]
 
 [editable path="WorldModel/ShotgunContainer/weapon_shotgun"]

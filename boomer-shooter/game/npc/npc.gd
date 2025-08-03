@@ -147,6 +147,10 @@ func poll_vision() -> void:
 
 class State extends Node:
 	func _ready() -> void:
+		
+		var weapon = get_parent().get_node("%Weapon")
+		if weapon:
+			weapon.hide_glow()
 		get_parent().died.connect(_died)
 	
 	func move_to(state:State) -> void:

@@ -5,7 +5,7 @@ static var instance
 
 var source_id := 1
 
-var time: float = 20.0
+var time: float = 30.0
 
 func _init() -> void:
 	instance = self
@@ -25,4 +25,4 @@ func _process(delta: float) -> void:
 		time -= delta
 		if time <= 0:
 			player.die()
-		
+	#$AudioStreamPlayer.pitch_scale = 1.0 + (1.0 - (time / 30.0)) * 0.5
