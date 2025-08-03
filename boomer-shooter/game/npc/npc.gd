@@ -6,6 +6,7 @@ signal heard
 signal told_enemy_position
 signal spotted_enemy
 
+@export var target_lock_time := 0.3
 @export var moving_to:Node3D
 @export var looking_at:Vector3
 @export var target:Node3D : 
@@ -193,7 +194,7 @@ class StateIdle extends State:
 		get_parent().looking_at = position
 		
 	func _told_enemy_position(enemy) -> void:
-		var next_state = StateAttacking.new()
+		var next_state = StateWasToldEnemyPosition.new()
 		next_state.enemy = enemy
 		move_to(next_state)
 
@@ -215,6 +216,7 @@ class StateSpottedEnemy extends State:
 	func _ready() -> void:
 		super()
 		
+		get_parent().target = enemy
 
 		var animation_tree = get_parent().get("animation_tree")
 		if animation_tree:
@@ -224,19 +226,39 @@ class StateSpottedEnemy extends State:
 			if node != get_parent() and node.global_position.distance_squared_to(get_parent().global_position) < 50:
 				node._told_enemy_position(enemy)
 				
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1.0).timeout
 
 		var next_state = StateAttacking.new()
 		next_state.enemy = enemy
 		move_to(next_state)
 
-class StateAttacking extends State:
+class StateWasToldEnemyPosition extends State:
 	var enemy:Node3D
-	
-	
+
 	func _ready() -> void:
 		super()
 		
+		get_parent().target = enemy
+
+		var animation_tree = get_parent().get("animation_tree")
+		if animation_tree:
+			animation_tree.set("parameters/Holding/transition_request", "Pistol")
+
+		await get_tree().create_timer(1.0).timeout
+
+		var next_state = StateAttacking.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+
+class StateAttacking extends State:
+	var enemy:Node3D
+	var target_lock := 0.0
+
+	func _ready() -> void:
+		super()
+		
+		target_lock = get_parent().target_lock_time
 		var animation_tree = get_parent().get("animation_tree")
 		if animation_tree:
 			animation_tree.set("parameters/Holding/transition_request", "Pistol")
@@ -245,6 +267,8 @@ class StateAttacking extends State:
 		#get_parent().moving_to = enemy
 		
 	func _physics_process(delta: float) -> void:
+		target_lock = max(0, target_lock - delta)
+		
 		var weapon = get_parent().get_node("%Weapon")
 		if not is_instance_valid(weapon):
 			return queue_free()
@@ -268,7 +292,14 @@ class StateAttacking extends State:
 		if ds < 1.0:
 			get_parent().speed_scale = 0.0
 		
-		weapon.aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP)
+		var miss := Vector3(
+			target_lock * sign(randf_range(-0.5, 0.5)),
+			target_lock * sign(randf_range(-0.5, 0.5)),
+			target_lock * sign(randf_range(-0.5, 0.5)))
+		
+		var aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP + miss)
+		
+		weapon.aim_dir = aim_dir
 		weapon.trigger_pressed = true
 		weapon.ammo = weapon.max_ammo
 		
