@@ -58,14 +58,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			animation_tree.set("parameters/MoveDirection/blend_position", Vector2.ZERO)
 		
-		look_at_node_y_axis_lerp(target.global_position, delta * 0.5)
+		look_at_node_y_axis_lerp(target.global_position, delta * 2.0)
 	
 	if knock_back_force != Vector3.ZERO:
 		global_position -= knock_back_force
 		knock_back_force = lerp(knock_back_force, Vector3.ZERO, delta)
 		
 	if not target and looking_at:
-		look_at_node_y_axis_lerp(looking_at, delta * 0.5)
+		look_at_node_y_axis_lerp(looking_at, delta * 2.0)
 
 
 func look_at_node_y_axis_lerp(target_position: Vector3, delta: float, speed: float = 5.0) -> void:
