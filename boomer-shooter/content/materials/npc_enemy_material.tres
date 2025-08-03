@@ -1,11 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b5w4vmvenaaft"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b5w4vmvenaaft"]
 
 [ext_resource type="Shader" uid="uid://gwcb86082iq6" path="res://content/models/npc.gdshader" id="1_kstga"]
+[ext_resource type="Texture2D" uid="uid://bhivmi2rkmovt" path="res://content/textures/big_guy_skin_export.png" id="2_kclyt"]
 [ext_resource type="Texture2D" uid="uid://dmsaoi3kdgwba" path="res://content/textures/hole_map.png" id="2_wioqg"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_kstga")
+shader_parameter/texture_albedo = ExtResource("2_kclyt")
 shader_parameter/texture_holes = ExtResource("2_wioqg")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/blood_color = Color(0.878431, 0, 0, 1)

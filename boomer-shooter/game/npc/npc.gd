@@ -81,7 +81,8 @@ func _told_enemy_position(enemy) -> void:
 
 
 func melee() -> void:
-	health -= 5
+	health = 0
+	die()
 	cuts += 1
 
 

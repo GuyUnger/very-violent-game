@@ -242,6 +242,17 @@ func _physics_process(delta: float) -> void:
 	
 	look_angle_prev = look_angle
 	velocity_prev = velocity
+	
+	for body in %PickUp.get_overlapping_bodies():
+		if not weapon and body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
+			weapon = body
+			weapon.pickup(self)
+			if body.is_inside_tree():
+				body.reparent(fps_weapon)
+			else:
+				fps_weapon.add_child(body)
+			break
+	
 
 func throw_weapon() -> void:
 	if not weapon:
@@ -569,13 +580,14 @@ func die() -> void:
 
 
 func _pick_up_body_entered(body: Node3D) -> void:
-	if not weapon and body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
-		weapon = body
-		weapon.pickup(self)
-		if body.is_inside_tree():
-			body.reparent(fps_weapon)
-		else:
-			fps_weapon.add_child(body)
+	pass
+	#if not weapon and body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
+	#	weapon = body
+	#	weapon.pickup(self)
+	#	if body.is_inside_tree():
+	#		body.reparent(fps_weapon)
+	#	else:
+	#		fps_weapon.add_child(body)
 		
 
 
