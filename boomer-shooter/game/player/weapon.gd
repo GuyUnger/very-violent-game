@@ -23,6 +23,7 @@ var trigger_pressed:bool :
 @onready var handle: MeshInstance3D = $WorldModel/weapon_smg/SMG/Handle
 
 @export var ammo: int = 40
+@onready var max_ammo = ammo
 
 var total_recoil: float = 0.0
 var since_thrown: float = 99.0
@@ -141,7 +142,7 @@ func throw(force:Vector3) -> void:
 	
 
 func pickup(p_player: Player) -> void:
-	if pickup_sounds.size() == 0:
+	if pickup_sounds.size() == 0 or randf() < 0.05:
 		%AudioPickup.stream = pickup_sounds_b.pick_random()
 	else:
 		%AudioPickup.stream = pickup_sounds.pick_random()
