@@ -13,6 +13,10 @@ func _init() -> void:
 
 func _ready() -> void:
 	EventStore.register_source(source_id, self)
+	get_tree().paused = true
+	await get_tree().create_timer(0.3).timeout
+	get_tree().paused = false
+	
 
 static var player: Player
 

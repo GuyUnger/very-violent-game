@@ -8,6 +8,7 @@ var knock_back := 0.0
 
 var damage: int = 5
 
+
 var dead: bool = false:
 	set(value):
 		if value:
@@ -25,7 +26,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_3d_body_entered(body:Node3D) -> void:
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
+	if dead:
+		return
+	dead = true
+	#EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
 	if "hit" in body:
 		body.hit(self)
-	queue_free()
+	#queue_free()

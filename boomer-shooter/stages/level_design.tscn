@@ -22,255 +22,364 @@ starting_weapon = ExtResource("2_0cfai")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -9, -16)
 
 [node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="3" instance=ExtResource("4_0cfai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3937, 3.38193, 7.26274)
+allow_shotgun = false
+allow_revolver = false
+allow_katana = false
+allow_smg = false
 
-[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("4_0cfai")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 13)
+[node name="WeaponSpawn4" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("4_0cfai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.7069, 4.73293, -42.2819)
+allow_sniper = false
+allow_revolver = false
+allow_katana = false
+allow_smg = false
 
-[node name="WeaponSpawn3" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("4_0cfai")]
+[node name="WeaponSpawn5" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("4_0cfai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.473, 12.4838, -0.158592)
+allow_sniper = false
+allow_revolver = false
+allow_katana = false
+allow_smg = false
+
+[node name="WeaponSpawn6" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("4_0cfai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.9813, 7.06921, 41.2712)
+allow_shotgun = false
+allow_sniper = false
+allow_revolver = false
+allow_smg = false
+
+[node name="WeaponSpawn7" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("4_0cfai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.9279, -0.121523, 58.638)
+allow_shotgun = false
+allow_sniper = false
+allow_revolver = false
+allow_smg = false
+
+[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("4_0cfai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0159, 0, 17.1466)
+allow_shotgun = false
+allow_sniper = false
+allow_katana = false
+allow_smg = false
+
+[node name="WeaponSpawn3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("4_0cfai")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 24)
+allow_shotgun = false
+allow_sniper = false
+allow_revolver = false
+allow_smg = false
 
 [node name="FujiMountFuji" type="MeshInstance3D" parent="." index="4"]
 transform = Transform3D(-4.27682, 0, -2.59014, 0, 5, 0, 2.59014, 0, -4.27682, 0, 228, 0)
 mesh = ExtResource("7_6p0xd")
 
 [node name="NPCS" type="Node3D" parent="." index="5"]
-transform = Transform3D(-0.309631, 0, -0.950857, 0, 1, 0, 0.950857, 0, -0.309631, -15.5981, -0.989803, 39.5677)
 
 [node name="NPCEnemyBigGuy" parent="NPCS" index="0" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -2.84662, -0.014827, 0.982694)
+transform = Transform3D(0.718394, 0, 0.695637, 0, 1, 0, -0.695637, 0, 0.718394, -15.6511, -1.00463, 36.5567)
+target_lock_time = 0.3
 
 [node name="npc_grunt" parent="NPCS" index="1" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 0.328423, 0, 1.00857)
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -16.6588, -0.989803, 39.5677)
 
 [node name="npc_grunt2" parent="NPCS" index="2" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.309631, 0, -0.950857, 0, 1, 0, 0.950857, 0, -0.309631, -15.5981, -0.989803, 39.5677)
 
 [node name="npc_grunt3" parent="NPCS" index="3" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.209984, 0.0152301, -0.977586, -0.139052, 0.989249, 0.04528, 0.967766, 0.145443, -0.205608, 0.874882, 0, -0.284892)
+transform = Transform3D(-0.855189, -0.143011, 0.498195, -0.139052, 0.989249, 0.04528, -0.499315, -0.030552, -0.865882, -15.5981, -0.989803, 40.4878)
 
 [node name="npc_grunt4" parent="NPCS" index="4" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.209984, 0.0152301, -0.977586, -0.139052, 0.989249, 0.04528, 0.967766, 0.145443, -0.205608, 1.69725, 0, 0.466187)
+transform = Transform3D(-0.855189, -0.143011, 0.498195, -0.139052, 0.989249, 0.04528, -0.499315, -0.030552, -0.865882, -16.5669, -0.989803, 41.0372)
 
 [node name="npc_grunt5" parent="NPCS" index="5" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.209984, 0.0152301, -0.977586, -0.139052, 0.989249, 0.04528, 0.967766, 0.145443, -0.205608, -34.4353, 0, 12.2322)
+transform = Transform3D(0.788856, 0.0830111, 0.608947, -0.139052, 0.989249, 0.04528, -0.598641, -0.120394, 0.791917, -16.5669, -0.989803, 3.03719)
 
 [node name="npc_grunt6" parent="NPCS" index="6" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.209984, 0.0152301, -0.977586, -0.139052, 0.989249, 0.04528, 0.967766, 0.145443, -0.205608, -32.202, 0, 9.40156)
+transform = Transform3D(0.367693, 0.0940313, -0.92518, -0.139052, 0.989249, 0.04528, 0.919492, 0.111999, 0.376816, -14.5669, -0.989803, 6.03719)
 
 [node name="npc_grunt7" parent="NPCS" index="7" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.209984, 0.0152301, -0.977586, -0.139052, 0.989249, 0.04528, 0.967766, 0.145443, -0.205608, -28.9279, 0, 38.8342)
+transform = Transform3D(-0.855189, -0.143011, 0.498195, -0.139052, 0.989249, 0.04528, -0.499315, -0.030552, -0.865882, -43.5669, -0.989803, 0.0371361)
 
 [node name="npc_grunt8" parent="NPCS" index="8" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.209984, 0.0152301, -0.977586, -0.139052, 0.989249, 0.04528, 0.967766, 0.145443, -0.205608, -25.7437, 0, 35.6939)
+transform = Transform3D(-0.855189, -0.143011, 0.498195, -0.139052, 0.989249, 0.04528, -0.499315, -0.030552, -0.865882, -41.5668, -0.989803, 4.03719)
 
 [node name="NPCEnemySniper" parent="NPCS" index="9" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -17.2013, 6.9898, -41.3017)
+transform = Transform3D(-0.933412, 0, -0.358808, 0, 1, 0, 0.358808, 0, -0.933412, 29, 6, 36)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper2" parent="NPCS" index="10" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -39.7781, 4.9898, -23.4331)
+[node name="NPCEnemySniper18" parent="NPCS" index="10" instance=ExtResource("8_xm73y")]
+transform = Transform3D(-0.381248, 0, 0.924473, 0, 1, 0, -0.924473, 0, -0.381248, 29, 6, 49.6918)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper3" parent="NPCS" index="11" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -42.0773, 3.9898, -11.1159)
+[node name="NPCEnemySniper2" parent="NPCS" index="11" instance=ExtResource("8_xm73y")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 19, 4, 9.00003)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper4" parent="NPCS" index="12" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -74.2256, 7.27598, -25.4768)
+[node name="NPCEnemySniper3" parent="NPCS" index="12" instance=ExtResource("8_xm73y")]
+transform = Transform3D(0.124052, 0, -0.992276, 0, 1, 0, 0.992276, 0, 0.124052, 7.99996, 3, 3.00003)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper5" parent="NPCS" index="13" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -75.53, 7.27598, -29.4826)
+[node name="NPCEnemySniper17" parent="NPCS" index="13" instance=ExtResource("8_xm73y")]
+transform = Transform3D(0.124052, 0, -0.992276, 0, 1, 0, 0.992276, 0, 0.124052, 7.99996, -0.811727, 10.6084)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper6" parent="NPCS" index="14" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -73.1495, 5.20077, 34.8846)
+[node name="NPCEnemySniper4" parent="NPCS" index="14" instance=ExtResource("8_xm73y")]
+transform = Transform3D(0.941929, 0, -0.335813, 0, 1, 0, 0.335813, 0, 0.941929, 31.714, 6.28618, -23.1218)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper7" parent="NPCS" index="15" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 19.204, -0.118946, 62.6894)
+[node name="NPCEnemySniper5" parent="NPCS" index="15" instance=ExtResource("8_xm73y")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 35.8221, 6.28618, -23.1218)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper8" parent="NPCS" index="16" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 22.2957, -0.118946, 58.4054)
+[node name="NPCEnemySniper6" parent="NPCS" index="16" instance=ExtResource("8_xm73y")]
+transform = Transform3D(-0.0295267, 0, 0.999564, 0, 1, 0, -0.999564, 0, -0.0295267, -26.119, 4.21097, -40.7884)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper9" parent="NPCS" index="17" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 17.8427, -0.118946, 57.8055)
+[node name="NPCEnemySniper7" parent="NPCS" index="17" instance=ExtResource("8_xm73y")]
+transform = Transform3D(-0.998146, 0, -0.0608744, 0, 1, 0, 0.0608744, 0, -0.998146, -81.1529, -1.10875, 38.4174)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper10" parent="NPCS" index="18" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -22.9368, -0.118946, -42.8531)
+[node name="NPCEnemySniper8" parent="NPCS" index="18" instance=ExtResource("8_xm73y")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -78.0367, -1.10875, 42.6836)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper11" parent="NPCS" index="19" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -28.9939, 3.22414, -61.4541)
+[node name="NPCEnemySniper9" parent="NPCS" index="19" instance=ExtResource("8_xm73y")]
+transform = Transform3D(-0.549125, 0, -0.83574, 0, 1, 0, 0.83574, 0, -0.549125, -76.0875, -1.10875, 38.6352)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper12" parent="NPCS" index="20" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -4.14437, 20.192, 97.177)
+[node name="NPCEnemySniper10" parent="NPCS" index="20" instance=ExtResource("8_xm73y")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 32.251, -1.10875, 31.0267)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper13" parent="NPCS" index="21" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -7.38815, 20.192, 96.6325)
+[node name="NPCEnemySniper11" parent="NPCS" index="21" instance=ExtResource("8_xm73y")]
+transform = Transform3D(-0.539491, 0, -0.841992, 0, 1, 0, 0.841992, 0, -0.539491, 51.8134, 2.23434, 31.0267)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper14" parent="NPCS" index="22" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 32.4616, 12.2494, 4.27118)
+[node name="NPCEnemySniper12" parent="NPCS" index="22" instance=ExtResource("8_xm73y")]
+transform = Transform3D(-0.58517, 0, 0.810911, 0, 1, 0, -0.810911, 0, -0.58517, -109.817, 19.2022, 7.17947)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper15" parent="NPCS" index="23" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 51.7716, 12.2494, -0.910845)
+[node name="NPCEnemySniper13" parent="NPCS" index="23" instance=ExtResource("8_xm73y")]
+transform = Transform3D(0.849856, 0, -0.527015, 0, 1, 0, 0.527015, 0, 0.849856, 12.83, 8.16175, 16.5468)
+target_lock_time = 0.3
 
-[node name="NPCEnemySniper16" parent="NPCS" index="24" instance=ExtResource("8_xm73y")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -29.4423, 20.3311, -51.8683)
+[node name="NPCEnemySniper14" parent="NPCS" index="24" instance=ExtResource("8_xm73y")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -29.7105, 11.2596, 69.1115)
+target_lock_time = 0.3
 
-[node name="NPCEnemyTurret" parent="NPCS" index="25" instance=ExtResource("11_v6np0")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -47.6305, 3.66644, -9.7795)
+[node name="NPCEnemySniper15" parent="NPCS" index="25" instance=ExtResource("8_xm73y")]
+transform = Transform3D(-0.994825, 0, 0.101612, 0, 1, 0, -0.101612, 0, -0.994825, -30.7621, 11.2596, 89.0771)
+target_lock_time = 0.3
 
-[node name="npc_grunt9" parent="NPCS" index="26" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 9.03952, 0.389603, 11.1726)
+[node name="NPCEnemySniper16" parent="NPCS" index="26" instance=ExtResource("8_xm73y")]
+transform = Transform3D(-0.371643, 0, -0.928376, 0, 1, 0, 0.928376, 0, -0.371643, 42.8375, 19.0861, 27.6323)
+target_lock_time = 0.3
 
-[node name="npc_grunt10" parent="NPCS" index="27" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 6.74409, 0.389603, 7.50526)
+[node name="NPCEnemyTurret" parent="NPCS" index="27" instance=ExtResource("11_v6np0")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 8.44868, 2.67664, -2.69406)
 
-[node name="npc_grunt11" parent="NPCS" index="28" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 15.6302, 0.389603, 4.61164)
+[node name="npc_grunt9" parent="NPCS" index="28" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.960958, 0, -0.276694, 0, 1, 0, 0.276694, 0, -0.960958, -29.0206, -0.6002, 44.7036)
 
-[node name="npc_grunt12" parent="NPCS" index="29" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 18.2616, 0.389603, 6.33395)
+[node name="npc_grunt10" parent="NPCS" index="29" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.349014, 0, -0.937118, 0, 1, 0, 0.937118, 0, -0.349014, -24.8227, -0.6002, 43.6565)
 
-[node name="npc_grunt13" parent="NPCS" index="30" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 14.523, 0.434329, -24.5413)
+[node name="npc_grunt11" parent="NPCS" index="30" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.576176, 0, -0.817326, 0, 1, 0, 0.817326, 0, -0.576176, -24.8227, -0.6002, 53.0019)
 
-[node name="npc_grunt14" parent="NPCS" index="31" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -15.3662, 0.434329, -52.0501)
+[node name="npc_grunt12" parent="NPCS" index="31" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.265253, 0, -0.964179, 0, 1, 0, 0.964179, 0, -0.265253, -27.2751, -0.6002, 54.9707)
 
-[node name="npc_grunt15" parent="NPCS" index="32" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -9.61662, 0.434329, -51.7102)
+[node name="npc_grunt13" parent="NPCS" index="32" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.774812, 0, -0.632192, 0, 1, 0, 0.632192, 0, -0.774812, 3.24039, -0.555474, 60.9757)
 
-[node name="npc_grunt16" parent="NPCS" index="33" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -14.5104, 0.434329, -59.385)
+[node name="npc_grunt14" parent="NPCS" index="33" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.437932, 0, 0.899008, 0, 1, 0, -0.899008, 0, -0.437932, 38.6519, -0.555474, 41.073)
 
-[node name="npc_grunt17" parent="NPCS" index="34" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -42.9343, 0.259766, -33.647)
+[node name="npc_grunt15" parent="NPCS" index="34" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.81826, 0, -0.574848, 0, 1, 0, 0.574848, 0, -0.81826, 36.5485, -0.758973, 46.4347)
 
-[node name="npc_grunt18" parent="NPCS" index="35" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -45.1783, 0.259766, -34.9007)
+[node name="npc_grunt16" parent="NPCS" index="35" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.762262, 2.12968e-09, -0.647269, -1.14633e-08, 1, 1.03901e-08, 0.647269, -1.52868e-08, -0.762262, 45.3614, -0.754585, 44.1578)
 
-[node name="npc_grunt19" parent="NPCS" index="36" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -42.659, 0.606675, -40.8945)
+[node name="npc_grunt17" parent="NPCS" index="36" instance=ExtResource("12_55831")]
+transform = Transform3D(0.994279, 0, 0.106819, 0, 1, 0, -0.106819, 0, 0.994279, 29.6892, -0.730037, 9.16148)
 
-[node name="npc_grunt20" parent="NPCS" index="37" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -49.5817, 10.1555, -54.5673)
+[node name="npc_grunt42" parent="NPCS" index="37" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.927908, 0, 0.37281, 0, 1, 0, -0.37281, 0, -0.927908, 19.6041, -0.730037, 9.16148)
 
-[node name="npc_grunt21" parent="NPCS" index="38" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -53.2218, 10.1555, -55.4871)
+[node name="npc_grunt43" parent="NPCS" index="38" instance=ExtResource("12_55831")]
+transform = Transform3D(0.986498, 0, -0.163774, 0, 1, 0, 0.163774, 0, 0.986498, 18.4057, -0.730037, 1.35874)
 
-[node name="npc_grunt22" parent="NPCS" index="39" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -53.2218, 16.3491, -55.4871)
+[node name="npc_grunt44" parent="NPCS" index="39" instance=ExtResource("12_55831")]
+transform = Transform3D(0.0033509, 0, 0.999995, 0, 1, 0, -0.999995, 0, 0.0033509, 16.9861, -0.730037, -27.2477)
 
-[node name="npc_grunt23" parent="NPCS" index="40" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -34.3256, 16.3491, -49.9385)
+[node name="npc_grunt45" parent="NPCS" index="40" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.21112, 0, -0.97746, 0, 1, 0, 0.97746, 0, -0.21112, 24.9966, 6.22016, -29.2749)
 
-[node name="npc_grunt24" parent="NPCS" index="41" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -31.4017, 16.3491, -50.3357)
+[node name="npc_grunt18" parent="NPCS" index="41" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.489489, 0, 0.87201, 0, 1, 0, -0.87201, 0, -0.489489, 31.5761, -0.730037, 7.41594)
 
-[node name="npc_grunt25" parent="NPCS" index="42" instance=ExtResource("12_55831")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -10.8184, 5.94277, -57.0383)
+[node name="npc_grunt19" parent="NPCS" index="42" instance=ExtResource("12_55831")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 36.4953, -0.383128, 11.6673)
 
-[node name="NPCEnemyBigGuy2" parent="NPCS" index="43" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -32.045, 0.0203468, -25.9771)
+[node name="npc_grunt20" parent="NPCS" index="43" instance=ExtResource("12_55831")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 51.6396, 9.1657, 9.31832)
 
-[node name="NPCEnemyBigGuy3" parent="NPCS" index="44" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -77.2239, 5.1365, 51.0204)
+[node name="npc_grunt21" parent="NPCS" index="44" instance=ExtResource("12_55831")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 53.6413, 9.1657, 6.1419)
 
-[node name="NPCEnemyBigGuy4" parent="NPCS" index="45" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -110.063, -5.85373, 41.1725)
+[node name="npc_grunt22" parent="NPCS" index="45" instance=ExtResource("12_55831")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 53.6413, 15.3593, 6.1419)
 
-[node name="NPCEnemyBigGuy5" parent="NPCS" index="46" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -79.505, -5.85373, 15.4137)
+[node name="npc_grunt23" parent="NPCS" index="46" instance=ExtResource("12_55831")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 42.5145, 15.3593, 22.3915)
 
-[node name="NPCEnemyBigGuy6" parent="NPCS" index="47" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -80.5696, -5.85373, 18.6395)
+[node name="npc_grunt24" parent="NPCS" index="47" instance=ExtResource("12_55831")]
+transform = Transform3D(-0.244647, 0, -0.969612, 0, 1, 0, 0.969612, 0, -0.244647, 41.9869, 15.3593, 25.2947)
 
-[node name="NPCEnemyBigGuy7" parent="NPCS" index="48" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -86.1206, -5.75022, 0.315114)
+[node name="npc_grunt25" parent="NPCS" index="48" instance=ExtResource("12_55831")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 41.9869, 4.20439, 46.9418)
 
-[node name="NPCEnemyBigGuy8" parent="NPCS" index="49" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -91.2881, 7.14317, -14.5141)
+[node name="NPCEnemyBigGuy2" parent="NPCS" index="49" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(0.928732, 0, 0.370752, 0, 1, 0, -0.370752, 0, 0.928732, 19.0245, -0.969456, 13.1541)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy9" parent="NPCS" index="50" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -40.6948, 16.3407, -40.0754)
+[node name="NPCEnemyBigGuy3" parent="NPCS" index="50" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.986879, 0, 0.161466, 0, 1, 0, -0.161466, 0, -0.986879, -40.2003, 4.1467, -49.6587)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy10" parent="NPCS" index="51" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -15.5341, 16.3407, -45.5255)
+[node name="NPCEnemyBigGuy4" parent="NPCS" index="51" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -20.6683, -6.84353, -77.8347)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy11" parent="NPCS" index="52" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(0.983775, 0, -0.179403, 0, 1, 0, 0.179403, 0, 0.983775, 0.968704, 0.297955, -50.8993)
+[node name="NPCEnemyBigGuy5" parent="NPCS" index="52" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(0.768474, 0, -0.639882, 0, 1, 0, 0.639882, 0, 0.768474, 4.58578, -6.84353, -44.6567)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy12" parent="NPCS" index="53" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.961281, 0, -0.27557, 0, 1, 0, 0.27557, 0, -0.961281, -5.29602, -3.85091, -70.1379)
+[node name="NPCEnemyBigGuy6" parent="NPCS" index="53" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.344594, 0, 0.938752, 0, 1, 0, -0.938752, 0, -0.344594, -8.37476, -6.84353, -42.8138)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy13" parent="NPCS" index="54" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(0.996869, 0, -0.0790681, 0, 1, 0, 0.0790681, 0, 0.996869, -29.6975, 3.36252, -71.3259)
+[node name="NPCEnemyBigGuy7" parent="NPCS" index="54" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.97749, 0, 0.210984, 0, 1, 0, -0.210984, 0, -0.97749, 10.7679, -6.74002, -42.4182)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy14" parent="NPCS" index="55" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.56691, 0, -0.82378, 0, 1, 0, 0.82378, 0, -0.56691, 13.6205, 0.306763, 61.7008)
+[node name="NPCEnemyBigGuy8" parent="NPCS" index="55" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(0.992117, 0, -0.125316, 0, 1, 0, 0.125316, 0, 0.992117, 26.4684, 6.15337, -43.4201)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy15" parent="NPCS" index="56" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(0.878141, 0, -0.478401, 0, 1, 0, 0.478401, 0, 0.878141, 19.3, 0.306763, 73.0366)
+[node name="NPCEnemyBigGuy9" parent="NPCS" index="56" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.643897, 0, -0.765113, 0, 1, 0, 0.765113, 0, -0.643897, 37.9611, 15.3509, 14.1177)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy16" parent="NPCS" index="57" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.326129, 0, -0.945325, 0, 1, 0, 0.945325, 0, -0.326129, 43.4685, 6.50634, 63.8004)
+[node name="NPCEnemyBigGuy10" parent="NPCS" index="57" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 32.5, 15.3509, 38.8931)
+target_lock_time = 0.3
 
-[node name="NPCEnemyBigGuy17" parent="NPCS" index="58" instance=ExtResource("6_6p0xd")]
-transform = Transform3D(-0.326129, 0, -0.945325, 0, 1, 0, 0.945325, 0, -0.326129, 40.3321, 6.31767, 2.55807)
+[node name="NPCEnemyBigGuy11" parent="NPCS" index="58" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.475194, 0, -0.879881, 0, 1, 0, 0.879881, 0, -0.475194, 32.4999, -0.867018, 56.2488)
+target_lock_time = 0.3
 
-[node name="npc_grunt26" parent="NPCS" index="59" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -21.5712, 0.777308, -9.5061)
+[node name="NPCEnemyBigGuy12" parent="NPCS" index="59" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(0.0356147, 0, 0.999366, 0, 1, 0, -0.999366, 0, 0.0356147, 52.7328, -4.84071, 56.2488)
+target_lock_time = 0.3
 
-[node name="npc_grunt27" parent="NPCS" index="60" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -17.4139, 2.31692, 0.587657)
+[node name="NPCEnemyBigGuy13" parent="NPCS" index="60" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(0.415551, 0, -0.90957, 0, 1, 0, 0.90957, 0, 0.415551, 56.0367, 9.29552, 13.7871)
+target_lock_time = 0.3
 
-[node name="npc_grunt28" parent="NPCS" index="61" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -17.2575, 2.31692, -1.32292)
+[node name="NPCEnemyBigGuy14" parent="NPCS" index="61" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.996165, 0, 0.0875037, 0, 1, 0, -0.0875037, 0, -0.996165, -78.4841, -0.68304, 33.4144)
+target_lock_time = 0.3
 
-[node name="npc_grunt29" parent="NPCS" index="62" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -69.4912, 0.370182, 2.72575)
+[node name="NPCEnemyBigGuy15" parent="NPCS" index="62" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.726791, 0, -0.686859, 0, 1, 0, 0.686859, 0, -0.726791, -91.0213, -0.68304, 35.3048)
+target_lock_time = 0.3
 
-[node name="npc_grunt30" parent="NPCS" index="63" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -72.3007, 0.370182, 1.61342)
+[node name="NPCEnemyBigGuy16" parent="NPCS" index="63" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.745732, 0, 0.666246, 0, 1, 0, -0.666246, 0, -0.745732, -89.7223, 5.51654, 61.1454)
+target_lock_time = 0.3
 
-[node name="npc_grunt31" parent="NPCS" index="64" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -75.2734, 0.370182, -24.722)
+[node name="NPCEnemyBigGuy17" parent="NPCS" index="64" instance=ExtResource("6_6p0xd")]
+transform = Transform3D(-0.797889, 0, 0.602804, 0, 1, 0, -0.602804, 0, -0.797889, -30.5185, 5.32787, 77.1257)
+target_lock_time = 0.3
 
-[node name="npc_grunt32" parent="NPCS" index="65" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -76.5538, 0.736438, -22.5815)
+[node name="npc_grunt26" parent="NPCS" index="65" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.963994, 0, 0.265926, 0, 1, 0, -0.265926, 0, -0.963994, 0.119951, -0.212495, 22)
 
-[node name="npc_grunt33" parent="NPCS" index="66" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -80.5046, 0.635745, -23.1146)
+[node name="npc_grunt27" parent="NPCS" index="66" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -10.765, 1.32712, 22.8276)
 
-[node name="npc_grunt34" parent="NPCS" index="67" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -39.6752, 0.635745, -40.666)
+[node name="npc_grunt41" parent="NPCS" index="67" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.991457, 0, 0.13044, 0, 1, 0, -0.13044, 0, -0.991457, -14.6585, -0.413791, 28.0351)
 
-[node name="npc_grunt35" parent="NPCS" index="68" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -9.60875, 2.45399, -40.2208)
+[node name="npc_grunt28" parent="NPCS" index="68" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.52829, 0, 0.849064, 0, 1, 0, -0.849064, 0, -0.52829, -8.99674, 1.32712, 23.5679)
 
-[node name="npc_grunt36" parent="NPCS" index="69" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -9.80289, 2.45399, -37.8036)
+[node name="npc_grunt29" parent="NPCS" index="69" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 3.32673, -0.619621, -27.3525)
 
-[node name="npc_grunt37" parent="NPCS" index="70" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -8.17694, 2.45399, -36.6739)
+[node name="npc_grunt46" parent="NPCS" index="70" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -21.8722, -0.619621, -45.1365)
 
-[node name="npc_grunt38" parent="NPCS" index="71" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 16.9931, 0.301429, -14.7054)
+[node name="npc_grunt47" parent="NPCS" index="71" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -20.9968, -0.619621, -50.4056)
 
-[node name="npc_grunt39" parent="NPCS" index="72" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 1.26414, 0.301429, 57.0666)
+[node name="npc_grunt48" parent="NPCS" index="72" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -17.6837, -0.619621, -50.4056)
 
-[node name="npc_grunt40" parent="NPCS" index="73" instance=ExtResource("7_aqw5h")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, 9.29918, 20.2152, 95.2735)
+[node name="npc_grunt49" parent="NPCS" index="73" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -28.6827, -0.619621, -48.4365)
 
-[node name="NPCEnemyTurret2" parent="NPCS" index="74" instance=ExtResource("11_v6np0")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -18.5873, 3.75553, -61.2672)
+[node name="npc_grunt30" parent="NPCS" index="74" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 5.2543, -0.619621, -29.6795)
 
-[node name="NPCEnemyTurret3" parent="NPCS" index="75" instance=ExtResource("11_v6np0")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -44.2873, 14.6014, -52.8984)
+[node name="npc_grunt31" parent="NPCS" index="75" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(0.564247, 0, -0.825606, 0, 1, 0, 0.825606, 0, 0.564247, 31.216, -0.619621, -24.3518)
 
-[node name="NPCEnemyTurret4" parent="NPCS" index="76" instance=ExtResource("11_v6np0")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -48.6276, 23.726, -48.1227)
+[node name="npc_grunt32" parent="NPCS" index="76" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(0.385536, 0, -0.922693, 0, 1, 0, 0.922693, 0, 0.385536, 29.5771, -0.253365, -26.2321)
 
-[node name="NPCEnemyTurret5" parent="NPCS" index="77" instance=ExtResource("11_v6np0")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -80.2986, 12.8181, -16.6516)
+[node name="npc_grunt33" parent="NPCS" index="77" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 31.3073, -0.354058, -29.8237)
 
-[node name="NPCEnemyTurret6" parent="NPCS" index="78" instance=ExtResource("11_v6np0")]
-transform = Transform3D(-0.309631, 0, 0.950857, 0, 1, 0, -0.950857, 0, -0.309631, -41.4379, 14.6377, -35.7703)
+[node name="npc_grunt34" parent="NPCS" index="78" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 35.3541, -0.354058, 14.4337)
+
+[node name="npc_grunt35" parent="NPCS" index="79" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.589056, 0, 0.808093, 0, 1, 0, -0.808093, 0, -0.589056, 25.6213, 1.46419, 42.8848)
+
+[node name="npc_grunt36" parent="NPCS" index="80" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 23.383, 1.46419, 41.9517)
+
+[node name="npc_grunt37" parent="NPCS" index="81" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(0.587814, 0, 0.808997, 0, 1, 0, -0.808997, 0, 0.587814, 21.8054, 1.46419, 43.148)
+
+[node name="npc_grunt38" parent="NPCS" index="82" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.812175, 0, 0.583414, 0, 1, 0, -0.583414, 0, -0.812175, -6.87696, -0.688374, 60.279)
+
+[node name="npc_grunt39" parent="NPCS" index="83" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -70.2517, -0.688374, 23.1001)
+
+[node name="npc_grunt40" parent="NPCS" index="84" instance=ExtResource("7_aqw5h")]
+transform = Transform3D(-0.0629996, 0, 0.998014, 0, 1, 0, -0.998014, 0, -0.0629996, -109.069, 19.2254, 18.9103)
+
+[node name="NPCEnemyTurret2" parent="NPCS" index="85" instance=ExtResource("11_v6np0")]
+transform = Transform3D(-0.378342, 0, -0.925666, 0, 1, 0, 0.925666, 0, -0.378342, 48.4134, 2.76573, 40.8641)
+
+[node name="NPCEnemyTurret3" parent="NPCS" index="86" instance=ExtResource("11_v6np0")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 48.4134, 13.6116, 13.8358)
+
+[node name="NPCEnemyTurret4" parent="NPCS" index="87" instance=ExtResource("11_v6np0")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 45.2163, 22.7362, 8.23008)
+
+[node name="NPCEnemyTurret5" parent="NPCS" index="88" instance=ExtResource("11_v6np0")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 25.0981, 11.8283, -31.6289)
+
+[node name="NPCEnemyTurret6" parent="NPCS" index="89" instance=ExtResource("11_v6np0")]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 31.2448, 13.6479, 11.2418)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource("8_aqw5h")

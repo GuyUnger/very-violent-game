@@ -1,16 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct8vytijeramr"]
+[gd_scene load_steps=8 format=3 uid="uid://ct8vytijeramr"]
 
 [ext_resource type="Script" uid="uid://didoril3vpi01" path="res://game/misc/finish.gd" id="1_nrt5p"]
+[ext_resource type="ArrayMesh" uid="uid://c1qyc6di1s8am" path="res://content/environment/props/meshes/props_door_closed.res" id="2_k8n7e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4tmal"]
-size = Vector3(2.06738, 1.78882, 2.23242)
+size = Vector3(1.52148, 2.74231, 2.23242)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8n7e"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_k8n7e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mdgu6"]
+size = Vector3(0.475159, 2.94235, 0.760742)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k8n7e"]
+size = Vector3(2.22266, 0.358513, 0.760742)
 
 [node name="Finish" type="Area3D"]
 collision_mask = 2
 script = ExtResource("1_nrt5p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05436, -0.956815)
 shape = SubResource("BoxShape3D_4tmal")
+
+[node name="DoorClosed" type="StaticBody3D" parent="."]
+
+[node name="PropsDoorClosed" type="MeshInstance3D" parent="DoorClosed"]
+mesh = ExtResource("2_k8n7e")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorClosed/PropsDoorClosed"]
+transform = Transform3D(1.57, 0, 0, 0, 2.7873, 0, 0, 0, 0.207572, 0, 1.46482, 0)
+material_override = SubResource("StandardMaterial3D_k8n7e")
+mesh = SubResource("BoxMesh_k8n7e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorClosed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02359, 1.52989, -0.119629)
+shape = SubResource("BoxShape3D_mdgu6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="DoorClosed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97641, 1.52989, -0.119629)
+shape = SubResource("BoxShape3D_mdgu6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="DoorClosed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0432771, 2.88189, -0.119629)
+shape = SubResource("BoxShape3D_k8n7e")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -74,7 +74,6 @@ var last_transform := Transform3D()
 func _ready() -> void:
 	source_id = EventStore.next_source_id()
 	
-	look_angle.x = rotation.y
 	
 	EventStore.push_event(
 		EventStoreCommandAddChild.new(
@@ -89,10 +88,11 @@ func _ready() -> void:
 	Main.player = self
 	
 	await get_tree().process_frame
+	
+	look_angle.x = -rotation.y - PI * 0.5
+	
 	cam.reparent(get_parent())
 	ray_cam.reparent(get_parent())
-	
-	
 	
 	%Person.visible = not first_person
 
@@ -560,8 +560,12 @@ func die() -> void:
 	throw_weapon()
 	first_person = false
 	#%Person.visible = not first_person
-	await get_tree().create_timer(1.0).timeout
+	
+	await get_tree().create_timer(0.5).timeout
+	await Transition.close(Color.RED)
+	
 	EventStore.reset()
+	Transition.open()
 
 
 func _pick_up_body_entered(body: Node3D) -> void:
