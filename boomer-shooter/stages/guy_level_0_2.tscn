@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://npsi3v750s7c"]
+[gd_scene load_steps=43 format=3 uid="uid://cy2l414msbsos"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_j0cmv"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_kpc0v"]
@@ -226,7 +226,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1029, 1, 1.60809)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11555, 1, 1.34132)
 
 [node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("18_j0cmv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0861, 1, 9.40178)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09156, 1, 7.06743)
 
 [node name="npc_grunt4" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("18_j0cmv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27948, 1, 2.82336)
