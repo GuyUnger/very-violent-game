@@ -21,6 +21,11 @@ func unique_source_id(node: Node) -> int:
 	return hash(node.global_position)
 
 
+func clear() -> void:
+	loops.clear()
+	new_loop()
+
+
 func new_loop() -> void:
 	loops.push_back(Loop.new())
 	

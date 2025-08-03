@@ -10,6 +10,7 @@ func _on_body_entered(body:Node3D) -> void:
 	entered = true
 	
 	get_tree().paused = true
+	EventStore.clear()
 	await Transition.close()
 	get_tree().change_scene_to_file(next_level)
 	Transition.open()
