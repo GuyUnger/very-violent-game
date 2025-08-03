@@ -33,6 +33,8 @@ var pickup_sounds_b: Array[AudioStream] = [
 	preload("res://game/weapons/pickup_sfx/pickup_default 04.wav"),
 ]
 
+@export var damage_scale: int = 1
+
 
 func set_trigger_pressed(value:bool) -> void:
 	if value != trigger_pressed:
@@ -103,11 +105,13 @@ func shoot() -> void:
 		player.cam.shake_shock(0.2, 0.5)
 		projectile.track_in_event_store = true
 		projectile.position = player.cam.global_position
+		projectile.damage *= damage_scale
 		Main.instance.add_child(projectile)
 		#projectile.collision_mask = 1 + 4
 	else:
 		var projectile := preload("res://game/projectiles/bullet_enemy.tscn").instantiate()
 
+		projectile.damage *= damage_scale
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
 		#projectile.collision_mask = 1 + 2
 		projectile.position = global_position + Vector3.UP * 0.1
@@ -119,7 +123,7 @@ func shoot() -> void:
 	else:
 		%AudioShootNPC.play()
 		
-	total_recoil += recoil
+	total_recoil = recoil
 	
 func throw(force:Vector3) -> void:
 	trigger_pressed = false

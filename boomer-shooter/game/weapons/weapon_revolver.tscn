@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dbbhoit78n2uc" path="res://game/weapons/model/weapon_revolver.glb" id="5_b8m8k"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="6_4mobr"]
 [ext_resource type="PackedScene" uid="uid://by7a00rd5o3fx" path="res://game/weapons/model/weapon_revolver_arm.glb" id="6_h4bbw"]
-[ext_resource type="Script" uid="uid://5im22xi16vfl" path="res://game/weapons/weapon_revolver_animations.gd" id="9_w5rom"]
+[ext_resource type="Script" path="res://game/weapons/weapon_revolver_animations.gd" id="9_w5rom"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="10_w5rom"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lea5y"]
@@ -21,6 +21,7 @@ script = ExtResource("1_5ro7y")
 fire_rate = 0.1
 ammo = 8
 pickup_sounds = Array[AudioStream]([ExtResource("2_enli4"), ExtResource("3_4mobr")])
+damage_scale = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_lea5y")

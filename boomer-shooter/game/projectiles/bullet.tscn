@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ba84d1ksxorgp" path="res://game/projectiles/bullet.gd" id="1_2dqbx"]
 [ext_resource type="AudioStream" uid="uid://16i2e8o0hgxj" path="res://content/sfx/bullet_whiz.wav" id="3_645c0"]
-[ext_resource type="AudioStream" path="res://game/player/bullet_ricochet.tres" id="3_tynb1"]
+[ext_resource type="AudioStream" uid="uid://bp0xff2046anp" path="res://game/player/bullet_ricochet.tres" id="3_tynb1"]
 [ext_resource type="AudioStream" uid="uid://cwhw047fx33ox" path="res://content/sfx/bullet_hit_meat.wav" id="5_a77ay"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="5_xx14j"]
 
@@ -43,6 +43,7 @@ rings = 2
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_2dqbx")
+damage = 2
 
 [node name="Mesh" type="Node3D" parent="."]
 
