@@ -22,7 +22,7 @@ script = ExtResource("1_5ro7y")
 fire_rate = 0.1
 ammo = 12
 pickup_sounds = Array[AudioStream]([ExtResource("2_enli4"), ExtResource("3_4mobr")])
-damage_scale = 6
+damage_scale = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_lea5y")

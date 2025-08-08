@@ -1,0 +1,12 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://bmr1xlo01d2jr"]
+
+[ext_resource type="AudioStream" uid="uid://d3inwsosye115" path="res://game/weapons/melee_slash 01.wav" id="0_6fj44"]
+[ext_resource type="AudioStream" uid="uid://bxnrt1vrntrpe" path="res://game/weapons/melee_slash 02.wav" id="1_2ngn9"]
+[ext_resource type="AudioStream" uid="uid://cy50m6vqgoll2" path="res://game/weapons/melee_slash 03.wav" id="2_oyz2s"]
+
+[resource]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("0_6fj44")
+stream_1/stream = ExtResource("1_2ngn9")
+stream_2/stream = ExtResource("2_oyz2s")

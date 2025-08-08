@@ -86,11 +86,14 @@ time = 20.0
 transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)
 shadow_enabled = true
 
-[node name="Player" parent="SubViewportContainer/SubViewport" index="1"]
+[node name="npc_grunt" parent="SubViewportContainer/SubViewport" index="1" instance=ExtResource("21_4tmal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25253, 0.145303, -8.53593)
+
+[node name="Player" parent="SubViewportContainer/SubViewport" index="2"]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0.509219, 0, 7.23507)
 starting_weapon = ExtResource("2_apt5p")
 
-[node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" index="3"]
+[node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77, -9, -16)
 
 [node name="PlaneCrash" parent="SubViewportContainer/SubViewport/Props" index="0" instance=ExtResource("3_8g440")]
@@ -103,10 +106,10 @@ transform = Transform3D(-0.917824, 0, 0.396988, 0, 1, 0, -0.396988, 0, -0.917824
 transform = Transform3D(-0.894076, 0, -0.447915, 0, 1, 0, 0.447915, 0, -0.894076, -2, 8, 11)
 
 [node name="Conditioner" parent="SubViewportContainer/SubViewport/Props" index="3" instance=ExtResource("5_iq0yp")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 44.812, 14.7875, 17.9813)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 75.812, 12.2875, 18.5813)
 
 [node name="Awning" parent="SubViewportContainer/SubViewport/Props" index="4" instance=ExtResource("6_m8a5v")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 54.0311, 15.616, 18.6558)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 87.1393, 13.616, 21.0414)
 
 [node name="WindowDeco" parent="SubViewportContainer/SubViewport/Props" index="5" instance=ExtResource("7_lwund")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57.2131, 12.8235, 33.474)
@@ -121,32 +124,35 @@ transform = Transform3D(-0.556339, 0, -0.830955, 0, 1, 0, 0.830955, 0, -0.556339
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 55.4628, 8.075, 15.9868)
 
 [node name="Barrel4" parent="SubViewportContainer/SubViewport/Props" index="9" instance=ExtResource("11_4vb5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.7486, 8.74199, 22.1875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.3898, 9.74199, 18.8099)
 
-[node name="Stairs2" parent="SubViewportContainer/SubViewport/Props" index="10" instance=ExtResource("12_3p6do")]
+[node name="Barrel5" parent="SubViewportContainer/SubViewport/Props" index="10" instance=ExtResource("11_4vb5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.3452, 9.74199, 21.1128)
+
+[node name="Stairs2" parent="SubViewportContainer/SubViewport/Props" index="11" instance=ExtResource("12_3p6do")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 40.8014, 8, 6.38413)
 
-[node name="StairsShort" parent="SubViewportContainer/SubViewport/Props" index="11" instance=ExtResource("13_a5k3t")]
+[node name="StairsShort" parent="SubViewportContainer/SubViewport/Props" index="12" instance=ExtResource("13_a5k3t")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 60.8243, 8, 25.7702)
 
-[node name="Platform3" parent="SubViewportContainer/SubViewport/Props" index="12" instance=ExtResource("14_34y8f")]
+[node name="Platform3" parent="SubViewportContainer/SubViewport/Props" index="13" instance=ExtResource("14_34y8f")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 49.7192, 13.794, 13.6424)
 
-[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("4_y4jwv")]
+[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("4_y4jwv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 10)
 allow_shotgun = false
 allow_sniper = false
 allow_katana = false
 allow_smg = false
 
-[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("4_y4jwv")]
+[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("4_y4jwv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 12)
 allow_shotgun = false
 allow_sniper = false
 allow_katana = false
 allow_smg = false
 
-[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="6"]
+[node name="Blockout" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="7"]
 script = ExtResource("16_pus1d")
 materials = Array[Material]([ExtResource("17_k4sm8"), ExtResource("18_rws5q"), ExtResource("19_gfb7o"), ExtResource("20_lg8mm"), ExtResource("21_7m774"), ExtResource("22_1p132"), ExtResource("23_vmxh1"), ExtResource("24_ngoov"), ExtResource("25_v87rw"), ExtResource("26_oqn7r"), ExtResource("27_uhonv"), ExtResource("28_kt554"), ExtResource("29_v866o"), ExtResource("30_ssnlf"), ExtResource("31_dykgl"), ExtResource("32_o8u80"), ExtResource("33_faclp"), ExtResource("34_j5jpw"), ExtResource("35_uw8a5"), ExtResource("36_qw4b3"), ExtResource("37_s6by0")])
 metadata/_custom_type_script = "uid://bgxvcscuumfyq"
@@ -184,16 +190,16 @@ material = ExtResource("29_v866o")
 metadata/_edit_group_ = true
 
 [node name="Add_1_3_13" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1.5, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 3, 1.5)
 use_collision = true
-size = Vector3(1, 3, 13)
+size = Vector3(11, 6, 13)
 material = ExtResource("28_kt554")
 metadata/_edit_group_ = true
 
 [node name="Add_13_3_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 1)
 use_collision = true
-size = Vector3(15, 3, 2)
+size = Vector3(16, 6, 2)
 material = ExtResource("20_lg8mm")
 metadata/_edit_group_ = true
 
@@ -261,50 +267,47 @@ metadata/_edit_group_ = true
 material_override = SubResource("StandardMaterial3D_4tmal")
 mesh = SubResource("ImmediateMesh_3usft")
 
-[node name="DoorSlideWall" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("18_iq0yp")]
+[node name="DoorSlideWall" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("18_iq0yp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -6)
 
-[node name="MeleeActivator" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("19_m8a5v")]
+[node name="MeleeActivator" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("19_m8a5v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 0, 7.4)
 
-[node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt3" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -11)
 
-[node name="npc_grunt6" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt6" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
 
-[node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29925, -0.0259438, -15.03)
 
-[node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43855, 0, -15.8856)
 
-[node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9648, 0, -14.8746)
 
-[node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80213, -0.0194693, -14.5708)
 
-[node name="Finish" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("20_3usft")]
+[node name="Finish" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("20_3usft")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.86416, 0, -15.3144)
 next_level = "res://stages/guy_level_2.tscn"
 
-[node name="Box" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("42_rws5q")]
+[node name="Box" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.880138, 0, -0.474718, 0, 1, 0, 0.474718, 0, 0.880138, -3.40502, 0.665051, -7.52027)
 
-[node name="Box2" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("42_rws5q")]
+[node name="Box2" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.941541, 0, 0.336898, 0, 1, 0, -0.336898, 0, 0.941541, -8.7607, 0.681949, -10.6084)
 
-[node name="Box3" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("42_rws5q")]
+[node name="Box3" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.875709, 0, -0.482839, 0, 1, 0, 0.482839, 0, 0.875709, -8.7607, 0.681949, -8.7651)
 
-[node name="Conditioner" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("5_iq0yp")]
+[node name="Conditioner" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("5_iq0yp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60485, 1.83366, -4.48801)
 
-[node name="npc_grunt" parent="." index="4" instance=ExtResource("21_4tmal")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25253, 0.145303, -8.53593)
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="7"]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource("45_gfb7o")
 volume_db = 1.0
 bus = &"SFX"

@@ -82,6 +82,8 @@ func _told_enemy_position(enemy) -> void:
 
 func melee() -> void:
 	health = 0
+	if has_node("%AudioMeleeSlash"):
+		%AudioMeleeSlash.play()
 	die()
 	cuts += 1
 

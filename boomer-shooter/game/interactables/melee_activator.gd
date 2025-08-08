@@ -19,12 +19,15 @@ signal activated
 
 
 func shoot_activate() -> void:
-	enabled = true
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "enabled", enabled))
+	activate()
 
 func melee() -> void:
+	activate()
+
+func activate() -> void:
 	enabled = true
 	EventStore.push_event(EventStoreCommandSet.new(source_id, "enabled", enabled))
+	%Light.show()
 
 
 func _process(delta: float) -> void:

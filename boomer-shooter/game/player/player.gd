@@ -202,12 +202,13 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if dead:
-		
-		cam.camera.fov = lerp(cam.camera.fov, 60.0, delta * 5.0)
-		
-		%EnemyFocus.material.set_shader_parameter("time",
-				lerp(%EnemyFocus.material.get_shader_parameter("time"), 0.15, delta * 5.0))
-		
+		if last_hit_enemy:
+			cam.camera.fov = lerp(cam.camera.fov, 60.0, delta * 5.0)
+			
+			%EnemyFocus.material.set_shader_parameter("time",
+					lerp(%EnemyFocus.material.get_shader_parameter("time"), 0.15, delta * 5.0))
+		else:
+			cam.camera.fov = lerp(cam.camera.fov, 120.0, delta * 5.0)
 		return
 	
 	#region Input
@@ -487,7 +488,7 @@ func _process_melee(delta) -> void:
 	else:
 		since_secondary_pressed += delta
 	
-	melee_reload_t = move_toward(melee_reload_t, 0.0, delta / 0.8)
+	melee_reload_t = move_toward(melee_reload_t, 0.0, delta / 0.6)
 	
 	if since_secondary_pressed < 0.2 and melee_reload_t <= 0.0 and weapon and weapon is WeaponKatana:
 		vel_hor *= 3.5
