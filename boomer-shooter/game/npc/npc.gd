@@ -154,6 +154,7 @@ class State extends Node:
 		
 		var weapon = get_parent().get_node("%Weapon")
 		if weapon:
+			weapon.enemy = get_parent()
 			weapon.hide_glow()
 		get_parent().died.connect(_died)
 	

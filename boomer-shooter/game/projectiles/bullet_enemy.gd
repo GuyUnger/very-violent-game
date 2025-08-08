@@ -8,6 +8,8 @@ var knock_back := 0.0
 
 var damage: int = 5
 
+var enemy: NPCEnemy
+
 
 var dead: bool = false:
 	set(v):
@@ -31,6 +33,8 @@ func _on_area_3d_body_entered(body:Node3D) -> void:
 		return
 	dead = true
 	#EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
-	if "hit" in body:
+	if "hit" in body and not body.dead:
 		body.hit(damage)
+		if enemy and "last_hit_enemy" in body:
+			body.last_hit_enemy = enemy
 	#queue_free()

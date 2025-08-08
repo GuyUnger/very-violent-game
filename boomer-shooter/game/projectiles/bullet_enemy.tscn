@@ -41,7 +41,7 @@ radial_segments = 4
 rings = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rrtqo"]
-radius = 0.124314
+radius = 0.05
 height = 0.470643
 
 [node name="Bullet" type="Node3D"]

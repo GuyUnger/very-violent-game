@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://d3b5576toy6a8" path="res://game/projectiles/melee.gd" id="1_rryft"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5ghna"]
-height = 0.4
-radius = 1.5
+radius = 1.8
 
 [node name="AreaMelee" type="Area3D"]
 collision_layer = 0

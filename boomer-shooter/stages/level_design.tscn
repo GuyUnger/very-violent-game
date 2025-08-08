@@ -125,51 +125,39 @@ transform = Transform3D(-0.855189, -0.143011, 0.498195, -0.139052, 0.989249, 0.0
 
 [node name="NPCEnemySniper" parent="NPCS" index="7" instance=ExtResource("8_xm73y")]
 transform = Transform3D(-0.933412, 0, -0.358808, 0, 1, 0, 0.358808, 0, -0.933412, 29, 6, 36)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper2" parent="NPCS" index="8" instance=ExtResource("8_xm73y")]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 19, 4, 9.00003)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper3" parent="NPCS" index="9" instance=ExtResource("8_xm73y")]
 transform = Transform3D(0.124052, 0, -0.992276, 0, 1, 0, 0.992276, 0, 0.124052, 7.99996, 3, 3.00003)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper17" parent="NPCS" index="10" instance=ExtResource("8_xm73y")]
 transform = Transform3D(0.124052, 0, -0.992276, 0, 1, 0, 0.992276, 0, 0.124052, 7.99996, -0.811727, 10.6084)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper4" parent="NPCS" index="11" instance=ExtResource("8_xm73y")]
 transform = Transform3D(0.941929, 0, -0.335813, 0, 1, 0, 0.335813, 0, 0.941929, 13.8518, -0.642623, -49.6596)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper6" parent="NPCS" index="12" instance=ExtResource("8_xm73y")]
 transform = Transform3D(-0.0295267, 0, 0.999564, 0, 1, 0, -0.999564, 0, -0.0295267, -23.2987, 6.92788, -4.12559)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper8" parent="NPCS" index="13" instance=ExtResource("8_xm73y")]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -78.0367, -1.10875, 37.3771)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper9" parent="NPCS" index="14" instance=ExtResource("8_xm73y")]
 transform = Transform3D(-0.549125, 0, -0.83574, 0, 1, 0, 0.83574, 0, -0.549125, -76.0875, -1.10875, 38.6352)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper10" parent="NPCS" index="15" instance=ExtResource("8_xm73y")]
 transform = Transform3D(-0.999974, 0, 0.00727811, 0, 1, 0, -0.00727811, 0, -0.999974, 31.4619, -1.10875, 30.7934)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper11" parent="NPCS" index="16" instance=ExtResource("8_xm73y")]
 transform = Transform3D(-0.539491, 0, -0.841992, 0, 1, 0, 0.841992, 0, -0.539491, 51.8134, 2.23434, 31.0267)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper12" parent="NPCS" index="17" instance=ExtResource("8_xm73y")]
 transform = Transform3D(-0.58517, 0, 0.810911, 0, 1, 0, -0.810911, 0, -0.58517, -104.769, 19.2022, 5.72423)
-target_lock_time = 0.3
 
 [node name="NPCEnemySniper13" parent="NPCS" index="18" instance=ExtResource("8_xm73y")]
 transform = Transform3D(0.849856, 0, -0.527015, 0, 1, 0, 0.527015, 0, 0.849856, 12.83, 8.16175, 16.5468)
-target_lock_time = 0.3
 
 [node name="npc_grunt9" parent="NPCS" index="19" instance=ExtResource("12_55831")]
 transform = Transform3D(-0.960958, 0, -0.276694, 0, 1, 0, 0.276694, 0, -0.960958, -29.0206, -0.6002, 44.7036)

@@ -70,6 +70,8 @@ var last_transform := Transform3D()
 
 var invincible_t: float = 0.0
 
+var last_hit_enemy
+
 #region Initialization
 
 func _ready() -> void:
@@ -102,6 +104,14 @@ func _ready() -> void:
 #region Processing
 
 func _process(delta: float) -> void:
+	if dead:
+		if last_hit_enemy:
+			var looking_at_transform = cam.global_transform
+			looking_at_transform = looking_at_transform.looking_at(last_hit_enemy.global_position + Vector3.UP * 1.0, Vector3.UP)
+			cam.global_transform = cam.global_transform.interpolate_with(looking_at_transform, delta * 5.0)
+			#cam.look_at(last_hit_enemy.global_position + Vector3.UP * 1.5, Vector3.UP)
+		return
+	
 	if invincible_t > 0.0:
 		invincible_t -= delta
 	%Crosshair.visible = weapon != null
@@ -578,7 +588,7 @@ func die() -> void:
 	first_person = false
 	#%Person.visible = not first_person
 	
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(1.0).timeout
 	await Transition.close(Color.RED)
 	
 	EventStore.reset()
@@ -606,3 +616,4 @@ func hit(damage: int) -> void:
 	if invincible_t > 0.0:
 		return
 	super(damage)
+

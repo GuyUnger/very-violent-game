@@ -17,6 +17,7 @@ var since_primary_pressed: float = 999.0
 var aim_dir := Vector3.ZERO
 var throwing_velocity := Vector3.ZERO
 var player: Player
+var enemy
 var trigger_pressed:bool :
 	set = set_trigger_pressed
 
@@ -110,7 +111,7 @@ func shoot() -> void:
 		#projectile.collision_mask = 1 + 4
 	else:
 		var projectile := preload("res://game/projectiles/bullet_enemy.tscn").instantiate()
-
+		projectile.enemy = enemy
 		projectile.damage *= damage_scale
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
 		#projectile.collision_mask = 1 + 2
