@@ -44,7 +44,7 @@
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="37_s6by0"]
 [ext_resource type="PackedScene" uid="uid://ba7a7b7hxx0p0" path="res://game/props/box.tscn" id="42_rws5q"]
 [ext_resource type="AudioStream" uid="uid://c8fruuvl4hl7i" path="res://content/sfx/liam.wav" id="45_gfb7o"]
-[ext_resource type="Script" path="res://stages/liam_says.gd" id="46_lg8mm"]
+[ext_resource type="Script" uid="uid://rs0r2fpjx06w" path="res://stages/liam_says.gd" id="46_lg8mm"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pus1d"]
 _surfaces = [{

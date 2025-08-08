@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://6g6hmmibm6iy"]
+
+[sub_resource type="Shader" id="Shader_ybp5j"]
+code = "shader_type spatial;
+render_mode blend_add, unshaded, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 emission_color : source_color;
+uniform float emission_amount = 5.0; 
+uniform float rim_steepness : hint_range(0.0f, 16.0f) = 3.0f; //higher values mean a smaller rim.
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	float NdotV = dot(NORMAL, VIEW);
+	float rim_light = pow(1.0 - NdotV, rim_steepness);
+	ALBEDO = emission_color.rgb * emission_amount;
+	ALPHA = rim_light;
+}"
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_ybp5j")
+shader_parameter/emission_color = Color(0, 1, 0.274557, 1)
+shader_parameter/emission_amount = 0.5
+shader_parameter/rim_steepness = 1.2

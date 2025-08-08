@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dbnfimasck115"]
+[gd_scene load_steps=48 format=3 uid="uid://dbnfimasck115"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_tuhmy"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_hmnp2"]
@@ -40,6 +40,11 @@
 [ext_resource type="Material" uid="uid://cmc7f1y8anju" path="res://content/environment/materials/surface_18.tres" id="35_sf1y0"]
 [ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="36_e4d73"]
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="37_l4b0v"]
+[ext_resource type="ArrayMesh" uid="uid://lyystp6tfvfu" path="res://game/props/mesh_target_cable_level_0_1_1.res" id="40_f2yxq"]
+[ext_resource type="Script" uid="uid://brirebvdpnk3w" path="res://game/interactables/activator_cable.gd" id="41_riiqb"]
+[ext_resource type="ArrayMesh" uid="uid://hdueylpc40w6" path="res://game/props/mesh_target_cable_level_0_1_2.res" id="41_tfkrv"]
+[ext_resource type="ArrayMesh" uid="uid://6wmlloehkca5" path="res://game/props/mesh_target_cable_level_0_1_3.res" id="42_riiqb"]
+[ext_resource type="ArrayMesh" uid="uid://bs5tb2avrfbal" path="res://game/props/mesh_target_cable_level_0_1_4.res" id="43_o6i4f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcdd8"]
 cull_mode = 2
@@ -96,7 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.7486, 8.74199, 22.1875)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 40.8014, 8, 6.38413)
 
 [node name="StairsShort" parent="SubViewportContainer/SubViewport/Props" index="11" instance=ExtResource("13_gflld")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 60.8243, 8, 25.7702)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 60.8309, 8, 25.7704)
 
 [node name="Platform3" parent="SubViewportContainer/SubViewport/Props" index="12" instance=ExtResource("14_vh33m")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 49.7192, 13.794, 13.6424)
@@ -315,19 +320,7 @@ size = Vector3(5, 10, 4)
 material = ExtResource("35_sf1y0")
 metadata/_edit_group_ = true
 
-[node name="MeleeActivator" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="28" instance=ExtResource("17_tcdd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 2)
-
-[node name="MeleeActivator2" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="29" instance=ExtResource("17_tcdd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2657, 1, 10.286)
-
-[node name="MeleeActivator3" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="30" instance=ExtResource("17_tcdd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6192, 0.999999, 23.4091)
-
-[node name="MeleeActivator4" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="31" instance=ExtResource("17_tcdd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8286, 0.999998, -0.521259)
-
-[node name="Add_2_1_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="32"]
+[node name="Add_2_1_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="28"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.5, 2)
 use_collision = true
 size = Vector3(2, 1, 2)
@@ -335,27 +328,70 @@ material = ExtResource("28_xtefv")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="@MeshInstance3D@126147" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="33"]
+[node name="@MeshInstance3D@126147" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D" index="29"]
 material_override = SubResource("StandardMaterial3D_tcdd8")
 mesh = SubResource("ImmediateMesh_bcoy1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Blockout" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.54525, -1.02568, 7.9702)
+light_color = Color(1, 0.446084, 0, 1)
+light_energy = 10.383
+shadow_enabled = true
+shadow_blur = 2.0
 
 [node name="Finish2" parent="SubViewportContainer/SubViewport" index="6" instance=ExtResource("17_hmnp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0893483, 1, -7.26178)
 next_level = "res://stages/guy_level_0_2.tscn"
 
-[node name="DoorSlideWall" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("18_k4s86")]
+[node name="MeleeActivator" parent="SubViewportContainer/SubViewport" index="7" instance=ExtResource("17_tcdd8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 2)
+
+[node name="MeshTargetCableLevel014" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/MeleeActivator" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -1, -2)
+mesh = ExtResource("43_o6i4f")
+skeleton = NodePath("../../../..")
+script = ExtResource("41_riiqb")
+
+[node name="MeleeActivator2" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("17_tcdd8")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.2657, 1, 10.286)
+
+[node name="MeshTargetCableLevel013" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/MeleeActivator2" index="6"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.286, -1, 13.2657)
+mesh = ExtResource("42_riiqb")
+skeleton = NodePath("../../../..")
+script = ExtResource("41_riiqb")
+
+[node name="MeleeActivator3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("17_tcdd8")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.6192, 0.999999, 23.4091)
+
+[node name="MeshTargetCableLevel011" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/MeleeActivator3" index="6"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23.4091, -0.999999, -11.6192)
+mesh = ExtResource("40_f2yxq")
+skeleton = NodePath("../../../..")
+script = ExtResource("41_riiqb")
+
+[node name="MeleeActivator4" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("17_tcdd8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.8286, 0.999998, -1.20655)
+
+[node name="MeshTargetCableLevel012" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/MeleeActivator4" index="6"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.20655, -0.999998, 11.8286)
+mesh = ExtResource("41_tfkrv")
+skeleton = NodePath("../../../..")
+script = ExtResource("41_riiqb")
+
+[node name="DoorSlideWall" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("18_k4s86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
 
-[node name="DoorSlideWall2" parent="SubViewportContainer/SubViewport" index="8" instance=ExtResource("18_k4s86")]
+[node name="DoorSlideWall2" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("18_k4s86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
 
-[node name="DoorSlideWall3" parent="SubViewportContainer/SubViewport" index="9" instance=ExtResource("18_k4s86")]
+[node name="DoorSlideWall3" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("18_k4s86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
 
-[node name="DoorSlideWall4" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("18_k4s86")]
+[node name="DoorSlideWall4" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("18_k4s86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00167632, 0.985087, -4.98139)
 
-[connection signal="activated" from="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D/MeleeActivator" to="SubViewportContainer/SubViewport/DoorSlideWall3" method="activate"]
-[connection signal="activated" from="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D/MeleeActivator2" to="SubViewportContainer/SubViewport/DoorSlideWall4" method="activate"]
-[connection signal="activated" from="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D/MeleeActivator3" to="SubViewportContainer/SubViewport/DoorSlideWall2" method="activate"]
-[connection signal="activated" from="SubViewportContainer/SubViewport/Blockout/CSGCombiner3D/MeleeActivator4" to="SubViewportContainer/SubViewport/DoorSlideWall" method="activate"]
+[connection signal="activated" from="SubViewportContainer/SubViewport/MeleeActivator" to="SubViewportContainer/SubViewport/DoorSlideWall3" method="activate"]
+[connection signal="activated" from="SubViewportContainer/SubViewport/MeleeActivator2" to="SubViewportContainer/SubViewport/DoorSlideWall4" method="activate"]
+[connection signal="activated" from="SubViewportContainer/SubViewport/MeleeActivator3" to="SubViewportContainer/SubViewport/DoorSlideWall2" method="activate"]
+[connection signal="activated" from="SubViewportContainer/SubViewport/MeleeActivator4" to="SubViewportContainer/SubViewport/DoorSlideWall" method="activate"]
