@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://crruv3fy0bbv7"]
+[gd_scene load_steps=13 format=3 uid="uid://crruv3fy0bbv7"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_5ro7y"]
 [ext_resource type="AudioStream" uid="uid://bxq2fxhorumdn" path="res://game/weapons/pickup_sfx/pickup_revolver 01.wav" id="2_enli4"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bv7hqumm0g7hk" path="res://game/weapons/sfx/weapon_revolver_shoot_sfx_rand.tres" id="4_w5rom"]
 [ext_resource type="PackedScene" uid="uid://dbbhoit78n2uc" path="res://game/weapons/model/weapon_revolver.glb" id="5_b8m8k"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="6_4mobr"]
+[ext_resource type="Material" uid="uid://chn0dm02oh6wo" path="res://game/weapons/model/mat_revolver.tres" id="6_05atw"]
 [ext_resource type="PackedScene" uid="uid://by7a00rd5o3fx" path="res://game/weapons/model/weapon_revolver_arm.glb" id="6_h4bbw"]
 [ext_resource type="Script" path="res://game/weapons/weapon_revolver_animations.gd" id="9_w5rom"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="10_w5rom"]
@@ -19,9 +20,9 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_5ro7y")
 fire_rate = 0.1
-ammo = 8
+ammo = 12
 pickup_sounds = Array[AudioStream]([ExtResource("2_enli4"), ExtResource("3_4mobr")])
-damage_scale = 4
+damage_scale = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_lea5y")
@@ -42,6 +43,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
 
 [node name="Revolver" parent="WorldModel" instance=ExtResource("5_b8m8k")]
 transform = Transform3D(1, 0, 0, 0, 0.981121, 0.193395, 0, -0.193395, 0.981121, 0, 0, -0.0425274)
+
+[node name="Revolver" parent="WorldModel/Revolver" index="0"]
+material_override = ExtResource("6_05atw")
 
 [node name="Hand" parent="WorldModel/Revolver" instance=ExtResource("6_h4bbw")]
 unique_name_in_owner = true
@@ -65,3 +69,5 @@ script = ExtResource("9_w5rom")
 
 [node name="Muzzleflash" parent="." instance=ExtResource("10_w5rom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0122675, 0.148788)
+
+[editable path="WorldModel/Revolver"]

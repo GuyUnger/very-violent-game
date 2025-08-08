@@ -6,6 +6,10 @@ func set_target(node:Node3D) -> void:
 	
 
 func _ready() -> void:
+	
+	var weapon = %Weapon
+	if weapon:
+		weapon.enemy = self
 	super()
 	add_child(StateIdle.new())
 
@@ -22,5 +26,3 @@ func die() -> void:
 	set_physics_process(false)
 	remove_from_group("aimables")
 	died.emit()
-	hide()
-	#queue_free()

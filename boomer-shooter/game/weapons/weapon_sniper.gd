@@ -24,6 +24,7 @@ func shoot() -> void:
 		#projectile.collision_mask = 1 + 4
 	else:
 		var projectile := preload("res://game/projectiles/bullet_enemy.tscn").instantiate()
+		projectile.enemy = enemy
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)
 		#projectile.collision_mask = 1 + 2
 		projectile.position = global_position + Vector3.UP * 0.1

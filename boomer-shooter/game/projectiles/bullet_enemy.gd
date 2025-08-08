@@ -8,7 +8,7 @@ var knock_back := 0.0
 
 var damage: int = 5
 
-var enemy: NPCEnemy
+var enemy
 
 
 var dead: bool = false:
