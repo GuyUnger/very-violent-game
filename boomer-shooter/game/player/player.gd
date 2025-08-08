@@ -626,4 +626,3 @@ func hit(damage: int) -> void:
 	if invincible_t > 0.0:
 		return
 	super(damage)
-

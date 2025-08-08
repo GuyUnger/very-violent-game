@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bubokaw6tm32t"]
+[gd_scene load_steps=39 format=3 uid="uid://blsqo2j2llkmq"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_57m8n"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_4p0ku"]
@@ -39,7 +39,7 @@
 [ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="36_v75ly"]
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="37_3lvoq"]
 
-[node name="Main2" instance=ExtResource("1_57m8n")]
+[node name="Main3" instance=ExtResource("1_57m8n")]
 time = null
 track_num = null
 
