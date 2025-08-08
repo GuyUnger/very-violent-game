@@ -29,10 +29,29 @@ func open() -> void:
 
 
 func _on_music_finished() -> void:
-	$Music.stream = preload("res://game/gameplay01_loop.ogg")
+	$Music.stream = tracks[track_num]
 	$Music.play()
 
 
 func play_end() -> void:
-	$Music.stream = preload("res://end_loop.ogg")
+	$Music.stream = preload("res://content/music/end_loop.ogg")
 	$Music.play()
+
+@onready var intros: Array = [
+	preload("res://content/music/gameplay01_intro.ogg"),
+	preload("res://content/music/gameplay02_intro.ogg"),
+	
+]
+@onready var tracks: Array = [
+	preload("res://content/music/gameplay01_loop.ogg"),
+	preload("res://content/music/gameplay02_loop.ogg"),
+]
+
+var track_num: int = -1
+func play_track(p_track_num: int) -> void:
+	if track_num == p_track_num:
+		return
+	track_num = p_track_num
+	$Music.stream = intros[track_num]
+	$Music.play()
+	

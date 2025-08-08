@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://d2asqq0623evt"]
+[gd_scene load_steps=48 format=4 uid="uid://d2asqq0623evt"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_0g2fk"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_k1cap"]
@@ -39,7 +39,6 @@
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="37_beew0"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="40_6fapp"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="41_ggrh0"]
-[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="42_iqw8y"]
 [ext_resource type="PackedScene" uid="uid://bldqjyp2glnyx" path="res://game/npc/npc_enemy_big_guy.tscn" id="43_0g2fk"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pus1d"]
@@ -429,8 +428,5 @@ transform = Transform3D(-0.281412, -0.140788, 0.949202, -0.118598, 0.986697, 0.1
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.34496, 0, -9.70719)
 next_level = "res://stages/guy_level_2.tscn"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
-stream = ExtResource("42_iqw8y")
-
-[node name="NPCEnemyBigGuy" parent="." index="5" instance=ExtResource("43_0g2fk")]
+[node name="NPCEnemyBigGuy" parent="." index="4" instance=ExtResource("43_0g2fk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5929, 0.0142612, -10.7196)

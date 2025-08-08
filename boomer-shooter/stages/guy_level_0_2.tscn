@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cy2l414msbsos"]
+[gd_scene load_steps=42 format=3 uid="uid://cy2l414msbsos"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_j0cmv"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_kpc0v"]
@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="18_j0cmv"]
 [ext_resource type="Material" uid="uid://doapqabe7twc4" path="res://content/environment/materials/surface_0.tres" id="18_xm2mw"]
 [ext_resource type="Material" uid="uid://buavh7fna845w" path="res://content/environment/materials/surface_1.tres" id="19_mlgc6"]
-[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="20_mxwxx"]
 [ext_resource type="Material" uid="uid://b71gxlhwanayi" path="res://content/environment/materials/surface_2.tres" id="20_wqu2v"]
 [ext_resource type="Material" uid="uid://dcl8eha8janno" path="res://content/environment/materials/surface_3.tres" id="21_0fds8"]
 [ext_resource type="Material" uid="uid://bfosjqjdja0e2" path="res://content/environment/materials/surface_4.tres" id="22_p7ly5"]
@@ -233,6 +232,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27948, 1, 2.82336)
 
 [node name="npc_grunt5" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("18_j0cmv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733611, 1, 8.0314)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
-stream = ExtResource("20_mxwxx")

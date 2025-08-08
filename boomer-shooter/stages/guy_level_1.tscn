@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://snae31wna7f5"]
+[gd_scene load_steps=53 format=4 uid="uid://snae31wna7f5"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_0tv5r"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_apt5p"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="7_hs8q1"]
 [ext_resource type="PackedScene" uid="uid://cqeao6wkv6xen" path="res://game/props/window_deco.tscn" id="7_lwund"]
 [ext_resource type="PackedScene" uid="uid://cgw3r72e1dnxp" path="res://game/props/car_1.tscn" id="8_4tmal"]
-[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="8_phylu"]
 [ext_resource type="PackedScene" uid="uid://ddgjm2qbdejwa" path="res://game/props/car_2.tscn" id="9_3usft"]
 [ext_resource type="PackedScene" uid="uid://cvkxvvl5qllmb" path="res://game/props/doorway.tscn" id="10_l5iur"]
 [ext_resource type="PackedScene" uid="uid://c464glcbycu8f" path="res://game/props/barrel.tscn" id="11_4vb5a"]
@@ -45,7 +44,7 @@
 [ext_resource type="Material" uid="uid://cxt335jdda36f" path="res://content/environment/materials/surface_20.tres" id="37_s6by0"]
 [ext_resource type="PackedScene" uid="uid://ba7a7b7hxx0p0" path="res://game/props/box.tscn" id="42_rws5q"]
 [ext_resource type="AudioStream" uid="uid://c8fruuvl4hl7i" path="res://content/sfx/liam.wav" id="45_gfb7o"]
-[ext_resource type="Script" uid="uid://rs0r2fpjx06w" path="res://stages/liam_says.gd" id="46_lg8mm"]
+[ext_resource type="Script" path="res://stages/liam_says.gd" id="46_lg8mm"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pus1d"]
 _surfaces = [{
@@ -274,44 +273,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -11)
 [node name="npc_grunt6" parent="SubViewportContainer/SubViewport" index="10" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
 
-[node name="npc_grunt7" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23414, 0, -7.68464)
-
-[node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt8" parent="SubViewportContainer/SubViewport" index="11" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29925, -0.0259438, -15.03)
 
-[node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt11" parent="SubViewportContainer/SubViewport" index="12" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43855, 0, -15.8856)
 
-[node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt12" parent="SubViewportContainer/SubViewport" index="13" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9648, 0, -14.8746)
 
-[node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("7_hs8q1")]
+[node name="npc_grunt13" parent="SubViewportContainer/SubViewport" index="14" instance=ExtResource("7_hs8q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80213, -0.0194693, -14.5708)
 
-[node name="Finish" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("20_3usft")]
+[node name="Finish" parent="SubViewportContainer/SubViewport" index="15" instance=ExtResource("20_3usft")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.86416, 0, -15.3144)
 next_level = "res://stages/guy_level_2.tscn"
 
-[node name="Box" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("42_rws5q")]
+[node name="Box" parent="SubViewportContainer/SubViewport" index="16" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.880138, 0, -0.474718, 0, 1, 0, 0.474718, 0, 0.880138, -3.40502, 0.665051, -7.52027)
 
-[node name="Box2" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("42_rws5q")]
+[node name="Box2" parent="SubViewportContainer/SubViewport" index="17" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.941541, 0, 0.336898, 0, 1, 0, -0.336898, 0, 0.941541, -8.7607, 0.681949, -10.6084)
 
-[node name="Box3" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("42_rws5q")]
+[node name="Box3" parent="SubViewportContainer/SubViewport" index="18" instance=ExtResource("42_rws5q")]
 transform = Transform3D(0.875709, 0, -0.482839, 0, 1, 0, 0.482839, 0, 0.875709, -8.7607, 0.681949, -8.7651)
 
-[node name="Conditioner" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("5_iq0yp")]
+[node name="Conditioner" parent="SubViewportContainer/SubViewport" index="19" instance=ExtResource("5_iq0yp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60485, 1.83366, -4.48801)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
-stream = ExtResource("8_phylu")
-
-[node name="npc_grunt" parent="." index="5" instance=ExtResource("21_4tmal")]
+[node name="npc_grunt" parent="." index="4" instance=ExtResource("21_4tmal")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25253, 0.145303, -8.53593)
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="8"]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource("45_gfb7o")
 volume_db = 1.0
 bus = &"SFX"

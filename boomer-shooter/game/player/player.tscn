@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://n2142e5rpapd"]
+[gd_scene load_steps=21 format=3 uid="uid://n2142e5rpapd"]
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
 [ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
@@ -28,6 +28,26 @@ radius = 1.8
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a4w0n"]
 radius = 0.3
 height = 1.6
+
+[sub_resource type="Shader" id="Shader_uv2nh"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float time;
+
+void fragment() {
+	vec2 uv = UV;
+	uv -= 0.5;
+	uv.x /= SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
+	uv += 0.5;
+	float dist = length(uv - 0.5);
+	float a = min(round(sin(dist + time * PI * 1.25 - PI * 0.25) * 16.0) / 3.0, 1.0) * 0.5;
+	COLOR.a = a;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n270p"]
+shader = SubResource("Shader_uv2nh")
+shader_parameter/time = 0.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_j0mij"]
 radius = 1.0
@@ -134,6 +154,16 @@ polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
 rotation = 4.71238
 scale = Vector2(2, 2)
 polygon = PackedVector2Array(0, 0, -5, -7, 5, -7)
+
+[node name="EnemyFocus" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
+material = SubResource("ShaderMaterial_n270p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Audio" type="Node3D" parent="."]
 

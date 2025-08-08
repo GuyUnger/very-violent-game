@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c58snso3lh168"]
+[gd_scene load_steps=5 format=3 uid="uid://c58snso3lh168"]
 
 [ext_resource type="Script" uid="uid://w3jlujywnuvd" path="res://ui/level_between.gd" id="1_2e5i2"]
 [ext_resource type="AudioStream" path="res://ui/start.tres" id="2_pma06"]
-[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="3_7gmv2"]
-[ext_resource type="AudioStream" uid="uid://qc313bhj1lps" path="res://content/sfx/gameplay02_loop.ogg" id="4_04vrx"]
 
 [sub_resource type="Shader" id="Shader_w4fll"]
 code = "shader_type canvas_item;
@@ -20,11 +18,6 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2e5i2"]
 shader = SubResource("Shader_w4fll")
 shader_parameter/time = 0.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p3yno"]
-streams_count = 2
-stream_0/stream = ExtResource("3_7gmv2")
-stream_1/stream = ExtResource("4_04vrx")
 
 [node name="Control" type="CanvasLayer"]
 process_mode = 3
@@ -43,7 +36,6 @@ mouse_filter = 2
 stream = ExtResource("2_pma06")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_p3yno")
 autoplay = true
 
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]

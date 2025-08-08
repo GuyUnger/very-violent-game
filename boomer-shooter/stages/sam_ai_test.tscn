@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://bb41t4phio4io"]
+[gd_scene load_steps=29 format=4 uid="uid://bb41t4phio4io"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_carx5"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_8judo"]
@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://nu82ttrlo4if" path="res://game/interactables/melee_activator.tscn" id="18_h2t03"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="19_j7y17"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="20_f5k2u"]
-[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="21_6uxbs"]
 [ext_resource type="PackedScene" uid="uid://v0boycsgos0n" path="res://game/npc/npc_enemy_grunt_smg.tscn" id="22_7edlx"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pus1d"]
@@ -267,10 +266,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32017, -0.0194693, -13.960
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="20" instance=ExtResource("20_f5k2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -15)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
-stream = ExtResource("21_6uxbs")
-
-[node name="npc_grunt" parent="." index="5" instance=ExtResource("22_7edlx")]
+[node name="npc_grunt" parent="." index="4" instance=ExtResource("22_7edlx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25253, 0.145303, -8.53593)
 
 [connection signal="activated" from="SubViewportContainer/SubViewport/MeleeActivator" to="SubViewportContainer/SubViewport/DoorSlideWall" method="activate"]

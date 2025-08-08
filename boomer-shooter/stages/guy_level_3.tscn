@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dy8pwj167lwyq"]
+[gd_scene load_steps=17 format=3 uid="uid://dy8pwj167lwyq"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_7lqqu"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_2s067"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://c32xofphq7in5" path="res://game/props/platform.tscn" id="14_yr20t"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="15_d2rvp"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="16_55tbj"]
-[ext_resource type="AudioStream" uid="uid://cwqxssy57vtvh" path="res://gameplay01_loop.ogg" id="17_c87ue"]
 
 [node name="Main" instance=ExtResource("1_7lqqu")]
 
@@ -80,6 +79,3 @@ metadata/_edit_lock_ = true
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="SubViewportContainer/SubViewport/Blockout" index="0"]
 use_collision = true
 metadata/_edit_lock_ = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="4"]
-stream = ExtResource("17_c87ue")

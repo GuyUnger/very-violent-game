@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+func _ready() -> void:
+	Main.hud = self
+
 func _process(delta: float) -> void:
 	%Time.text = str(ceili(Main.instance.time))
 	if Main.instance.player.weapon:

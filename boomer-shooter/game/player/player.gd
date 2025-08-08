@@ -76,7 +76,7 @@ var last_hit_enemy
 
 func _ready() -> void:
 	source_id = EventStore.next_source_id()
-	
+	%EnemyFocus.material.set_shader_parameter("time", -0.05)
 	
 	EventStore.push_event(
 		EventStoreCommandAddChild.new(
@@ -102,6 +102,7 @@ func _ready() -> void:
 #endregion
 
 #region Processing
+
 
 func _process(delta: float) -> void:
 	if dead:
@@ -201,6 +202,12 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if dead:
+		
+		cam.camera.fov = lerp(cam.camera.fov, 60.0, delta * 5.0)
+		
+		%EnemyFocus.material.set_shader_parameter("time",
+				lerp(%EnemyFocus.material.get_shader_parameter("time"), 0.15, delta * 5.0))
+		
 		return
 	
 	#region Input
@@ -576,6 +583,8 @@ func die() -> void:
 	if dead:
 		return
 	dead = true
+	Main.hud.hide()
+	%Crosshair.hide()
 	
 	var prev_dead_sound: int = dead_sound
 	while prev_dead_sound == dead_sound:
