@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bubokaw6tm32t"]
+[gd_scene load_steps=42 format=3 uid="uid://bubokaw6tm32t"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_1gyog"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_fniu7"]
@@ -39,7 +39,6 @@
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="37_8qf2g"]
 [ext_resource type="PackedScene" uid="uid://b0mg37m0iryg8" path="res://game/npc/npc_enemy_sniper.tscn" id="37_fniu7"]
 [ext_resource type="PackedScene" uid="uid://ba7a7b7hxx0p0" path="res://game/props/box.tscn" id="38_fniu7"]
-[ext_resource type="PackedScene" path="res://ui/instruction.tscn" id="38_fx4ov"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fniu7"]
 cull_mode = 2
@@ -952,11 +951,11 @@ mesh = SubResource("ImmediateMesh_46dfg")
 
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("37_8qf2g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.0893, 1, -22.8271)
-next_level = "res://stages/guy_level_0_1.tscn"
+next_level = "res://ui/end_screen.tscn"
 
 [node name="Finish2" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("37_8qf2g")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.7005, 1, -51.1039)
-next_level = "res://stages/guy_level_0_1.tscn"
+next_level = "res://ui/end_screen.tscn"
 
 [node name="Props2" type="Node3D" parent="SubViewportContainer/SubViewport" index="6"]
 
@@ -1205,8 +1204,5 @@ transform = Transform3D(0.998536, 0, -0.0540963, 0, 1, 0, 0.0540963, 0, 0.998536
 [node name="npc_grunt29" parent="SubViewportContainer/SubViewport/Enemies" index="37" instance=ExtResource("35_pokln")]
 transform = Transform3D(-0.694043, 0, -0.719934, 0, 1, 0, 0.719934, 0, -0.694043, 0.768355, 2.25685, -53.8435)
 
-[node name="Instruction" parent="." index="4" instance=ExtResource("38_fx4ov")]
-text = "Space to jump"
-
-[node name="Pole" parent="." index="7" instance=ExtResource("4_abqms")]
+[node name="Pole" parent="." index="6" instance=ExtResource("4_abqms")]
 transform = Transform3D(0.975442, 0.134228, -0.174631, -0.132128, 0.99095, 0.0236545, 0.176226, 0, 0.98435, 3.2134, 0.626814, -39.2296)
