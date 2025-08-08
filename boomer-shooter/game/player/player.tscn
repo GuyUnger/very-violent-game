@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://n2142e5rpapd"]
+[gd_scene load_steps=19 format=3 uid="uid://n2142e5rpapd"]
 
 [ext_resource type="Script" uid="uid://bc1s83133nqrb" path="res://game/player/player.gd" id="1_7hyr5"]
 [ext_resource type="Script" uid="uid://dvra5c3bg3gxm" path="res://game/player/cam.gd" id="2_b2mth"]
@@ -22,6 +22,9 @@ height = 1.09575
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_uv2nh"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5ghna"]
+radius = 1.8
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a4w0n"]
 radius = 0.3
 height = 1.6
@@ -41,6 +44,16 @@ shape = SubResource("CapsuleShape3D_8soms")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
 shape = SubResource("SeparationRayShape3D_uv2nh")
+
+[node name="AreaMelee" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 36
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaMelee"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.591245, 0)
+shape = SubResource("CylinderShape3D_5ghna")
+debug_color = Color(0.965054, 0, 0.491947, 1)
 
 [node name="Model" type="Node3D" parent="."]
 unique_name_in_owner = true

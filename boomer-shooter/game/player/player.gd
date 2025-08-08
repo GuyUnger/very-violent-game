@@ -484,15 +484,17 @@ func _process_melee(delta) -> void:
 		%MeleeAttack.rotation.y = 0.0
 		var tween = create_tween()
 		tween.tween_property(%MeleeAttack, "rotation:y", -TAU, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-
-		await get_tree().create_timer(0.1).timeout
 		
-		var melee := preload("res://game/projectiles/melee.tscn").instantiate()
-		melee.position = global_position
-		Main.instance.add_child(melee)
-		
-
-		await get_tree().create_timer(0.1).timeout
+		for i in 4:
+			await get_tree().create_timer(0.05).timeout
+			if not get_tree():
+				return
+			
+			for body in %AreaMelee.get_overlapping_bodies():
+				if "melee" in body:
+					body.melee()
+				elif "melee" in body.get_parent():
+					body.get_parent().melee()
 		
 		%MeleeAttack.hide()
 
@@ -600,7 +602,7 @@ func animate_crosshair() -> void:
 	$AudioHit.play()
 
 
-func hit(from) -> void:
+func hit(damage: int) -> void:
 	if invincible_t > 0.0:
 		return
-	super(from)
+	super(damage)

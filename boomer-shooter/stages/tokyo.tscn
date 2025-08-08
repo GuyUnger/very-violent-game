@@ -1863,6 +1863,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 65.835
 [node name="Car1" parent="Sector1/Props" instance=ExtResource("40_tjdsr")]
 transform = Transform3D(0.962744, 0, -0.270416, 0, 1, 0, 0.270416, 0, 0.962744, 50.0187, 8.1318, 12.7343)
 
+[node name="Car5" parent="Sector1/Props" instance=ExtResource("40_tjdsr")]
+transform = Transform3D(-0.867592, 0, -0.497277, 0, 1, 0, 0.497277, 0, -0.867592, 49.6948, 8.1318, 72.0916)
+
 [node name="Car2" parent="Sector1/Props" instance=ExtResource("41_aodlu")]
 transform = Transform3D(-0.556339, 0, -0.830955, 0, 1, 0, 0.830955, 0, -0.556339, 63.3297, 8.0132, 65.9867)
 

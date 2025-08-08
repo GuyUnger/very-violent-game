@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://kjth5n3pmvxy"]
+[gd_scene load_steps=19 format=3 uid="uid://kjth5n3pmvxy"]
 
 [ext_resource type="Script" uid="uid://co641dg8s4n86" path="res://game/weapons/weapon_shotgun.gd" id="1_prx1q"]
 [ext_resource type="AudioStream" uid="uid://b5oybs5wceg0c" path="res://game/weapons/pickup_sfx/pickup_shotgun 01.wav" id="2_prx1q"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cmuwwvlykmou0" path="res://game/weapons/weapon_shotgun_animations.gd" id="7_kc37h"]
 [ext_resource type="AudioStream" uid="uid://cv78so5jridw4" path="res://game/weapons/sfx/shotgun_reload_2.ogg" id="8_4p3ji"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="8_gt5ou"]
+[ext_resource type="Material" path="res://game/weapons/model/mat_shotgun.tres" id="10_4p3ji"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="13_n14iq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
@@ -58,6 +59,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000782948, 0.00282902, -0.
 
 [node name="weapon_shotgun" parent="WorldModel/ShotgunContainer" instance=ExtResource("3_ri3d7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
+
+[node name="Shotty" parent="WorldModel/ShotgunContainer/weapon_shotgun" index="0"]
+material_override = ExtResource("10_4p3ji")
+
+[node name="ShottyHandle" parent="WorldModel/ShotgunContainer/weapon_shotgun/Shotty" index="0"]
+surface_material_override/0 = ExtResource("10_4p3ji")
+
+[node name="ShottyReloadThingy" parent="WorldModel/ShotgunContainer/weapon_shotgun/Shotty" index="1"]
+surface_material_override/0 = ExtResource("10_4p3ji")
 
 [node name="Hand" type="Node3D" parent="WorldModel/ShotgunContainer"]
 unique_name_in_owner = true

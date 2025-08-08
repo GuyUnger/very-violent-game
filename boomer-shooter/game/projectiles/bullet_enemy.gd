@@ -3,7 +3,7 @@ extends Node3D
 var source_id: int
 
 var direction: Vector3
-var speed: float = 15.0
+var speed: float = 25.0
 var knock_back := 0.0
 
 var damage: int = 5
@@ -32,5 +32,5 @@ func _on_area_3d_body_entered(body:Node3D) -> void:
 	dead = true
 	#EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
 	if "hit" in body:
-		body.hit(self)
+		body.hit(damage)
 	#queue_free()

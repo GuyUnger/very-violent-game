@@ -22,3 +22,5 @@ func die() -> void:
 	set_physics_process(false)
 	remove_from_group("aimables")
 	died.emit()
+	hide()
+	#queue_free()

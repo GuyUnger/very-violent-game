@@ -1,5 +1,5 @@
-extends NPC
 class_name NPCHumanoid
+extends NPCEnemy
 
 @onready var animation_tree:AnimationTree = $AnimationTree
 
@@ -100,23 +100,6 @@ func knock_back(force:Vector3) -> void:
 	knock_back_tween_.tween_property(self, "speed_scale_knock_back", 0.1, 0.1)
 	knock_back_tween_.tween_property(self, "speed_scale_knock_back", 1.0, 1.0)
 	animation_tree.set("parameters/HitHead/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
-
-func melee() -> void:
-	super()
-	
-	$AudioHurt.unit_size = 10
-	$AudioHurt.volume_db = 5.0
-	$AudioHurt.play()
-	
-	var x := preload("res://game/fx/bloot_line.tscn").instantiate()
-	$CollisionShape3D.add_child(x)
-	x.position.y += 0.5
-	x.look_at(Main.instance.player.global_position + Vector3.UP * 2.0, Vector3.UP, true)
-
-
-func hit(from:Node3D) -> void:
-	super(from)
 
 
 func die() -> void:

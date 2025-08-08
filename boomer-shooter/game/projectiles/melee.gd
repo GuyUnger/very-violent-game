@@ -11,20 +11,17 @@ func _ready() -> void:
 		source_id = EventStore.next_source_id()
 		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
 	
-	await get_tree().physics_frame
-	if not get_tree():
-		return
-	await get_tree().physics_frame
-	if not get_tree():
-		return
-	await get_tree().physics_frame
-	if not get_tree():
-		return
-	
-	for body in get_overlapping_bodies():
-		if "melee" in body:
-			body.melee()
-		elif "melee" in body.get_parent():
-			body.get_parent().melee()
+	if not is_ghost:
+		
+		for i in 4:
+			await get_tree().create_timer(0.05).timeout
+			if not get_tree():
+				return
+			
+			for body in get_overlapping_bodies():
+				if "melee" in body:
+					body.melee()
+				elif "melee" in body.get_parent():
+					body.get_parent().melee()
 			
 	queue_free()

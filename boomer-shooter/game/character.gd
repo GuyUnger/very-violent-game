@@ -28,8 +28,8 @@ var vel_hor: Vector2:
 		velocity.z = value.y
 
 
-func hit(from) -> void:
-	health -= from.damage
+func hit(damage: int) -> void:
+	health -= damage
 	if health <= 0:
 		die()
 

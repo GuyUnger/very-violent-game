@@ -1,7 +1,7 @@
 extends NPCHumanoid
 class_name NPCPlayerGhost
 
-var source_id:int
+#var source_id:int
 var last_position := Vector3.ZERO
 var dead:int = 0: 
 	set = set_dead
@@ -36,5 +36,6 @@ func _physics_process(delta: float) -> void:
 	animation_tree.set("parameters/MoveDirection/blend_position", blend_vector)
 	last_position = global_position
 
-func hit(from) -> void:
+
+func hit(damage: int) -> void:
 	pass

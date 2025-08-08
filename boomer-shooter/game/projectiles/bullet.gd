@@ -9,6 +9,25 @@ var track_in_event_store := false
 var source_id := 0
 var is_ghost := false
 var collision_mask := 1 + 4
+var target_position: Vector3:
+	get:
+		return target_position
+	set(value):
+		target_position = value
+		var distance := global_position.distance_to(target_position)
+		var duration: float = distance / 250.0
+		
+		$Mesh.scale.z = distance
+		
+		position = target_position
+		
+		await get_tree().physics_frame
+		var tween := create_tween()
+		tween.tween_property($Mesh, "scale:z", 0.0, duration)
+		
+		$Whiz.pitch_scale = randf_range(0.9, 1.3)
+		$Whiz.play()
+
 
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("npc_enemies"):
@@ -36,38 +55,26 @@ func _ready() -> void:
 	query.from = global_position
 	query.to = global_position + global_transform.basis.z.normalized() * 100.0
 	
-	var target_position: Vector3
-	var res := get_world_3d().direct_space_state.intersect_ray(query)
-	if res:
-		if not is_ghost and res.collider is Character:
-			Main.player.animate_crosshair()
-		target_position = res.position
-	else:
-		target_position = global_position + global_transform.basis.z.normalized() * 100.0
-	
-	var distance := global_position.distance_to(target_position)
-	var duration: float = distance / 250.0
-	
-	$Mesh.scale.z = distance
-	
-	position = target_position
-	
-	await get_tree().physics_frame
-	var tween := create_tween()
-	tween.tween_property($Mesh, "scale:z", 0.0, duration)
+	if not is_ghost:
+		var res := get_world_3d().direct_space_state.intersect_ray(query)
+		if res:
+			if res.collider is Character:
+				Main.player.animate_crosshair()
+			target_position = res.position
+			hit(res.collider, res.normal, res.position)
+		else:
+			target_position = global_position + global_transform.basis.z.normalized() * 100.0
+		
+		EventStore.push_event(EventStoreCommandSet.new(source_id, "target_position", target_position))
 	
 	if is_ghost:
 		$Fire.global_position = from_position
 		$Fire.pitch_scale = randf_range(1.0, 1.2)
 		$Fire.play()
 	
-	if res:
-		hit(res.collider, res.normal, res.position)
-	await tween.finished
-	
-	$Whiz.pitch_scale = randf_range(0.9, 1.3)
-	$Whiz.play()
-
+	if is_inside_tree():
+		await get_tree().create_timer(1.0).timeout
+		queue_free()
 
 #func _physics_process(delta: float) -> void:
 	#if not is_ghost:
@@ -108,9 +115,5 @@ func hit(collider:Node3D, normal:Vector3, hit_position:Vector3) -> void:
 		x.position = hit_position
 		x.look_at_from_position(x.position, x.position + normal * 10.0)
 		add_child(x)
-
-		collider.hit(self)
 	
-	if is_inside_tree():
-		await get_tree().create_timer(1.0).timeout
-		queue_free()
+		collider.hit(damage)
