@@ -125,7 +125,7 @@ func shoot() -> void:
 		%AudioShootNPC.play()
 		
 	total_recoil = recoil
-	
+
 func throw(force:Vector3) -> void:
 	trigger_pressed = false
 	player = null
@@ -143,6 +143,8 @@ func throw(force:Vector3) -> void:
 	if ammo > 0:
 		$PickupGlow.show()
 	
+	
+
 
 func pickup(p_player: Player) -> void:
 	if pickup_sounds.size() == 0 or randf() < 0.05:

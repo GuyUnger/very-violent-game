@@ -48,6 +48,7 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_s1ya0"]
 
 [node name="Main" instance=ExtResource("1_j0cmv")]
+time = 10.0
 
 [node name="Finish" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("18_elmn4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)

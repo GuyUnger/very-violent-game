@@ -30,6 +30,14 @@ func _ready() -> void:
 	EventStore.register_source(source_id, self)
 	get_tree().paused = true
 	
+	match Settings.difficulty:
+		Settings.Difficulty.EASY:
+			time *= 4.0
+		Settings.Difficulty.REGULAR:
+			pass
+		Settings.Difficulty.HARD:
+			time *= 0.7
+	
 	clones += 1
 	await get_tree().process_frame
 	total_enemies = get_tree().get_nodes_in_group("npc_enemies").size()

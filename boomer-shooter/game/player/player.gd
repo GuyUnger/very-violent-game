@@ -88,6 +88,10 @@ func _ready() -> void:
 	#if starting_weapon:
 	#	_pick_up_body_entered(starting_weapon.instantiate())
 	
+	match Settings.difficulty:
+		Settings.Difficulty.EASY:
+			health = 10
+	
 	Main.player = self
 	
 	await get_tree().process_frame
@@ -212,13 +216,13 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	#region Input
-	#var look_vel_to: Vector2 = Input.get_vector(
-	#		"joy_left", "joy_right",
-	#		"joy_down", "joy_up")
-	#if look_vel_to.length() < 0.1:
-	#	look_vel = lerp(look_vel, Vector2.ZERO, delta * 20.0)
-	#else:
-	#	look_vel = lerp(look_vel, look_vel_to, delta * 10.0)
+	var look_vel_to: Vector2 = Input.get_vector(
+			"joy_left", "joy_right",
+			"joy_down", "joy_up")
+	if look_vel_to.length() < 0.1:
+		look_vel = lerp(look_vel, Vector2.ZERO, delta * 20.0)
+	else:
+		look_vel = lerp(look_vel, look_vel_to * Vector2(1.0, 0.8) * Settings.look_sensitivity, delta * 10.0)
 	
 	if Input.is_action_just_pressed("jump"):
 		since_jump_pressed = 0.0
@@ -544,7 +548,7 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if event is InputEventMouseMotion:
-		var mouse_speed: float = 0.1
+		var mouse_speed: float = 0.1 * Settings.look_sensitivity
 		var mouse_motion: InputEventMouseMotion = event
 		look_angle.x += mouse_motion.relative.x * mouse_speed / TAU
 		look_angle.y -= mouse_motion.relative.y * mouse_speed / TAU * 0.7

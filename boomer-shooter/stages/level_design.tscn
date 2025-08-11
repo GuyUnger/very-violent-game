@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://v0boycsgos0n" path="res://game/npc/npc_enemy_grunt_smg.tscn" id="12_55831"]
 
 [node name="Main2" instance=ExtResource("3_rsuto")]
-time = 60.0
 track_num = 1
 
 [node name="Finish" parent="." index="0" instance=ExtResource("5_55831")]

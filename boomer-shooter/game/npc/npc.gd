@@ -229,8 +229,9 @@ class StateSpottedEnemy extends State:
 		for node in get_tree().get_nodes_in_group("npc_enemies"):
 			if node != get_parent() and node.global_position.distance_squared_to(get_parent().global_position) < 50:
 				node._told_enemy_position(enemy)
-				
-		await get_tree().create_timer(1.0).timeout
+		
+		var wait_delay = [3.0, 1.2, 0.5][Settings.difficulty]
+		await get_tree().create_timer(wait_delay).timeout
 
 		var next_state = StateAttacking.new()
 		next_state.enemy = enemy
