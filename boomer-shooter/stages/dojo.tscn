@@ -1,0 +1,445 @@
+[gd_scene load_steps=13 format=3 uid="uid://btll4w783s3s7"]
+
+[ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_mit6q"]
+[ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="2_smgb3"]
+[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="3_uvo0e"]
+[ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_mlw6u"]
+[ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="5_fth3k"]
+[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="11_qwvpn"]
+[ext_resource type="Material" uid="uid://c8am7gxht6vdq" path="res://content/environment/materials/surface_9.tres" id="15_5qr1n"]
+[ext_resource type="Material" uid="uid://c00744tmfikc5" path="res://content/environment/materials/surface_12.tres" id="18_w3j4k"]
+[ext_resource type="Material" uid="uid://h1otvpr12uoy" path="res://content/environment/materials/surface_17.tres" id="23_4gcnf"]
+[ext_resource type="Material" uid="uid://cmc7f1y8anju" path="res://content/environment/materials/surface_18.tres" id="24_6lm0t"]
+[ext_resource type="Material" uid="uid://cync0ppij3c7m" path="res://content/environment/materials/surface_19.tres" id="25_mo7xd"]
+[ext_resource type="PackedScene" uid="uid://bldqjyp2glnyx" path="res://game/npc/npc_enemy_big_guy.tscn" id="27_b56bl"]
+
+[node name="Main" instance=ExtResource("1_mit6q")]
+
+[node name="Finish" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("2_smgb3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 34.5764, 0.00164706, 0.0328746)
+next_level = "res://stages/perfoon_level_1.tscn"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="1"]
+transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)
+shadow_enabled = true
+
+[node name="Player" parent="SubViewportContainer/SubViewport" index="2"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -43, 0, 0)
+starting_weapon = ExtResource("3_uvo0e")
+
+[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="4" instance=ExtResource("4_mlw6u")]
+
+[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" index="5" instance=ExtResource("4_mlw6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.2259, 0.11252, -0.0513819)
+allow_shotgun = false
+allow_sniper = false
+allow_revolver = false
+allow_smg = false
+
+[node name="CubeGrid3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="6"]
+script = ExtResource("5_fth3k")
+materials = Array[Material]([ExtResource("23_4gcnf"), ExtResource("24_6lm0t"), ExtResource("25_mo7xd"), ExtResource("15_5qr1n"), ExtResource("18_w3j4k")])
+metadata/_custom_type_script = "uid://bgxvcscuumfyq"
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="SubViewportContainer/SubViewport/CubeGrid3D" index="1"]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Add_57_27_70" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 13.5, 2)
+use_collision = true
+size = Vector3(57, 27, 54)
+material = ExtResource("24_6lm0t")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_57_27_70" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D/Add_57_27_70" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(55, 26, 52)
+material = ExtResource("24_6lm0t")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_36_2_66" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 13, 1)
+use_collision = true
+size = Vector3(58, 2, 66)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_57_1_70" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -0.5, 2)
+use_collision = true
+size = Vector3(86, 1, 70)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_41_25_52" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 14.5, 2)
+operation = 2
+use_collision = true
+size = Vector3(41, 25, 36)
+material = ExtResource("25_mo7xd")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_22_10_18" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 5, 0)
+use_collision = true
+size = Vector3(22, 10, 18)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_22_10_18" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D/Add_22_10_18" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(20, 9, 16)
+material = ExtResource("25_mo7xd")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_8_4_6" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 2, 0)
+operation = 2
+use_collision = true
+size = Vector3(8, 4, 6)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_7_5_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 2.5, 0)
+use_collision = true
+size = Vector3(7, 5, 8)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_7_5_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D/Add_7_5_8" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+size = Vector3(5, 4, 6)
+material = ExtResource("18_w3j4k")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sub_4_4_6" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 2, 0)
+operation = 2
+use_collision = true
+size = Vector3(2, 4, 6)
+material = ExtResource("24_6lm0t")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_6_5_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 2.5, -12)
+use_collision = true
+size = Vector3(6, 5, 8)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_11_6_9" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 3, 13.5)
+use_collision = true
+size = Vector3(11, 6, 9)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_11_11_15" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 5, 2.5)
+use_collision = true
+size = Vector3(3, 10, 13)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_18_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 9, 7.5)
+use_collision = true
+size = Vector3(1, 18, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_22_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 11, -9.5)
+use_collision = true
+size = Vector3(1, 22, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_28_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 9.5, -3.5)
+use_collision = true
+size = Vector3(1, 19, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_17_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8.5, 15.5)
+use_collision = true
+size = Vector3(1, 17, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_24_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 10.5, 1.5)
+use_collision = true
+size = Vector3(1, 21, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@57480" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 8.5, -14.5)
+use_collision = true
+size = Vector3(1, 17, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_20_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 10, -4.5)
+use_collision = true
+size = Vector3(1, 20, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_9_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 6, 5.5)
+use_collision = true
+size = Vector3(1, 12, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@57490" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 8.5, 6.5)
+use_collision = true
+size = Vector3(1, 17, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_16_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 14, 12.5)
+use_collision = true
+size = Vector3(1, 16, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_7_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 3.5, 17.5)
+use_collision = true
+size = Vector3(1, 7, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@57497" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 4.5, 12.5)
+use_collision = true
+size = Vector3(1, 9, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@57500" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3.5, 1.5)
+use_collision = true
+size = Vector3(1, 7, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_14_1_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 17.5, 1.5)
+use_collision = true
+size = Vector3(14, 1, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_10_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="25"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 15, 1.5)
+use_collision = true
+size = Vector3(1, 10, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_15_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="26"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 13, 20.5)
+use_collision = true
+size = Vector3(1, 26, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_15_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5, 13, 20.5)
+use_collision = true
+size = Vector3(1, 26, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_15_3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="28"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5, 13, -16.5)
+use_collision = true
+size = Vector3(1, 26, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_15_4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 13, -16.5)
+use_collision = true
+size = Vector3(1, 26, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_11_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5.5, 12.5)
+use_collision = true
+size = Vector3(1, 11, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@59312" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 9.5, -9.5)
+use_collision = true
+size = Vector3(1, 9, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@59314" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="32"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 5, -12.5)
+use_collision = true
+size = Vector3(1, 10, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_4_1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 2, -7.5)
+use_collision = true
+size = Vector3(1, 4, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_1_1_22" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 12.5, 4)
+use_collision = true
+size = Vector3(1, 1, 22)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@59323" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8, -7.5)
+use_collision = true
+size = Vector3(1, 16, 1)
+material = ExtResource("15_5qr1n")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_2_4_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="36"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 16, 24)
+use_collision = true
+size = Vector3(2, 4, 8)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_2_5_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="37"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 16.5, -20)
+use_collision = true
+size = Vector3(2, 5, 8)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_7_5_2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="38"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5, 16.5, 12)
+use_collision = true
+size = Vector3(7, 5, 2)
+material = ExtResource("24_6lm0t")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="@CSGBox3D@59966" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="39"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 16.5, -6)
+use_collision = true
+size = Vector3(7, 5, 2)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Add_2_7_8" type="CSGBox3D" parent="SubViewportContainer/SubViewport/CubeGrid3D/CSGCombiner3D" index="40"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 17.5, 24)
+use_collision = true
+size = Vector3(2, 7, 8)
+material = ExtResource("23_4gcnf")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="NPCEnemyBigGuy" parent="SubViewportContainer" index="1" instance=ExtResource("27_b56bl")]
+transform = Transform3D(-0.99125, 0, 0.131997, 0, 1, 0, -0.131997, 0, -0.99125, -17.0142, -0.0536098, 25.2323)
+
+[node name="NPCEnemyBigGuy2" parent="SubViewportContainer" index="2" instance=ExtResource("27_b56bl")]
+transform = Transform3D(0.983175, 0, 0.182664, 0, 1, 0, -0.182664, 0, 0.983175, 0.0598069, -0.0536098, -22.0997)
+
+[node name="NPCEnemyBigGuy3" parent="SubViewportContainer" index="3" instance=ExtResource("27_b56bl")]
+transform = Transform3D(-0.760122, 0, -0.649779, 0, 1, 0, 0.649779, 0, -0.760122, 9.67049, -0.0536098, 20.9719)
+
+[node name="NPCEnemyBigGuy5" parent="SubViewportContainer" index="4" instance=ExtResource("27_b56bl")]
+transform = Transform3D(0.760122, 0, 0.649779, 0, 1, 0, -0.649779, 0, 0.760122, -1.32951, -0.0536098, -7.0281)
+
+[node name="NPCEnemyBigGuy4" parent="SubViewportContainer" index="5" instance=ExtResource("27_b56bl")]
+transform = Transform3D(-0.189387, 0, -0.981902, 0, 1, 0, 0.981902, 0, -0.189387, 23.174, 0.44893, 1.33446)
+
+[node name="NPCEnemyBigGuy6" parent="SubViewportContainer" index="6" instance=ExtResource("27_b56bl")]
+transform = Transform3D(0.654965, 0, 0.755659, 0, 1, 0, -0.755659, 0, 0.654965, 11.174, 0.44893, -17.6655)
+
+[node name="NPCEnemyBigGuy7" parent="SubViewportContainer" index="7" instance=ExtResource("27_b56bl")]
+transform = Transform3D(-0.326937, 0, 0.945046, 0, 1, 0, -0.945046, 0, -0.326937, -5.826, 0.44893, 15.3345)
+
+[node name="NPCEnemyBigGuy8" parent="SubViewportContainer" index="8" instance=ExtResource("27_b56bl")]
+transform = Transform3D(0.899428, 0, -0.437069, 0, 1, 0, 0.437069, 0, 0.899428, -11.826, 0.44893, -12.6655)
+
+[node name="NPCEnemyBigGuy9" parent="SubViewportContainer" index="9" instance=ExtResource("27_b56bl")]
+transform = Transform3D(-0.993021, 0, 0.117936, 0, 1, 0, -0.117936, 0, -0.993021, -13.0509, 6.10526, 15.159)
+
+[node name="npc_grunt" parent="SubViewportContainer" index="10" instance=ExtResource("11_qwvpn")]
+transform = Transform3D(0.474057, 0, 0.880494, 0, 1, 0, -0.880494, 0, 0.474057, -21.3273, 14.1537, -1.45638)
+
+[node name="npc_grunt2" parent="SubViewportContainer" index="11" instance=ExtResource("11_qwvpn")]
+transform = Transform3D(0.944508, 0, -0.328488, 0, 1, 0, 0.328488, 0, 0.944508, -9.49797, 14.1537, -17.1889)
+
+[node name="npc_grunt3" parent="SubViewportContainer" index="12" instance=ExtResource("11_qwvpn")]
+transform = Transform3D(-0.951159, 0, 0.308702, 0, 1, 0, -0.308702, 0, -0.951159, 23.585, 14.0712, 15.8273)
+
+[node name="npc_grunt4" parent="SubViewportContainer" index="13" instance=ExtResource("11_qwvpn")]
+transform = Transform3D(-0.951159, 0, 0.308702, 0, 1, 0, -0.308702, 0, -0.951159, 5.15504, 14.0712, 21.9899)
+
+[node name="npc_grunt5" parent="SubViewportContainer" index="14" instance=ExtResource("11_qwvpn")]
+transform = Transform3D(0.331387, 0, 0.943495, 0, 1, 0, -0.943495, 0, 0.331387, -20.5044, 14.0712, 14.8563)
+
+[node name="npc_grunt6" parent="SubViewportContainer" index="15" instance=ExtResource("11_qwvpn")]
+transform = Transform3D(0.659096, 0, 0.752059, 0, 1, 0, -0.752059, 0, 0.659096, 9.1773, 14.0712, -16.8196)
