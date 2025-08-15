@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://btll4w783s3s7"]
+[gd_scene load_steps=12 format=3 uid="uid://btll4w783s3s7"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_mit6q"]
 [ext_resource type="PackedScene" uid="uid://ct8vytijeramr" path="res://game/misc/finish.tscn" id="2_smgb3"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="3_uvo0e"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_mlw6u"]
 [ext_resource type="Script" uid="uid://bgxvcscuumfyq" path="res://addons/boxconstructor/scripts/cube_grid.gd" id="5_fth3k"]
-[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="11_qwvpn"]
 [ext_resource type="Material" uid="uid://c8am7gxht6vdq" path="res://content/environment/materials/surface_9.tres" id="15_5qr1n"]
 [ext_resource type="Material" uid="uid://c00744tmfikc5" path="res://content/environment/materials/surface_12.tres" id="18_w3j4k"]
 [ext_resource type="Material" uid="uid://h1otvpr12uoy" path="res://content/environment/materials/surface_17.tres" id="23_4gcnf"]
@@ -426,20 +425,20 @@ transform = Transform3D(0.899428, 0, -0.437069, 0, 1, 0, 0.437069, 0, 0.899428, 
 [node name="NPCEnemyBigGuy9" parent="SubViewportContainer" index="9" instance=ExtResource("27_b56bl")]
 transform = Transform3D(-0.993021, 0, 0.117936, 0, 1, 0, -0.117936, 0, -0.993021, -13.0509, 6.10526, 15.159)
 
-[node name="npc_grunt" parent="SubViewportContainer" index="10" instance=ExtResource("11_qwvpn")]
-transform = Transform3D(0.727797, 0, -0.685793, 0, 1, 0, 0.685793, 0, 0.727797, -4.32728, 14.1537, -16.4564)
+[node name="NPCEnemyBigGuy10" parent="SubViewportContainer" index="10" instance=ExtResource("27_b56bl")]
+transform = Transform3D(-0.993021, 0, 0.117936, 0, 1, 0, -0.117936, 0, -0.993021, -13.0509, 14.1053, 21.159)
 
-[node name="npc_grunt2" parent="SubViewportContainer" index="11" instance=ExtResource("11_qwvpn")]
-transform = Transform3D(0.944508, 0, -0.328488, 0, 1, 0, 0.328488, 0, 0.944508, -9.49797, 14.1537, -17.1889)
+[node name="NPCEnemyBigGuy11" parent="SubViewportContainer" index="11" instance=ExtResource("27_b56bl")]
+transform = Transform3D(-0.989709, 0, -0.143095, 0, 1, 0, 0.143095, 0, -0.989709, 12.9491, 14.1053, 21.159)
 
-[node name="npc_grunt3" parent="SubViewportContainer" index="12" instance=ExtResource("11_qwvpn")]
-transform = Transform3D(-0.208236, 0, 0.978079, 0, 1, 0, -0.978079, 0, -0.208236, 11.585, 14.0712, 20.8273)
+[node name="NPCEnemyBigGuy12" parent="SubViewportContainer" index="12" instance=ExtResource("27_b56bl")]
+transform = Transform3D(0.801013, 0, -0.598646, 0, 1, 0, 0.598646, 0, 0.801013, 12.9491, 14.1053, -16.841)
 
-[node name="npc_grunt4" parent="SubViewportContainer" index="13" instance=ExtResource("11_qwvpn")]
-transform = Transform3D(-0.951159, 0, 0.308702, 0, 1, 0, -0.308702, 0, -0.951159, 5.15504, 14.0712, 21.9899)
+[node name="NPCEnemyBigGuy13" parent="SubViewportContainer" index="13" instance=ExtResource("27_b56bl")]
+transform = Transform3D(0.117936, 0, 0.993021, 0, 1, 0, -0.993021, 0, 0.117936, -10.0509, 14.1053, -17.841)
 
-[node name="npc_grunt5" parent="SubViewportContainer" index="14" instance=ExtResource("11_qwvpn")]
-transform = Transform3D(-0.943495, 0, 0.331387, 0, 1, 0, -0.331387, 0, -0.943495, -6.50435, 14.0712, 20.8563)
+[node name="NPCEnemyBigGuy14" parent="SubViewportContainer" index="14" instance=ExtResource("27_b56bl")]
+transform = Transform3D(0.993021, 0, -0.117936, 0, 1, 0, 0.117936, 0, 0.993021, 6.94915, 0.105259, 10.159)
 
-[node name="npc_grunt6" parent="SubViewportContainer" index="15" instance=ExtResource("11_qwvpn")]
-transform = Transform3D(0.659096, 0, 0.752059, 0, 1, 0, -0.752059, 0, 0.659096, 9.1773, 14.0712, -16.8196)
+[node name="NPCEnemyBigGuy15" parent="SubViewportContainer" index="15" instance=ExtResource("27_b56bl")]
+transform = Transform3D(0.928661, 0, -0.37093, 0, 1, 0, 0.37093, 0, 0.928661, 19.9491, 0.105259, -10.841)
