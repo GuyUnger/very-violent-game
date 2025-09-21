@@ -10,10 +10,9 @@ func _process(delta: float) -> void:
 	else:
 		%Ammo.text = ""
 	
-	%ProgressBar.visible = Main.instance.total_enemies > 0
-	%ProgressBar.max_value = Main.instance.total_enemies
+	%ProgressBar.visible = Main.instance.enemies_total > 0
+	%ProgressBar.max_value = Main.instance.enemies_total
 	
-	var enemies_killed = Main.instance.total_enemies - Main.instance.enemies_left
-	%ProgressBar.value = enemies_killed
-	%LabelEnemies.text = str(enemies_killed) + " / " + str(Main.instance.total_enemies)
+	%ProgressBar.value = Main.instance.enemies_killed
+	%LabelEnemies.text = str(Main.instance.enemies_killed) + " / " + str(Main.instance.enemies_total)
 	

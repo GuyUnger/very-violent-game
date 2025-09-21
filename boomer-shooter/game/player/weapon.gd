@@ -36,6 +36,8 @@ var pickup_sounds_b: Array[AudioStream] = [
 
 @export var damage_scale: int = 1
 
+@export var invincible: bool = false
+
 
 func set_trigger_pressed(value:bool) -> void:
 	if value != trigger_pressed:
@@ -108,6 +110,8 @@ func shoot() -> void:
 		projectile.position = player.cam.global_position
 		projectile.damage *= damage_scale
 		Main.instance.add_child(projectile)
+		if invincible:
+			Main.player.invincible_t = maxf(Main.player.invincible_t, 0.2)
 		#projectile.collision_mask = 1 + 4
 	else:
 		var projectile := preload("res://game/projectiles/bullet_enemy.tscn").instantiate()

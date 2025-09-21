@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _on_enemy_killed() -> void:
 	await get_tree().process_frame
-	if Main.instance.enemies_left == 0:
+	if Main.instance.enemies_killed >= Main.instance.enemies_total:
 		open()
 
 
@@ -30,7 +30,8 @@ func _on_body_entered(body:Node3D) -> void:
 	if entered:
 		return
 	entered = true
-	
+	var tween = create_tween()
+	tween.tween_property(Main.player.cam.camera, "fov", 30.0, 1.0)
 	get_tree().paused = true
 	EventStore.clear()
 	await Transition.close()

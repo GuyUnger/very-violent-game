@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://chrmm8h2esgsc"]
+
+[ext_resource type="Shader" uid="uid://gwcb86082iq6" path="res://content/models/npc.gdshader" id="1_64qgg"]
+[ext_resource type="Texture2D" uid="uid://bx0ht6b2syi8v" path="res://content/textures/grunt_skin.png" id="2_6wqqy"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_64qgg")
+shader_parameter/texture_albedo = ExtResource("2_6wqqy")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/blood_color = Color(0, 0, 0, 1)

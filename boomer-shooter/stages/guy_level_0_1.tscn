@@ -1,14 +1,11 @@
-[gd_scene load_steps=48 format=3 uid="uid://dbnfimasck115"]
+[gd_scene load_steps=45 format=3 uid="uid://dbnfimasck115"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_tuhmy"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_hmnp2"]
-[ext_resource type="PackedScene" uid="uid://csfp8t30e7u6m" path="res://game/props/plane_crash.tscn" id="3_k4s86"]
 [ext_resource type="PackedScene" uid="uid://bhwigbhxgn45k" path="res://game/props/pole.tscn" id="4_tcdd8"]
 [ext_resource type="PackedScene" uid="uid://3xpj0l2cqkiq" path="res://game/props/conditioner.tscn" id="5_bcoy1"]
 [ext_resource type="PackedScene" uid="uid://c7by6vbb060yn" path="res://game/props/awning.tscn" id="6_pf322"]
-[ext_resource type="PackedScene" uid="uid://cqeao6wkv6xen" path="res://game/props/window_deco.tscn" id="7_4hwrl"]
 [ext_resource type="PackedScene" uid="uid://cgw3r72e1dnxp" path="res://game/props/car_1.tscn" id="8_hsohy"]
-[ext_resource type="PackedScene" uid="uid://ddgjm2qbdejwa" path="res://game/props/car_2.tscn" id="9_4cspe"]
 [ext_resource type="PackedScene" uid="uid://cvkxvvl5qllmb" path="res://game/props/doorway.tscn" id="10_fyxc0"]
 [ext_resource type="PackedScene" uid="uid://c464glcbycu8f" path="res://game/props/barrel.tscn" id="11_2044k"]
 [ext_resource type="PackedScene" uid="uid://bbk7tjem838g0" path="res://game/props/stairs.tscn" id="12_7bx77"]
@@ -67,32 +64,32 @@ starting_weapon = ExtResource("2_hmnp2")
 [node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80, -9, -16)
 
-[node name="PlaneCrash" parent="SubViewportContainer/SubViewport/Props" index="0" instance=ExtResource("3_k4s86")]
-transform = Transform3D(0.88271, -0.0137399, -0.469717, 0.0458108, 0.997327, 0.0569162, 0.46768, -0.0717587, 0.88098, -4, 7, 51)
-
-[node name="Pole2" parent="SubViewportContainer/SubViewport/Props" index="1" instance=ExtResource("4_tcdd8")]
+[node name="Pole2" parent="SubViewportContainer/SubViewport/Props" index="0" instance=ExtResource("4_tcdd8")]
 transform = Transform3D(-0.917824, 0, 0.396988, 0, 1, 0, -0.396988, 0, -0.917824, 53, 8, 11)
 
-[node name="Pole3" parent="SubViewportContainer/SubViewport/Props" index="2" instance=ExtResource("4_tcdd8")]
+[node name="Pole3" parent="SubViewportContainer/SubViewport/Props" index="1" instance=ExtResource("4_tcdd8")]
 transform = Transform3D(-0.894076, 0, -0.447915, 0, 1, 0, 0.447915, 0, -0.894076, -2, 8, 11)
 
-[node name="Conditioner" parent="SubViewportContainer/SubViewport/Props" index="3" instance=ExtResource("5_bcoy1")]
+[node name="Conditioner" parent="SubViewportContainer/SubViewport/Props" index="2" instance=ExtResource("5_bcoy1")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 44.812, 14.7875, 17.9813)
 
-[node name="Awning" parent="SubViewportContainer/SubViewport/Props" index="4" instance=ExtResource("6_pf322")]
+[node name="Awning" parent="SubViewportContainer/SubViewport/Props" index="3" instance=ExtResource("6_pf322")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 54.0311, 15.616, 18.6558)
 
-[node name="WindowDeco" parent="SubViewportContainer/SubViewport/Props" index="5" instance=ExtResource("7_4hwrl")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57.2131, 12.8235, 33.474)
-
-[node name="Car1" parent="SubViewportContainer/SubViewport/Props" index="6" instance=ExtResource("8_hsohy")]
+[node name="Car1" parent="SubViewportContainer/SubViewport/Props" index="4" instance=ExtResource("8_hsohy")]
 transform = Transform3D(0.962744, 0, -0.270416, 0, 1, 0, 0.270416, 0, 0.962744, 50.0187, 8.1318, 12.7343)
 
-[node name="Car2" parent="SubViewportContainer/SubViewport/Props" index="7" instance=ExtResource("9_4cspe")]
-transform = Transform3D(-0.556339, 0, -0.830955, 0, 1, 0, 0.830955, 0, -0.556339, 50.7848, 8.0132, 30.9605)
+[node name="Doorway" parent="SubViewportContainer/SubViewport/Props" index="5" instance=ExtResource("10_fyxc0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 73.9267, 9.97725, 18.0055)
 
-[node name="Doorway" parent="SubViewportContainer/SubViewport/Props" index="8" instance=ExtResource("10_fyxc0")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 55.4628, 8.075, 15.9868)
+[node name="Doorway2" parent="SubViewportContainer/SubViewport/Props" index="6" instance=ExtResource("10_fyxc0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 73.9267, 9.97725, 23.9937)
+
+[node name="Doorway3" parent="SubViewportContainer/SubViewport/Props" index="7" instance=ExtResource("10_fyxc0")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 86.0692, 9.97725, 23.9937)
+
+[node name="Doorway4" parent="SubViewportContainer/SubViewport/Props" index="8" instance=ExtResource("10_fyxc0")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 86.0692, 9.97725, 18.0055)
 
 [node name="Barrel4" parent="SubViewportContainer/SubViewport/Props" index="9" instance=ExtResource("11_2044k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.7486, 8.74199, 22.1875)

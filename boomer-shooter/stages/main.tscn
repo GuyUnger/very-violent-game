@@ -64,6 +64,60 @@ render_mode blend_mix;
 
 uniform sampler2D screen_texture : hint_screen_texture;
 
+// RGB -> HSV
+vec3 rgb2hsv(vec3 c) {
+    float cmax = max(c.r, max(c.g, c.b));
+    float cmin = min(c.r, min(c.g, c.b));
+    float delta = cmax - cmin;
+
+    float h = 0.0;
+    if (delta > 1e-5) {
+        if (cmax == c.r) {
+            h = mod(((c.g - c.b) / delta), 6.0);
+        } else if (cmax == c.g) {
+            h = ((c.b - c.r) / delta) + 2.0;
+        } else {
+            h = ((c.r - c.g) / delta) + 4.0;
+        }
+        h /= 6.0;
+        if (h < 0.0) h += 1.0;
+    }
+
+    float s = (cmax <= 0.0) ? 0.0 : delta / cmax;
+    float v = cmax;
+
+    return vec3(h, s, v);
+}
+
+// HSV -> RGB
+vec3 hsv2rgb(vec3 c) {
+    float h = fract(c.x) * 6.0;
+    float s = clamp(c.y, 0.0, 1.0);
+    float v = clamp(c.z, 0.0, 1.0);
+
+    int i = int(floor(h));
+    float f = h - float(i);
+    float p = v * (1.0 - s);
+    float q = v * (1.0 - s * f);
+    float t = v * (1.0 - s * (1.0 - f));
+
+    if (i == 0) return vec3(v, t, p);
+    if (i == 1) return vec3(q, v, p);
+    if (i == 2) return vec3(p, v, t);
+    if (i == 3) return vec3(p, q, v);
+    if (i == 4) return vec3(t, p, v);
+    return vec3(v, p, q);
+}
+float ease_in_out(float x, float amt) {
+    x = clamp(x, 0.0, 1.0);
+    if (amt <= 0.0) return x;
+    float a = max(1.0, amt * 2.0); // strength
+    float p = pow(x, a);
+    float q = 1.0 - pow(1.0 - x, a);
+    return mix(x, (p + q) * 0.5, amt);
+}
+
+
 void fragment() {
 	float dither = 0.0;
 	ivec2 pixel = ivec2(SCREEN_UV / SCREEN_PIXEL_SIZE);
@@ -73,8 +127,14 @@ void fragment() {
 	else if (pixel % ivec2(2) == ivec2(0) || pixel % ivec2(2) == ivec2(1)) {
 		dither = 0.2;
 	}
-	float steps = mix(30.0, 5.0, dither);
+	float steps = mix(20.0, 4.0, dither);
 	vec3 color = texture(screen_texture, SCREEN_UV).rgb;
+	
+	float red = color.r;
+	color = rgb2hsv(color);
+	color.g *= red + 0.3;
+	color.b *= 0.8;
+	color = hsv2rgb(color);
 
 	color = round(color * steps) / steps;
 

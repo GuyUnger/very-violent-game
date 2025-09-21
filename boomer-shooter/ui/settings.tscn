@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://csir10sqv5g0g"]
+
+[ext_resource type="Script" uid="uid://bfgq0hgk7083w" path="res://settings.gd" id="1_7kwmf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4u22a"]
+
+[node name="Settings" type="CanvasLayer"]
+process_mode = 2
+visible = false
+script = ExtResource("1_7kwmf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.647059)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "look sensitivity"
+horizontal_alignment = 1
+
+[node name="SliderLookSensitivity" type="HSlider" parent="CenterContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+min_value = 0.1
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4u22a")
+
+[node name="ButtonContinue" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4u22a")
+
+[node name="ButtonMainMenu" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+
+[node name="ButtonClose" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Close
+"
+
+[node name="ButtonExit" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Exit Game"
+
+[connection signal="value_changed" from="CenterContainer/MarginContainer/VBoxContainer/SliderLookSensitivity" to="." method="_on_slider_look_sensitivity_value_changed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ButtonContinue" to="." method="_on_button_continue_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ButtonMainMenu" to="." method="_on_button_main_menu_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ButtonClose" to="." method="_on_button_close_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ButtonExit" to="." method="_on_button_close_pressed"]

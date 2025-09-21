@@ -72,6 +72,7 @@ auto = true
 recoil = 0.1
 ammo = 300
 pickup_sounds = Array[AudioStream]([ExtResource("2_bjki7"), ExtResource("3_g4h8n")])
+invincible = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7w4b6")

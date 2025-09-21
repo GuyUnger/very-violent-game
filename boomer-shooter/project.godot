@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="boomer shooter"
-run/main_scene="uid://blsqo2j2llkmq"
+run/main_scene="uid://2x8ey8mi7h5p"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EventStore="*res://game/event_store.gd"
 Transition="*res://ui/level_between.tscn"
+Settings="*res://ui/settings.tscn"
 
 [display]
 

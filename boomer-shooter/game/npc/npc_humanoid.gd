@@ -32,7 +32,8 @@ func set_target(node:Node3D) -> void:
 
 	if not is_node_ready():
 		return
-	
+	if not %LookAtModifier3D:
+		return
 	if target:
 		if target.has_node("%Head"):
 			%LookAtModifier3D.target_node = target.get_node("%Head").get_path()
