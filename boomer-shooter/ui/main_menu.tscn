@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://2x8ey8mi7h5p"]
+[gd_scene load_steps=6 format=3 uid="uid://2x8ey8mi7h5p"]
 
-[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="Script" uid="uid://cdquex7xxlu1m" path="res://ui/main_menu.gd" id="1_t7e0r"]
 [ext_resource type="Texture2D" uid="uid://bry718g3pruo4" path="res://3LLbEG.png" id="2_0dkrt"]
+[ext_resource type="AudioStream" uid="uid://drttvh8gh5mv" path="res://game/player/land_metal 03.wav" id="3_rmr83"]
+[ext_resource type="AudioStream" uid="uid://bj7teeseyb1eg" path="res://game/weapons/sfx/weapon_shotgun_shoot_sfx_rand.tres" id="3_wk0pr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7e0r"]
 
@@ -108,6 +110,14 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_t7e0r")
 [node name="ButtonBack" type="Button" parent="Difficulty/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Back"
+
+[node name="AudioHover" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_rmr83")
+
+[node name="AudioSelect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_wk0pr")
 
 [connection signal="pressed" from="Main/CenterContainer/VBoxContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
 [connection signal="pressed" from="Main/CenterContainer/VBoxContainer/ButtonSettings" to="." method="_on_button_settings_pressed"]

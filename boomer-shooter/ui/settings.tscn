@@ -6,6 +6,7 @@
 
 [node name="Settings" type="CanvasLayer"]
 process_mode = 2
+layer = 2
 visible = false
 script = ExtResource("1_7kwmf")
 

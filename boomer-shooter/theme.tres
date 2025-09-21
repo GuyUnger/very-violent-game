@@ -1,3 +1,27 @@
-[gd_resource type="Theme" format=3 uid="uid://cjn0suqlrt76x"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cjn0suqlrt76x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1x85"]
+content_margin_left = 32.0
+content_margin_top = 4.0
+content_margin_right = 32.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6184582, 0.0065974505, 4.813075e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvktn"]
+content_margin_left = 32.0
+content_margin_top = 4.0
+content_margin_right = 32.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjfk0"]
+content_margin_left = 32.0
+content_margin_top = 4.0
+content_margin_right = 32.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
 
 [resource]
+Button/styles/hover = SubResource("StyleBoxFlat_e1x85")
+Button/styles/normal = SubResource("StyleBoxFlat_wvktn")
+Button/styles/pressed = SubResource("StyleBoxFlat_cjfk0")
