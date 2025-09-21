@@ -45,6 +45,7 @@ npc_enemies=""
 
 [gui]
 
+theme/custom="uid://cjn0suqlrt76x"
 theme/custom_font="uid://boqhcqqhxixb3"
 
 [input]

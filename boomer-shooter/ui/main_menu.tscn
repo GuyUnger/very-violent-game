@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://2x8ey8mi7h5p"]
+[gd_scene load_steps=4 format=3 uid="uid://2x8ey8mi7h5p"]
 
-[ext_resource type="Script" uid="uid://cdquex7xxlu1m" path="res://ui/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="Texture2D" uid="uid://bry718g3pruo4" path="res://3LLbEG.png" id="2_0dkrt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7e0r"]
 
@@ -31,11 +32,17 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="3lLbEg" type="Sprite2D" parent="Main"]
+position = Vector2(428, 260)
+scale = Vector2(0.950766, 0.950766)
+texture = ExtResource("2_0dkrt")
+
 [node name="CenterContainer" type="CenterContainer" parent="Main"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -52,6 +59,7 @@ text = "Settings"
 
 [node name="Difficulty" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
