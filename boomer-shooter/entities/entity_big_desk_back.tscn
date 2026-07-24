@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cckhxd110laup"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://entities/entity_bath_tub.tscn" id="1_e58gu"]
+[ext_resource type="ArrayMesh" uid="uid://dvgapughxxvpp" path="res://models/office/Office_Desk_1.obj" id="2_e58gu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umx4j"]
+size = Vector3(1.435, 0.932, 0.71)
+
+[node name="EntityKitchenOven" unique_id=58870841 instance=ExtResource("1_e58gu")]
+
+[node name="MeshInstance3D2" parent="." index="0" unique_id=1141119635]
+mesh = ExtResource("2_e58gu")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47564375, 0)
+shape = SubResource("BoxShape3D_umx4j")

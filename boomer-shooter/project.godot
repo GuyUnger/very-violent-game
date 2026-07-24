@@ -167,7 +167,9 @@ crouch={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemies"
 3d_physics/layer_4="PlayerGhosts"
+3d_physics/layer_5="Opaque"
 3d_physics/layer_6="Meleeable"
+3d_physics/layer_7="WeaponPickup"
 
 [rendering]
 

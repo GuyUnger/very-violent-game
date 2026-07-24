@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var tween: Tween
+var changing_scene := false
 
 var t: float:
 	get:
@@ -26,6 +27,27 @@ func open() -> void:
 	tween = create_tween()
 	tween.tween_property(self, "t", 1.0, 0.3)
 	await tween.finished
+
+
+func reload_current_scene(color: Color = Color.WHITE) -> void:
+	if changing_scene:
+		return
+
+	changing_scene = true
+	await close(color)
+
+	var reload_error := get_tree().reload_current_scene()
+	if reload_error != OK:
+		push_error("Could not reload the current scene: error %s" % reload_error)
+		await open()
+		changing_scene = false
+		return
+
+	# This node is an autoload, so it survives while the old scene and player
+	# are replaced. Wait for the new scene before revealing it.
+	await get_tree().process_frame
+	await open()
+	changing_scene = false
 
 
 func _on_music_finished() -> void:

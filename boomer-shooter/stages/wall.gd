@@ -7,6 +7,7 @@ const MAX_HITS := HIT_TEXTURE_SIZE * HIT_TEXTURE_SIZE
 const WALL_SPARKS_SCENE := preload("res://game/fx/wall_sparks.tscn")
 const SNAP_COLLISION_LAYER := 1 << 19
 const SNAP_POINT_GROUP := &"wall_snap_point"
+const OPAQUE_COLLISION_LAYER := 1 << 4
 
 
 @export_range(1, 1000, 1) var max_health := 5
@@ -15,6 +16,8 @@ const SNAP_POINT_GROUP := &"wall_snap_point"
 @export_range(0.01, 0.5, 0.01) var break_edge_width := 0.12
 @export_range(0.0, 100.0, 0.1) var bullet_stopping_power := 1.0
 @export var can_run_through := false
+@export var opaque := true:
+	set = set_opaque
 @export var wall_color := Color.WHITE
 @export var exclude_from_snap := false
 @export_range(0.05, 1.0, 0.01) var snap_point_search_distance := 0.35
@@ -33,6 +36,7 @@ var wall_material: ShaderMaterial
 
 func _ready() -> void:
 	health = max_health
+	_update_opaque_collision_layer()
 	_update_editor_snap_points_enabled()
 	var size_min := minf(bullet_hole_size_range.x, bullet_hole_size_range.y)
 	var size_max := maxf(bullet_hole_size_range.x, bullet_hole_size_range.y)
@@ -63,7 +67,13 @@ func _ready() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_ENTER_TREE:
+		_update_opaque_collision_layer()
 		call_deferred("_update_editor_snap_points_enabled")
+
+
+func set_opaque(value: bool) -> void:
+	opaque = value
+	_update_opaque_collision_layer()
 
 
 func hit(hit_position: Vector3, _hit_normal: Vector3, damage: int = 1) -> void:
@@ -123,6 +133,13 @@ func try_break_from_sprint_impact() -> bool:
 
 func get_bullet_stopping_power() -> float:
 	return 0.0 if broken else bullet_stopping_power
+
+
+func _update_opaque_collision_layer() -> void:
+	if opaque:
+		collision_layer |= OPAQUE_COLLISION_LAYER
+	else:
+		collision_layer &= ~OPAQUE_COLLISION_LAYER
 
 
 func _apply_instance_shader_params() -> void:

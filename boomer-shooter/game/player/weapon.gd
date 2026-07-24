@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Weapon
 
+signal released_by_holder
+
 enum HoldPose {
 	PISTOL,
 	RIFLE
@@ -10,6 +12,7 @@ enum HoldPose {
 @export var auto := false
 @export var hold_pose:HoldPose
 @export var recoil := 0.0
+@export var penetration_power := 0.0
 
 var target_range: float = 20.0
 var reload_t: float = 0.0
@@ -107,6 +110,7 @@ func shoot() -> void:
 		projectile.track_in_event_store = true
 		projectile.position = player.cam.global_position
 		projectile.damage *= damage_scale
+		projectile.penetration_power = penetration_power
 		Main.instance.add_child(projectile)
 		#projectile.collision_mask = 1 + 4
 	else:
@@ -116,6 +120,7 @@ func shoot() -> void:
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
 		projectile.collision_mask = 1 + 2
 		projectile.position = global_position + Vector3.UP * 0.1
+		projectile.penetration_power = penetration_power
 	
 		Main.instance.add_child(projectile)
 	
@@ -127,8 +132,10 @@ func shoot() -> void:
 	total_recoil = recoil
 
 func throw(force:Vector3) -> void:
+	var had_holder := player != null or enemy != null
 	trigger_pressed = false
 	player = null
+	enemy = null
 	since_thrown = 0.0
 	
 	
@@ -137,11 +144,14 @@ func throw(force:Vector3) -> void:
 	collision_mask = 1
 	velocity = force
 
-	collision_layer = 8
+	collision_layer = 64
 	await get_tree().create_timer(0.2).timeout
 	
 	if ammo > 0:
 		$PickupGlow.show()
+
+	if had_holder:
+		released_by_holder.emit()
 	
 	
 
@@ -155,6 +165,7 @@ func pickup(p_player: Player) -> void:
 	%AudioPickup.pitch_scale = 1.1
 	hide_glow()
 	player = p_player
+	enemy = null
 	velocity = Vector3.ZERO
 	collision_mask = 0
 	collision_layer = 0

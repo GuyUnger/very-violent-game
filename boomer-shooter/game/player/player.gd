@@ -69,8 +69,13 @@ var weapon:Weapon
 
 @export var starting_weapon:PackedScene
 @export var close_on_escape = false
+@export var mounted := false:
+	set = set_mounted
+@export var mounted_x_bounds := Vector2(-45.0, 45.0)
+@export var mounted_y_bounds := Vector2(-30.0, 30.0)
 
 var dead: bool = false
+var mounted_look_center := Vector2.ZERO
 
 var last_transform := Transform3D()
 
@@ -104,8 +109,13 @@ func _ready() -> void:
 			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
 			global_transform))
 	
-	#if starting_weapon:
-	#	_pick_up_body_entered(starting_weapon.instantiate())
+	if starting_weapon:
+		var starting_weapon_instance := starting_weapon.instantiate()
+		if starting_weapon_instance is Weapon:
+			_equip_weapon(starting_weapon_instance)
+		else:
+			push_warning("Player starting_weapon scene must have a Weapon root node.")
+			starting_weapon_instance.queue_free()
 	
 	match Settings.difficulty:
 		Settings.Difficulty.EASY:
@@ -116,6 +126,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 	
 	look_angle.x = -rotation.y - PI * 0.5
+	if mounted:
+		_capture_mounted_look_center()
 	
 	cam.reparent(get_parent())
 	ray_cam.reparent(get_parent())
@@ -150,6 +162,8 @@ func _process(delta: float) -> void:
 	look_angle += look_vel * 5.0 * delta
 	
 	# Clamp look angle
+	if mounted:
+		_clamp_mounted_look()
 	look_angle.x = wrapf(look_angle.x, 0.0, TAU)
 	look_angle.y = clamp(look_angle.y, -PI * 0.45, PI * 0.35)
 	
@@ -289,13 +303,8 @@ func _physics_process(delta: float) -> void:
 	
 	for body in %PickUp.get_overlapping_bodies():
 		if not weapon and body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
-			weapon = body
-			weapon.pickup(self)
-			if body.is_inside_tree():
-				body.reparent(fps_weapon)
-			else:
-				fps_weapon.add_child(body)
-			break
+			if _equip_weapon(body):
+				break
 	
 
 func throw_weapon() -> void:
@@ -311,6 +320,11 @@ func throw_weapon() -> void:
 #region Movement
 
 func _process_movement(delta:float) -> void:
+	if mounted:
+		input_direction = Vector2.ZERO
+		velocity = Vector3.ZERO
+		return
+
 	# Rotate towards view direction
 	if input_direction != Vector2.ZERO:
 		rotate_towards_view_direction()
@@ -453,6 +467,34 @@ func rotate_towards_view_direction(t: float = 1.0) -> void:
 	rotation.y = lerp_angle(rotation.y, -look_angle.x,  t)
 
 
+func set_mounted(value: bool) -> void:
+	if mounted == value:
+		return
+
+	mounted = value
+	if mounted:
+		_capture_mounted_look_center()
+		input_direction = Vector2.ZERO
+		look_vel = Vector2.ZERO
+		velocity = Vector3.ZERO
+
+
+func _capture_mounted_look_center() -> void:
+	mounted_look_center = look_angle
+
+
+func _clamp_mounted_look() -> void:
+	var x_min := deg_to_rad(minf(mounted_x_bounds.x, mounted_x_bounds.y))
+	var x_max := deg_to_rad(maxf(mounted_x_bounds.x, mounted_x_bounds.y))
+	var y_min := deg_to_rad(minf(mounted_y_bounds.x, mounted_y_bounds.y))
+	var y_max := deg_to_rad(maxf(mounted_y_bounds.x, mounted_y_bounds.y))
+
+	var x_offset := angle_difference(mounted_look_center.x, look_angle.x)
+	var y_offset := look_angle.y - mounted_look_center.y
+	look_angle.x = mounted_look_center.x + clampf(x_offset, x_min, x_max)
+	look_angle.y = mounted_look_center.y + clampf(y_offset, y_min, y_max)
+
+
 func _update_crouch_state(delta: float) -> void:
 	var wants_to_crouch := Input.is_action_pressed("crouch")
 	if wants_to_crouch:
@@ -475,9 +517,8 @@ func _can_stand_up() -> bool:
 
 
 func get_center_pos() -> Vector3:
-	if body_collision_shape and body_collision_shape.shape is CapsuleShape3D:
-		var capsule := body_collision_shape.shape as CapsuleShape3D
-		return global_position + Vector3.UP * (body_collision_shape.position.y + capsule.height * 0.5)
+	if body_collision_shape:
+		return body_collision_shape.global_position
 	return super.get_center_pos()
 
 
@@ -693,23 +734,28 @@ func die() -> void:
 	#%Person.visible = not first_person
 	
 	await get_tree().create_timer(1.0).timeout
-	await Transition.close(Color.RED)
 	
 	# Restart without replaying the dead player's recorded run as a ghost.
 	EventStore.clear()
-	get_tree().reload_current_scene()
-	Transition.open()
+	Transition.reload_current_scene(Color.RED)
 
 
 func _pick_up_body_entered(body: Node3D) -> void:
-	pass
-	#if not weapon and body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
-	#	weapon = body
-	#	weapon.pickup(self)
-	#	if body.is_inside_tree():
-	#		body.reparent(fps_weapon)
-	#	else:
-	#		fps_weapon.add_child(body)
+	if body is Weapon and body.ammo > 0 and body.since_thrown > 0.2:
+		_equip_weapon(body)
+
+
+func _equip_weapon(new_weapon: Weapon) -> bool:
+	if weapon or not is_instance_valid(new_weapon):
+		return false
+
+	weapon = new_weapon
+	if new_weapon.is_inside_tree():
+		new_weapon.reparent(fps_weapon)
+	else:
+		fps_weapon.add_child(new_weapon)
+	new_weapon.pickup(self)
+	return true
 		
 
 

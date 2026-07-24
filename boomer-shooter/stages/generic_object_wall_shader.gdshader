@@ -9,6 +9,10 @@ uniform float specular : hint_range(0.0, 1.0) = 0.5;
 uniform float roughness : hint_range(0.0, 1.0) = 0.5;
 uniform vec3 aabb = vec3(1.0);
 
+group_uniforms variation;
+uniform float random_hue : hint_range(0.0, 1.0) = 0.0;
+group_uniforms;
+
 group_uniforms detail;
 uniform float detail : hint_range(0.0, 1.0);
 uniform sampler2D texture_detail : source_color;
@@ -34,9 +38,7 @@ uniform float quad_outline_distortion : hint_range(0.0, 1.0) = 0.0;
 uniform vec2 quad_outline_distortion_scale = vec2(1.0, 1.0);
 group_uniforms;
 
-group_uniforms wear;
-uniform float wear;
-uniform float wear_multiply;
+group_uniforms distortion;
 uniform sampler2D disorder;
 group_uniforms;
 
@@ -59,9 +61,37 @@ uniform float contact_height = -999.0;
 uniform vec2 contact_amp = vec2(0.0);
 
 varying vec3 aabb_factor;
+varying float node_random_seed;
 
 float hash(vec2 p) {
 	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+}
+
+float hash_position(vec3 p) {
+	return fract(sin(dot(p, vec3(12.9898, 78.233, 37.719))) * 43758.5453123);
+}
+
+vec3 rgb_to_hsv(vec3 color) {
+	vec4 k = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+	vec4 p = mix(
+		vec4(color.bg, k.wz),
+		vec4(color.gb, k.xy),
+		step(color.b, color.g));
+	vec4 q = mix(
+		vec4(p.xyw, color.r),
+		vec4(color.r, p.yzx),
+		step(p.x, color.r));
+	float d = q.x - min(q.w, q.y);
+	float e = 1.0e-10;
+	return vec3(
+		abs(q.z + (q.w - q.y) / (6.0 * d + e)),
+		d / (q.x + e),
+		q.x);
+}
+
+vec3 hsv_to_rgb(vec3 color) {
+	vec3 p = abs(fract(color.xxx + vec3(0.0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0);
+	return color.z * mix(vec3(1.0), clamp(p - 1.0, 0.0, 1.0), color.y);
 }
 
 float noise_from_uv(vec2 uv) {
@@ -101,7 +131,8 @@ tile_info make_tile_info(vec2 uv, vec2 offset, vec2 size) {
 
 	row = uv.x;
 	if (tile_bricks) {
-		row += random(vec2(info.idx.y));
+		float half_tile_width = 0.5 / max(size.x, 0.0001);
+		row += mod(info.idx.y, 2.0) * half_tile_width;
 	}
 	row += noise_tex_1.r;
 	info.idx.x = floor(row * tile_size.x);
@@ -193,6 +224,7 @@ float get_broken_edge_alpha(vec2 uv) {
 void vertex() {
 	aabb_factor = VERTEX / aabb;
 	aabb_factor.xz += aabb.xz * 0.5;
+	node_random_seed = hash_position(NODE_POSITION_WORLD);
 }
 
 void fragment() {
@@ -203,8 +235,6 @@ void fragment() {
 	ALBEDO = texture(albedo, vec2(aabb_factor.x, 1.0 - aabb_factor.y)).rgb;
 
 	vec4 color_detail = texture(texture_detail, UV * detail_uv_scale);
-	color_detail.a -= wear;
-	color_detail.a = clamp(color_detail.a, 0.0, 1.0);
 	ALBEDO = mix(ALBEDO, color_detail.rgb, detail * color_detail.a);
 
 	METALLIC = metalic;
@@ -237,9 +267,12 @@ void fragment() {
 		ALBEDO = mix(ALBEDO, ALBEDO * tile_modulate.rgb, tile_modulate.a * info.is_line);
 	}
 
-	float w = clamp(round(aoe_color.g * wear), 0.0, 1.0);
-	ALBEDO = mix(ALBEDO, ALBEDO * wear_multiply, w);
 	ALBEDO *= modulate;
+
+	vec3 hsv = rgb_to_hsv(ALBEDO);
+	float signed_hue_seed = node_random_seed * 2.0 - 1.0;
+	hsv.x = fract(hsv.x + signed_hue_seed * random_hue * 0.5);
+	ALBEDO = hsv_to_rgb(hsv);
 
 	AO = aoe_color.r;
 

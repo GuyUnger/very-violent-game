@@ -44,27 +44,39 @@ func set_target(node:Node3D) -> void:
 func _physics_process(delta: float) -> void:
 	if moving_to:
 		global_position = global_position.move_toward(moving_to.global_position, delta * speed * speed_scale * speed_scale_knock_back)
+
+	if moving_to:
+		var world_direction = global_position.direction_to(moving_to.global_position)
+		var forward = global_transform.basis.z
+		var right = global_transform.basis.x
+		var local_x = right.dot(world_direction)
+		var local_y = forward.dot(world_direction)
+		var blend_vector = Vector2(local_x, local_y)
+		blend_vector *= speed_scale * speed_scale_knock_back
+		animation_tree.set("parameters/MoveDirection/blend_position", blend_vector)
+	else:
+		animation_tree.set("parameters/MoveDirection/blend_position", Vector2.ZERO)
 	
 	if target:
-		if moving_to:
-			var world_direction = global_position.direction_to(moving_to.global_position)
-			var forward = global_transform.basis.z
-			var right = global_transform.basis.x
-			var local_x = right.dot(world_direction)
-			var local_y = forward.dot(world_direction)
-			var blend_vector = Vector2(local_x, local_y)
-			blend_vector *= speed_scale * speed_scale_knock_back
-			animation_tree.set("parameters/MoveDirection/blend_position", blend_vector)
-		else:
-			animation_tree.set("parameters/MoveDirection/blend_position", Vector2.ZERO)
-		
 		look_at_node_y_axis_lerp(target.global_position, delta * 5.0)
 	
 	if knock_back_force != Vector3.ZERO:
 		global_position -= knock_back_force
 		knock_back_force = lerp(knock_back_force, Vector3.ZERO, delta)
 		
-	if not target and looking_at:
+	if not target and moving_to:
+		var to_waypoint := moving_to.global_position - global_position
+		to_waypoint.y = 0.0
+		if not to_waypoint.is_zero_approx():
+			var turn_speed := 5.0
+			var travel_yaw := atan2(to_waypoint.x, to_waypoint.z)
+			var arrival_yaw := moving_to.global_rotation.y
+			var travel_speed := speed * speed_scale * speed_scale_knock_back
+			var time_to_waypoint := to_waypoint.length() / maxf(travel_speed, 0.001)
+			var time_to_arrival_yaw := absf(angle_difference(global_rotation.y, arrival_yaw)) / turn_speed
+			var desired_yaw := arrival_yaw if time_to_arrival_yaw >= time_to_waypoint else travel_yaw
+			global_rotation.y = rotate_toward(global_rotation.y, desired_yaw, turn_speed * delta)
+	if not target and not moving_to and looking_at:
 		look_at_node_y_axis_lerp(looking_at, delta * 5.0)
 
 

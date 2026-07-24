@@ -1,0 +1,497 @@
+[gd_scene format=3 uid="uid://d0hlrlftrrwwo"]
+
+[ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_j1kci"]
+[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="3_aa4k0"]
+[ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_l5yni"]
+[ext_resource type="PackedScene" uid="uid://dm6fq1rqip8cg" path="res://stages/wall_150x240_brick.tscn" id="5_g06fm"]
+[ext_resource type="Shader" uid="uid://c2fkgivfy8owk" path="res://stages/generic_wall_shader_x.gdshader" id="6_kuxv1"]
+[ext_resource type="PackedScene" uid="uid://cvalijmkyj5by" path="res://stages/wall_150x240_glass.tscn" id="7_bc7iv"]
+[ext_resource type="PackedScene" uid="uid://cckhxd110laup" path="res://entities/entity_big_desk_back.tscn" id="8_ldwh5"]
+[ext_resource type="Script" uid="uid://hlrty7jwlqet" path="res://stages/switch.gd" id="8_s8u2h"]
+[ext_resource type="PackedScene" uid="uid://b4xf7s5682ywg" path="res://stages/wall_150x240_plaster.tscn" id="10_bdysu"]
+[ext_resource type="PackedScene" uid="uid://v0boycsgos0n" path="res://game/npc/npc_enemy_grunt_smg.tscn" id="12_ctv0o"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p2ekv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gju8q"]
+noise = SubResource("FastNoiseLite_p2ekv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hr7po"]
+render_priority = 0
+shader = ExtResource("6_kuxv1")
+shader_parameter/modulate = Color(0.27517945, 0.23268655, 0.15797201, 1)
+shader_parameter/metalic = 0.11600000551
+shader_parameter/specular = 0.682000032395
+shader_parameter/roughness = 0.9550000453625
+shader_parameter/aabb = Vector3(1, 1, 1)
+shader_parameter/contact_height = -999.0
+shader_parameter/contact_amp = Vector2(0, 0)
+shader_parameter/detail = 0.0
+shader_parameter/detail_uv_scale = Vector2(1, 1)
+shader_parameter/tile_size = Vector2(10, 55)
+shader_parameter/tile_bricks = true
+shader_parameter/tile_seam_thickness = Vector2(0.01, 0.04)
+shader_parameter/tile_outline_width = Vector2(-0.055, 0.07)
+shader_parameter/tile_outline_color = Color(0, 0, 0, 0.39607844)
+shader_parameter/tile_outline_distortion = 0.07600000361
+shader_parameter/tile_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/tile_modulate = Color(0, 0, 0, 1)
+shader_parameter/tile_variance = 0.73
+shader_parameter/quad_outline_width = Vector2(0, 0)
+shader_parameter/quad_outline_color = Color(0, 0, 0, 0)
+shader_parameter/quad_outline_distortion = 0.0
+shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/wear = 0.0
+shader_parameter/wear_multiply = 0.0
+shader_parameter/disorder = SubResource("NoiseTexture2D_gju8q")
+
+[sub_resource type="QuadMesh" id="QuadMesh_tklcm"]
+size = Vector2(21.215, 20)
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tklcm"]
+size = Vector3(50, 0.01, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gju8q"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a5rx6"]
+flip_faces = true
+size = Vector2(22.89, 20)
+
+[node name="Main" unique_id=508795477 instance=ExtResource("1_j1kci")]
+time = 10000.0
+track_num = 1
+next_level = null
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="0" unique_id=1007040939]
+transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)
+shadow_enabled = true
+
+[node name="Player" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="1" unique_id=1806949651]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20.11288, 1, 26.011248)
+starting_weapon = ExtResource("3_aa4k0")
+
+[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="3" unique_id=1966736859 instance=ExtResource("4_l5yni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.970999, 1.3853631, 25.910816)
+allow_sniper = false
+allow_revolver = false
+allow_katana = false
+infinite = true
+
+[node name="Add_25_6_50" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="4" unique_id=1134587521 instance=ExtResource("5_g06fm")]
+transform = Transform3D(1, 0, -1.7484557e-07, 0, 1, 0, 1.7484557e-07, 0, 1, -8.25, 0.998, 17.25)
+
+[node name="Add_25_6_51" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="5" unique_id=946003436 instance=ExtResource("5_g06fm")]
+transform = Transform3D(-2.1855696e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855696e-07, -7.5, 0.998, 18)
+
+[node name="Add_25_6_52" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="6" unique_id=1906461710 instance=ExtResource("5_g06fm")]
+transform = Transform3D(-2.1855696e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855696e-07, -7.5, 0.998, 34.5)
+
+[node name="Add_25_6_53" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="7" unique_id=277826780 instance=ExtResource("5_g06fm")]
+transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, -8.25, 0.998, 35.25)
+
+[node name="Floor" type="StaticBody3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="8" unique_id=939646590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.511795, 1.0003613, 26.06858)
+
+[node name="Floor" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Floor" index="0" unique_id=341238013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1206875, 0, 0)
+material_override = SubResource("ShaderMaterial_hr7po")
+mesh = SubResource("QuadMesh_tklcm")
+skeleton = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Floor" index="1" unique_id=1677534485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.511795, 0, -0.7527237)
+shape = SubResource("BoxShape3D_tklcm")
+
+[node name="Ceiling" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Floor" index="2" unique_id=336016405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.4165173, 0.18414307)
+material_override = SubResource("StandardMaterial3D_gju8q")
+mesh = SubResource("PlaneMesh_a5rx6")
+skeleton = NodePath("../..")
+metadata/_edit_lock_ = true
+
+[node name="EntityKitchenOven5" parent="SubViewportContainer/SubViewport/Floor" index="3" unique_id=58870841 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.62973, 0.0068854094, 1.4484253)
+
+[node name="EntityKitchenOven13" parent="SubViewportContainer/SubViewport/Floor" index="4" unique_id=848748897 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.62973, 0.0068854094, -0.051574707)
+
+[node name="EntityKitchenOven6" parent="SubViewportContainer/SubViewport/Floor" index="5" unique_id=191965585 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.62973, 0.0068854094, -1.5138054)
+
+[node name="EntityKitchenOven7" parent="SubViewportContainer/SubViewport/Floor" index="6" unique_id=1571696183 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.515831, 0.0068854094, -1.857233)
+
+[node name="EntityKitchenOven8" parent="SubViewportContainer/SubViewport/Floor" index="7" unique_id=2059440381 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.0357227, 0.0068854094, -1.857233)
+
+[node name="EntityKitchenOven11" parent="SubViewportContainer/SubViewport/Floor" index="8" unique_id=1381443306 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0357208, 0.0068854094, 1.8733501)
+
+[node name="EntityKitchenOven12" parent="SubViewportContainer/SubViewport/Floor" index="9" unique_id=842544230 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.515829, 0.0068854094, 1.8733501)
+
+[node name="EntityKitchenOven9" parent="SubViewportContainer/SubViewport/Floor" index="10" unique_id=1343100283 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1.6866302, 0.0068854094, -0.7388859)
+
+[node name="EntityKitchenOven10" parent="SubViewportContainer/SubViewport/Floor" index="11" unique_id=850122028 instance=ExtResource("8_ldwh5")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -1.6866302, 0.0068854094, 0.7611141)
+
+[node name="Wall150x240Glass14" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="9" unique_id=1432736824 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 34.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass15" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="10" unique_id=1785173539 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 33)
+collision_layer = 17
+
+[node name="Wall150x240Glass16" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="11" unique_id=466769984 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 31.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass17" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="12" unique_id=2065322521 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 30)
+collision_layer = 17
+
+[node name="Wall150x240Glass18" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="13" unique_id=1406524255 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 28.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass21" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="14" unique_id=489435395 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 24)
+collision_layer = 17
+
+[node name="Wall150x240Glass24" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="15" unique_id=787299160 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 25.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass25" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="16" unique_id=2125805841 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 27)
+collision_layer = 17
+
+[node name="Wall150x240Glass22" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="17" unique_id=680523720 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 22.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass23" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="18" unique_id=357605964 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 21)
+collision_layer = 17
+
+[node name="Wall150x240Glass35" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="19" unique_id=1952003868 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 19.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass58" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="20" unique_id=1543694580 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 18)
+collision_layer = 17
+
+[node name="Wall150x240Glass59" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="21" unique_id=1257846766 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -26.25, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass60" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="22" unique_id=1861485819 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24.75, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass61" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="23" unique_id=273674129 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -23.25, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass62" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="24" unique_id=471581402 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -21.75, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass63" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="25" unique_id=764668053 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -20.25, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass64" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="26" unique_id=1049822883 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -18.75, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass65" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="27" unique_id=892182575 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -17.25, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass66" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="28" unique_id=1225844447 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -15.75, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass67" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="29" unique_id=557864538 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -14.25, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass68" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="30" unique_id=318165561 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -12.75, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass69" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="31" unique_id=795533318 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.25, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass70" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="32" unique_id=556408631 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.75, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass71" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="33" unique_id=206794601 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.75, 0.998, 17.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass36" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="34" unique_id=1726517964 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 0.998, 33)
+collision_layer = 17
+
+[node name="Wall150x240Glass37" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="35" unique_id=1657929696 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 0.998, 31.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass38" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="36" unique_id=1000966180 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 0.998, 30)
+collision_layer = 17
+
+[node name="Wall150x240Glass39" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="37" unique_id=1794234006 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 0.998, 28.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass42" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="38" unique_id=1000830424 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 0.998, 24)
+collision_layer = 17
+
+[node name="Wall150x240Glass43" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="39" unique_id=486154257 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 0.998, 22.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass44" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="40" unique_id=1727997345 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 0.998, 21)
+collision_layer = 17
+
+[node name="Wall150x240Glass45" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="41" unique_id=2035586307 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 0.998, 19.5)
+collision_layer = 17
+
+[node name="Wall150x240Glass46" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="42" unique_id=740263281 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.75, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass47" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="43" unique_id=1004393388 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.25, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass48" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="44" unique_id=57077856 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -12.75, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass49" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="45" unique_id=813148736 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -14.25, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass50" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="46" unique_id=630889271 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -15.75, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass51" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="47" unique_id=627603097 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -17.25, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass52" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="48" unique_id=1833315559 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -18.75, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass53" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="49" unique_id=756762699 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -20.25, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass54" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="50" unique_id=1674009340 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -21.75, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass55" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="51" unique_id=436008532 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -23.25, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Wall150x240Glass56" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="52" unique_id=1178282054 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24.75, 0.998, 35.25)
+collision_layer = 17
+
+[node name="Add_25_6_27" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="53" unique_id=184683788 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.75, 0.998, 18.75)
+collision_layer = 17
+
+[node name="Add_25_6_55" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="54" unique_id=431199786 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.75, 0.998, 18.749998)
+collision_layer = 17
+
+[node name="Add_25_6_56" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="55" unique_id=319298110 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.25, 0.998, 18.749998)
+collision_layer = 17
+
+[node name="Add_25_6_57" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="56" unique_id=2002306539 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.75, 0.998, 18.749998)
+collision_layer = 17
+
+[node name="Add_25_6_65" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="57" unique_id=1699756012 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -25.5, 0.998, 19.499998)
+collision_layer = 17
+
+[node name="Add_25_6_43" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="58" unique_id=1620641939 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.25, 0.998, 18.75)
+collision_layer = 17
+
+[node name="Add_25_6_44" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="59" unique_id=2101781421 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.75, 0.998, 18.749998)
+collision_layer = 17
+
+[node name="Add_25_6_48" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="60" unique_id=2062621406 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.25, 0.998, 18.75)
+collision_layer = 17
+
+[node name="Add_25_6_71" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="61" unique_id=472329629 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.25, 0.998, 33.763245)
+collision_layer = 17
+
+[node name="Add_25_6_73" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="62" unique_id=1977946279 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.75, 0.998, 33.763245)
+collision_layer = 17
+
+[node name="Add_25_6_83" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="63" unique_id=1645215181 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.25, 0.998, 33.763245)
+collision_layer = 17
+
+[node name="Add_25_6_84" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="64" unique_id=1060928280 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.704967, 0.998, 33.763016)
+collision_layer = 17
+
+[node name="Add_25_6_79" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="65" unique_id=1888479625 instance=ExtResource("10_bdysu")]
+transform = Transform3D(0.010006223, 0, -0.99994993, 0, 1, 0, 0.99994993, 0, 0.010006223, -25.492495, 0.998, 30.013206)
+collision_layer = 17
+
+[node name="Add_25_6_82" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="66" unique_id=698574846 instance=ExtResource("10_bdysu")]
+transform = Transform3D(0.010006223, 0, -0.99994993, 0, 1, 0, 0.99994993, 0, 0.010006223, -25.492495, 0.998, 28.513206)
+collision_layer = 17
+
+[node name="Add_25_6_87" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="67" unique_id=1144742863 instance=ExtResource("10_bdysu")]
+transform = Transform3D(0.010006223, 0, -0.99994993, 0, 1, 0, 0.99994993, 0, 0.010006223, -25.492495, 0.998, 24.013206)
+collision_layer = 17
+
+[node name="Add_25_6_88" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="68" unique_id=1534367917 instance=ExtResource("10_bdysu")]
+transform = Transform3D(0.010006223, 0, -0.99994993, 0, 1, 0, 0.99994993, 0, 0.010006223, -25.492495, 0.998, 22.513206)
+collision_layer = 17
+
+[node name="Add_25_6_89" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="69" unique_id=252420649 instance=ExtResource("10_bdysu")]
+transform = Transform3D(0.010006223, 0, -0.99994993, 0, 1, 0, 0.99994993, 0, 0.010006223, -25.492495, 0.998, 21.013206)
+collision_layer = 17
+
+[node name="Add_25_6_80" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="70" unique_id=1023358347 instance=ExtResource("10_bdysu")]
+transform = Transform3D(0.010006223, 0, -0.99994993, 0, 1, 0, 0.99994993, 0, 0.010006223, -25.477484, 0.998, 31.51313)
+collision_layer = 17
+
+[node name="Add_25_6_81" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="71" unique_id=1414890277 instance=ExtResource("10_bdysu")]
+transform = Transform3D(0.010006223, 0, -0.99994993, 0, 1, 0, 0.99994993, 0, 0.010006223, -25.462473, 0.998, 33.013054)
+collision_layer = 17
+
+[node name="Add_25_6_67" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="72" unique_id=218418779 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.750001, 0.998, 33.749996)
+collision_layer = 17
+
+[node name="Add_25_6_68" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="73" unique_id=1724258166 instance=ExtResource("10_bdysu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.250001, 0.998, 33.749996)
+collision_layer = 17
+
+[node name="Add_25_6_28" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="74" unique_id=573808199 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 19.5)
+collision_layer = 17
+
+[node name="Add_25_6_29" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="75" unique_id=215691024 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 21)
+collision_layer = 17
+
+[node name="Add_25_6_30" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="76" unique_id=1909018294 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 22.5)
+collision_layer = 17
+
+[node name="Add_25_6_31" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="77" unique_id=605057913 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 24)
+collision_layer = 17
+
+[node name="Add_25_6_32" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="78" unique_id=1034341261 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 24)
+collision_layer = 17
+
+[node name="Add_25_6_33" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="79" unique_id=74398047 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 30)
+collision_layer = 17
+
+[node name="Add_25_6_41" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="80" unique_id=961072262 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 28.5)
+collision_layer = 17
+
+[node name="Add_25_6_34" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="81" unique_id=727486947 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 31.5)
+collision_layer = 17
+
+[node name="Add_25_6_35" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="82" unique_id=579216299 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.000001, 0.998, 32.999996)
+collision_layer = 17
+
+[node name="Add_25_6_36" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="83" unique_id=166252492 instance=ExtResource("10_bdysu")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12.750001, 0.998, 33.749996)
+collision_layer = 17
+
+[node name="WaypointPath" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="84" unique_id=837420115]
+
+[node name="Waypoint" type="Marker3D" parent="SubViewportContainer/SubViewport/WaypointPath" index="0" unique_id=343829572]
+transform = Transform3D(0.021979421, 0, -0.9997584, 0, 1, 0, 0.9997584, 0, 0.021979421, -11.089182, 1.0026433, 25.996511)
+
+[node name="Waypoint2" type="Marker3D" parent="SubViewportContainer/SubViewport/WaypointPath" index="1" unique_id=1251468169]
+transform = Transform3D(0.9997584, 0, 0.021979464, 0, 1, 0, -0.021979464, 0, 0.9997584, -10.433081, 0.838675, 17.817146)
+
+[node name="Waypoint3" type="Marker3D" parent="SubViewportContainer/SubViewport/WaypointPath" index="2" unique_id=149810199]
+transform = Transform3D(0.9997585, 0, 0.021979481, 0, 1, 0, -0.021979481, 0, 0.9997585, -19.751707, 0.838675, 17.812876)
+
+[node name="Waypoint4" type="Marker3D" parent="SubViewportContainer/SubViewport/WaypointPath" index="3" unique_id=217006758]
+transform = Transform3D(0.9997584, 0, 0.021979464, 0, 1, 0, -0.021979464, 0, 0.9997584, -26.633389, 0.838675, 17.817146)
+
+[node name="Waypoint5" type="Marker3D" parent="SubViewportContainer/SubViewport/WaypointPath" index="4" unique_id=48060862]
+transform = Transform3D(-0.02197951, 0, 0.9997584, 0, 1, 0, -0.9997584, 0, -0.02197951, -25.98728, 0.838675, 26.18023)
+
+[node name="Waypoint6" type="Marker3D" parent="SubViewportContainer/SubViewport/WaypointPath" index="5" unique_id=757152070]
+transform = Transform3D(-0.02197951, 0, 0.9997584, 0, 1, 0, -0.9997584, 0, -0.02197951, -26.109175, 0.838675, 34.422245)
+
+[node name="Waypoint7" type="Marker3D" parent="SubViewportContainer/SubViewport/WaypointPath" index="6" unique_id=74459666]
+transform = Transform3D(-0.9997584, 0, -0.021979554, 0, 1, 0, 0.021979554, 0, -0.9997584, -19.689478, 0.838675, 34.28111)
+
+[node name="Waypoint8" type="Marker3D" parent="SubViewportContainer/SubViewport/WaypointPath" index="7" unique_id=376003903]
+transform = Transform3D(-0.9997584, 0, -0.021979554, 0, 1, 0, 0.021979554, 0, -0.9997584, -9.951495, 0.838675, 34.06702)
+
+[node name="Wall150x240Glass57" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="85" unique_id=560381935 instance=ExtResource("7_bc7iv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -26.25, 0.998, 35.25)
+collision_layer = 17
+
+[node name="PortalSpawns" type="Marker3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="86" unique_id=1496032339]
+unique_name_in_owner = true
+transform = Transform3D(0.99999225, 0, -0.003939375, 0, 1, 0, 0.003939375, 0, 0.99999225, 0, 1.0286875, 0)
+
+[node name="Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport/PortalSpawns" index="0" unique_id=1946038788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.013037, 0, 31.974289)
+
+[node name="Marker3D2" type="Marker3D" parent="SubViewportContainer/SubViewport/PortalSpawns" index="1" unique_id=830438346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.78611, 0, 29.173985)
+
+[node name="Marker3D3" type="Marker3D" parent="SubViewportContainer/SubViewport/PortalSpawns" index="2" unique_id=1118541780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.850922, 0, 20.593603)
+
+[node name="Marker3D4" type="Marker3D" parent="SubViewportContainer/SubViewport/PortalSpawns" index="3" unique_id=1014993579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.773233, 0, 32.593765)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="87" unique_id=1045057467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.0003613, 25.315857)
+
+[node name="Switch" type="Node" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="88" unique_id=345845721]
+script = ExtResource("8_s8u2h")
+
+[node name="npc_grunt3" parent="." index="4" unique_id=145858847 instance=ExtResource("12_ctv0o")]
+transform = Transform3D(0.9994248, 0, 0.033913992, 0, 1, 0, -0.033913992, 0, 0.9994248, -11.12096, 1.0610008, 23.878374)
+patrol_waypoint_root = NodePath("../SubViewportContainer/SubViewport/WaypointPath")
+max_health = 20
+health = 20

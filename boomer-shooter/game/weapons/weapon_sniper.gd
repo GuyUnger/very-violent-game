@@ -20,6 +20,7 @@ func shoot() -> void:
 		projectile.position = player.cam.global_position
 		projectile.speed = 200.0
 		projectile.damage = 100
+		projectile.penetration_power = penetration_power
 		Main.instance.add_child(projectile)
 		#projectile.collision_mask = 1 + 4
 	else:
@@ -30,6 +31,7 @@ func shoot() -> void:
 		projectile.position = global_position + Vector3.UP * 0.1
 		projectile.speed = 200.0
 		projectile.damage = 5
+		projectile.penetration_power = penetration_power
 	
 		Main.instance.add_child(projectile)
 
