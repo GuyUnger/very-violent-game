@@ -90,8 +90,8 @@ func shoot() -> void:
 	reload_t = fire_rate
 	if has_node("Animations"):
 		$Animations.shoot()
-	if has_node("Muzzleflash"):
-		$Muzzleflash.shoot()
+	#if has_node("Muzzleflash"):
+	#	$Muzzleflash.shoot()
 	
 	var r = Vector3(
 		randf_range(-total_recoil, total_recoil), 
@@ -110,11 +110,11 @@ func shoot() -> void:
 		Main.instance.add_child(projectile)
 		#projectile.collision_mask = 1 + 4
 	else:
-		var projectile := preload("res://game/projectiles/bullet_enemy.tscn").instantiate()
+		var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
 		projectile.enemy = enemy
 		projectile.damage *= damage_scale
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
-		#projectile.collision_mask = 1 + 2
+		projectile.collision_mask = 1 + 2
 		projectile.position = global_position + Vector3.UP * 0.1
 	
 		Main.instance.add_child(projectile)

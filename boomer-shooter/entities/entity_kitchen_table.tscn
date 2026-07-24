@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b36gupgjpw8ma"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://entities/entity_bath_tub.tscn" id="1_4h8kc"]
+[ext_resource type="ArrayMesh" uid="uid://rqxdn53wfx40" path="res://models/home/Simple Table Outside - Small.obj" id="2_4h8kc"]
+[ext_resource type="ArrayMesh" uid="uid://55wyj4viuf4v" path="res://models/home/Simple Table Outside - Acc.obj" id="3_2sjqh"]
+[ext_resource type="AudioStream" uid="uid://hwlt383howk" path="res://content/sfx/wood_break.wav" id="3_56qlc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umx4j"]
+size = Vector3(0.81, 0.932, 0.71)
+
+[node name="EntityKitchenSink" unique_id=58870841 instance=ExtResource("1_4h8kc")]
+can_run_through = true
+
+[node name="MeshInstance3D2" parent="." index="0" unique_id=1141119635]
+mesh = ExtResource("2_4h8kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D2" index="0" unique_id=2030445845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89973545, 0)
+mesh = ExtResource("3_2sjqh")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47564375, 0)
+shape = SubResource("BoxShape3D_umx4j")
+
+[node name="HitSound" parent="." index="2" unique_id=1507396186]
+stream = ExtResource("3_56qlc")

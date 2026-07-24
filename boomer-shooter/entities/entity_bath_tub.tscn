@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://xybty0fcyef3"]
+
+[ext_resource type="Script" uid="uid://dpwd40s6vjxx3" path="res://entities/prop.gd" id="1_6vt2u"]
+[ext_resource type="ArrayMesh" uid="uid://dkht66gtjrlkr" path="res://models/home/Bathtub.obj" id="1_i5hb6"]
+[ext_resource type="AudioStream" uid="uid://75mkxcnngcqb" path="res://content/sfx/bullet_hit_metal.wav" id="3_sbqos"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tklcm"]
+size = Vector3(0.965, 0.605, 2.01)
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=58870841]
+script = ExtResource("1_6vt2u")
+max_hp = 99999
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1141119635]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("1_i5hb6")
+skeleton = NodePath("../WeaponSpawn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299008, 0)
+shape = SubResource("BoxShape3D_tklcm")
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="." unique_id=1507396186]
+stream = ExtResource("3_sbqos")

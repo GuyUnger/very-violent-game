@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bvqsismaweb22"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://entities/entity_bath_tub.tscn" id="1_1ulb4"]
+[ext_resource type="ArrayMesh" uid="uid://c8ls7cxmdlwp3" path="res://models/home/Switch.obj" id="2_1ulb4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umx4j"]
+size = Vector3(0.16890869, 0.2694404, 0.039326172)
+
+[node name="EntityEleveatorButton" unique_id=58870841 instance=ExtResource("1_1ulb4")]
+
+[node name="MeshInstance3D2" parent="." index="0" unique_id=1141119635]
+mesh = ExtResource("2_1ulb4")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003478974, 0.0004428625, -0.011362305)
+shape = SubResource("BoxShape3D_umx4j")

@@ -7,6 +7,12 @@ signal told_enemy_position
 signal spotted_enemy
 
 @export var target_lock_time := 0.3
+@export var heard_enemy_attack_time := 1.2
+@export var attack_shot_delay_range := Vector2(0.4, 0.9)
+@export var surprised_time := 1.0
+@export_range(0.0, 2.0, 0.01) var attack_vertical_spread := 0.35
+@export var auto_burst_shot_range := Vector2i(3, 6)
+@export var ignore_player_hearing := false
 @export var moving_to:Node3D
 @export var looking_at:Vector3
 @export var target:Node3D : 
@@ -60,8 +66,11 @@ func knock_back(force:Vector3) -> void:
 
 func is_node_visible(node) -> bool:
 	var query = PhysicsRayQueryParameters3D.new()
+	var target_position = node.global_position + Vector3.UP * 1.0
+	if node is Character:
+		target_position = node.center_pos
 	query.from = %Vision.global_position
-	query.to = node.global_position + Vector3.UP * 1.
+	query.to = target_position
 	query.collide_with_bodies = true
 	query.collision_mask = 1 + 2 + 8
 	
@@ -73,11 +82,31 @@ func is_node_visible(node) -> bool:
 
 
 func _heard(sound_position:Vector3) -> void:
+	if ignore_player_hearing:
+		return
 	heard.emit(sound_position)
 
 
 func _told_enemy_position(enemy) -> void:
 	told_enemy_position.emit(enemy)
+
+
+func roll_attack_shot_delay() -> float:
+	var delay_min := minf(attack_shot_delay_range.x, attack_shot_delay_range.y)
+	var delay_max := maxf(attack_shot_delay_range.x, attack_shot_delay_range.y)
+	if is_equal_approx(delay_min, delay_max):
+		return delay_min
+	return randf_range(delay_min, delay_max)
+
+
+func roll_auto_burst_shot_count() -> int:
+	var shot_min := mini(auto_burst_shot_range.x, auto_burst_shot_range.y)
+	var shot_max := maxi(auto_burst_shot_range.x, auto_burst_shot_range.y)
+	if shot_max <= 0:
+		return 1
+	if shot_min == shot_max:
+		return maxi(shot_min, 1)
+	return randi_range(maxi(shot_min, 1), shot_max)
 
 
 func melee() -> void:
@@ -158,6 +187,7 @@ class State extends Node:
 		if weapon:
 			weapon.enemy = get_parent()
 			weapon.hide_glow()
+		_set_emote_visibility(false, false)
 		get_parent().died.connect(_died)
 	
 	func move_to(state:State) -> void:
@@ -178,7 +208,19 @@ class State extends Node:
 		queue_free()
 		
 	func _exit_tree() -> void:
+		_set_emote_visibility(false, false)
 		get_parent().died.disconnect(_died)
+
+	func _set_emote_visibility(show_startled: bool, show_attacking: bool) -> void:
+		var startled = get_parent().get_node_or_null("Startled")
+		if startled == null:
+			startled = get_parent().get_node_or_null("Spotted")
+		if startled:
+			startled.visible = show_startled
+
+		var attacking = get_parent().get_node_or_null("Attacking")
+		if attacking:
+			attacking.visible = show_attacking
 
 
 class StateIdle extends State:
@@ -195,7 +237,10 @@ class StateIdle extends State:
 		get_parent().poll_vision()
 	
 	func _heard(position:Vector3) -> void:
-		get_parent().looking_at = position
+		var next_state = StateSurprised.new()
+		next_state.heard_position = position
+		next_state.react_to_heard = true
+		move_to(next_state)
 		
 	func _told_enemy_position(enemy) -> void:
 		var next_state = StateWasToldEnemyPosition.new()
@@ -203,8 +248,9 @@ class StateIdle extends State:
 		move_to(next_state)
 
 	func _spotted_enemy(enemy) -> void:
-		var next_state = StateSpottedEnemy.new()
+		var next_state = StateSurprised.new()
 		next_state.enemy = enemy
+		next_state.react_to_heard = false
 		move_to(next_state)
 
 	func _exit_tree() -> void:
@@ -219,6 +265,7 @@ class StateSpottedEnemy extends State:
 
 	func _ready() -> void:
 		super()
+		_set_emote_visibility(false, true)
 		
 		get_parent().target = enemy
 
@@ -246,11 +293,67 @@ class StateSpottedEnemy extends State:
 		super()
 	
 
+class StateSurprised extends State:
+	var enemy: Node3D
+	var heard_position := Vector3.ZERO
+	var react_to_heard := false
+	var surprise_time_left := 0.0
+	var weapon
+
+	func _ready() -> void:
+		super()
+		_set_emote_visibility(true, false)
+
+		weapon = get_parent().get_node_or_null("%Weapon")
+		surprise_time_left = get_parent().surprised_time
+		get_parent().moving_to = null
+		get_parent().speed_scale = 0.0
+		if enemy:
+			get_parent().target = enemy
+		else:
+			get_parent().target = null
+			get_parent().looking_at = heard_position
+
+		var animation_tree = get_parent().get("animation_tree")
+		if animation_tree:
+			animation_tree.set("parameters/Holding/transition_request", "Pistol")
+
+	func _physics_process(delta: float) -> void:
+		surprise_time_left -= delta
+		get_parent().speed_scale = 0.0
+		if is_instance_valid(weapon):
+			weapon.trigger_pressed = false
+
+		if enemy:
+			if not is_instance_valid(enemy) or enemy.health <= 0:
+				move_to(StateIdle.new())
+				return
+			if is_instance_valid(weapon):
+				weapon.look_at(enemy.global_position, Vector3.UP, true)
+		else:
+			get_parent().looking_at = heard_position
+			if is_instance_valid(weapon):
+				weapon.look_at(heard_position, Vector3.UP, true)
+
+		if surprise_time_left > 0.0:
+			return
+
+		if react_to_heard:
+			var next_heard := StateHeardEnemy.new()
+			next_heard.heard_position = heard_position
+			move_to(next_heard)
+		else:
+			var next_attacking := StateAttacking.new()
+			next_attacking.enemy = enemy
+			move_to(next_attacking)
+
+
 class StateWasToldEnemyPosition extends State:
 	var enemy:Node3D
 
 	func _ready() -> void:
 		super()
+		_set_emote_visibility(false, true)
 		
 		get_parent().target = enemy
 
@@ -270,13 +373,114 @@ class StateWasToldEnemyPosition extends State:
 			weapon.look_at(enemy.global_position, Vector3.UP, true)
 
 
-class StateAttacking extends State:
-	var enemy:Node3D
+class StateHeardEnemy extends State:
+	var heard_position := Vector3.ZERO
+	var attack_time_left := 0.0
 	var target_lock := 0.0
+	var shot_delay_left := 0.0
+	var waiting_for_shot := false
+	var burst_shots_left := 0
 	var weapon
 
 	func _ready() -> void:
 		super()
+		_set_emote_visibility(false, true)
+
+		weapon = get_parent().get_node_or_null("%Weapon")
+		if not weapon:
+			queue_free()
+			return
+
+		attack_time_left = get_parent().heard_enemy_attack_time
+		target_lock = get_parent().target_lock_time
+		shot_delay_left = 0.0
+		waiting_for_shot = false
+		burst_shots_left = _roll_burst_shots()
+		get_parent().target = null
+		get_parent().moving_to = null
+		get_parent().looking_at = heard_position
+		get_parent().spotted_enemy.connect(_spotted_enemy)
+		get_parent().told_enemy_position.connect(_told_enemy_position)
+
+	func _physics_process(delta: float) -> void:
+		attack_time_left -= delta
+		target_lock = max(0.0, target_lock - delta)
+		shot_delay_left = max(shot_delay_left - delta, 0.0)
+
+		if attack_time_left <= 0.0:
+			weapon.trigger_pressed = false
+			move_to(StateIdle.new())
+			return
+
+		weapon.look_at(heard_position, Vector3.UP, true)
+		get_parent().speed_scale = 0.0
+		get_parent().looking_at = heard_position
+
+		var tl := minf(target_lock, 1.0)
+		var miss := Vector3(
+			tl * sign(randf_range(-0.5, 0.5)),
+			randf_range(-get_parent().attack_vertical_spread, get_parent().attack_vertical_spread),
+			tl * sign(randf_range(-0.5, 0.5)))
+		var aim_dir = weapon.global_position.direction_to(heard_position + Vector3.UP + miss)
+
+		weapon.aim_dir = aim_dir
+		if waiting_for_shot:
+			weapon.trigger_pressed = true
+			if weapon.reload_t > 0.0:
+				_on_shot_fired()
+		elif shot_delay_left <= 0.0 and weapon.reload_t <= 0.0:
+			waiting_for_shot = true
+			weapon.trigger_pressed = true
+		else:
+			weapon.trigger_pressed = false
+		weapon.ammo = weapon.max_ammo
+
+	func _on_shot_fired() -> void:
+		waiting_for_shot = false
+		if weapon and weapon.auto:
+			burst_shots_left -= 1
+			if burst_shots_left > 0:
+				shot_delay_left = 0.0
+			else:
+				shot_delay_left = get_parent().roll_attack_shot_delay()
+				burst_shots_left = _roll_burst_shots()
+		else:
+			shot_delay_left = get_parent().roll_attack_shot_delay()
+
+	func _roll_burst_shots() -> int:
+		if weapon and weapon.auto:
+			return get_parent().roll_auto_burst_shot_count()
+		return 1
+
+	func _spotted_enemy(enemy) -> void:
+		var next_state = StateAttacking.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+	func _told_enemy_position(enemy) -> void:
+		var next_state = StateWasToldEnemyPosition.new()
+		next_state.enemy = enemy
+		move_to(next_state)
+
+	func _exit_tree() -> void:
+		super()
+		if is_instance_valid(weapon):
+			weapon.trigger_pressed = false
+		get_parent().spotted_enemy.disconnect(_spotted_enemy)
+		get_parent().told_enemy_position.disconnect(_told_enemy_position)
+
+
+class StateAttacking extends State:
+	var enemy:Node3D
+	var target_lock := 0.0
+	var shot_delay_left := 0.0
+	var waiting_for_shot := false
+	var burst_shots_left := 0
+	var weapon
+
+	func _ready() -> void:
+		super()
+		_set_emote_visibility(false, true)
 		
 		weapon = get_parent().get_node_or_null("%Weapon")
 		if not weapon:
@@ -288,6 +492,9 @@ class StateAttacking extends State:
 			return
 		
 		target_lock = get_parent().target_lock_time
+		shot_delay_left = 0.0
+		waiting_for_shot = false
+		burst_shots_left = _roll_burst_shots()
 		var animation_tree = get_parent().get("animation_tree")
 		if animation_tree:
 			animation_tree.set("parameters/Holding/transition_request", "Pistol")
@@ -300,6 +507,7 @@ class StateAttacking extends State:
 		
 	func _physics_process(delta: float) -> void:
 		target_lock = max(0, target_lock - delta)
+		shot_delay_left = max(shot_delay_left - delta, 0.0)
 
 		weapon.look_at(enemy.global_position, Vector3.UP, true)
 		
@@ -320,16 +528,44 @@ class StateAttacking extends State:
 		if ds < 1.0:
 			get_parent().speed_scale = 0.0
 		
+		
+		var tl := target_lock
+		tl = min(tl, 1.0)
 		var miss := Vector3(
-			target_lock * sign(randf_range(-0.5, 0.5)),
-			target_lock * sign(randf_range(-0.5, 0.5)),
-			target_lock * sign(randf_range(-0.5, 0.5)))
+			tl * sign(randf_range(-0.5, 0.5)),
+			randf_range(-get_parent().attack_vertical_spread, get_parent().attack_vertical_spread),
+			tl * sign(randf_range(-0.5, 0.5)))
 		
 		var aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP + miss)
 		
 		weapon.aim_dir = aim_dir
-		weapon.trigger_pressed = true
+		if waiting_for_shot:
+			weapon.trigger_pressed = true
+			if weapon.reload_t > 0.0:
+				_on_shot_fired()
+		elif shot_delay_left <= 0.0 and weapon.reload_t <= 0.0:
+			waiting_for_shot = true
+			weapon.trigger_pressed = true
+		else:
+			weapon.trigger_pressed = false
 		weapon.ammo = weapon.max_ammo
+
+	func _on_shot_fired() -> void:
+		waiting_for_shot = false
+		if weapon and weapon.auto:
+			burst_shots_left -= 1
+			if burst_shots_left > 0:
+				shot_delay_left = 0.0
+			else:
+				shot_delay_left = get_parent().roll_attack_shot_delay()
+				burst_shots_left = _roll_burst_shots()
+		else:
+			shot_delay_left = get_parent().roll_attack_shot_delay()
+
+	func _roll_burst_shots() -> int:
+		if weapon and weapon.auto:
+			return get_parent().roll_auto_burst_shot_count()
+		return 1
 		
 		
 	func _exit_tree() -> void:

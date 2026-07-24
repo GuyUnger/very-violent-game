@@ -3,12 +3,17 @@ extends Character
 
 signal jumped
 
-const MOVE_SPEED = 12.0
+const WALK_SPEED = 4.0
+const SPRINT_SPEED = 12.0
+const CROUCH_SPEED = 0.35
 const MOVE_ACCEL = 6.0
 const MOVE_DECEL = 13.0
 const AIR_ACCEL = 5.0
 const AIR_DECEL = 1.0
 const JUMP_STRENGTH = 12.0
+const STAND_CAMERA_HEIGHT = 1.5
+const CROUCH_CAMERA_HEIGHT = 0.4
+const CROUCH_HEIGHT_RATIO = 0.22
 
 
 # References
@@ -19,6 +24,7 @@ const JUMP_STRENGTH = 12.0
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
 @onready var fps_weapon: Node3D = %FpsWeapon
+@onready var body_collision_shape: CollisionShape3D = $CollisionShape3D
 
 var source_id := 0
 
@@ -71,12 +77,25 @@ var last_transform := Transform3D()
 var invincible_t: float = 0.0
 
 var last_hit_enemy
+var crouching := false
+var standing_collision_height := 0.0
+var standing_collision_position_y := 0.0
+var crouching_collision_height := 0.0
+var crouching_collision_position_y := 0.0
 
 #region Initialization
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	source_id = EventStore.next_source_id()
 	%EnemyFocus.material.set_shader_parameter("time", -0.05)
+	if body_collision_shape.shape is CapsuleShape3D:
+		body_collision_shape.shape = body_collision_shape.shape.duplicate()
+		var capsule := body_collision_shape.shape as CapsuleShape3D
+		standing_collision_height = capsule.height
+		standing_collision_position_y = body_collision_shape.position.y
+		crouching_collision_height = standing_collision_height * CROUCH_HEIGHT_RATIO
+		crouching_collision_position_y = standing_collision_position_y - (standing_collision_height - crouching_collision_height) * 0.5
 	
 	EventStore.push_event(
 		EventStoreCommandAddChild.new(
@@ -147,7 +166,7 @@ func _process(delta: float) -> void:
 	
 	if first_person:
 		cam_distance_to = 0.0
-		cam_up = 1.5
+		cam_up = CROUCH_CAMERA_HEIGHT if crouching else STAND_CAMERA_HEIGHT
 	
 	var view_up_close_in: float = clampf(-look_angle.y + 1.3, 0.0, 1.0)
 	view_up_close_in = ease(view_up_close_in, -2.0)
@@ -297,8 +316,16 @@ func _process_movement(delta:float) -> void:
 		rotate_towards_view_direction()
 	else:
 		rotate_towards_view_direction(delta * 2.0)
+
+	_update_crouch_state(delta)
 	
 	# Movement
+	var move_speed := WALK_SPEED
+	if crouching:
+		move_speed = CROUCH_SPEED
+	elif Input.is_action_pressed("sprint"):
+		move_speed = SPRINT_SPEED
+	
 	var accel: float
 	if input_direction == Vector2.ZERO:
 		# Decelerate
@@ -306,7 +333,7 @@ func _process_movement(delta:float) -> void:
 	else:
 		# Accelerate
 		accel = MOVE_ACCEL if is_on_floor() else AIR_ACCEL
-	vel_hor_to(input_direction * MOVE_SPEED, accel * delta)
+	vel_hor_to(input_direction * move_speed, accel * delta)
 	
 	# Gravity
 	var gravity_scale: float = 1.0
@@ -338,7 +365,7 @@ func _process_movement(delta:float) -> void:
 	apply_move_and_slide()
 	
 	if is_on_floor():
-		walk_cycle += delta * vel_hor.length() / MOVE_SPEED * 5.0
+		walk_cycle += delta * vel_hor.length() / maxf(move_speed, 0.001) * 5.0
 		
 		if walk_cycle > walk_cycle_next_step:
 			walk_cycle_next_step += 1
@@ -360,16 +387,20 @@ func _on_step(left: bool) -> void:
 
 func apply_move_and_slide() -> void:
 	move_and_slide()
-	var collision: KinematicCollision3D = get_last_slide_collision()
-	if collision:
-		for i in collision.get_collision_count():
-			var normal: Vector3 = collision.get_normal(i)
-			if melee_reload_t > 0.7 and allow_walljump and absf(normal.y) < 0.1:
-				#velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * MOVE_SPEED * 2.0
-				velocity = normal * MOVE_SPEED * 2.0
-				allow_walljump = false
-				velocity.y = JUMP_STRENGTH * 1.5
-				%AudioWallbounce.play()
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		if not collision:
+			continue
+
+		var normal: Vector3 = collision.get_normal()
+		if melee_reload_t > 0.7 and allow_walljump and absf(normal.y) < 0.1:
+			#velocity = (velocity_prev.bounce(normal) * Vector3(1.0, 0.0, 1.0)).normalized() * SPRINT_SPEED * 2.0
+			velocity = normal * SPRINT_SPEED * 2.0
+			allow_walljump = false
+			velocity.y = JUMP_STRENGTH * 1.5
+			%AudioWallbounce.play()
+
+		_try_break_wall_from_sprint(collision)
 
 
 func vel_hor_to(to:Vector2, t:float = 1.0) -> void:
@@ -393,18 +424,77 @@ func jump() -> void:
 		cam.shake_land(0.4, 0.5)
 
 
+func _try_break_wall_from_sprint(collision: KinematicCollision3D) -> void:
+	if not Input.is_action_pressed("sprint"):
+		return
+
+	var collider := collision.get_collider()
+	if not ((collider is Wall) or (collider is Prop)):
+		return
+
+	var impact_direction := Vector3(velocity_prev.x, 0.0, velocity_prev.z)
+	if impact_direction.length_squared() < 0.01 and input_direction != Vector2.ZERO:
+		impact_direction = (-basis.x * input_direction.y + basis.z * input_direction.x)
+		impact_direction.y = 0.0
+	if impact_direction.length_squared() < 0.01:
+		impact_direction = -cam.global_basis.z
+		impact_direction.y = 0.0
+	impact_direction = impact_direction.normalized()
+
+	var impact_normal := collision.get_normal()
+	if impact_normal.dot(impact_direction) > -0.5:
+		return
+
+	if collider.try_break_from_sprint_impact():
+		cam.shake_shock(0.25, 0.8)
+
+
 func rotate_towards_view_direction(t: float = 1.0) -> void:
 	rotation.y = lerp_angle(rotation.y, -look_angle.x,  t)
 
 
+func _update_crouch_state(delta: float) -> void:
+	var wants_to_crouch := Input.is_action_pressed("crouch")
+	if wants_to_crouch:
+		crouching = true
+	elif _can_stand_up():
+		crouching = false
+
+	if body_collision_shape.shape is CapsuleShape3D:
+		var capsule := body_collision_shape.shape as CapsuleShape3D
+		var target_height := crouching_collision_height if crouching else standing_collision_height
+		var target_position_y := crouching_collision_position_y if crouching else standing_collision_position_y
+		capsule.height = lerp(capsule.height, target_height, delta * 16.0)
+		body_collision_shape.position.y = lerp(body_collision_shape.position.y, target_position_y, delta * 16.0)
+
+
+func _can_stand_up() -> bool:
+	if not crouching:
+		return true
+	return not test_move(global_transform, Vector3.UP * 0.6)
+
+
+func get_center_pos() -> Vector3:
+	if body_collision_shape and body_collision_shape.shape is CapsuleShape3D:
+		var capsule := body_collision_shape.shape as CapsuleShape3D
+		return global_position + Vector3.UP * (body_collision_shape.position.y + capsule.height * 0.5)
+	return super.get_center_pos()
+
+
 func process_jump_vel_boost() -> void:
+	var move_speed := WALK_SPEED
+	if crouching:
+		move_speed = CROUCH_SPEED
+	elif Input.is_action_pressed("sprint"):
+		move_speed = SPRINT_SPEED
+
 	if (	allow_jump_vel_boost
 			and not is_on_floor()
 			and is_jump_just_pressed()
 			and input_direction != Vector2.ZERO
-			and vel_hor.length() > MOVE_SPEED * 0.2):
+			and vel_hor.length() > move_speed * 0.2):
 		allow_jump_vel_boost = false
-		vel_hor_to(input_direction * MOVE_SPEED, 0.5)
+		vel_hor_to(input_direction * move_speed, 0.5)
 
 #endregion
 
@@ -605,7 +695,9 @@ func die() -> void:
 	await get_tree().create_timer(1.0).timeout
 	await Transition.close(Color.RED)
 	
-	EventStore.reset()
+	# Restart without replaying the dead player's recorded run as a ghost.
+	EventStore.clear()
+	get_tree().reload_current_scene()
 	Transition.open()
 
 

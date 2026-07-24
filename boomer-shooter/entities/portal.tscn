@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dhenrkglup4oj"]
+
+[ext_resource type="Script" uid="uid://chanbmddvdcdy" path="res://entities/portal.gd" id="1_g0q8t"]
+[ext_resource type="PackedScene" uid="uid://dlicy8u6yn8a3" path="res://stages/level_apartment.tscn" id="2_eay2k"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_tklcm"]
+orientation = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p4jbi"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_p4jbi"]
+
+[node name="Portal" type="Area3D" unique_id=122166312]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_g0q8t")
+portal_to = ExtResource("2_eay2k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1853465206]
+mesh = SubResource("QuadMesh_tklcm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2076459250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99409103, 0)
+mesh = SubResource("CylinderMesh_p4jbi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1207290015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9927926, 0)
+shape = SubResource("CylinderShape3D_p4jbi")

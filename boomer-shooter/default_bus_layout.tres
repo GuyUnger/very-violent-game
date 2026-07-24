@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://rlaf2xxjlhob"]
+[gd_resource type="AudioBusLayout" format=3 uid="uid://rlaf2xxjlhob"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
 resource_name = "Reverb"
@@ -13,7 +13,6 @@ resource_name = "Compressor"
 mix = 0.75
 
 [resource]
-bus/0/volume_db = -3.99224
 bus/1/name = &"SFX"
 bus/1/solo = false
 bus/1/mute = false

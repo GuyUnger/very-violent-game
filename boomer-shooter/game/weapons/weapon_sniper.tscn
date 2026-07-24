@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cg5fupmfgsdtj"]
+[gd_scene format=3 uid="uid://cg5fupmfgsdtj"]
 
 [ext_resource type="Script" uid="uid://coaxw8ju8bkhn" path="res://game/weapons/weapon_sniper.gd" id="1_24slo"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_qrhx1"]
@@ -30,7 +30,7 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_24slo"]
 size = Vector3(0.005, 0.005, 100)
 
-[node name="Weapon" type="CharacterBody3D"]
+[node name="Weapon" type="CharacterBody3D" unique_id=1245577776]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_24slo")
@@ -38,76 +38,78 @@ fire_rate = 1.0
 auto = true
 ammo = 10
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=129808597]
 shape = SubResource("SphereShape3D_7w4b6")
 
-[node name="AudioShoot" type="AudioStreamPlayer" parent="."]
+[node name="AudioShoot" type="AudioStreamPlayer" parent="." unique_id=1925378542]
 unique_name_in_owner = true
 stream = ExtResource("2_qrhx1")
 bus = &"SFX"
 
-[node name="WorldModel" type="Node3D" parent="."]
+[node name="WorldModel" type="Node3D" parent="." unique_id=1394172959]
 
-[node name="RightHand" type="Marker3D" parent="WorldModel"]
+[node name="RightHand" type="Marker3D" parent="WorldModel" unique_id=458541275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
 
-[node name="LeftHand" type="Marker3D" parent="WorldModel"]
+[node name="LeftHand" type="Marker3D" parent="WorldModel" unique_id=1465334502]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel" unique_id=454890791]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.000823617, 0.0554796)
 material_override = SubResource("StandardMaterial3D_6ml3f")
 mesh = SubResource("CylinderMesh_ls1xp")
 skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel" unique_id=1484031903]
 transform = Transform3D(1, 0, 0, 0, 0.990105, -0.140331, 0, 0.140331, 0.990105, 0, -0.0524004, -0.0874176)
 material_override = SubResource("StandardMaterial3D_on6gv")
 mesh = SubResource("BoxMesh_3pcvd")
 
-[node name="weapon_smg" parent="WorldModel" instance=ExtResource("3_brtfp")]
+[node name="weapon_smg" parent="WorldModel" unique_id=245913910 instance=ExtResource("3_brtfp")]
 
-[node name="WorldModel2" type="Node3D" parent="."]
+[node name="WorldModel2" type="Node3D" parent="." unique_id=97336326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.193329)
 
-[node name="RightHand" type="Marker3D" parent="WorldModel2"]
+[node name="RightHand" type="Marker3D" parent="WorldModel2" unique_id=1862171959]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
 
-[node name="LeftHand" type="Marker3D" parent="WorldModel2"]
+[node name="LeftHand" type="Marker3D" parent="WorldModel2" unique_id=1473974575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel2"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel2" unique_id=1237766323]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.000823617, 0.0554796)
 material_override = SubResource("StandardMaterial3D_6ml3f")
 mesh = SubResource("CylinderMesh_ls1xp")
 skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel2" unique_id=761774502]
 transform = Transform3D(1, 0, 0, 0, 0.990105, -0.140331, 0, 0.140331, 0.990105, 0, -0.0524004, -0.0874176)
 material_override = SubResource("StandardMaterial3D_on6gv")
 mesh = SubResource("BoxMesh_3pcvd")
 
-[node name="weapon_smg" parent="WorldModel2" instance=ExtResource("3_brtfp")]
+[node name="weapon_smg" parent="WorldModel2" unique_id=1140462175 instance=ExtResource("3_brtfp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00497741)
 
-[node name="RedDotContainer" type="Node3D" parent="."]
+[node name="RedDotContainer" type="Node3D" parent="." unique_id=1582406282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00477135, 0.065252, 0.32991)
+visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RedDotContainer"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RedDotContainer" unique_id=1550861870]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+visible = false
 material_override = SubResource("StandardMaterial3D_24slo")
 mesh = SubResource("BoxMesh_24slo")
 skeleton = NodePath("../..")
 
-[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="." unique_id=2014362269]
 unique_name_in_owner = true
 top_level = true
 stream = ExtResource("4_qrhx1")
 volume_db = -6.0
 bus = &"SFX"
 
-[node name="AudioPickup" type="AudioStreamPlayer" parent="."]
+[node name="AudioPickup" type="AudioStreamPlayer" parent="." unique_id=1295694640]
 unique_name_in_owner = true
 
-[node name="PickupGlow" parent="." instance=ExtResource("5_brtfp")]
+[node name="PickupGlow" parent="." unique_id=1625453900 instance=ExtResource("5_brtfp")]
 modulate = Color(0.905492, 0.001272, 0.986046, 1)

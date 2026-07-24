@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dn3nhxe7xnakq"
+path="res://.godot/imported/Rug_B.obj-b4f8c6c8e5c6ca6dd99af630a0f2b913.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Rug_B.obj-b4f8c6c8e5c6ca6dd99af630a0f2b913.mesh"]
+
+source_file="res://models/office/Rug_B.obj"
+dest_files=["res://.godot/imported/Rug_B.obj-b4f8c6c8e5c6ca6dd99af630a0f2b913.mesh", "res://.godot/imported/Rug_B.obj-b4f8c6c8e5c6ca6dd99af630a0f2b913.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

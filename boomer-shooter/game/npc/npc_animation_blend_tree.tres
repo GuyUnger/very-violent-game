@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=20 format=3 uid="uid://dqjgomdtemo5l"]
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://dqjgomdtemo5l"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3ocbx"]
 animation = &"npc_animation_library/Nervously Look Around"
@@ -82,14 +82,19 @@ animation = &"npc_animation_library/rifle run"
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yxww1"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_wa5vi")
 blend_point_0/pos = Vector2(-1, 0)
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_wfnr8")
 blend_point_1/pos = Vector2(1, 0)
+blend_point_1/name = &"1"
 blend_point_2/node = SubResource("AnimationNodeAnimation_px5sl")
 blend_point_2/pos = Vector2(0, -1)
+blend_point_2/name = &"2"
 blend_point_3/node = SubResource("AnimationNodeAnimation_glpr6")
 blend_point_3/pos = Vector2(0, 0)
+blend_point_3/name = &"3"
 blend_point_4/node = SubResource("AnimationNodeAnimation_0qfo5")
 blend_point_4/pos = Vector2(0, 1)
+blend_point_4/name = &"4"
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ye2x2"]
 xfade_time = 0.2
@@ -110,6 +115,7 @@ input_2/reset = true
 
 [resource]
 graph_offset = Vector2(-1569.54, -178.534)
+nodes/output/position = Vector2(880, 480)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_yj70c")
 nodes/Animation/position = Vector2(-880, 740)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_3ocbx")
@@ -138,5 +144,4 @@ nodes/Special/node = SubResource("AnimationNodeTransition_ye2x2")
 nodes/Special/position = Vector2(-300, 520)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3ocbx")
 nodes/TimeScale/position = Vector2(460, 480)
-nodes/output/position = Vector2(880, 480)
-node_connections = [&"Blend2", 0, &"MoveDirection", &"Blend2", 1, &"Holding", &"Blend2 2", 0, &"Animation 4", &"Blend2 2", 1, &"Animation 5", &"HitHead", 0, &"Special", &"HitHead", 1, &"Animation 3", &"Holding", 0, &"Blend2 2", &"Holding", 1, &"Animation 6", &"Holding", 2, &"Animation 8", &"Special", 0, &"Blend2", &"Special", 1, &"Animation 2", &"Special", 2, &"Animation", &"TimeScale", 0, &"HitHead", &"output", 0, &"TimeScale"]
+node_connections = [&"output", 0, &"TimeScale", &"Blend2", 0, &"MoveDirection", &"Blend2", 1, &"Holding", &"Blend2 2", 0, &"Animation 4", &"Blend2 2", 1, &"Animation 5", &"HitHead", 0, &"Special", &"HitHead", 1, &"Animation 3", &"Holding", 0, &"Blend2 2", &"Holding", 1, &"Animation 6", &"Holding", 2, &"Animation 8", &"Special", 0, &"Blend2", &"Special", 1, &"Animation 2", &"Special", 2, &"Animation", &"TimeScale", 0, &"HitHead"]

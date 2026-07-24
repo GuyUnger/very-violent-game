@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cruj5sum5lmw5"
+path="res://.godot/imported/RFan_Base.obj-9c7234d217d3c5870c42b9a9734a7594.mesh"
+
+[deps]
+
+files=["res://.godot/imported/RFan_Base.obj-9c7234d217d3c5870c42b9a9734a7594.mesh"]
+
+source_file="res://models/office/RFan_Base.obj"
+dest_files=["res://.godot/imported/RFan_Base.obj-9c7234d217d3c5870c42b9a9734a7594.mesh", "res://.godot/imported/RFan_Base.obj-9c7234d217d3c5870c42b9a9734a7594.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

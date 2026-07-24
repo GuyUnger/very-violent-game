@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://kjth5n3pmvxy"]
+[gd_scene format=3 uid="uid://kjth5n3pmvxy"]
 
 [ext_resource type="Script" uid="uid://co641dg8s4n86" path="res://game/weapons/weapon_shotgun.gd" id="1_prx1q"]
 [ext_resource type="AudioStream" uid="uid://b5oybs5wceg0c" path="res://game/weapons/pickup_sfx/pickup_shotgun 01.wav" id="2_prx1q"]
@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://cmuwwvlykmou0" path="res://game/weapons/weapon_shotgun_animations.gd" id="7_kc37h"]
 [ext_resource type="AudioStream" uid="uid://cv78so5jridw4" path="res://game/weapons/sfx/shotgun_reload_2.ogg" id="8_4p3ji"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="8_gt5ou"]
-[ext_resource type="Material" path="res://game/weapons/model/mat_shotgun.tres" id="10_4p3ji"]
+[ext_resource type="Material" uid="uid://beoslwnwxgfa1" path="res://game/weapons/model/mat_shotgun.tres" id="10_4p3ji"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="13_n14iq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
@@ -26,7 +26,7 @@ streams_count = 2
 stream_0/stream = ExtResource("7_baumh")
 stream_1/stream = ExtResource("8_4p3ji")
 
-[node name="WeaponShotgun" type="CharacterBody3D"]
+[node name="WeaponShotgun" type="CharacterBody3D" unique_id=400651479]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_prx1q")
@@ -34,30 +34,30 @@ fire_rate = 0.75
 ammo = 6
 pickup_sounds = Array[AudioStream]([ExtResource("2_prx1q"), ExtResource("3_n14iq"), ExtResource("4_tq6aa"), ExtResource("5_baumh")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=343985361]
 shape = SubResource("SphereShape3D_7w4b6")
 
-[node name="AudioShoot" type="AudioStreamPlayer" parent="."]
+[node name="AudioShoot" type="AudioStreamPlayer" parent="." unique_id=1776490610]
 unique_name_in_owner = true
 stream = ExtResource("6_n14iq")
 bus = &"SFX"
 
-[node name="AudioReload" type="AudioStreamPlayer" parent="."]
+[node name="AudioReload" type="AudioStreamPlayer" parent="." unique_id=1741938210]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_qhrax")
 bus = &"SFX"
 
-[node name="WorldModel" type="Node3D" parent="."]
+[node name="WorldModel" type="Node3D" parent="." unique_id=1188740970]
 unique_name_in_owner = true
 
-[node name="ShotgunContainer" type="Node3D" parent="WorldModel"]
+[node name="ShotgunContainer" type="Node3D" parent="WorldModel" unique_id=474330982]
 unique_name_in_owner = true
 
-[node name="ShellEjection" type="Marker3D" parent="WorldModel/ShotgunContainer"]
+[node name="ShellEjection" type="Marker3D" parent="WorldModel/ShotgunContainer" unique_id=566192163]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000782948, 0.00282902, -0.0360167)
 
-[node name="weapon_shotgun" parent="WorldModel/ShotgunContainer" instance=ExtResource("3_ri3d7")]
+[node name="weapon_shotgun" parent="WorldModel/ShotgunContainer" unique_id=1037512156 instance=ExtResource("3_ri3d7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
 
 [node name="Shotty" parent="WorldModel/ShotgunContainer/weapon_shotgun" index="0"]
@@ -69,39 +69,39 @@ surface_material_override/0 = ExtResource("10_4p3ji")
 [node name="ShottyReloadThingy" parent="WorldModel/ShotgunContainer/weapon_shotgun/Shotty" index="1"]
 surface_material_override/0 = ExtResource("10_4p3ji")
 
-[node name="Hand" type="Node3D" parent="WorldModel/ShotgunContainer"]
+[node name="Hand" type="Node3D" parent="WorldModel/ShotgunContainer" unique_id=2062600662]
 unique_name_in_owner = true
 visible = false
 
-[node name="weapon_shotgun_arm_l" parent="WorldModel/ShotgunContainer/Hand" instance=ExtResource("3_qelip")]
+[node name="weapon_shotgun_arm_l" parent="WorldModel/ShotgunContainer/Hand" unique_id=766534899 instance=ExtResource("3_qelip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
 
-[node name="weapon_shotgun_arm_r" parent="WorldModel/ShotgunContainer/Hand" instance=ExtResource("4_kc37h")]
+[node name="weapon_shotgun_arm_r" parent="WorldModel/ShotgunContainer/Hand" unique_id=1682399133 instance=ExtResource("4_kc37h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
 
-[node name="RightHand" type="Marker3D" parent="WorldModel"]
+[node name="RightHand" type="Marker3D" parent="WorldModel" unique_id=451460360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
 
-[node name="LeftHand" type="Marker3D" parent="WorldModel"]
+[node name="LeftHand" type="Marker3D" parent="WorldModel" unique_id=968597823]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
 
-[node name="Muzzleflash" parent="." instance=ExtResource("5_gwt1y")]
+[node name="Muzzleflash" parent="." unique_id=1763482523 instance=ExtResource("5_gwt1y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, 0.00486123, 0.303278)
 
-[node name="Animations" type="Node" parent="."]
+[node name="Animations" type="Node" parent="." unique_id=1478370515]
 script = ExtResource("7_kc37h")
 
-[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="." unique_id=922637908]
 unique_name_in_owner = true
 top_level = true
 stream = ExtResource("8_gt5ou")
 volume_db = -6.0
 bus = &"SFX"
 
-[node name="AudioPickup" type="AudioStreamPlayer" parent="."]
+[node name="AudioPickup" type="AudioStreamPlayer" parent="." unique_id=1443613301]
 unique_name_in_owner = true
 
-[node name="PickupGlow" parent="." instance=ExtResource("13_n14iq")]
+[node name="PickupGlow" parent="." unique_id=1953123539 instance=ExtResource("13_n14iq")]
 modulate = Color(0.0637082, 0.893431, 0, 1)
 
 [editable path="WorldModel/ShotgunContainer/weapon_shotgun"]

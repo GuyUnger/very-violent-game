@@ -7,3 +7,4 @@ func shoot() -> void:
 	for i in 16:
 		total_recoil = 0.4
 		super()
+		await get_tree().process_frame

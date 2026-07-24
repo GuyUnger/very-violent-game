@@ -33,7 +33,7 @@ func _on_area_3d_body_entered(body:Node3D) -> void:
 		return
 	dead = true
 	#EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", true))
-	if "hit" in body and not body.dead:
+	if "hit" in body and "dead" in body and not body.dead:
 		body.hit(damage)
 		if enemy and "last_hit_enemy" in body:
 			body.last_hit_enemy = enemy

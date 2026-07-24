@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ddd86ecxe3yr1"
+path="res://.godot/imported/Simple Pan.obj-8241a26fc083c9769c50f0818470faff.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Simple Pan.obj-8241a26fc083c9769c50f0818470faff.mesh"]
+
+source_file="res://models/home/Simple Pan.obj"
+dest_files=["res://.godot/imported/Simple Pan.obj-8241a26fc083c9769c50f0818470faff.mesh", "res://.godot/imported/Simple Pan.obj-8241a26fc083c9769c50f0818470faff.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

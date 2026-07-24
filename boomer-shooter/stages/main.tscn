@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bs15p6iks3jtm"]
+[gd_scene format=3 uid="uid://bs15p6iks3jtm"]
 
 [ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://stages/main.gd" id="1_0oqm6"]
 [ext_resource type="PackedScene" uid="uid://n2142e5rpapd" path="res://game/player/player.tscn" id="2_43f5m"]
@@ -8,133 +8,33 @@
 [ext_resource type="AudioStream" uid="uid://bi4e28jxmil2m" path="res://game/kill 01.wav" id="6_byaf2"]
 [ext_resource type="AudioStream" uid="uid://bpy78hrxwsp4t" path="res://game/all_kills.wav" id="7_byaf2"]
 
-[sub_resource type="Shader" id="Shader_0oqm6"]
-code = "shader_type canvas_item;
-
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
-
-uniform float fish_intensity = 1.0;
-uniform float scale_correction : hint_range(0.9, 1.1) = 0.99;
-
-void fragment() {
-	vec2 uv = SCREEN_UV;
-	uv -= 0.5;
-	uv *= scale_correction;
-	uv += 0.5;
-
-	// Convert to lens-space (-1,1) and correct for aspect ratio
-	float aspect_ratio = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
-	vec2 lens_pos = (uv - 0.5) * 2.0;
-	lens_pos.x *= aspect_ratio;
-	float lens_radius = length(lens_pos);
-
-	// Equisolid-angle remap: screen radius -> source radius
-	const float max_fov_deg = 70.0; // visible field of view
-	float max_fov_rad = radians(max_fov_deg);
-	float theta = lens_radius * max_fov_rad * fish_intensity;
-	float src_radius = tan(theta * 0.5) / tan(max_fov_rad * 0.5);
-	vec2 unit_dir = lens_pos / max(lens_radius, 1e-6);
-	vec2 src_pos = unit_dir * src_radius;
-	src_pos.x /= aspect_ratio;
-	vec2 sample_uv = src_pos * 0.5 + 0.5; // back to 0,1
-
-	float center_dist = length(sample_uv - 0.5);
-
-	vec2 offset = vec2(0.003, 0.002) * length(uv - 0.5);
-	vec3 color_l = vec3(0.6, 0.6, 0.0);
-	vec3 color_r = vec3(0.0, 0.6, 0.6);
-	vec3 color_c = vec3(1.0) - color_l - color_r;
-	vec3 sample_c = texture(SCREEN_TEXTURE, sample_uv).rgb * color_c;
-	vec3 sample_l = texture(SCREEN_TEXTURE, sample_uv - offset).rgb * color_l;
-	vec3 sample_r = texture(SCREEN_TEXTURE, sample_uv + offset).rgb * color_r;
-
-	vec3 sample = sample_c + sample_l + sample_r;
-	// hue-shift deges
-	COLOR.rgb = mix(sample, sample.bgr, pow(center_dist, 1.0) * 0.5);
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fejr8"]
-shader = SubResource("Shader_0oqm6")
-shader_parameter/fish_intensity = 0.8
-shader_parameter/scale_correction = 0.961
-
-[sub_resource type="Shader" id="Shader_fejr8"]
-code = "shader_type canvas_item;
-render_mode blend_mix;
-
-uniform sampler2D screen_texture : hint_screen_texture;
-
-void fragment() {
-	float dither = 0.0;
-	ivec2 pixel = ivec2(SCREEN_UV / SCREEN_PIXEL_SIZE);
-	if (pixel % ivec2(4) == ivec2(0) || pixel % ivec2(4) == ivec2(2)) {
-		dither = 1.0;
-	}
-	else if (pixel % ivec2(2) == ivec2(0) || pixel % ivec2(2) == ivec2(1)) {
-		dither = 0.2;
-	}
-	float steps = mix(30.0, 5.0, dither);
-	vec3 color = texture(screen_texture, SCREEN_UV).rgb;
-
-	color = round(color * steps) / steps;
-
-	COLOR.rgb = color;
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5sjox"]
-shader = SubResource("Shader_fejr8")
-
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=245061433]
 script = ExtResource("1_0oqm6")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="Fisheye" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_fejr8")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = 3
-
-[node name="Dither" type="ColorRect" parent="CanvasLayer2"]
-material = SubResource("ShaderMaterial_5sjox")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=651636305]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=376577687]
 handle_input_locally = false
 scaling_3d_scale = 2.0
 audio_listener_enable_3d = true
 size = Vector2i(854, 480)
 render_target_update_mode = 4
 
-[node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_43f5m")]
+[node name="Player" parent="SubViewportContainer/SubViewport" unique_id=1806949651 instance=ExtResource("2_43f5m")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=904615459]
 environment = ExtResource("3_fejr8")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1174169434]
 layer = 8
 script = ExtResource("3_7iyax")
 
-[node name="Time" type="Label" parent="HUD"]
+[node name="Time" type="Label" parent="HUD" unique_id=617921250]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -151,7 +51,7 @@ theme_override_font_sizes/font_size = 32
 text = "59"
 horizontal_alignment = 1
 
-[node name="Ammo" type="Label" parent="HUD"]
+[node name="Ammo" type="Label" parent="HUD" unique_id=1328019826]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -167,11 +67,11 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 32
 text = "Ammo: 59"
 
-[node name="AudioCountDown" type="AudioStreamPlayer" parent="HUD"]
+[node name="AudioCountDown" type="AudioStreamPlayer" parent="HUD" unique_id=322871808]
 unique_name_in_owner = true
 stream = ExtResource("4_0oqm6")
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+[node name="ProgressBar" type="ProgressBar" parent="HUD" unique_id=1775513178]
 unique_name_in_owner = true
 self_modulate = Color(1, 0, 0, 1)
 anchors_preset = 12
@@ -183,7 +83,7 @@ grow_horizontal = 2
 grow_vertical = 0
 show_percentage = false
 
-[node name="LabelEnemies" type="Label" parent="HUD/ProgressBar"]
+[node name="LabelEnemies" type="Label" parent="HUD/ProgressBar" unique_id=1394459865]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
@@ -197,11 +97,11 @@ theme_override_font_sizes/font_size = 22
 text = "0/5"
 horizontal_alignment = 1
 
-[node name="AudioKill" type="AudioStreamPlayer" parent="."]
+[node name="AudioKill" type="AudioStreamPlayer" parent="." unique_id=493423656]
 unique_name_in_owner = true
 stream = ExtResource("6_byaf2")
 volume_db = -6.0
 
-[node name="AudioKillComplete" type="AudioStreamPlayer" parent="."]
+[node name="AudioKillComplete" type="AudioStreamPlayer" parent="." unique_id=843660870]
 unique_name_in_owner = true
 stream = ExtResource("7_byaf2")

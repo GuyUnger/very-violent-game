@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://fk2ws4nkdayk"]
+[gd_scene format=3 uid="uid://fk2ws4nkdayk"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_57hh3"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_7w4b6"]
@@ -28,7 +28,7 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_3pcvd"]
 size = Vector3(0.005, 0.07, 0.04)
 
-[node name="WeaponSmg" type="CharacterBody3D"]
+[node name="WeaponSmg" type="CharacterBody3D" unique_id=394893205]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_57hh3")
@@ -38,64 +38,63 @@ recoil = 0.1
 ammo = 30
 pickup_sounds = Array[AudioStream]([ExtResource("2_pkk1y"), ExtResource("3_81lhf")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2058046379]
 shape = SubResource("SphereShape3D_7w4b6")
 
-[node name="AudioShoot" type="AudioStreamPlayer" parent="."]
+[node name="AudioShoot" type="AudioStreamPlayer" parent="." unique_id=1664513758]
 unique_name_in_owner = true
 stream = ExtResource("2_7w4b6")
 volume_db = 5.0
 max_polyphony = 5
 bus = &"SFX"
 
-[node name="WorldModel" type="Node3D" parent="."]
+[node name="WorldModel" type="Node3D" parent="." unique_id=1727778807]
 
-[node name="RightHand" type="Marker3D" parent="WorldModel"]
+[node name="RightHand" type="Marker3D" parent="WorldModel" unique_id=1125408121]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
 
-[node name="LeftHand" type="Marker3D" parent="WorldModel"]
+[node name="LeftHand" type="Marker3D" parent="WorldModel" unique_id=1564301264]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel" unique_id=173441840]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.000823617, 0.0554796)
 visible = false
 material_override = SubResource("StandardMaterial3D_6ml3f")
 mesh = SubResource("CylinderMesh_ls1xp")
 skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel" unique_id=1439511002]
 transform = Transform3D(1, 0, 0, 0, 0.990105, -0.140331, 0, 0.140331, 0.990105, 0, -0.0524004, -0.0874176)
 visible = false
 material_override = SubResource("StandardMaterial3D_on6gv")
 mesh = SubResource("BoxMesh_3pcvd")
 
-[node name="weapon_smg" parent="WorldModel" instance=ExtResource("3_7w4b6")]
+[node name="weapon_smg" parent="WorldModel" unique_id=1887486235 instance=ExtResource("3_7w4b6")]
 
-[node name="Hand" parent="WorldModel/weapon_smg" instance=ExtResource("4_ujfyf")]
+[node name="Hand" parent="WorldModel/weapon_smg" unique_id=934641808 instance=ExtResource("4_ujfyf")]
 unique_name_in_owner = true
 visible = false
 
-[node name="ShellEjection" type="Marker3D" parent="WorldModel"]
+[node name="ShellEjection" type="Marker3D" parent="WorldModel" unique_id=1143028505]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00567615, 0.00567617)
 
-[node name="Muzzleflash" parent="." instance=ExtResource("5_8w3g1")]
+[node name="Muzzleflash" parent="." unique_id=1464695937 instance=ExtResource("5_8w3g1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.265738)
 
-[node name="Animations" type="Node" parent="."]
+[node name="Animations" type="Node" parent="." unique_id=1859269143]
 script = ExtResource("6_yuge1")
 
-[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="." unique_id=1677041107]
 unique_name_in_owner = true
-top_level = true
 stream = ExtResource("7_bl6n7")
 volume_db = -6.0
 bus = &"SFX"
 
-[node name="AudioPickup" type="AudioStreamPlayer" parent="."]
+[node name="AudioPickup" type="AudioStreamPlayer" parent="." unique_id=1007823485]
 unique_name_in_owner = true
 
-[node name="PickupGlow" parent="." instance=ExtResource("10_81lhf")]
+[node name="PickupGlow" parent="." unique_id=1258914329 instance=ExtResource("10_81lhf")]
 modulate = Color(1, 0.650716, 0.226772, 1)
 
 [editable path="WorldModel/weapon_smg"]

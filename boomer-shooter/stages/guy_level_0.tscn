@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://blsqo2j2llkmq"]
+[gd_scene load_steps=39 format=3 uid="uid://bubokaw6tm32t"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_57m8n"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://game/weapons/weapon_smg.tscn" id="2_4p0ku"]

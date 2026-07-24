@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://c68pwuni7f2gj"]
+
+[ext_resource type="Script" uid="uid://e3ugfjftn216" path="res://stages/wall.gd" id="1_60t12"]
+[ext_resource type="Shader" uid="uid://jt6n0aoj0esi" path="res://stages/generic_wall_shader.gdshader" id="2_alx00"]
+[ext_resource type="Shader" uid="uid://806x6fsb5w6d" path="res://stages/generic_object_wall_shader.gdshader" id="2_dqjae"]
+[ext_resource type="Texture2D" uid="uid://urr07c70shjs" path="res://new_noise_texture_2d.tres" id="3_g3ii4"]
+[ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="3_ri5cc"]
+[ext_resource type="AudioStream" uid="uid://cavtdu5mpdr6r" path="res://31622__srehpog__light_crate_smash1.wav" id="4_dqjae"]
+[ext_resource type="Texture2D" uid="uid://cm2ltkkns2htq" path="res://mdf_texture.jpg" id="5_opjry"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tklcm"]
+size = Vector3(1.5, 0.01, 2.4)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n5wkr"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fr0px"]
+noise = SubResource("FastNoiseLite_n5wkr")
+
+[sub_resource type="Image" id="Image_60t12"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBAFloat",
+"height": 8,
+"mipmaps": false,
+"width": 8
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_alx00"]
+image = SubResource("Image_60t12")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ri5cc"]
+render_priority = 0
+shader = ExtResource("2_dqjae")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/metalic = 0.0110000005225
+shader_parameter/specular = 0.0400000019
+shader_parameter/roughness = 1.0
+shader_parameter/aabb = Vector3(1.5, 1, 2.4)
+shader_parameter/contact_height = -999.0
+shader_parameter/contact_amp = Vector2(0, 0)
+shader_parameter/detail = 1.0
+shader_parameter/texture_detail = ExtResource("5_opjry")
+shader_parameter/detail_uv_scale = Vector2(1, 1.3)
+shader_parameter/tile_size = Vector2(0, 0)
+shader_parameter/tile_bricks = true
+shader_parameter/tile_seam_thickness = Vector2(0, 0)
+shader_parameter/tile_outline_width = Vector2(0, 0)
+shader_parameter/tile_outline_color = Color(0, 0, 0, 0)
+shader_parameter/tile_outline_distortion = 0.0
+shader_parameter/tile_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/tile_modulate = Color(0, 0, 0, 1)
+shader_parameter/tile_variance = 1.0
+shader_parameter/quad_outline_width = Vector2(0.04, 0.015)
+shader_parameter/quad_outline_color = Color(0.7882353, 0.61960787, 0.5411765, 0.5764706)
+shader_parameter/quad_outline_distortion = 0.0400000019
+shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/wear = 0.0
+shader_parameter/wear_multiply = 0.0
+shader_parameter/disorder = ExtResource("3_g3ii4")
+shader_parameter/holes = SubResource("ImageTexture_alx00")
+shader_parameter/hole_count = 0
+shader_parameter/hole_atlas = ExtResource("3_ri5cc")
+shader_parameter/edge_noise_texture = SubResource("NoiseTexture2D_fr0px")
+shader_parameter/hole_atlas_grid = Vector2i(1, 1)
+shader_parameter/hole_uv_size = Vector2(0.3, 0.3)
+shader_parameter/hole_size_random_range = Vector2(0.85, 1.2)
+shader_parameter/wall_chunk_size = Vector2(1.5, 2.4)
+shader_parameter/broken = 0.0
+shader_parameter/break_edge_width = 0.12
+shader_parameter/edge_noise_scale = Vector2(5, 5)
+shader_parameter/edge_noise_strength = 0.08
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tklcm"]
+size = Vector2(1.5, 2.4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oj4nc"]
+render_priority = 0
+shader = ExtResource("2_alx00")
+shader_parameter/hole_count = 0
+shader_parameter/hole_atlas = ExtResource("3_ri5cc")
+shader_parameter/edge_noise_texture = SubResource("NoiseTexture2D_fr0px")
+shader_parameter/hole_atlas_grid = Vector2i(1, 1)
+shader_parameter/hole_uv_size = Vector2(0.3, 0.3)
+shader_parameter/hole_size_random_range = Vector2(0.85, 1.2)
+shader_parameter/wall_chunk_size = Vector2(1, 3)
+shader_parameter/broken = 0.0
+shader_parameter/break_edge_width = 0.12
+shader_parameter/edge_noise_scale = Vector2(5, 5)
+shader_parameter/edge_noise_strength = 0.08
+shader_parameter/corrugated = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_tklcm"]
+size = Vector3(0.025, 0.09, 2.4)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_snap"]
+radius = 0.18
+
+[node name="Add_25_6_27" type="StaticBody3D" unique_id=787299160]
+script = ExtResource("1_60t12")
+max_health = 1000
+bullet_stopping_power = 0.0
+can_run_through = true
+wall_color = Color(0.8815938, 0.86345685, 1.92523e-06, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1315778456]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0.045152873)
+shape = SubResource("BoxShape3D_tklcm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=191552772]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
+material_override = SubResource("ShaderMaterial_ri5cc")
+mesh = SubResource("PlaneMesh_tklcm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=770293341]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, -0.05)
+visible = false
+material_override = SubResource("ShaderMaterial_oj4nc")
+instance_shader_parameters/wall_color = Color(0.8815938, 0.86345685, 1.92523e-06, 1)
+mesh = SubResource("PlaneMesh_tklcm")
+
+[node name="struts" type="MeshInstance3D" parent="." unique_id=1753414505]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.738, 1.2, 0)
+mesh = SubResource("BoxMesh_tklcm")
+
+[node name="struts2" type="MeshInstance3D" parent="." unique_id=1197596357]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.738, 1.2, 0)
+mesh = SubResource("BoxMesh_tklcm")
+
+[node name="Break" type="AudioStreamPlayer3D" parent="." unique_id=1378425732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+stream = ExtResource("4_dqjae")
+
+[node name="SnapPoints" type="Node3D" parent="." unique_id=682617222]
+
+[node name="SnapLeft" type="Area3D" parent="SnapPoints" unique_id=619427736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.2, 0)
+collision_layer = 524288
+collision_mask = 524288
+metadata/snap_axis = -1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPoints/SnapLeft" unique_id=1188959120]
+shape = SubResource("SphereShape3D_snap")
+
+[node name="SnapRight" type="Area3D" parent="SnapPoints" unique_id=1935208273]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.2, 0)
+collision_layer = 524288
+collision_mask = 524288
+metadata/snap_axis = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPoints/SnapRight" unique_id=1748734096]
+shape = SubResource("SphereShape3D_snap")

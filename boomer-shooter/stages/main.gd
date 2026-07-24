@@ -18,6 +18,7 @@ var max_enemies: int = 30
 var completed: bool= false
 
 @export var track_num: int = 0
+@export var next_level: PackedScene
 
 static var clones: int = 0
 
@@ -67,9 +68,36 @@ func _on_enemy_killed() -> void:
 	if enemies_left == 0 and !completed:
 		$AudioKillComplete.play()
 		completed = true
+		spawn_portal()
 	else:
 		%AudioKill.pitch_scale = pitch
 		%AudioKill.play()
+
+func spawn_portal() -> void:
+	var portal = preload("res://entities/portal.tscn").instantiate()
+	var portal_spawns := get_node_or_null("%PortalSpawns")
+	if portal_spawns:
+		var valid_spawns: Array[Node3D] = []
+		for child in portal_spawns.get_children():
+			if not (child is Node3D):
+				continue
+			var spawn_point := child as Node3D
+			if player and spawn_point.global_position.distance_to(player.global_position) < 1.0:
+				continue
+			valid_spawns.append(spawn_point)
+
+		if valid_spawns.is_empty():
+			for child in portal_spawns.get_children():
+				if child is Node3D:
+					valid_spawns.append(child)
+
+		if not valid_spawns.is_empty():
+			var chosen_spawn = valid_spawns.pick_random()
+			portal.global_transform = chosen_spawn.global_transform
+			
+	portal.portal_to = next_level
+	add_child(portal)
+
 
 static var player: Player
 
