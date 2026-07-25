@@ -1,7 +1,7 @@
 extends Node
 var anim_tween : Tween
 
-@onready var revolver: Node3D = $"../WorldModel/Revolver"
+@onready var revolver: Node3D = $"../WorldModel"
 
 func shoot():
 	if anim_tween:

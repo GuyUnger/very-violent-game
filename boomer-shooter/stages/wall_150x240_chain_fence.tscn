@@ -32,13 +32,12 @@ image = SubResource("Image_jssti")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k26b8"]
 render_priority = 0
 shader = ExtResource("2_4injs")
-shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/metalic = 0.0110000005225
 shader_parameter/specular = 0.0400000019
 shader_parameter/roughness = 1.0
-shader_parameter/aabb = Vector3(1.5, 1, 2.4)
 shader_parameter/contact_height = -999.0
 shader_parameter/contact_amp = Vector2(0, 0)
+shader_parameter/random_hue = 0.0
 shader_parameter/detail = 1.0
 shader_parameter/texture_detail = ExtResource("5_jssti")
 shader_parameter/detail_uv_scale = Vector2(3, 4)
@@ -55,8 +54,6 @@ shader_parameter/quad_outline_width = Vector2(0.04, 0.015)
 shader_parameter/quad_outline_color = Color(0.7882353, 0.61960787, 0.5411765, 0.5764706)
 shader_parameter/quad_outline_distortion = 0.0400000019
 shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
-shader_parameter/wear = 0.0
-shader_parameter/wear_multiply = 0.0
 shader_parameter/disorder = ExtResource("3_k26b8")
 shader_parameter/holes = SubResource("ImageTexture_4injs")
 shader_parameter/hole_count = 0
@@ -101,7 +98,6 @@ collision_layer = 17
 script = ExtResource("1_jssti")
 max_health = 1000
 bullet_stopping_power = 0.0
-wall_color = Color(0.8815938, 0.86345685, 1.92523e-06, 1)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1315778456]
@@ -111,6 +107,7 @@ shape = SubResource("BoxShape3D_tklcm")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=191552772]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
 material_override = SubResource("ShaderMaterial_k26b8")
+instance_shader_parameters/modulate = Color(1, 1, 1, 1)
 mesh = SubResource("PlaneMesh_tklcm")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=770293341]

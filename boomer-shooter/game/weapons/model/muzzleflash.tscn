@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dn8qcdsnyofpu"]
+[gd_scene format=3 uid="uid://dn8qcdsnyofpu"]
 
 [ext_resource type="ArrayMesh" uid="uid://x2uglqsopfrx" path="res://game/weapons/model/mesh_muzzleflash.res" id="1_gqu1p"]
 [ext_resource type="Script" uid="uid://dimwskculi2rm" path="res://game/weapons/model/muzzleflash.gd" id="1_rfdu2"]
@@ -42,30 +42,28 @@ height = 0.15
 radial_segments = 4
 rings = 1
 
-[node name="Muzzleflash" type="Node3D"]
+[node name="Muzzleflash" type="Node3D" unique_id=550914255]
 script = ExtResource("1_rfdu2")
 
-[node name="MeshMuzzleflash" type="MeshInstance3D" parent="."]
+[node name="MeshMuzzleflash" type="MeshInstance3D" parent="." unique_id=1259730908]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 visible = false
 cast_shadow = 0
 mesh = ExtResource("1_gqu1p")
 
-[node name="MeshMuzzleflash2" type="MeshInstance3D" parent="MeshMuzzleflash"]
+[node name="MeshMuzzleflash2" type="MeshInstance3D" parent="MeshMuzzleflash" unique_id=1519942532]
 transform = Transform3D(0.6325, 0, 0, 0, 0.6325, 0, 0, 0, 0.6325, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("1_gqu1p")
 skeleton = NodePath("../..")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1533618637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.217537)
 light_color = Color(1, 0.606152, 0.317017, 1)
 light_energy = 0.001
 light_size = 0.15
-omni_range = 10.0
-omni_attenuation = 1.3
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1651765504]
 material_override = SubResource("StandardMaterial3D_rfdu2")
 emitting = false
 amount = 9

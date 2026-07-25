@@ -10,6 +10,7 @@ func _ready() -> void:
 		node.died.connect(_switch)
 
 func _switch() -> void:
+	return
 	door.open = true
 	wire.trigger()
 	blocker.queue_free()

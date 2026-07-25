@@ -11,6 +11,7 @@ func shoot() -> void:
 	reload_t = fire_rate
 
 	ammo -= 1
+	$Animations.shoot()
 	if player:
 		var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir, Vector3.UP)

@@ -93,8 +93,8 @@ func shoot() -> void:
 	reload_t = fire_rate
 	if has_node("Animations"):
 		$Animations.shoot()
-	#if has_node("Muzzleflash"):
-	#	$Muzzleflash.shoot()
+	if has_node("Muzzleflash"):
+		$Muzzleflash.shoot()
 	
 	var r = Vector3(
 		randf_range(-total_recoil, total_recoil), 

@@ -6,6 +6,7 @@ extends Node3D
 @export var allow_katana: bool = true
 @export var allow_smg: bool = true
 @export var allow_double_smg: bool = false
+@export var allow_ak: bool = false
 @export var infinite := false
 
 const WEAPON_SCENES = [
@@ -15,6 +16,7 @@ const WEAPON_SCENES = [
 	preload("res://game/weapons/weapon_revolver.tscn"),
 	preload("res://game/weapons/weapon_katana.tscn"),
 	preload("res://game/weapons/weapon_double_smg.tscn"),
+	preload("res://game/weapons/weapon_ak.tscn"),
 ]
 
 
@@ -35,6 +37,8 @@ func _ready() -> void:
 		weapon_scenes.append(WEAPON_SCENES[0])
 	if allow_double_smg:
 		weapon_scenes.append(WEAPON_SCENES[5])
+	if allow_ak:
+		weapon_scenes.append(WEAPON_SCENES[6])
 
 	await get_tree().process_frame
 	_spawn_weapon()

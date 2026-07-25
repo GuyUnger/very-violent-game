@@ -8,6 +8,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_tklcm"]
 size = Vector3(1.5, 0.01, 2.4)
 
+[sub_resource type="Gradient" id="Gradient_60t12"]
+colors = PackedColorArray(0.5370113, 0.5370113, 0.5370113, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5cjay"]
+gradient = SubResource("Gradient_60t12")
+fill_from = Vector2(0.46153846, 0)
+fill_to = Vector2(0.49287748, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_60t12"]
 frequency = 0.0162
 
@@ -20,7 +28,7 @@ frequency = 0.0022
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fr0px"]
 noise = SubResource("FastNoiseLite_n5wkr")
 
-[sub_resource type="Image" id="Image_alx00"]
+[sub_resource type="Image" id="Image_60t12"]
 data = {
 "data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 "format": "RGBAFloat",
@@ -29,23 +37,22 @@ data = {
 "width": 8
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_ri5cc"]
-image = SubResource("Image_alx00")
+[sub_resource type="ImageTexture" id="ImageTexture_alx00"]
+image = SubResource("Image_60t12")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqjae"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ri5cc"]
 render_priority = 0
 shader = ExtResource("2_dqjae")
-shader_parameter/modulate = Color(1, 0.851137, 0.7471438, 1)
+shader_parameter/albedo = SubResource("GradientTexture2D_5cjay")
 shader_parameter/metalic = 0.0110000005225
 shader_parameter/specular = 0.0400000019
 shader_parameter/roughness = 1.0
-shader_parameter/aabb = Vector3(1.5, 1, 2.4)
 shader_parameter/contact_height = -999.0
 shader_parameter/contact_amp = Vector2(0, 0)
 shader_parameter/random_hue = 0.10000000475
 shader_parameter/detail = 0.0
 shader_parameter/detail_uv_scale = Vector2(1, 1)
-shader_parameter/tile_size = Vector2(256, 1)
+shader_parameter/tile_size = Vector2(170.66667, 0.41666666)
 shader_parameter/tile_bricks = false
 shader_parameter/tile_seam_thickness = Vector2(0, 0)
 shader_parameter/tile_outline_width = Vector2(0, 0)
@@ -54,12 +61,12 @@ shader_parameter/tile_outline_distortion = 0.0
 shader_parameter/tile_outline_distortion_scale = Vector2(1, 1)
 shader_parameter/tile_modulate = Color(0, 0, 0, 1)
 shader_parameter/tile_variance = 0.405
-shader_parameter/quad_outline_width = Vector2(0.04, 0.015)
+shader_parameter/quad_outline_width = Vector2(0.04, 0.04)
 shader_parameter/quad_outline_color = Color(0, 0, 0, 0.1882353)
-shader_parameter/quad_outline_distortion = 0.082000003895
-shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/quad_outline_distortion = 0.050000002375
+shader_parameter/quad_outline_distortion_scale = Vector2(1, 0.28)
 shader_parameter/disorder = SubResource("NoiseTexture2D_alx00")
-shader_parameter/holes = SubResource("ImageTexture_ri5cc")
+shader_parameter/holes = SubResource("ImageTexture_alx00")
 shader_parameter/hole_count = 0
 shader_parameter/hole_atlas = ExtResource("3_ri5cc")
 shader_parameter/edge_noise_texture = SubResource("NoiseTexture2D_fr0px")
@@ -87,7 +94,7 @@ script = ExtResource("1_60t12")
 max_health = 1000
 bullet_stopping_power = 0.0
 can_run_through = true
-wall_color = Color(0.8815938, 0.86345685, 1.92523e-06, 1)
+wall_color = Color(0.9269379, 0.67533726, 0.5734759, 1)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1315778456]
@@ -96,7 +103,8 @@ shape = SubResource("BoxShape3D_tklcm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=191552772]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
-material_override = SubResource("ShaderMaterial_dqjae")
+material_override = SubResource("ShaderMaterial_ri5cc")
+instance_shader_parameters/modulate = Color(0.9269379, 0.67533726, 0.5734759, 1)
 mesh = SubResource("PlaneMesh_tklcm")
 
 [node name="struts" type="MeshInstance3D" parent="." unique_id=1753414505]

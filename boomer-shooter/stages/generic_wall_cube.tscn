@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://stages/generic_wall_cube.gd" id="1_wall_cube"]
+
+[node name="GenericWallCube" type="Node3D"]
+script = ExtResource("1_wall_cube")

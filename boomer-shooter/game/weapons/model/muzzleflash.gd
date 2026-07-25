@@ -15,7 +15,7 @@ func shoot(s := 2.0):
 	if tween:
 		tween.kill()
 	light.show()
-	light.light_energy = 10.0
+	light.light_energy = 1.0
 	mesh_muzzleflash.rotation.z = randf()*TAU
 	mesh_muzzleflash_2.rotation.z = randf()*TAU
 	mesh_muzzleflash.show()

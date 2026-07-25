@@ -18,7 +18,12 @@ const OPAQUE_COLLISION_LAYER := 1 << 4
 @export var can_run_through := false
 @export var opaque := true:
 	set = set_opaque
-@export var wall_color := Color.WHITE
+@export var wall_color := Color.WHITE :
+	set(v):
+		wall_color = v
+		if not is_node_ready():
+			return
+		_apply_instance_shader_params()
 @export var exclude_from_snap := false
 @export_range(0.05, 1.0, 0.01) var snap_point_search_distance := 0.35
 @export_tool_button("Snap To Nearby Wall") var snap_to_wall_action = _snap_to_wall
@@ -143,15 +148,19 @@ func _update_opaque_collision_layer() -> void:
 
 
 func _apply_instance_shader_params() -> void:
-	wall_mesh.set_instance_shader_parameter("wall_color", wall_color)
+	wall_mesh.set_instance_shader_parameter("modulate", wall_color)
 	if back_wall_mesh:
-		back_wall_mesh.set_instance_shader_parameter("wall_color", wall_color)
+		back_wall_mesh.set_instance_shader_parameter("modulate", wall_color)
 
 
 func _spawn_wall_sparks(hit_position: Vector3, hit_normal: Vector3) -> void:
 	var sparks := WALL_SPARKS_SCENE.instantiate()
-	sparks.global_position = hit_position
-	sparks.look_at(hit_position + hit_normal, Vector3.UP, true)
+	sparks.position = to_local(hit_position)
+	sparks.look_at_from_position(
+		hit_position,
+		hit_position + hit_normal,
+		Vector3.UP,
+		true)
 	add_child(sparks)
 
 

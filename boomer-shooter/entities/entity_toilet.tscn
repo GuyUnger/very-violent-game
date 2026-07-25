@@ -1,14 +1,34 @@
 [gd_scene format=3 uid="uid://6s3vaif7lx5b"]
 
 [ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://entities/entity_bath_tub.tscn" id="1_hb815"]
-[ext_resource type="ArrayMesh" uid="uid://daolty4jsekkp" path="res://models/home/Toilet.obj" id="2_wi3l1"]
+[ext_resource type="ArrayMesh" uid="uid://dqpbpmc6i518i" path="res://models/home/toilet.res" id="2_wi3l1"]
+[ext_resource type="Shader" uid="uid://20sgn88awuao" path="res://game/weapons/generic_object_material.gdshader" id="2_yi5xq"]
+[ext_resource type="Texture2D" uid="uid://bg1ab3udprotc" path="res://textures/prop_toilet_aoe_map.png" id="3_k7aoh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vf5aw"]
+render_priority = 0
+shader = ExtResource("2_yi5xq")
+shader_parameter/aoe_texture = ExtResource("3_k7aoh")
+shader_parameter/size = Vector3(0, 0, 0)
+shader_parameter/roughness = 0.3330000158175
+shader_parameter/specular = 0.690000032775
+shader_parameter/metallic = 0.574000027265
+shader_parameter/max_y = 0.0
+shader_parameter/ao_light_affect = 0.999999977648
+shader_parameter/detail_scale = Vector2(1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
 size = Vector3(0.51, 0.605, 0.695)
 
 [node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_hb815")]
+max_hp = 5
+can_run_through = true
 
 [node name="MeshInstance3D2" parent="." index="0" unique_id=1141119635]
+material_override = SubResource("ShaderMaterial_vf5aw")
+instance_shader_parameters/albedo = Color(1, 1, 0.92156863, 1)
+instance_shader_parameters/wear = 0.1090000051775
+instance_shader_parameters/wear_albedo = Color(0.772247, 0.7722471, 0.772247, 1)
 mesh = ExtResource("2_wi3l1")
 
 [node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]

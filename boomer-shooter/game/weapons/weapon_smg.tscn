@@ -1,12 +1,15 @@
-[gd_scene format=3 uid="uid://fk2ws4nkdayk"]
+[gd_scene format=4 uid="uid://fk2ws4nkdayk"]
 
 [ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://game/player/weapon.gd" id="1_57hh3"]
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="2_7w4b6"]
 [ext_resource type="AudioStream" uid="uid://dlefj36iolvdv" path="res://game/weapons/pickup_sfx/pickup_smg 01.wav" id="2_pkk1y"]
-[ext_resource type="PackedScene" uid="uid://cbt4a74g6fyhs" path="res://game/weapons/model/weapon_smg.glb" id="3_7w4b6"]
 [ext_resource type="AudioStream" uid="uid://c1umsegk5hevb" path="res://game/weapons/pickup_sfx/pickup_smg 02.wav" id="3_81lhf"]
 [ext_resource type="PackedScene" uid="uid://dqul5y672j5k2" path="res://game/weapons/model/weapon_smg_arm.glb" id="4_ujfyf"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_8w3g1"]
+[ext_resource type="ArrayMesh" uid="uid://3qnuikshcd6p" path="res://models/guns/weapon_smg.res" id="5_a5me7"]
+[ext_resource type="Shader" uid="uid://20sgn88awuao" path="res://game/weapons/generic_object_material.gdshader" id="5_ov2wc"]
+[ext_resource type="Texture2D" uid="uid://nf6me4j2nbl2" path="res://textures/weapon_smg_aoe_map.png" id="6_3wxce"]
+[ext_resource type="Material" uid="uid://c1m0dsyp0q6ke" path="res://game/weapons/model/mat_smg.tres" id="6_ov2wc"]
 [ext_resource type="Script" uid="uid://dntd1fqlvxqh5" path="res://game/weapons/weapon_smg_animations.gd" id="6_yuge1"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="7_bl6n7"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="10_81lhf"]
@@ -27,6 +30,52 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3pcvd"]
 size = Vector3(0.005, 0.07, 0.04)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6qdb"]
+render_priority = 0
+shader = ExtResource("5_ov2wc")
+shader_parameter/aoe_texture = ExtResource("6_3wxce")
+shader_parameter/size = Vector3(0, 0, 0)
+shader_parameter/roughness = 0.4770000226575
+shader_parameter/specular = 0.1530000072675
+shader_parameter/metallic = 0.8190000389025
+shader_parameter/max_y = 0.0
+shader_parameter/ao_light_affect = 0.999999977648
+shader_parameter/detail_scale = Vector2(1, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vix3x"]
+_surfaces = [{
+"aabb": AABB(0.01545962, -0.0026145142, 0.022859322, 0.017525215, 0.017525217, 0.017525213),
+"format": 34896613377,
+"index_count": 66,
+"index_data": PackedByteArray("CQAKAAYACgAHAAYACQAGAAUACgALAAcACQALAAoACwAIAAcADAAJAAUADAAFAAMACwAAAAgAAAAEAAgADQAMAAMADQAJAAwADQADAAEADQABAAIADgACAAQADQACAA4AAAAPAAQADgAEAA8ADwANAA4ADwAJAA0ACwAPAAAACQAPAAsA"),
+"lods": [0.008890281, PackedByteArray("AAABAAIAAAADAAEAAAACAAQAAAAFAAMAAAAGAAUAAAAHAAYAAAAEAAgAAAAIAAcAAAAAAAgA")],
+"name": "SMG",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("//8AAP9/AAAAAIHafSUAAAAA/38AAAAAAAD///9/AAAAAH0lfSUAAAAAgdqB2gAAAAD/f///AAAAAH0lgdoAAAAAAAD/fwAA/v+B2oHaAAD///9///8AAP//fSWB2gAA/v////9/AAD+/4HafSUAAP///38AAAAA//99JX0lAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lby0x"]
+resource_name = "weapon_smg_Cube_001"
+_surfaces = [{
+"aabb": AABB(0.01545962, -0.0026145142, 0.022859322, 0.017525215, 0.017525217, 0.017525213),
+"attribute_data": PackedByteArray("bpeDb52Fv4KdhVZ8nYUpiZ2F7XWdhYNvnYWSj52F/JWdhWWcnYXOom6XzqJul5KPbpf8lW6XZZxulymJbpe/gm6XVnxul+11DrKEeKO7po9pwkt/acLfiKO7hHhIq9+ISKtLfw6ypo8="),
+"format": 34896613399,
+"index_count": 66,
+"index_data": PackedByteArray("CwAMAAcADAAIAAcACwAHAAYADAANAAgADQAJAAgADQAKAAkADgALAAYADgAGAAMADwAOAAMADwADAAEADwABAAIADwACABAAEAACAAQAEAAEABEAAAARAAQAAAAEAAUAEgATABQAFAATABUAEgAUABYAEwASABcAFwASABgAEwAXABkA"),
+"lods": [0.008890281, PackedByteArray("AAABAAIAAAADAAEAAAACAAQAAAAEAAUAAAAGAAMAAAAHAAYAAAAIAAcAAAAJAAgAAAAKAAkA")],
+"material": ExtResource("6_ov2wc"),
+"name": "SMG",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("//8AAP9//78AAIHafSX/3wAA/38AAP//AAD///9//78AAH0lfSX/3wAAAAD/f/+/AACB2oHa/58AAP9///8AgAAAfSWB2v+fAAAAAP9//7///wAA/3//v/7/gdqB2v+f////f///AID//30lgdr/n/7/////f/+//v+B2n0l/9////9/AAD/////fSV9Jf/f//99JX0lNjP+/4Hagdo2M/7/gdp9JTYz/v////9/NjP///9/AAA2M///fSWB2jYz//8AAP9/NjP///9///82MwAA/3////9/////f////38AAP9/AAD/f////3//f///AAD/fwAA/38AAP9/////f/9///8AAP9/////f////3////9/AAD/f8k2myTJNpskyTabJMk2myTJNpskyTabJMk2myTJNpsk")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vix3x")
 
 [node name="WeaponSmg" type="CharacterBody3D" unique_id=394893205]
 collision_layer = 0
@@ -69,7 +118,20 @@ visible = false
 material_override = SubResource("StandardMaterial3D_on6gv")
 mesh = SubResource("BoxMesh_3pcvd")
 
-[node name="weapon_smg" parent="WorldModel" unique_id=1887486235 instance=ExtResource("3_7w4b6")]
+[node name="weapon_smg" type="Node3D" parent="WorldModel" unique_id=1887486235]
+
+[node name="SMG" type="MeshInstance3D" parent="WorldModel/weapon_smg" unique_id=802055146]
+material_override = SubResource("ShaderMaterial_x6qdb")
+instance_shader_parameters/albedo = Color(0.22041348, 0.21233028, 0.18808046, 1)
+instance_shader_parameters/albedo2 = Color(0.81004107, 0, 0.2539025, 1)
+instance_shader_parameters/wear = 0.1310000062225
+instance_shader_parameters/wear_albedo = Color(0.38242704, 0.3671804, 0.31373894, 1)
+mesh = ExtResource("5_a5me7")
+skeleton = NodePath("")
+
+[node name="Handle" type="MeshInstance3D" parent="WorldModel/weapon_smg/SMG" unique_id=243665340]
+mesh = SubResource("ArrayMesh_lby0x")
+skeleton = NodePath("")
 
 [node name="Hand" parent="WorldModel/weapon_smg" unique_id=934641808 instance=ExtResource("4_ujfyf")]
 unique_name_in_owner = true
@@ -96,5 +158,3 @@ unique_name_in_owner = true
 
 [node name="PickupGlow" parent="." unique_id=1258914329 instance=ExtResource("10_81lhf")]
 modulate = Color(1, 0.650716, 0.226772, 1)
-
-[editable path="WorldModel/weapon_smg"]

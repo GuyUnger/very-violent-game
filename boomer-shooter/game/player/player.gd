@@ -69,6 +69,9 @@ var weapon:Weapon
 
 @export var starting_weapon:PackedScene
 @export var close_on_escape = false
+## When disabled, the player's body stops colliding but movement and gravity continue.
+@export var physics_enabled := true:
+	set = set_physics_enabled
 @export var mounted := false:
 	set = set_mounted
 @export var mounted_x_bounds := Vector2(-45.0, 45.0)
@@ -92,6 +95,7 @@ var crouching_collision_position_y := 0.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	_apply_physics_enabled()
 	source_id = EventStore.next_source_id()
 	%EnemyFocus.material.set_shader_parameter("time", -0.05)
 	if body_collision_shape.shape is CapsuleShape3D:
@@ -477,6 +481,18 @@ func set_mounted(value: bool) -> void:
 		input_direction = Vector2.ZERO
 		look_vel = Vector2.ZERO
 		velocity = Vector3.ZERO
+
+
+func set_physics_enabled(value: bool) -> void:
+	physics_enabled = value
+	if is_inside_tree():
+		_apply_physics_enabled()
+
+
+func _apply_physics_enabled() -> void:
+	for child in get_children():
+		if child is CollisionShape3D:
+			child.set_deferred("disabled", not physics_enabled)
 
 
 func _capture_mounted_look_center() -> void:

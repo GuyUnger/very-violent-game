@@ -2,12 +2,11 @@ shader_type spatial;
 render_mode cull_disabled;
 
 uniform sampler2D albedo : source_color, repeat_disable;
-uniform vec3 modulate : source_color = vec3(1.0);
+instance uniform vec3 modulate : source_color = vec3(1.0);
 uniform sampler2D texture_aoe : source_color;
 uniform float metalic : hint_range(0.0, 1.0) = 0.5;
 uniform float specular : hint_range(0.0, 1.0) = 0.5;
 uniform float roughness : hint_range(0.0, 1.0) = 0.5;
-uniform vec3 aabb = vec3(1.0);
 
 group_uniforms variation;
 uniform float random_hue : hint_range(0.0, 1.0) = 0.0;
@@ -60,7 +59,7 @@ group_uniforms;
 uniform float contact_height = -999.0;
 uniform vec2 contact_amp = vec2(0.0);
 
-varying vec3 aabb_factor;
+varying vec2 local_surface_position;
 varying float node_random_seed;
 
 float hash(vec2 p) {
@@ -222,27 +221,28 @@ float get_broken_edge_alpha(vec2 uv) {
 }
 
 void vertex() {
-	aabb_factor = VERTEX / aabb;
-	aabb_factor.xz += aabb.xz * 0.5;
+	local_surface_position = VERTEX.xz;
 	node_random_seed = hash_position(NODE_POSITION_WORLD);
 }
 
 void fragment() {
-	vec2 base_uv = UV;
-	base_uv += (texture(disorder, base_uv).r * 2.0 - 1.0) * 0.001;
+	vec2 boundary_uv = UV;
+	vec2 surface_uv = local_surface_position;
+	vec2 procedural_uv = surface_uv;
+	procedural_uv += (texture(disorder, surface_uv).r * 2.0 - 1.0) * 0.001;
 
-	vec3 aoe_color = texture(texture_aoe, base_uv).rgb;
-	ALBEDO = texture(albedo, vec2(aabb_factor.x, 1.0 - aabb_factor.y)).rgb;
+	vec3 aoe_color = texture(texture_aoe, boundary_uv).rgb;
+	ALBEDO = texture(albedo, vec2(boundary_uv.x, 1.0 - boundary_uv.y)).rgb;
 
-	vec4 color_detail = texture(texture_detail, UV * detail_uv_scale);
+	vec4 color_detail = texture(texture_detail, boundary_uv * detail_uv_scale);
 	ALBEDO = mix(ALBEDO, color_detail.rgb, detail * color_detail.a);
 
 	METALLIC = metalic;
 	ROUGHNESS = roughness;
 	SPECULAR = specular;
 
-	vec2 quad_edge_dist = min(UV, vec2(1.0) - UV);
-	float quad_outline_noise = (texture(disorder, base_uv * quad_outline_distortion_scale).r * 2.0 - 1.0) * quad_outline_distortion;
+	vec2 quad_edge_dist = min(boundary_uv, vec2(1.0) - boundary_uv);
+	float quad_outline_noise = (texture(disorder, surface_uv * quad_outline_distortion_scale).r * 2.0 - 1.0) * quad_outline_distortion;
 	vec2 quad_outline_width_distorted = max(quad_outline_width + vec2(quad_outline_noise), vec2(0.0));
 	float quad_outline_x = 1.0 - step(quad_outline_width_distorted.x, quad_edge_dist.x);
 	float quad_outline_y = 1.0 - step(quad_outline_width_distorted.y, quad_edge_dist.y);
@@ -250,9 +250,9 @@ void fragment() {
 	ALBEDO = mix(ALBEDO, quad_outline_color.rgb, quad_outline * quad_outline_color.a);
 
 	if (length(tile_size) > 0.0) {
-		tile_info info = make_tile_info(base_uv, vec2(0.0), tile_size);
+		tile_info info = make_tile_info(procedural_uv, vec2(0.0), tile_size);
 		vec2 edge_dist = min(info.coord_in_tile, vec2(1.0) - info.coord_in_tile);
-		float outline_noise = (texture(disorder, base_uv * tile_size * tile_outline_distortion_scale).r * 2.0 - 1.0) * tile_outline_distortion;
+		float outline_noise = (texture(disorder, surface_uv * tile_size * tile_outline_distortion_scale).r * 2.0 - 1.0) * tile_outline_distortion;
 		vec2 outline_width = max(tile_outline_width + vec2(outline_noise), vec2(0.0));
 		float outline_x = 1.0 - step(outline_width.x, edge_dist.x);
 		float outline_y = 1.0 - step(outline_width.y, edge_dist.y);
@@ -276,10 +276,10 @@ void fragment() {
 
 	AO = aoe_color.r;
 
-	float contact_noise = noise_from_uv(aabb_factor.xy * contact_amp) * 0.1;
-	float contact_alpha = round(aabb_factor.y + (0.5 - contact_height) + contact_noise);
-	float bullet_hole_alpha = get_bullet_hole_alpha(UV);
-	float broken_edge_alpha = get_broken_edge_alpha(UV);
+	float contact_noise = noise_from_uv(surface_uv * contact_amp) * 0.1;
+	float contact_alpha = round(boundary_uv.y + (0.5 - contact_height) + contact_noise);
+	float bullet_hole_alpha = get_bullet_hole_alpha(boundary_uv);
+	float broken_edge_alpha = get_broken_edge_alpha(boundary_uv);
 	float detail_alpha = mix(1.0, color_detail.a, detail);
 
 	ALPHA = min(detail_alpha, min(contact_alpha, min(bullet_hole_alpha, broken_edge_alpha)));

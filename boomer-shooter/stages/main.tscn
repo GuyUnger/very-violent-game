@@ -36,6 +36,7 @@ script = ExtResource("3_7iyax")
 
 [node name="Time" type="Label" parent="HUD" unique_id=617921250]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

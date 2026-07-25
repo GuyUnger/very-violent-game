@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ca55ffsq0gaqr"]
 
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_t24d4"]
+[ext_resource type="PackedScene" uid="uid://bx8tr0b4m334h" path="res://stages/level_office.tscn" id="2_7j07r"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_3r05p"]
 [ext_resource type="PackedScene" uid="uid://dm6fq1rqip8cg" path="res://stages/wall_150x240_brick.tscn" id="5_xwdd5"]
 [ext_resource type="Shader" uid="uid://c2fkgivfy8owk" path="res://stages/generic_wall_shader_x.gdshader" id="6_4sh1e"]
@@ -61,7 +62,7 @@ size = Vector3(50, 0.01, 50)
 [node name="Main" unique_id=508795477 instance=ExtResource("1_t24d4")]
 time = 10000.0
 track_num = 1
-next_level = null
+next_level = ExtResource("2_7j07r")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="0" unique_id=1007040939]
 transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)

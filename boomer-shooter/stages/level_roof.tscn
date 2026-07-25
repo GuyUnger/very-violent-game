@@ -3,17 +3,27 @@
 [ext_resource type="PackedScene" uid="uid://bs15p6iks3jtm" path="res://stages/main.tscn" id="1_ed5qn"]
 [ext_resource type="PackedScene" uid="uid://c5sjuibhdjfue" path="res://stages/level_building_site.tscn" id="2_rt85c"]
 [ext_resource type="Texture2D" uid="uid://hn6hlckxovhc" path="res://grafitti/wasd_to_move.png" id="3_rt85c"]
+[ext_resource type="Texture2D" uid="uid://gq2d0wnob3gg" path="res://textures/2.png" id="4_0vij8"]
 [ext_resource type="Texture2D" uid="uid://bnstvqeqf8p5w" path="res://grafitti/shift_to_run_throught_stuff.png" id="4_mdalf"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="5_2kuw3"]
+[ext_resource type="Texture2D" uid="uid://cfnp2m0os1a8a" path="res://grafitti/ctrl_to_crawl.png" id="5_iafuh"]
+[ext_resource type="Texture2D" uid="uid://dqch027utm1qs" path="res://textures/4.png" id="5_mal56"]
+[ext_resource type="Texture2D" uid="uid://cb5dnbbymmv5v" path="res://textures/1.png" id="6_iafuh"]
 [ext_resource type="PackedScene" uid="uid://c68pwuni7f2gj" path="res://stages/wall_150x240_mdf.tscn" id="7_1l8k0"]
+[ext_resource type="Texture2D" uid="uid://dojpp1a1cplfg" path="res://textures/3.png" id="7_3kfmi"]
 [ext_resource type="PackedScene" uid="uid://dvpchx64kj01y" path="res://entities/entity_roof_thing.tscn" id="7_6i63k"]
+[ext_resource type="Shader" uid="uid://806x6fsb5w6d" path="res://stages/generic_object_wall_shader.gdshader" id="7_mdalf"]
 [ext_resource type="PackedScene" uid="uid://dm6fq1rqip8cg" path="res://stages/wall_150x240_brick.tscn" id="8_iafuh"]
 [ext_resource type="PackedScene" uid="uid://cdt1h8n7xyl38" path="res://entities/entity_electric_box.tscn" id="8_m3e3e"]
 [ext_resource type="PackedScene" uid="uid://84enu8tpbwe6" path="res://stages/wall_150x240_chain_fence.tscn" id="9_3uljd"]
 [ext_resource type="Script" uid="uid://hlrty7jwlqet" path="res://stages/switch.gd" id="9_c72ba"]
+[ext_resource type="Texture2D" uid="uid://dbv408kgcbdck" path="res://textures/graf.png" id="9_iafuh"]
+[ext_resource type="Texture2D" uid="uid://d1dqnnc4nj4xu" path="res://grafitti/shoot_bad_boys_through_walls.png" id="11_3kfmi"]
+[ext_resource type="PackedScene" uid="uid://bw0stjfc4qvlj" path="res://stages/ariel.tscn" id="11_5u6lf"]
+[ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="11_ed5qn"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="11_lkjap"]
+[ext_resource type="PackedScene" uid="uid://1bvlajyt7022" path="res://stages/ariel_2.tscn" id="12_e66yy"]
 [ext_resource type="PackedScene" uid="uid://cpxtsguisam0i" path="res://entities/entity_kitchen_sink.tscn" id="13_ed5qn"]
-[ext_resource type="Shader" uid="uid://c2fkgivfy8owk" path="res://stages/generic_wall_shader_x.gdshader" id="14_eci8u"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_p2ekv"]
 
@@ -22,196 +32,299 @@ noise = SubResource("FastNoiseLite_p2ekv")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hr7po"]
 render_priority = 0
-shader = ExtResource("14_eci8u")
-shader_parameter/modulate = Color(0.27517945, 0.23268655, 0.15797201, 1)
+shader = ExtResource("7_mdalf")
 shader_parameter/metalic = 0.11600000551
 shader_parameter/specular = 0.682000032395
 shader_parameter/roughness = 0.9550000453625
-shader_parameter/aabb = Vector3(0.325, 1, 1)
 shader_parameter/contact_height = -999.0
 shader_parameter/contact_amp = Vector2(0, 0)
+shader_parameter/random_hue = 0.0
 shader_parameter/detail = 0.0
 shader_parameter/detail_uv_scale = Vector2(1, 1)
-shader_parameter/tile_size = Vector2(10, 5)
+shader_parameter/tile_size = Vector2(1, 1)
 shader_parameter/tile_bricks = true
 shader_parameter/tile_seam_thickness = Vector2(0.005, 0.005)
-shader_parameter/tile_outline_width = Vector2(0.05, 0.055)
+shader_parameter/tile_outline_width = Vector2(0.05, 0.05)
 shader_parameter/tile_outline_color = Color(0, 0, 0, 0.39607844)
 shader_parameter/tile_outline_distortion = 0.07600000361
 shader_parameter/tile_outline_distortion_scale = Vector2(1, 1)
 shader_parameter/tile_modulate = Color(0, 0, 0, 1)
 shader_parameter/tile_variance = 0.73
-shader_parameter/quad_outline_width = Vector2(0.055, 0.1)
+shader_parameter/quad_outline_width = Vector2(0.1, 0.1)
 shader_parameter/quad_outline_color = Color(0, 0, 0, 0.32941177)
 shader_parameter/quad_outline_distortion = 0.0910000043225
 shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
-shader_parameter/wear = 0.0
-shader_parameter/wear_multiply = 0.0
 shader_parameter/disorder = SubResource("NoiseTexture2D_gju8q")
+shader_parameter/hole_count = 0
+shader_parameter/hole_atlas_grid = Vector2i(1, 1)
+shader_parameter/hole_uv_size = Vector2(0.08, 0.08)
+shader_parameter/hole_size_random_range = Vector2(0.85, 1.2)
+shader_parameter/wall_chunk_size = Vector2(1, 1)
+shader_parameter/broken = 0.0
+shader_parameter/break_edge_width = 0.12
+shader_parameter/edge_noise_scale = Vector2(5, 5)
+shader_parameter/edge_noise_strength = 0.08
+
+[sub_resource type="QuadMesh" id="QuadMesh_e66yy"]
+size = Vector2(1.5, 4.5)
+orientation = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_5u6lf"]
+size = Vector2(15, 9)
+orientation = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_tklcm"]
 size = Vector2(7.5, 4.5)
 orientation = 1
 
+[sub_resource type="QuadMesh" id="QuadMesh_mdalf"]
+size = Vector2(15, 1.5)
+orientation = 1
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_tklcm"]
-size = Vector3(50, 0.01, 50)
+size = Vector3(15, 0.01, 16.5)
+
+[sub_resource type="Gradient" id="Gradient_s64uj"]
+offsets = PackedFloat32Array(0, 0.9498069, 1)
+colors = PackedColorArray(0.34158427, 0.34158427, 0.3415842, 1, 0.738159, 0.738159, 0.73815894, 1, 0.26536027, 0.26536068, 0.2653602, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_07m6i"]
+gradient = SubResource("Gradient_s64uj")
+fill_from = Vector2(0.5071225, 0)
+fill_to = Vector2(0.5099715, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_07m6i"]
+frequency = 0.1512
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5cjay"]
+noise = SubResource("FastNoiseLite_07m6i")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n5wkr"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nr3wt"]
+noise = SubResource("FastNoiseLite_n5wkr")
+
+[sub_resource type="Image" id="Image_iafuh"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBAFloat",
+"height": 8,
+"mipmaps": false,
+"width": 8
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_e66yy"]
+image = SubResource("Image_iafuh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_poo33"]
+render_priority = 0
+shader = ExtResource("7_mdalf")
+shader_parameter/albedo = SubResource("GradientTexture2D_07m6i")
+shader_parameter/metalic = 0.0510000024225
+shader_parameter/specular = 0.6310000299725
+shader_parameter/roughness = 0.9750000463125
+shader_parameter/contact_height = -999.0
+shader_parameter/contact_amp = Vector2(0, 0)
+shader_parameter/random_hue = 1.0
+shader_parameter/detail = 0.0
+shader_parameter/detail_uv_scale = Vector2(1, 1)
+shader_parameter/tile_size = Vector2(2, 3)
+shader_parameter/tile_bricks = true
+shader_parameter/tile_seam_thickness = Vector2(0.04, 0.05)
+shader_parameter/tile_outline_width = Vector2(0.1, 0.1)
+shader_parameter/tile_outline_color = Color(0, 0, 0, 0.28627452)
+shader_parameter/tile_outline_distortion = 0.2510000119225
+shader_parameter/tile_outline_distortion_scale = Vector2(0.01, 0.01)
+shader_parameter/tile_modulate = Color(0, 0, 0, 1)
+shader_parameter/tile_variance = 0.875
+shader_parameter/quad_outline_width = Vector2(0.01, 0.01)
+shader_parameter/quad_outline_color = Color(0, 0, 0, 0.3882353)
+shader_parameter/quad_outline_distortion = 0.0150000007125
+shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/disorder = SubResource("NoiseTexture2D_5cjay")
+shader_parameter/holes = SubResource("ImageTexture_e66yy")
+shader_parameter/hole_count = 0
+shader_parameter/hole_atlas = ExtResource("11_ed5qn")
+shader_parameter/edge_noise_texture = SubResource("NoiseTexture2D_nr3wt")
+shader_parameter/hole_atlas_grid = Vector2i(1, 1)
+shader_parameter/hole_uv_size = Vector2(0.3, 0.3)
+shader_parameter/hole_size_random_range = Vector2(0.85, 1.2)
+shader_parameter/wall_chunk_size = Vector2(1.5, 2.4)
+shader_parameter/broken = 0.0
+shader_parameter/break_edge_width = 0.12
+shader_parameter/edge_noise_scale = Vector2(5, 5)
+shader_parameter/edge_noise_strength = 0.08
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2kuw3"]
+size = Vector2(20, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lkjap"]
+size = Vector2(15, 20)
 
 [node name="Main" unique_id=508795477 instance=ExtResource("1_ed5qn")]
 time = 10000.0
 track_num = 1
 next_level = ExtResource("2_rt85c")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="0" unique_id=1007040939]
+[node name="SubViewport" parent="SubViewportContainer" parent_id_path=PackedInt32Array(651636305) index="0" unique_id=376577687]
+screen_space_aa = 1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" index="0" unique_id=1007040939]
 transform = Transform3D(0.626133, -0.746421, 0.225419, 0.0231394, 0.306765, 0.951504, -0.779373, -0.590552, 0.209347, -48, 31.3619, -16)
 shadow_enabled = true
 directional_shadow_mode = 1
 
-[node name="Player" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="1" unique_id=1806949651]
+[node name="Player" parent="SubViewportContainer/SubViewport" index="1" unique_id=1806949651]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -17.704504, 1, 25.43086)
 
-[node name="WASDToMoveDecal" type="Decal" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="3" unique_id=981675600]
+[node name="WASDToMoveDecal" type="Decal" parent="SubViewportContainer/SubViewport" index="3" unique_id=981675600]
 transform = Transform3D(-4.8461416e-08, -1, 3.837788e-08, 0.11534224, -4.371139e-08, -0.9933258, 0.9933258, -4.371139e-08, 0.11534224, -16.381456, 2.459477, 25.503923)
 size = Vector3(1, 1, 1)
 texture_albedo = ExtResource("3_rt85c")
 modulate = Color(1, 1, 0, 1)
+normal_fade = 0.999
 
-[node name="ShiftToRunDecal" type="Decal" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="4" unique_id=1911844838]
+[node name="WASDToMoveDecal2" type="Decal" parent="SubViewportContainer/SubViewport" index="4" unique_id=1594731952]
+transform = Transform3D(-1, 8.742278e-08, 4.371139e-08, -4.371139e-08, 1.9106855e-15, -1, -8.742278e-08, -1, 1.9106855e-15, -17.320784, 2.170127, 27.748009)
+size = Vector3(1.5, 1, 2.4)
+texture_albedo = ExtResource("4_0vij8")
+albedo_mix = 0.95
+normal_fade = 0.999
+
+[node name="WASDToMoveDecal9" type="Decal" parent="SubViewportContainer/SubViewport" index="5" unique_id=1655109098]
+transform = Transform3D(-1, 8.742278e-08, 4.371139e-08, -4.371139e-08, 1.9106855e-15, -1, -8.742278e-08, -1, 1.9106855e-15, -14.30117, 2.2812302, 22.860666)
+size = Vector3(1, 1, 1.2)
+texture_albedo = ExtResource("5_iafuh")
+modulate = Color(1, 0, 1, 1)
+albedo_mix = 0.95
+normal_fade = 0.999
+
+[node name="WASDToMoveDecal3" type="Decal" parent="SubViewportContainer/SubViewport" index="6" unique_id=474837777]
+transform = Transform3D(-1, 8.742278e-08, 4.371139e-08, -4.371139e-08, 1.9106855e-15, -1, -8.742278e-08, -1, 1.9106855e-15, -23.289976, 2.1407485, 27.746128)
+size = Vector3(1.5, 1, 2.4)
+texture_albedo = ExtResource("5_mal56")
+albedo_mix = 0.53
+normal_fade = 0.999
+
+[node name="WASDToMoveDecal6" type="Decal" parent="SubViewportContainer/SubViewport" index="7" unique_id=371240181]
+transform = Transform3D(-4.371139e-08, -1, 0, -4.371139e-08, 1.9106855e-15, -1, 1, -4.371139e-08, -4.371139e-08, -16.073143, 2.1407485, 25.560251)
+size = Vector3(1.5, 1, 2.4)
+texture_albedo = ExtResource("5_mal56")
+normal_fade = 0.999
+
+[node name="WASDToMoveDecal7" type="Decal" parent="SubViewportContainer/SubViewport" index="8" unique_id=1580066704]
+transform = Transform3D(-4.371139e-08, -1, 0, -0.077182986, 3.3737755e-09, 0.99701697, -0.99701697, 4.3580997e-08, -0.077182986, -16.073143, 2.1407485, 27.144)
+size = Vector3(1.5, 1, 2.4)
+texture_albedo = ExtResource("5_mal56")
+normal_fade = 0.999
+
+[node name="WASDToMoveDecal8" type="Decal" parent="SubViewportContainer/SubViewport" index="9" unique_id=1011376962]
+transform = Transform3D(-4.371139e-08, -1, 0, -0.016449057, 7.190113e-10, -0.99986476, 0.99986476, -4.370548e-08, -0.016449057, -16.073143, 2.1407485, 24.127838)
+size = Vector3(1.5, 1, 2.4)
+texture_albedo = ExtResource("5_mal56")
+normal_fade = 0.999
+
+[node name="WASDToMoveDecal4" type="Decal" parent="SubViewportContainer/SubViewport" index="10" unique_id=428961061]
+transform = Transform3D(-1, 8.742278e-08, 4.371139e-08, -4.371139e-08, 1.9106855e-15, -1, -8.742278e-08, -1, 1.9106855e-15, -21.749058, 2.2111995, 27.75072)
+size = Vector3(1.5, 1, 2.4)
+texture_albedo = ExtResource("6_iafuh")
+albedo_mix = 0.59
+normal_fade = 0.999
+
+[node name="WASDToMoveDecal5" type="Decal" parent="SubViewportContainer/SubViewport" index="11" unique_id=427536038]
+transform = Transform3D(-4.371139e-08, -1, 0, -4.371139e-08, 1.9106855e-15, -1, 1, -4.371139e-08, -4.371139e-08, -12.250168, 2.2111995, 25.601185)
+size = Vector3(2.5, 1, 2.4)
+texture_albedo = ExtResource("7_3kfmi")
+normal_fade = 0.999
+
+[node name="WASDToMoveDecal10" type="Decal" parent="SubViewportContainer/SubViewport" index="12" unique_id=1206605862]
+transform = Transform3D(-0.021051327, 0.9997784, 9.201846e-10, -4.371139e-08, 1.9106855e-15, -1, -0.9997784, -0.021051327, 4.37017e-08, -10.263128, 2.2111995, 25.026802)
+size = Vector3(2.5, 1, 2.4)
+texture_albedo = ExtResource("9_iafuh")
+normal_fade = 0.999
+
+[node name="ShiftToRunDecal" type="Decal" parent="SubViewportContainer/SubViewport" index="13" unique_id=1911844838]
 transform = Transform3D(1, -4.7500315e-09, 3.7252903e-08, 4.4703484e-08, 0.11534224, -0.9933258, 1.8626451e-09, 0.9933258, 0.11534224, -17.192905, 2.2555618, 23.457346)
 size = Vector3(1, 1, 1.6643066)
 texture_albedo = ExtResource("4_mdalf")
 modulate = Color(0, 0.89337254, 0.5901293, 1)
 
-[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="5" unique_id=1966736859 instance=ExtResource("5_2kuw3")]
+[node name="ShootBadBoysThroughWallsDecal" type="Decal" parent="SubViewportContainer/SubViewport" index="14" unique_id=690781281]
+transform = Transform3D(-1, -8.208927e-08, -4.7336435e-08, 4.470348e-08, 0.11534224, -0.9933258, 8.556013e-08, -0.9933258, -0.11534224, -9.718569, 2.2369187, 26.242384)
+size = Vector3(1.3461914, 1, 2.1089478)
+texture_albedo = ExtResource("11_3kfmi")
+modulate = Color(1, 0.10326537, 0.38260537, 1)
+normal_fade = 0.592
+
+[node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" index="15" unique_id=1966736859 instance=ExtResource("5_2kuw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.082054, 2, 22.871895)
 allow_shotgun = false
 allow_sniper = false
 allow_revolver = false
 allow_katana = false
 
-[node name="Add_25_6_44" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="6" unique_id=1166933998 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_44" parent="SubViewportContainer/SubViewport" index="16" unique_id=1166933998 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -15.75, 0.998, 27.75)
 
-[node name="Add_25_6_45" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="7" unique_id=787299160 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_45" parent="SubViewportContainer/SubViewport" index="17" unique_id=787299160 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 27)
 
-[node name="Add_25_6_54" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="8" unique_id=304105555 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_54" parent="SubViewportContainer/SubViewport" index="18" unique_id=304105555 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -17.25, 0.998, 27.75)
 
-[node name="Add_25_6_55" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="9" unique_id=1628671505 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_55" parent="SubViewportContainer/SubViewport" index="19" unique_id=1628671505 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -18.75, 0.998, 27.75)
 
-[node name="Add_25_6_56" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="10" unique_id=1171986026 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_56" parent="SubViewportContainer/SubViewport" index="20" unique_id=1171986026 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -20.25, 0.998, 27.75)
 
-[node name="Add_25_6_59" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="11" unique_id=1653908215 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_59" parent="SubViewportContainer/SubViewport" index="21" unique_id=1653908215 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -21.75, 0.998, 27.75)
 
-[node name="Add_25_6_68" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="12" unique_id=637250467 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_68" parent="SubViewportContainer/SubViewport" index="22" unique_id=637250467 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -23.25, 0.998, 27.75)
 
-[node name="Add_25_6_58" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="13" unique_id=280483970 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_58" parent="SubViewportContainer/SubViewport" index="23" unique_id=280483970 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 24)
 
-[node name="Add_25_6_60" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="14" unique_id=1021829430 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_60" parent="SubViewportContainer/SubViewport" index="24" unique_id=1021829430 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 25.5)
 
-[node name="Add_25_6_64" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="15" unique_id=1884629746 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_64" parent="SubViewportContainer/SubViewport" index="25" unique_id=1884629746 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -15.75, 0.998, 23.25)
 
-[node name="Add_25_6_65" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="16" unique_id=491192477 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_65" parent="SubViewportContainer/SubViewport" index="26" unique_id=491192477 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -14.25, 0.998, 23.25)
 
-[node name="Add_25_6_67" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="17" unique_id=1669612737 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_67" parent="SubViewportContainer/SubViewport" index="27" unique_id=1669612737 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -11.25, 0.998, 23.25)
 
-[node name="Add_25_6_69" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="18" unique_id=656129496 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_69" parent="SubViewportContainer/SubViewport" index="28" unique_id=656129496 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -12, 0.998, 24)
 
-[node name="Add_25_6_101" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="19" unique_id=98496516 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_101" parent="SubViewportContainer/SubViewport" index="29" unique_id=98496516 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -12, 0.998, 25.5)
 
-[node name="Add_25_6_103" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="20" unique_id=727948796 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_103" parent="SubViewportContainer/SubViewport" index="30" unique_id=727948796 instance=ExtResource("8_iafuh")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -12, 0.998, 27)
 
-[node name="Add_25_6_70" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="21" unique_id=1586708545 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_70" parent="SubViewportContainer/SubViewport" index="31" unique_id=1586708545 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -13.5, 0.998, 24)
 
-[node name="Add_25_6_102" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="22" unique_id=1167691112 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_102" parent="SubViewportContainer/SubViewport" index="32" unique_id=1167691112 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -13.5, 0.998, 25.5)
 
-[node name="Add_25_6_104" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="23" unique_id=1297507447 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_104" parent="SubViewportContainer/SubViewport" index="33" unique_id=1297507447 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -13.5, 0.998, 27)
 
-[node name="Add_25_6_74" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="24" unique_id=1215347239 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -18.745264, 0.998, 21.75)
-
-[node name="Add_25_6_75" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="25" unique_id=2012077677 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -20.245264, 0.998, 21.75)
-
-[node name="Add_25_6_76" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="26" unique_id=752760372 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -21.745264, 0.998, 21.75)
-
-[node name="Add_25_6_77" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="27" unique_id=773634787 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -23.245264, 0.998, 21.75)
-
-[node name="Add_25_6_78" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="28" unique_id=1722881917 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -18.745264, 3.3919873, 21.75)
-
-[node name="Add_25_6_82" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="29" unique_id=734868905 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -17.245264, 0.998, 21.75)
-
-[node name="Add_25_6_83" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="30" unique_id=1040357916 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -17.245264, 3.3919873, 21.75)
-
-[node name="Add_25_6_90" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="31" unique_id=1299998443 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -15.745264, 0.998, 21.75)
-
-[node name="Add_25_6_91" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="32" unique_id=1249087217 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -15.745264, 3.3919873, 21.75)
-
-[node name="Add_25_6_94" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="33" unique_id=537913299 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -12.84203, 0.998, 22.320578)
-
-[node name="Add_25_6_96" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="34" unique_id=1550731100 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.34203, 0.998, 22.320578)
-
-[node name="Add_25_6_100" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="35" unique_id=1768599023 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.84203, 0.998, 22.320578)
-
-[node name="Add_25_6_97" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="36" unique_id=744248210 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.59203, 0.998, 21.570578)
-
-[node name="Add_25_6_98" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="37" unique_id=276338209 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.34203, 3.3496618, 22.320578)
-
-[node name="Add_25_6_99" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="38" unique_id=538440544 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.59203, 3.3496618, 21.570578)
-
-[node name="Add_25_6_95" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="39" unique_id=1765610621 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -12.84203, 3.3919873, 22.320578)
-
-[node name="Add_25_6_92" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="40" unique_id=1771090907 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-0.9238546, 0, 0.38274372, 0, 1, 0, -0.38274372, 0, -0.9238546, -14.279347, 0.998, 22.04752)
-
-[node name="Add_25_6_93" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="41" unique_id=1278504362 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-0.9238546, 0, 0.38274372, 0, 1, 0, -0.38274372, 0, -0.9238546, -14.279347, 3.3919873, 22.04752)
-
-[node name="Add_25_6_79" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="42" unique_id=962887097 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -20.245264, 3.3919873, 21.75)
-
-[node name="Add_25_6_80" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="43" unique_id=990410062 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -21.745264, 3.3919873, 21.75)
-
-[node name="Add_25_6_81" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="44" unique_id=1702324258 instance=ExtResource("8_iafuh")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -23.245264, 3.3919873, 21.75)
-
-[node name="Add_25_6_71" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="45" unique_id=458383436 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_71" parent="SubViewportContainer/SubViewport" index="34" unique_id=458383436 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -10.5, 0.998, 24)
 
-[node name="Add_25_6_72" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="46" unique_id=26721700 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_72" parent="SubViewportContainer/SubViewport" index="35" unique_id=26721700 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -10.5, 0.998, 25.5)
 
-[node name="PortalSpawns" type="Marker3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="47" unique_id=1496032339]
+[node name="PortalSpawns" type="Marker3D" parent="SubViewportContainer/SubViewport" index="36" unique_id=1496032339]
 unique_name_in_owner = true
 transform = Transform3D(0.99999225, 0, -0.003939375, 0, 1, 0, 0.003939375, 0, 0.99999225, 0, 1.0286875, 0)
 
@@ -227,57 +340,109 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.069435, 0, 29.504536)
 [node name="Marker3D4" type="Marker3D" parent="SubViewportContainer/SubViewport/PortalSpawns" index="3" unique_id=1014993579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.030981, 0, 32.551445)
 
-[node name="Add_25_6_73" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="48" unique_id=75849653 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_73" parent="SubViewportContainer/SubViewport" index="37" unique_id=75849653 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -10.5, 0.998, 27)
 
-[node name="Add_25_6_46" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="49" unique_id=485174638 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_46" parent="SubViewportContainer/SubViewport" index="38" unique_id=485174638 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -14.25, 0.998, 27.75)
 
-[node name="Add_25_6_48" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="50" unique_id=1752749714 instance=ExtResource("8_iafuh")]
+[node name="Add_25_6_48" parent="SubViewportContainer/SubViewport" index="39" unique_id=1752749714 instance=ExtResource("8_iafuh")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11.25, 0.998, 27.75)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="51" unique_id=1045057467]
+[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport" index="40" unique_id=1045057467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.0003613, 25.315857)
 
-[node name="Floor" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="0" unique_id=1724495000]
+[node name="Floor5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="0" unique_id=801482782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2480698, 0, 0.26791)
+material_override = SubResource("ShaderMaterial_hr7po")
+instance_shader_parameters/modulate = Color(0.22190201, 0.22190201, 0.22190201, 1)
+mesh = SubResource("QuadMesh_e66yy")
+skeleton = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="Floor6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="1" unique_id=782653530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24807, 0, 0.26791)
+material_override = SubResource("ShaderMaterial_hr7po")
+instance_shader_parameters/modulate = Color(0.22190201, 0.22190201, 0.22190201, 1)
+mesh = SubResource("QuadMesh_e66yy")
+skeleton = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="Floor4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="2" unique_id=270175347]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4992428, 0, 6.935379)
+material_override = SubResource("ShaderMaterial_hr7po")
+instance_shader_parameters/modulate = Color(0.22190201, 0.22190201, 0.22190201, 1)
+mesh = SubResource("QuadMesh_5u6lf")
+skeleton = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="Floor3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="3" unique_id=1907802675]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2475824, 0, 0.26791)
 material_override = SubResource("ShaderMaterial_hr7po")
+instance_shader_parameters/modulate = Color(0.22190201, 0.22190201, 0.22190201, 1)
 mesh = SubResource("QuadMesh_tklcm")
 skeleton = NodePath("../..")
 metadata/_edit_group_ = true
 
-[node name="Floor2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="1" unique_id=2011785658]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2475824, 0, -4.2227917)
+[node name="Floor2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="4" unique_id=2011785658]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -2.4855752, 0, -2.732)
 material_override = SubResource("ShaderMaterial_hr7po")
-mesh = SubResource("QuadMesh_tklcm")
+instance_shader_parameters/modulate = Color(0.22190201, 0.22190201, 0.22190201, 1)
+mesh = SubResource("QuadMesh_mdalf")
 skeleton = NodePath("../..")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="2" unique_id=1677534485]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="5" unique_id=1677534485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 4.75)
 shape = SubResource("BoxShape3D_tklcm")
 
-[node name="EntityBlocker" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="52" unique_id=58870841 instance=ExtResource("7_6i63k")]
+[node name="EntityBlocker" parent="SubViewportContainer/SubViewport" index="41" unique_id=58870841 instance=ExtResource("7_6i63k")]
 transform = Transform3D(-4.371139e-08, 0, -1, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1.9106855e-15, -13.585084, 2.2301896, 23.297316)
 
-[node name="Switch" type="Node" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="53" unique_id=345845721 node_paths=PackedStringArray("node", "blocker")]
+[node name="Switch" type="Node" parent="SubViewportContainer/SubViewport" index="42" unique_id=345845721 node_paths=PackedStringArray("node", "blocker")]
 script = ExtResource("9_c72ba")
 node = NodePath("../EntityElectricBox")
 blocker = NodePath("../EntityBlocker")
 
-[node name="EntityElectricBox" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="54" unique_id=312249332 instance=ExtResource("8_m3e3e")]
+[node name="EntityElectricBox" parent="SubViewportContainer/SubViewport" index="43" unique_id=312249332 instance=ExtResource("8_m3e3e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.481632, 2.4002376, 27.310648)
 max_hp = 5
+
+[node name="Ariel" parent="SubViewportContainer/SubViewport" index="44" unique_id=974456267 instance=ExtResource("11_5u6lf")]
+transform = Transform3D(1, 0, 0, 0, 0.9987431, -0.050121315, 0, 0.050121315, 0.9987431, -14.825708, 4.074294, 26.079336)
+
+[node name="Ariel2" parent="SubViewportContainer/SubViewport" index="45" unique_id=1843244617 instance=ExtResource("11_5u6lf")]
+transform = Transform3D(0.25808194, -0.07541876, 0.9631748, 0.019519815, 0.997152, 0.07284893, -0.9659258, 0, 0.25881907, -15.764665, 7.074294, 17.897238)
+
+[node name="Ariel3" parent="SubViewportContainer/SubViewport" index="46" unique_id=760880899 instance=ExtResource("12_e66yy")]
+transform = Transform3D(0.113881715, 0.02871074, -0.99307936, -0.0032709765, 0.9995878, 0.0285238, 0.9934889, 0, 0.113928676, -23.039555, 8.057112, 17.897238)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer" parent_id_path=PackedInt32Array(651636305) index="1" unique_id=741760043]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -17.131458, -3.7873666, 20.405516)
+material_override = SubResource("ShaderMaterial_poo33")
+instance_shader_parameters/modulate = Color(0.9532507, 0.5518115, 0.40088117, 1)
+mesh = SubResource("PlaneMesh_2kuw3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer" parent_id_path=PackedInt32Array(651636305) index="2" unique_id=999232618]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -16.468, -9.007, 21.84)
+material_override = SubResource("ShaderMaterial_poo33")
+mesh = SubResource("PlaneMesh_lkjap")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer" parent_id_path=PackedInt32Array(651636305) index="3" unique_id=1173465743]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -24.003, -8.999, 29.34)
+material_override = SubResource("ShaderMaterial_poo33")
+mesh = SubResource("PlaneMesh_lkjap")
 
 [node name="npc_grunt" parent="." index="4" unique_id=2002078780 instance=ExtResource("11_lkjap")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.576158, 1.0129229, 28.242474)
 move_attack_burst_interval_range = Vector2(4, 6)
 
 [node name="npc_grunt2" parent="." index="5" unique_id=2137270215 instance=ExtResource("11_lkjap")]
-transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, -12.977182, 1.0129229, 31.72575)
+transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, -12.470617, 1.0129229, 31.72575)
 move_attack_burst_interval_range = Vector2(4, 6)
 
 [node name="npc_grunt3" parent="." index="6" unique_id=463526937 instance=ExtResource("11_lkjap")]
-transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -13.668895, 1.0129229, 31.561031)
+transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -13.133167, 1.0129229, 31.603603)
 move_attack_burst_interval_range = Vector2(4, 6)
 
 [node name="npc_grunt4" parent="." index="7" unique_id=1287385262 instance=ExtResource("11_lkjap")]

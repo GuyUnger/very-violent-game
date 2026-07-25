@@ -14,16 +14,29 @@ frequency = 0.0022
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fr0px"]
 noise = SubResource("FastNoiseLite_n5wkr")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oj4nc"]
+[sub_resource type="Image" id="Image_0kq4r"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBAFloat",
+"height": 8,
+"mipmaps": false,
+"width": 8
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_5fhos"]
+image = SubResource("Image_0kq4r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6a87"]
 render_priority = 0
 shader = ExtResource("2_wavvi")
+shader_parameter/holes = SubResource("ImageTexture_5fhos")
 shader_parameter/hole_count = 0
 shader_parameter/hole_atlas = ExtResource("3_l3r30")
 shader_parameter/edge_noise_texture = SubResource("NoiseTexture2D_fr0px")
 shader_parameter/hole_atlas_grid = Vector2i(1, 1)
 shader_parameter/hole_uv_size = Vector2(0.3, 0.3)
 shader_parameter/hole_size_random_range = Vector2(0.85, 1.2)
-shader_parameter/wall_chunk_size = Vector2(1, 3)
+shader_parameter/wall_chunk_size = Vector2(1.5, 2.4)
 shader_parameter/broken = 0.0
 shader_parameter/break_edge_width = 0.12
 shader_parameter/edge_noise_scale = Vector2(5, 5)
@@ -41,6 +54,7 @@ size = Vector3(0.025, 0.09, 2.4)
 radius = 0.18
 
 [node name="Add_25_6_27" type="StaticBody3D" unique_id=787299160]
+collision_layer = 17
 script = ExtResource("1_acrx6")
 max_health = 50
 wall_color = Color(0.48700923, 0.48700923, 0.48700923, 1)
@@ -52,7 +66,8 @@ shape = SubResource("BoxShape3D_tklcm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=191552772]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0.05)
-material_override = SubResource("ShaderMaterial_oj4nc")
+material_override = SubResource("ShaderMaterial_f6a87")
+instance_shader_parameters/wall_color = Color(0.7863468, 0.78634685, 0.78634685, 1)
 mesh = SubResource("PlaneMesh_tklcm")
 
 [node name="struts" type="MeshInstance3D" parent="." unique_id=1753414505]
@@ -67,18 +82,22 @@ mesh = SubResource("BoxMesh_tklcm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 stream = ExtResource("4_1jot5")
 
-[node name="SnapPoints" type="Node3D" parent="."]
+[node name="SnapPoints" type="Node3D" parent="." unique_id=228530795]
 
-[node name="SnapLeft" type="Area3D" parent="SnapPoints"]
+[node name="SnapLeft" type="Area3D" parent="SnapPoints" unique_id=123688105]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.2, 0)
+collision_layer = 524288
+collision_mask = 524288
 metadata/snap_axis = -1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPoints/SnapLeft"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPoints/SnapLeft" unique_id=874345878]
 shape = SubResource("SphereShape3D_snap")
 
-[node name="SnapRight" type="Area3D" parent="SnapPoints"]
+[node name="SnapRight" type="Area3D" parent="SnapPoints" unique_id=550292466]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.2, 0)
+collision_layer = 524288
+collision_mask = 524288
 metadata/snap_axis = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPoints/SnapRight"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPoints/SnapRight" unique_id=419288966]
 shape = SubResource("SphereShape3D_snap")
