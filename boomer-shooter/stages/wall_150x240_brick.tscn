@@ -6,6 +6,16 @@
 [ext_resource type="AudioStream" uid="uid://cavtdu5mpdr6r" path="res://31622__srehpog__light_crate_smash1.wav" id="4_miypa"]
 [ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="5_nr3wt"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr7po"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nlwex"]
+flip_faces = true
+size = Vector2(1.5, 0.1)
+orientation = 2
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_tklcm"]
 size = Vector3(1.5, 0.01, 2.4)
 
@@ -45,7 +55,6 @@ image = SubResource("Image_5cjay")
 render_priority = 0
 shader = ExtResource("3_5cjay")
 shader_parameter/albedo = SubResource("GradientTexture2D_07m6i")
-shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/metalic = 0.0510000024225
 shader_parameter/specular = 0.6310000299725
 shader_parameter/roughness = 0.9750000463125
@@ -97,8 +106,13 @@ max_health = 200
 bullet_stopping_power = 100.0
 metadata/_edit_group_ = true
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=588938062]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.4056048, 0)
+material_override = SubResource("StandardMaterial3D_hr7po")
+mesh = SubResource("PlaneMesh_nlwex")
+skeleton = NodePath("../MeshInstance3D")
+
 [node name="Add_25_6_27" parent="." unique_id=340759234 instance=ExtResource("2_07m6i")]
-collision_layer = 17
 wall_color = Color(0.5364613, 0.7055091, 0.26779667, 1)
 exclude_from_snap = true
 
@@ -109,6 +123,7 @@ shape = SubResource("BoxShape3D_tklcm")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=191552772]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
 material_override = SubResource("ShaderMaterial_g55pv")
+instance_shader_parameters/modulate = Color(1, 1, 1, 1)
 mesh = SubResource("PlaneMesh_tklcm")
 
 [node name="struts" type="MeshInstance3D" parent="." unique_id=1753414505]

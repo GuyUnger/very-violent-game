@@ -13,6 +13,7 @@ signal spotted_enemy
 @export var move_attack_burst_interval_range := Vector2(4.0, 6.0)
 @export var surprised_time := 1.0
 @export_range(0.0, 2.0, 0.01) var attack_vertical_spread := 0.35
+@export_range(0, 100, 1) var intentional_misses_remaining := 1
 @export var auto_burst_shot_range := Vector2i(3, 6)
 @export var ignore_player_hearing := false
 @export var draw_debug_vision_ray := false
@@ -284,6 +285,28 @@ func roll_auto_burst_shot_count() -> int:
 	return randi_range(maxi(shot_min, 1), shot_max)
 
 
+func get_intentional_miss_offset(
+		from_position: Vector3,
+		aim_position: Vector3) -> Vector3:
+	if intentional_misses_remaining <= 0:
+		return Vector3.ZERO
+
+	var to_target := aim_position - from_position
+	var flat_direction := Vector3(to_target.x, 0.0, to_target.z)
+	var miss_side := Vector3.RIGHT
+	if not flat_direction.is_zero_approx():
+		flat_direction = flat_direction.normalized()
+		miss_side = Vector3(-flat_direction.z, 0.0, flat_direction.x)
+
+	var side_sign := -1.0 if intentional_misses_remaining % 2 == 0 else 1.0
+	var miss_distance := maxf(1.5, to_target.length() * 0.35)
+	return miss_side * miss_distance * side_sign
+
+
+func consume_intentional_miss() -> void:
+	intentional_misses_remaining = maxi(intentional_misses_remaining - 1, 0)
+
+
 func melee() -> void:
 	health = 0
 	if has_node("%AudioMeleeSlash"):
@@ -300,10 +323,6 @@ func hit(damage: int) -> void:
 
 	#knock_back(from.knock_back * 0.01 * from.transform.basis.z)
 	
-	#if "is_ghost" in from and not from.is_ghost:
-	#	$AudioHurt.unit_size = 30
-	#	$AudioHurt.volume_db = 4.0
-	#else:
 	#$AudioHurt.unit_size = 10
 	#$AudioHurt.volume_db = 0.0
 	$AudioHurt.play()
@@ -646,7 +665,11 @@ class StateHeardEnemy extends State:
 			tl * sign(randf_range(-0.5, 0.5)),
 			randf_range(-get_parent().attack_vertical_spread, get_parent().attack_vertical_spread),
 			tl * sign(randf_range(-0.5, 0.5)))
-		var aim_dir = weapon.global_position.direction_to(heard_position + Vector3.UP + miss)
+		var aim_position := heard_position + Vector3.UP
+		miss += get_parent().get_intentional_miss_offset(
+			weapon.global_position,
+			aim_position)
+		var aim_dir = weapon.global_position.direction_to(aim_position + miss)
 
 		weapon.aim_dir = aim_dir
 		if waiting_for_shot:
@@ -662,6 +685,7 @@ class StateHeardEnemy extends State:
 
 	func _on_shot_fired() -> void:
 		waiting_for_shot = false
+		get_parent().consume_intentional_miss()
 		if weapon and weapon.auto:
 			burst_shots_left -= 1
 			if burst_shots_left > 0:
@@ -762,8 +786,11 @@ class StateAttacking extends State:
 			tl * sign(randf_range(-0.5, 0.5)),
 			randf_range(-get_parent().attack_vertical_spread, get_parent().attack_vertical_spread),
 			tl * sign(randf_range(-0.5, 0.5)))
-		
-		var aim_dir = weapon.global_position.direction_to(enemy.global_position + Vector3.UP + miss)
+		var aim_position := enemy.global_position + Vector3.UP
+		miss += get_parent().get_intentional_miss_offset(
+			weapon.global_position,
+			aim_position)
+		var aim_dir = weapon.global_position.direction_to(aim_position + miss)
 		
 		weapon.aim_dir = aim_dir
 		if waiting_for_shot:
@@ -779,6 +806,7 @@ class StateAttacking extends State:
 
 	func _on_shot_fired() -> void:
 		waiting_for_shot = false
+		get_parent().consume_intentional_miss()
 		if weapon and weapon.auto:
 			burst_shots_left -= 1
 			if burst_shots_left > 0:
@@ -868,6 +896,9 @@ class StateMoveAndAttack extends State:
 			tl * sign(randf_range(-0.5, 0.5)),
 			randf_range(-get_parent().attack_vertical_spread, get_parent().attack_vertical_spread),
 			tl * sign(randf_range(-0.5, 0.5)))
+		miss += get_parent().get_intentional_miss_offset(
+			weapon.global_position,
+			aim_position)
 		weapon.aim_dir = weapon.global_position.direction_to(aim_position + miss)
 
 		if waiting_for_shot:
@@ -883,6 +914,7 @@ class StateMoveAndAttack extends State:
 
 	func _on_shot_fired() -> void:
 		waiting_for_shot = false
+		get_parent().consume_intentional_miss()
 		if weapon and weapon.auto:
 			burst_shots_left -= 1
 			if burst_shots_left > 0:

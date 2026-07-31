@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://c4jrqhu06lb5a"]
+
+[ext_resource type="Script" uid="uid://burcrs8e4hft" path="res://map_editor/generic_geometry.gd" id="1_geometry"]
+[ext_resource type="Shader" uid="uid://806x6fsb5w6d" path="res://stages/generic_object_wall_shader.gdshader" id="3_1qsaj"]
+[ext_resource type="Resource" uid="uid://crbb4gtyyrcd4" path="res://map_editor/surfaces/walls/surface_concrete.tres" id="3_surface"]
+[ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="4_ll8gs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_17kpp"]
+render_priority = 0
+shader = ExtResource("3_1qsaj")
+shader_parameter/metalic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/roughness = 1.0
+shader_parameter/contact_height = -999.0
+shader_parameter/contact_amp = Vector2(0, 0)
+shader_parameter/random_hue = 0.01
+shader_parameter/detail = 0.0
+shader_parameter/detail_uv_scale = Vector2(1, 1)
+shader_parameter/tile_size = Vector2(0, 0)
+shader_parameter/tile_bricks = false
+shader_parameter/tile_seam_thickness = Vector2(0, 0)
+shader_parameter/tile_outline_width = Vector2(0, 0)
+shader_parameter/tile_outline_color = Color(1, 1, 1, 0)
+shader_parameter/tile_outline_distortion = 0.0
+shader_parameter/tile_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/tile_modulate = Color(1, 1, 1, 0)
+shader_parameter/tile_variance = 0.0
+shader_parameter/quad_outline_width = Vector2(0, 0)
+shader_parameter/quad_outline_color = Color(1, 1, 1, 0)
+shader_parameter/quad_outline_distortion = 0.0
+shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/hole_count = 0
+shader_parameter/hole_atlas = ExtResource("4_ll8gs")
+shader_parameter/hole_atlas_grid = Vector2i(1, 1)
+shader_parameter/hole_uv_size = Vector2(0.08, 0.08)
+shader_parameter/hole_size_random_range = Vector2(0.85, 1.2)
+shader_parameter/wall_chunk_size = Vector2(1, 1)
+shader_parameter/broken = 0.0
+shader_parameter/break_edge_width = 0.12
+shader_parameter/edge_noise_scale = Vector2(5, 5)
+shader_parameter/edge_noise_strength = 0.08
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tklcm"]
+resource_local_to_scene = true
+size = Vector2(1.5, 2.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape_geometry"]
+resource_local_to_scene = true
+size = Vector3(1.5, 2.4, 0.025)
+
+[node name="GenericGeometry" type="StaticBody3D" unique_id=1375637369]
+collision_layer = 17
+script = ExtResource("1_geometry")
+surface_definition = ExtResource("3_surface")
+
+[node name="Geometry" type="MeshInstance3D" parent="." unique_id=1746620242]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
+material_override = SubResource("ShaderMaterial_17kpp")
+instance_shader_parameters/modulate = Vector3(0.42, 0.43, 0.41)
+mesh = SubResource("PlaneMesh_tklcm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=785443002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("BoxShape_geometry")
+
+[node name="BreakSound" type="AudioStreamPlayer3D" parent="." unique_id=1134205348]

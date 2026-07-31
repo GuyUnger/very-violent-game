@@ -76,4 +76,10 @@ func play_track(p_track_num: int) -> void:
 	track_num = p_track_num
 	$Music.stream = intros[track_num]
 	$Music.play()
+
+
+func stop_music() -> void:
+	track_num = -1
+	$Music.stop()
+	$Music.stream = null
 	

@@ -26,6 +26,8 @@ height = 0.1
 radial_segments = 4
 rings = 2
 
+[sub_resource type="BoxMesh" id="BoxMesh_nlwex"]
+
 [node name="Node3D" type="Node3D" unique_id=496460611]
 top_level = true
 script = ExtResource("1_7sl0c")
@@ -39,3 +41,6 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_tynb1")
 draw_pass_1 = SubResource("SphereMesh_a77ay")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GPUParticles3D" unique_id=172478662]
+mesh = SubResource("BoxMesh_nlwex")

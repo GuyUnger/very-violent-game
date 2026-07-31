@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://17pis6wk3xdy"]
+
+[ext_resource type="Script" uid="uid://bp0cjpkmccv0v" path="res://credits.gd" id="1_s2ta7"]
+[ext_resource type="AudioStream" uid="uid://dhu8nxpooxhqf" path="res://content/sfx/bad_boys.mp3" id="2_7a8ye"]
+[ext_resource type="AudioStream" uid="uid://cadt2cc0m1ua1" path="res://content/sfx/chopper.mp3" id="3_0a7ni"]
+
+[sub_resource type="Animation" id="Animation_7a8ye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect/RichTextLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center]What's the misson?[/center]"]
+}
+
+[sub_resource type="Animation" id="Animation_ayt76"]
+resource_name = "new_animation"
+length = 10.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_7a8ye")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect/RichTextLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 2, 3.5, 4.0333333, 4.81, 5.366667, 6.233333, 7.1666665, 7.6666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "[center]OPERATOR: What's the misson?[/center]", "[center]colonel: The misson?[/center]", "[center]We got some[/center]", "[center][wave][font_size=64]BAD[/font_size][/wave][/center]", "[center][wave][font_size=64]BOYS[/font_size][/wave][/center]", "[center]in the house[/center]", "", "[center]and[/center]", "[center]you gotta take em out[/center]"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(9.966666),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_start_game"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7a8ye"]
+_data = {
+&"RESET": SubResource("Animation_7a8ye"),
+&"new_animation": SubResource("Animation_ayt76")
+}
+
+[node name="Credits" type="Control" unique_id=1551495255]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s2ta7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=375020842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=128934583]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 165.0
+offset_right = 2.0
+offset_bottom = -146.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]What's the misson?[/center]"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=440145759]
+stream = ExtResource("3_0a7ni")
+volume_db = -6.0
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1646220251]
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=649048869]
+libraries/ = SubResource("AnimationLibrary_7a8ye")

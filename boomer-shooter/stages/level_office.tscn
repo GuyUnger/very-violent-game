@@ -4,13 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://d0hlrlftrrwwo" path="res://stages/level_lobby.tscn" id="2_baw2n"]
 [ext_resource type="PackedScene" uid="uid://bbbv3fu0e64th" path="res://game/weapons/weapon_spawn.tscn" id="4_7vgyo"]
 [ext_resource type="PackedScene" uid="uid://dm6fq1rqip8cg" path="res://stages/wall_150x240_brick.tscn" id="5_diaet"]
-[ext_resource type="Shader" uid="uid://c2fkgivfy8owk" path="res://stages/generic_wall_shader_x.gdshader" id="6_tf8vv"]
+[ext_resource type="Shader" uid="uid://806x6fsb5w6d" path="res://stages/generic_object_wall_shader.gdshader" id="6_dsdei"]
 [ext_resource type="PackedScene" uid="uid://cvalijmkyj5by" path="res://stages/wall_150x240_glass.tscn" id="7_j2qhw"]
 [ext_resource type="Script" uid="uid://hlrty7jwlqet" path="res://stages/switch.gd" id="8_2kwpo"]
 [ext_resource type="PackedScene" uid="uid://cxcrfxnkao1me" path="res://stages/wall_150x240_cubicle.tscn" id="9_j83fb"]
 [ext_resource type="PackedScene" uid="uid://b4xf7s5682ywg" path="res://stages/wall_150x240_plaster.tscn" id="10_j83fb"]
 [ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://game/npc/npc_enemy_grunt.tscn" id="12_d4cw6"]
 [ext_resource type="PackedScene" uid="uid://v0boycsgos0n" path="res://game/npc/npc_enemy_grunt_smg.tscn" id="13_ad5ex"]
+
+[sub_resource type="Gradient" id="Gradient_baw2n"]
+colors = PackedColorArray(0.48129886, 0.5861098, 1.1551381e-06, 1, 0.31220868, 0.6719622, 0.81903404, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_baw2n"]
+gradient = SubResource("Gradient_baw2n")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_p2ekv"]
 
@@ -19,22 +25,22 @@ noise = SubResource("FastNoiseLite_p2ekv")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hr7po"]
 render_priority = 0
-shader = ExtResource("6_tf8vv")
-shader_parameter/modulate = Color(0.27517945, 0.23268655, 0.15797201, 1)
+shader = ExtResource("6_dsdei")
+shader_parameter/albedo = SubResource("GradientTexture2D_baw2n")
 shader_parameter/metalic = 0.11600000551
 shader_parameter/specular = 0.682000032395
 shader_parameter/roughness = 0.9550000453625
-shader_parameter/aabb = Vector3(1, 1, 1)
 shader_parameter/contact_height = -999.0
 shader_parameter/contact_amp = Vector2(0, 0)
+shader_parameter/random_hue = 0.0
 shader_parameter/detail = 0.0
 shader_parameter/detail_uv_scale = Vector2(1, 1)
-shader_parameter/tile_size = Vector2(10, 55)
+shader_parameter/tile_size = Vector2(5, 5)
 shader_parameter/tile_bricks = true
-shader_parameter/tile_seam_thickness = Vector2(0.01, 0.04)
-shader_parameter/tile_outline_width = Vector2(-0.055, 0.07)
-shader_parameter/tile_outline_color = Color(0, 0, 0, 0.39607844)
-shader_parameter/tile_outline_distortion = 0.07600000361
+shader_parameter/tile_seam_thickness = Vector2(0, 0)
+shader_parameter/tile_outline_width = Vector2(0.05, 0.07)
+shader_parameter/tile_outline_color = Color(0, 0, 0, 0.050980393)
+shader_parameter/tile_outline_distortion = 0.0890000042275
 shader_parameter/tile_outline_distortion_scale = Vector2(1, 1)
 shader_parameter/tile_modulate = Color(0, 0, 0, 1)
 shader_parameter/tile_variance = 0.73
@@ -42,25 +48,71 @@ shader_parameter/quad_outline_width = Vector2(0, 0)
 shader_parameter/quad_outline_color = Color(0, 0, 0, 0)
 shader_parameter/quad_outline_distortion = 0.0
 shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
-shader_parameter/wear = 0.0
-shader_parameter/wear_multiply = 0.0
 shader_parameter/disorder = SubResource("NoiseTexture2D_gju8q")
+shader_parameter/hole_count = 0
+shader_parameter/hole_atlas_grid = Vector2i(1, 1)
+shader_parameter/hole_uv_size = Vector2(0.08, 0.08)
+shader_parameter/hole_size_random_range = Vector2(0.85, 1.2)
+shader_parameter/wall_chunk_size = Vector2(1, 1)
+shader_parameter/broken = 0.0
+shader_parameter/break_edge_width = 0.12
+shader_parameter/edge_noise_scale = Vector2(5, 5)
+shader_parameter/edge_noise_strength = 0.08
 
 [sub_resource type="QuadMesh" id="QuadMesh_tklcm"]
-size = Vector2(21.215, 20)
+size = Vector2(19.5, 19)
 orientation = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tklcm"]
-size = Vector3(50, 0.01, 50)
+size = Vector3(19.864258, 0.01, 18.984863)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gju8q"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5b4h3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dsdei"]
+noise = SubResource("FastNoiseLite_5b4h3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfdu2"]
+render_priority = 0
+shader = ExtResource("6_dsdei")
+shader_parameter/metalic = 0.5
+shader_parameter/specular = 0.5
+shader_parameter/roughness = 0.5
+shader_parameter/contact_height = -999.0
+shader_parameter/contact_amp = Vector2(0, 0)
+shader_parameter/random_hue = 0.0
+shader_parameter/detail = 0.0
+shader_parameter/detail_uv_scale = Vector2(1, 1)
+shader_parameter/tile_size = Vector2(1.5, 1.5)
+shader_parameter/tile_bricks = false
+shader_parameter/tile_seam_thickness = Vector2(0.01, 0.01)
+shader_parameter/tile_outline_width = Vector2(0.02, 0.045)
+shader_parameter/tile_outline_color = Color(0, 0, 0, 0.21960784)
+shader_parameter/tile_outline_distortion = 0.0570000027075
+shader_parameter/tile_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/tile_modulate = Color(0, 0, 0, 1)
+shader_parameter/tile_variance = 0.455
+shader_parameter/quad_outline_width = Vector2(0.01, 0.015)
+shader_parameter/quad_outline_color = Color(0, 0, 0, 0.26666668)
+shader_parameter/quad_outline_distortion = 0.006000000285
+shader_parameter/quad_outline_distortion_scale = Vector2(1, 1)
+shader_parameter/disorder = SubResource("NoiseTexture2D_dsdei")
+shader_parameter/hole_count = 0
+shader_parameter/hole_atlas_grid = Vector2i(1, 1)
+shader_parameter/hole_uv_size = Vector2(0.08, 0.08)
+shader_parameter/hole_size_random_range = Vector2(0.85, 1.2)
+shader_parameter/wall_chunk_size = Vector2(1, 1)
+shader_parameter/broken = 0.0
+shader_parameter/break_edge_width = 0.12
+shader_parameter/edge_noise_scale = Vector2(5, 5)
+shader_parameter/edge_noise_strength = 0.08
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a5rx6"]
 flip_faces = true
-size = Vector2(22.89, 20)
+size = Vector2(19.5, 18)
 
 [node name="Main" unique_id=508795477 instance=ExtResource("1_5b4h3")]
 time = 10000.0
+entry_hint_message = "FLOOR 1"
 track_num = 1
 next_level = ExtResource("2_baw2n")
 
@@ -73,8 +125,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.34
 
 [node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="3" unique_id=1966736859 instance=ExtResource("4_7vgyo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0967655, 1.0502086, 29.556541)
+allow_shotgun = false
 allow_sniper = false
+allow_revolver = false
 allow_katana = false
+allow_smg = false
 allow_ak = true
 
 [node name="Add_25_6_45" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="4" unique_id=787299160 instance=ExtResource("5_diaet")]
@@ -131,7 +186,7 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -15,
 [node name="Add_25_6_68" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="21" unique_id=752403552 instance=ExtResource("5_diaet")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -15, 0.998, 19.5)
 
-[node name="Add_25_6_69" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="22" unique_id=756406689 instance=ExtResource("5_diaet")]
+[node name="Add_25_6_69" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="22" unique_id=1427653876 instance=ExtResource("5_diaet")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -15, 0.998, 18)
 
 [node name="Add_25_6_70" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="23" unique_id=1586708545 instance=ExtResource("5_diaet")]
@@ -150,22 +205,22 @@ transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, -14.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.511795, 1.0003613, 26.06858)
 
 [node name="Floor" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Floor" index="0" unique_id=341238013]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1206875, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73023987, 0, -0.2549839)
 material_override = SubResource("ShaderMaterial_hr7po")
+instance_shader_parameters/modulate = Color(1, 1, 1, 1)
 mesh = SubResource("QuadMesh_tklcm")
 skeleton = NodePath("../..")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Floor" index="1" unique_id=1677534485]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.511795, 0, -0.7527237)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73820496, 0, -0.24515533)
 shape = SubResource("BoxShape3D_tklcm")
 
 [node name="Ceiling" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Floor" index="2" unique_id=336016405]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.4165173, 0.18414307)
-material_override = SubResource("StandardMaterial3D_gju8q")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73649216, 2.4165173, 0.18414307)
+material_override = SubResource("ShaderMaterial_rfdu2")
 mesh = SubResource("PlaneMesh_a5rx6")
 skeleton = NodePath("../..")
-metadata/_edit_lock_ = true
 
 [node name="Wall150x240Glass14" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="28" unique_id=1432736824 instance=ExtResource("7_j2qhw")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -27, 0.998, 34.5)
@@ -660,62 +715,77 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.
 [node name="npc_grunt" parent="." index="22" unique_id=2002078780 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.617367, 1.0456944, 33.340252)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt2" parent="." index="23" unique_id=1773962719 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.190573, 1.0456944, 28.875137)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt3" parent="." index="24" unique_id=631811604 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.118301, 1.0456944, 22.709715)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt12" parent="." index="25" unique_id=699615411 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.763926, 1.0456944, 24.927881)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt13" parent="." index="26" unique_id=1554542168 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.680307, 1.0456944, 27.278486)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt14" parent="." index="27" unique_id=1428822118 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.640081, 1.0456944, 31.42927)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt15" parent="." index="28" unique_id=148159710 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.247242, 1.0456944, 30.509712)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt4" parent="." index="29" unique_id=1210582056 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.015455, 1.0456944, 20.695694)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt5" parent="." index="30" unique_id=1140116129 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.365152, 1.0456944, 20.695694)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt6" parent="." index="31" unique_id=2054250385 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.365152, 1.0456944, 24.853258)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt7" parent="." index="32" unique_id=920591785 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.365152, 1.0456944, 29.134277)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt8" parent="." index="33" unique_id=1549671828 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.025253, 1.0456944, 31.291008)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt9" parent="." index="34" unique_id=236623346 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.872744, 1.0456944, 33.32421)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt10" parent="." index="35" unique_id=276393975 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.864014, 1.0456944, 26.79806)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt11" parent="." index="36" unique_id=514172953 instance=ExtResource("12_d4cw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.741949, 1.0456944, 22.411749)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt16" parent="." index="37" unique_id=467367106 instance=ExtResource("13_ad5ex")]
 transform = Transform3D(-0.54913074, 0, -0.83573645, 0, 1, 0, 0.83573645, 0, -0.54913074, -8.985672, 1.0302943, 33.9246)

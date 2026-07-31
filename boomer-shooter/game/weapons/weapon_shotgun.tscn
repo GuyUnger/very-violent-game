@@ -55,10 +55,10 @@ unique_name_in_owner = true
 
 [node name="ShellEjection" type="Marker3D" parent="WorldModel/ShotgunContainer" unique_id=566192163]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000782948, 0.00282902, -0.0360167)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000782948, 0.00282902, -0.10106221)
 
 [node name="weapon_shotgun" parent="WorldModel/ShotgunContainer" unique_id=1037512156 instance=ExtResource("3_ri3d7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.10006051)
 
 [node name="Shotty" parent="WorldModel/ShotgunContainer/weapon_shotgun" index="0"]
 material_override = ExtResource("10_4p3ji")
@@ -71,6 +71,7 @@ surface_material_override/0 = ExtResource("10_4p3ji")
 
 [node name="Hand" type="Node3D" parent="WorldModel/ShotgunContainer" unique_id=2062600662]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.065045506)
 visible = false
 
 [node name="weapon_shotgun_arm_l" parent="WorldModel/ShotgunContainer/Hand" unique_id=766534899 instance=ExtResource("3_qelip")]

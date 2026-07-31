@@ -68,6 +68,7 @@ size = Vector2(20, 20)
 
 [node name="Main" unique_id=508795477 instance=ExtResource("1_2fgr7")]
 time = 10000.0
+entry_hint_message = "FLOOR 6"
 track_num = 1
 next_level = ExtResource("2_pu5br")
 
@@ -80,120 +81,130 @@ transform = Transform3D(-4.37114e-08, 0, -1, -8.742278e-08, -1, 3.8213718e-15, -
 skeleton = NodePath("../Player")
 
 [node name="Player" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="2" unique_id=1806949651]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17.558435, 1, 19.803177)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17.558435, 1.8424754, 19.803177)
 
 [node name="WeaponSpawn" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="4" unique_id=1966736859 instance=ExtResource("4_dbhrq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.084312, 1.0502086, 20.078453)
 allow_sniper = false
 allow_revolver = false
 allow_katana = false
+allow_smg = false
 
-[node name="Add_25_6_45" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="5" unique_id=787299160 instance=ExtResource("5_cwbth")]
+[node name="WeaponSpawn2" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="5" unique_id=401811973 instance=ExtResource("4_dbhrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.084312, 1.0502086, 15.95266)
+allow_shotgun = false
+allow_sniper = false
+allow_revolver = false
+allow_katana = false
+allow_smg = false
+allow_double_smg = true
+
+[node name="Add_25_6_45" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="6" unique_id=787299160 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 27)
 
-[node name="Add_25_6_54" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="6" unique_id=68949600 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_54" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="7" unique_id=68949600 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 28.5)
 
-[node name="Add_25_6_75" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="7" unique_id=993398975 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_75" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="8" unique_id=993398975 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -15, 0.998, 31.5)
 
-[node name="Add_25_6_61" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="8" unique_id=1940253816 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_61" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="9" unique_id=1940253816 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 31.5)
 
-[node name="Add_25_6_62" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="9" unique_id=1216086524 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_62" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="10" unique_id=1216086524 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 33)
 
-[node name="Add_25_6_63" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="10" unique_id=475130441 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_63" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="11" unique_id=475130441 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 34.5)
 
-[node name="Add_25_6_55" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="11" unique_id=1470593627 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_55" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="12" unique_id=1470593627 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -18.75, 0.998, 27.75)
 
-[node name="Add_25_6_59" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="12" unique_id=919715863 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_59" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="13" unique_id=919715863 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -21.933367, 0.998, 23.25)
 
-[node name="Add_25_6_57" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="13" unique_id=912714532 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_57" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="14" unique_id=912714532 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -21.75, 0.998, 27.75)
 
-[node name="Add_25_6_73" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="14" unique_id=274000480 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_73" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="15" unique_id=274000480 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -23.25, 0.998, 27.75)
 
-[node name="Add_25_6_74" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="15" unique_id=1029479632 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_74" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="16" unique_id=1029479632 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -24, 0.998, 30)
 
-[node name="Add_25_6_46" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="16" unique_id=1179719067 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_46" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="17" unique_id=1179719067 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -25.275, 1.0003613, 36.040855)
 
-[node name="Add_25_6_47" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="17" unique_id=935682022 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_47" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="18" unique_id=935682022 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -26.025, 1.0003613, 35.290855)
 
-[node name="Add_25_6_48" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="18" unique_id=59871825 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_48" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="19" unique_id=59871825 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -26.025, 1.0003613, 17.290855)
 
-[node name="Add_25_6_49" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="19" unique_id=1029032188 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_49" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="20" unique_id=1029032188 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, -25.275, 1.0003613, 16.540855)
 
-[node name="Add_25_6_50" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="20" unique_id=1134587521 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_50" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="21" unique_id=1134587521 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, -7.275, 1.0003613, 16.540855)
 
-[node name="Add_25_6_51" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="21" unique_id=946003436 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_51" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="22" unique_id=946003436 instance=ExtResource("5_cwbth")]
 transform = Transform3D(3.0597974e-07, 0, 1, 0, 1, 0, -1, 0, 3.0597974e-07, -6.525, 1.0003613, 17.290855)
 
-[node name="Add_25_6_52" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="22" unique_id=1906461710 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_52" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="23" unique_id=1906461710 instance=ExtResource("5_cwbth")]
 transform = Transform3D(3.0597974e-07, 0, 1, 0, 1, 0, -1, 0, 3.0597974e-07, -6.525, 1.0003613, 35.290855)
 
-[node name="Add_25_6_53" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="23" unique_id=1456622617 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_53" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="24" unique_id=1456622617 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -3.4969113e-07, 0, 1, 0, 3.4969113e-07, 0, 1, -7.275, 1.0003613, 36.040855)
 
-[node name="Add_25_6_58" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="24" unique_id=280483970 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_58" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="25" unique_id=280483970 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 24)
 
-[node name="Add_25_6_60" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="25" unique_id=1021829430 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_60" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="26" unique_id=1021829430 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.5, 0.998, 25.5)
 
-[node name="Add_25_6_64" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="26" unique_id=1884629746 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_64" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="27" unique_id=1884629746 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -15.75, 0.998, 23.25)
 
-[node name="Add_25_6_68" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="27" unique_id=1994100070 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_68" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="28" unique_id=1994100070 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -17.25, 0.998, 23.25)
 
-[node name="Add_25_6_69" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="28" unique_id=36021343 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_69" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="29" unique_id=36021343 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -18, 0.998, 21)
 
-[node name="Add_25_6_72" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="29" unique_id=299870164 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_72" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="30" unique_id=299870164 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -18, 0.998, 22.5)
 
-[node name="Add_25_6_65" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="30" unique_id=491192477 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_65" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="31" unique_id=491192477 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -14.25, 0.998, 23.25)
 
-[node name="Add_25_6_66" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="31" unique_id=1407090128 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_66" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="32" unique_id=1407090128 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -13.5, 0.998, 22.5)
 
-[node name="Add_25_6_67" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="32" unique_id=1921373930 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_67" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="33" unique_id=1921373930 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -13.5, 0.998, 21)
 
-[node name="Add_25_6_70" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="33" unique_id=1586708545 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_70" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="34" unique_id=1586708545 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -13.5, 0.998, 24)
 
-[node name="Add_25_6_102" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="34" unique_id=1167691112 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_102" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="35" unique_id=1167691112 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -13.5, 0.998, 25.5)
 
-[node name="Add_25_6_107" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="35" unique_id=110618058 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_107" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="36" unique_id=110618058 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, -11.25, 0.998, 26.25)
 
-[node name="Add_25_6_108" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="36" unique_id=641448783 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_108" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="37" unique_id=641448783 instance=ExtResource("5_cwbth")]
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, -8.25, 0.998, 26.25)
 
-[node name="Add_25_6_103" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="37" unique_id=1979033795 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_103" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="38" unique_id=1979033795 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, -13.5, 0.998, 27)
 
-[node name="Add_25_6_104" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="38" unique_id=301111571 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_104" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="39" unique_id=301111571 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-1, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -1, -14.25, 0.998, 27.75)
 
-[node name="Add_25_6_105" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="39" unique_id=1284435276 instance=ExtResource("5_cwbth")]
+[node name="Add_25_6_105" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="40" unique_id=1284435276 instance=ExtResource("5_cwbth")]
 transform = Transform3D(-1, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -1, -15.75, 0.998, 27.75)
 
-[node name="PortalSpawns" type="Marker3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="40" unique_id=1496032339]
+[node name="PortalSpawns" type="Marker3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="41" unique_id=1496032339]
 unique_name_in_owner = true
 transform = Transform3D(0.99999225, 0, -0.003939375, 0, 1, 0, 0.003939375, 0, 0.99999225, 0, 1.0286875, 0)
 
@@ -209,7 +220,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.069435, 0, 29.504536)
 [node name="Marker3D4" type="Marker3D" parent="SubViewportContainer/SubViewport/PortalSpawns" index="3" unique_id=1014993579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.030981, 0, 32.551445)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="41" unique_id=1045057467]
+[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="42" unique_id=1045057467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.0003613, 25.315857)
 
 [node name="Floor" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="0" unique_id=1724495000]
@@ -225,175 +236,132 @@ shape = SubResource("BoxShape3D_tklcm")
 
 [node name="Wall150x240Glass2" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="2" unique_id=1910185075 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2250004, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass3" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="3" unique_id=132631250 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7250004, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass4" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="4" unique_id=96801921 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2250004, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass5" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="5" unique_id=1830239258 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7250004, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass6" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="6" unique_id=1299337410 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7749996, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass7" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="7" unique_id=774004286 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2749996, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass8" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="8" unique_id=903424665 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7749996, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass9" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="9" unique_id=1122965675 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2749996, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass10" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="10" unique_id=410348264 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7749996, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass11" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="11" unique_id=226510493 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.275, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass12" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="12" unique_id=1073298384 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.775, 0, 10.724998)
-collision_layer = 17
 
 [node name="Wall150x240Glass13" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="13" unique_id=262570897 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, 8.474998)
-collision_layer = 17
 
 [node name="Wall150x240Glass14" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="14" unique_id=1432736824 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, 6.9749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass15" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="15" unique_id=721271059 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, 5.4749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass16" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="16" unique_id=3833709 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, 3.9749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass17" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="17" unique_id=538885067 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, 2.4749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass18" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="18" unique_id=85577337 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, 0.9749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass19" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="19" unique_id=660874888 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, -0.5250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass20" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="20" unique_id=566936294 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, -2.0250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass21" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="21" unique_id=1319320438 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, -3.5250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass22" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="22" unique_id=1009465090 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, -5.0250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass23" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="23" unique_id=409307259 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.025, 0, -6.5250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass35" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="24" unique_id=1888969075 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, 8.474998)
-collision_layer = 17
 
 [node name="Wall150x240Glass36" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="25" unique_id=1726517964 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, 6.9749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass37" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="26" unique_id=593456528 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, 5.4749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass38" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="27" unique_id=469948574 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, 3.9749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass39" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="28" unique_id=2088118435 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, 2.4749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass40" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="29" unique_id=2119971564 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, 0.9749985)
-collision_layer = 17
 
 [node name="Wall150x240Glass41" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="30" unique_id=1868315494 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, -0.5250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass42" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="31" unique_id=176152403 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, -2.0250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass43" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="32" unique_id=1937986438 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, -3.5250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass44" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="33" unique_id=1763800638 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.470774, 0, -5.0250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass45" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="34" unique_id=1111719801 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.475, 0, -6.5250015)
-collision_layer = 17
 
 [node name="Wall150x240Glass24" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="35" unique_id=1188451777 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.775, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass25" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="36" unique_id=2142702386 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8.275, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass26" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="37" unique_id=47771457 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6.7749996, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass27" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="38" unique_id=1410206359 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -5.2749996, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass28" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="39" unique_id=1264086075 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.7749996, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass29" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="40" unique_id=1779256924 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.2749996, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass30" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="41" unique_id=1553158985 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.7749996, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass31" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="42" unique_id=1416264564 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.7250004, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass32" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="43" unique_id=2028451017 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2.2250004, 0, -8.775002)
-collision_layer = 17
 
 [node name="Wall150x240Glass33" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="44" unique_id=27621239 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.7250004, 0, -8.775002)
-collision_layer = 17
 
 [node name="Ceiling" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="45" unique_id=1270063533]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0733738, 2.3937087, 0.8198986)
@@ -409,12 +377,11 @@ skeleton = NodePath("../..")
 
 [node name="Wall150x240Glass34" parent="SubViewportContainer/SubViewport/StaticBody3D2" index="47" unique_id=1413314669 instance=ExtResource("7_rhu2h")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.2250004, 0, -8.775002)
-collision_layer = 17
 
-[node name="Switch" type="Node" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="42" unique_id=345845721]
+[node name="Switch" type="Node" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="43" unique_id=345845721]
 script = ExtResource("8_4vqax")
 
-[node name="Columns" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="43" unique_id=71147146]
+[node name="Columns" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="44" unique_id=71147146]
 
 [node name="Add_25_6_32" parent="SubViewportContainer/SubViewport/Columns" index="0" unique_id=1425033640 instance=ExtResource("9_vq2am")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 32.74856)
@@ -446,7 +413,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 20.7485
 [node name="Add_25_6_41" parent="SubViewportContainer/SubViewport/Columns" index="9" unique_id=214865704 instance=ExtResource("9_vq2am")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 19.248562)
 
-[node name="Columns2" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="44" unique_id=519176828]
+[node name="Columns2" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="45" unique_id=519176828]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.321949, 0, 0)
 
 [node name="Add_25_6_32" parent="SubViewportContainer/SubViewport/Columns2" index="0" unique_id=697448078 instance=ExtResource("9_vq2am")]
@@ -479,7 +446,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 20.7485
 [node name="Add_25_6_41" parent="SubViewportContainer/SubViewport/Columns2" index="9" unique_id=286575468 instance=ExtResource("9_vq2am")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 19.248562)
 
-[node name="Columns3" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="45" unique_id=70922183]
+[node name="Columns3" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="46" unique_id=70922183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.627861, 0, 0)
 
 [node name="Add_25_6_32" parent="SubViewportContainer/SubViewport/Columns3" index="0" unique_id=1417890859 instance=ExtResource("9_vq2am")]
@@ -530,7 +497,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 20.7485
 [node name="Add_25_6_41" parent="SubViewportContainer/SubViewport/Columns3" index="15" unique_id=2129820550 instance=ExtResource("9_vq2am")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 19.248562)
 
-[node name="Columns4" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="46" unique_id=1146521774]
+[node name="Columns4" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="47" unique_id=1146521774]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.05253, 0, 0)
 
 [node name="Add_25_6_32" parent="SubViewportContainer/SubViewport/Columns4" index="0" unique_id=1918560337 instance=ExtResource("9_vq2am")]
@@ -560,7 +527,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 20.7485
 [node name="Add_25_6_41" parent="SubViewportContainer/SubViewport/Columns4" index="8" unique_id=1618294058 instance=ExtResource("9_vq2am")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 19.248562)
 
-[node name="Columns5" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="47" unique_id=794043073]
+[node name="Columns5" type="Node3D" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="48" unique_id=794043073]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.829615, 0, 0)
 
 [node name="Add_25_6_32" parent="SubViewportContainer/SubViewport/Columns5" index="0" unique_id=233748736 instance=ExtResource("9_vq2am")]
@@ -587,68 +554,89 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 20.7485
 [node name="Add_25_6_41" parent="SubViewportContainer/SubViewport/Columns5" index="7" unique_id=366265922 instance=ExtResource("9_vq2am")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.589602, 1.0181789, 19.248562)
 
-[node name="Add_25_6_27" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="48" unique_id=403738822 instance=ExtResource("13_vmj0r")]
+[node name="Add_25_6_27" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="49" unique_id=403738822 instance=ExtResource("13_vmj0r")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0.9979999, 19.5)
 
-[node name="Add_25_6_28" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="49" unique_id=476539891 instance=ExtResource("13_vmj0r")]
+[node name="Add_25_6_29" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="50" unique_id=11633897 instance=ExtResource("13_vmj0r")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0.9979999, 19.5)
+
+[node name="Add_25_6_28" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="51" unique_id=476539891 instance=ExtResource("13_vmj0r")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.5, 0.9979999, 19.5)
+
+[node name="Add_25_6_30" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="52" unique_id=3168102 instance=ExtResource("13_vmj0r")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.5, 0.9979999, 18)
+
+[node name="Add_25_6_31" parent="SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(376577687) index="53" unique_id=88618717 instance=ExtResource("13_vmj0r")]
+transform = Transform3D(-0.9659258, 0, 0.25881898, 0, 1, 0, -0.25881898, 0, -0.9659258, -14.119085, 0.9979999, 16.924755)
 
 [node name="npc_grunt2" parent="." index="4" unique_id=2137270215 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, -19.683622, 1.0129229, 23.284966)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt3" parent="." index="5" unique_id=463526937 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -20.898703, 1.0129229, 24.270927)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt4" parent="." index="6" unique_id=1287385262 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -23.99878, 1.0129229, 24.379978)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt6" parent="." index="7" unique_id=1204824259 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -21.854563, 1.0129229, 29.568827)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt7" parent="." index="8" unique_id=1166486625 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -18.962395, 1.0129229, 30.483322)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt9" parent="." index="9" unique_id=1203898446 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -21.270077, 1.0129229, 31.984207)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt11" parent="." index="10" unique_id=641106076 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, -9.351445, 1.0129229, 23.284966)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt12" parent="." index="11" unique_id=1747366272 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -9.710985, 1.0129229, 24.270927)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt14" parent="." index="12" unique_id=1667724016 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -12.187223, 1.0129229, 24.379978)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt15" parent="." index="13" unique_id=1528597144 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -11.374784, 1.0129229, 30.483322)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt16" parent="." index="14" unique_id=725486115 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -8.131046, 1.0129229, 30.483322)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt17" parent="." index="15" unique_id=2006887149 instance=ExtResource("10_v8wn3")]
 transform = Transform3D(0.5958197, 0, 0.80311817, 0, 1, 0, -0.80311817, 0, 0.5958197, -8.131046, 1.0129229, 33.361115)
 move_attack_burst_interval_range = Vector2(4, 6)
+intentional_misses_remaining = 1
 
 [node name="npc_grunt" parent="." index="16" unique_id=1994185987 instance=ExtResource("13_2fgr7")]
 transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -12.653108, 1.0354308, 33.7122)
 auto_burst_shot_range = Vector2i(3, 6)
 
 [node name="npc_grunt19" parent="." index="17" unique_id=624017852 instance=ExtResource("13_2fgr7")]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -23.150236, 1.0354308, 34.51779)
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -20.444155, 1.0354308, 34.51779)
 auto_burst_shot_range = Vector2i(3, 6)
 
 [node name="npc_grunt20" parent="." index="18" unique_id=188658707 instance=ExtResource("13_2fgr7")]
-transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -20.14476, 1.0354308, 34.51779)
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -19.799086, 1.0354308, 34.51779)
 auto_burst_shot_range = Vector2i(3, 6)

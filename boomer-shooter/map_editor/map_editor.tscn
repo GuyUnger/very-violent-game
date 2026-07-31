@@ -1,0 +1,291 @@
+[gd_scene format=3 uid="uid://di08wgojr4xhk"]
+
+[ext_resource type="Script" uid="uid://c3gkoye1geo0g" path="res://map_editor/map_editor_camera.gd" id="1_camera"]
+[ext_resource type="Script" uid="uid://cyp38nlw6fq4i" path="res://map_editor/map_editor.gd" id="1_editor"]
+[ext_resource type="Shader" uid="uid://cloixyvtqjaa0" path="res://map_editor/map_editor_grid.gdshader" id="2_grid"]
+[ext_resource type="Resource" uid="uid://fob2y8mijrk4" path="res://map_editor/default_map_editor_catalog.tres" id="4_catalog"]
+[ext_resource type="Script" uid="uid://dcyq6d321ce5k" path="res://map_editor/stack_thumbnail_renderer.gd" id="5_thumbnail_renderer"]
+[ext_resource type="Theme" uid="uid://bqdn1hl5c7fvl" path="res://map_editor/theme/space_worm_theme.tres" id="6_wu3br"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_grid"]
+render_priority = 1
+shader = ExtResource("2_grid")
+shader_parameter/cell_size = 1.5
+shader_parameter/line_width = 0.035
+shader_parameter/major_line_width = 0.06
+shader_parameter/major_every = 4.0
+shader_parameter/grid_color = Color(0.34, 0.37, 0.4, 1)
+shader_parameter/major_grid_color = Color(0.52, 0.56, 0.6, 1)
+shader_parameter/axis_x_color = Color(0.65, 0.2, 0.2, 1)
+shader_parameter/axis_z_color = Color(0.2, 0.35, 0.65, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_grid"]
+material = SubResource("ShaderMaterial_grid")
+size = Vector2(256, 256)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mouse_marker"]
+shading_mode = 0
+albedo_color = Color(1, 0.55, 0.12, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_mouse_marker"]
+material = SubResource("StandardMaterial3D_mouse_marker")
+radius = 0.075
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[sub_resource type="Environment" id="Environment_thumbnail"]
+background_mode = 1
+background_color = Color(0.075, 0.08, 0.09, 1)
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.65
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toolbar"]
+bg_color = Color(0.075, 0.08, 0.09, 0.96)
+border_width_bottom = 1
+border_color = Color(0.22, 0.24, 0.27, 1)
+
+[sub_resource type="Theme" id="Theme_tklcm"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_un4jc"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_categories"]
+
+[node name="MapEditor" type="Node3D" unique_id=93832437]
+script = ExtResource("1_editor")
+catalog = ExtResource("4_catalog")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2034690492]
+transform = Transform3D(0.8660254, -0.46985188, 0.17099498, 0, 0.34198993, 0.9397036, -0.50000006, -0.8138072, 0.29617193, 0, 0, 0)
+
+[node name="Grid" type="MeshInstance3D" parent="." unique_id=1252028112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.005, 0)
+mesh = SubResource("PlaneMesh_grid")
+
+[node name="MouseGroundMarker" type="MeshInstance3D" parent="." unique_id=352817191]
+unique_name_in_owner = true
+cast_shadow = 0
+mesh = SubResource("SphereMesh_mouse_marker")
+
+[node name="StackThumbnailRenderer" type="SubViewport" parent="." unique_id=2045145889]
+unique_name_in_owner = true
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(128, 128)
+render_target_update_mode = 0
+script = ExtResource("5_thumbnail_renderer")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="StackThumbnailRenderer" unique_id=65660945]
+environment = SubResource("Environment_thumbnail")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="StackThumbnailRenderer" unique_id=1755948146]
+transform = Transform3D(0.90630776, 0.1786062, -0.38302222, 0, 0.90630776, 0.42261827, 0.42261827, -0.38302222, 0.8213937, 0, 0, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="StackThumbnailRenderer" unique_id=1994028708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+projection = 1
+current = true
+size = 1.15
+
+[node name="PreviewRoot" type="Node3D" parent="StackThumbnailRenderer" unique_id=1887692935]
+
+[node name="Walls" type="Node3D" parent="." unique_id=1672610144]
+unique_name_in_owner = true
+
+[node name="Floors" type="Node3D" parent="." unique_id=965676723]
+unique_name_in_owner = true
+
+[node name="Npcs" type="Node3D" parent="." unique_id=404840810]
+unique_name_in_owner = true
+
+[node name="Props" type="Node3D" parent="." unique_id=1356524365]
+unique_name_in_owner = true
+
+[node name="Items" type="Node3D" parent="." unique_id=1685451671]
+unique_name_in_owner = true
+
+[node name="Meta" type="Node3D" parent="." unique_id=30002044]
+unique_name_in_owner = true
+
+[node name="WallPreview" type="Node3D" parent="." unique_id=1192233719]
+unique_name_in_owner = true
+
+[node name="FloorPreview" type="Node3D" parent="." unique_id=1106686798]
+unique_name_in_owner = true
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=78479095]
+script = ExtResource("1_camera")
+
+[node name="Camera" type="Camera3D" parent="CameraRig" unique_id=673818805]
+unique_name_in_owner = true
+transform = Transform3D(0.7071069, -0.45451954, 0.541675, 0, 0.76604426, 0.6427878, -0.70710665, -0.4545197, 0.54167515, 12, 14, 12)
+current = true
+fov = 100.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1759419708]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=2123778370]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_wu3br")
+theme_override_constants/separation = 0
+
+[node name="Toolbar" type="PanelContainer" parent="CanvasLayer/VBoxContainer" unique_id=1255742431]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toolbar")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Toolbar" unique_id=496982916]
+layout_mode = 2
+theme = SubResource("Theme_tklcm")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer" unique_id=2084348283]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SaveButton" type="Button" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer" unique_id=783873413]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer" unique_id=1094275590]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Load"
+
+[node name="ToolbarSpacer" type="Control" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer" unique_id=1667329782]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer" unique_id=611529645]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Play"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer" unique_id=347988273]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer2" unique_id=482793410]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="TopDownViewButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=2033433903]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_un4jc")
+text = "Top Down"
+
+[node name="IsometricViewButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=759202675]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_un4jc")
+text = "Isometric"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer" unique_id=1512198361]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer/MarginContainer" unique_id=1967386196]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer" unique_id=939835039]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer" unique_id=1926281613]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=137617113]
+layout_mode = 2
+
+[node name="WallsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=471061270]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "Walls"
+
+[node name="WallPaperCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1114578796]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "Wall papers"
+
+[node name="FloorsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1929483592]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "Floors"
+
+[node name="NpcsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=108872072]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "NPCs"
+
+[node name="ItemsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=623376184]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "Items"
+
+[node name="PropsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=605500144]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "Props"
+
+[node name="MetaCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=842583864]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "Meta"
+
+[node name="Palette" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=452476460]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/Palette" unique_id=2028039664]
+layout_mode = 2
+
+[node name="PaletteItems" type="HFlowContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/Palette/ScrollContainer" unique_id=698183184]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6

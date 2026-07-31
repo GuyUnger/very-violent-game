@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://game/player/gun_shot_smg_rand.tres" id="4_n1xeq"]
 [ext_resource type="Shader" uid="uid://20sgn88awuao" path="res://game/weapons/generic_object_material.gdshader" id="5_c3jnh"]
 [ext_resource type="Texture2D" uid="uid://b01dn10cx1omh" path="res://textures/weapon_ak_aoe_map.png" id="6_euqui"]
-[ext_resource type="ArrayMesh" uid="uid://i0ohag5fjnr8" path="res://models/guns/weapon_ak.res" id="7_euqui"]
+[ext_resource type="ArrayMesh" uid="uid://dr086t3cv1c1p" path="res://models/guns/weapon_ak.res" id="7_euqui"]
 [ext_resource type="Material" uid="uid://c1m0dsyp0q6ke" path="res://game/weapons/model/mat_smg.tres" id="8_g5wwi"]
 [ext_resource type="PackedScene" uid="uid://mswr2wkg0tv7" path="res://game/weapons/model/weapon_shotgun_arm_l.glb" id="9_t0px0"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="10_6qjfd"]
@@ -82,11 +82,12 @@ shadow_mesh = SubResource("ArrayMesh_vix3x")
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_euqui")
-fire_rate = 0.15
+fire_rate = 0.04
 auto = true
 hold_pose = 1
 recoil = 0.1
-ammo = 30
+penetration_power = 1.0
+ammo = 90
 pickup_sounds = Array[AudioStream]([ExtResource("2_t0px0"), ExtResource("3_b0c4c")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2058046379]
@@ -102,25 +103,26 @@ bus = &"SFX"
 [node name="WorldModel" type="Node3D" parent="." unique_id=1727778807]
 
 [node name="RightHand" type="Marker3D" parent="WorldModel" unique_id=1125408121]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0971346)
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.04912149, -0.06861538, -0.020460583)
 
 [node name="LeftHand" type="Marker3D" parent="WorldModel" unique_id=1564301264]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0891441)
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.069731995, -0.098128475, -0.20322804)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel" unique_id=173441840]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.000823617, 0.0554796)
+transform = Transform3D(0.9938602, 0.11064334, -4.836375e-09, -0.017638093, 0.15843515, -0.9872118, -0.10922842, 0.9811505, 0.15941392, -0.053730335, -0.07602807, -0.061199084)
 visible = false
 material_override = SubResource("StandardMaterial3D_6ml3f")
 mesh = SubResource("CylinderMesh_ls1xp")
 skeleton = NodePath("../../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel" unique_id=1439511002]
-transform = Transform3D(1, 0, 0, 0, 0.990105, -0.140331, 0, 0.140331, 0.990105, 0, -0.0524004, -0.0874176)
+transform = Transform3D(0.9938601, 0.01552669, 0.10954851, -0.017638091, 0.9996766, 0.018331066, -0.1092284, -0.020150721, 0.9938125, -0.06954096, -0.14958523, -0.19318072)
 visible = false
 material_override = SubResource("StandardMaterial3D_on6gv")
 mesh = SubResource("BoxMesh_3pcvd")
 
 [node name="weapon_smg" type="Node3D" parent="WorldModel" unique_id=1887486235]
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.059868786, -0.08400491, -0.115764245)
 
 [node name="SMG" type="MeshInstance3D" parent="WorldModel/weapon_smg" unique_id=802055146]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.014308721, 0.23176476)
@@ -139,17 +141,17 @@ skeleton = NodePath("")
 
 [node name="Hand" type="Node3D" parent="WorldModel" unique_id=619874301]
 unique_name_in_owner = true
-visible = false
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.059868786, -0.08400491, -0.115764245)
 
 [node name="weapon_shotgun_arm_l" parent="WorldModel/Hand" unique_id=2028316359 instance=ExtResource("9_t0px0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, 0.020194203, -0.035015)
+transform = Transform3D(0.08600178, -0.6205909, -0.7794062, -0.80918914, -0.4998948, 0.30874506, -0.5812246, 0.60413295, -0.5451668, 0.16432516, -0.05341707, 0.33094734)
 
 [node name="weapon_shotgun_arm_r" parent="WorldModel/Hand" unique_id=1809737912 instance=ExtResource("10_b0c4c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, 0.0007335562, 0.028258909)
 
 [node name="ShellEjection" type="Marker3D" parent="WorldModel" unique_id=1143028505]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00567615, 0.00567617)
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.059240755, -0.07750204, -0.11109991)
 
 [node name="Muzzleflash" parent="." unique_id=1464695937 instance=ExtResource("10_6qjfd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0058786273, 0.021714047, 0.52683616)

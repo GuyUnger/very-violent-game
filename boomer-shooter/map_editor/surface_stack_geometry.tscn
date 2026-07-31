@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://0k2r0baieqix"]
+
+[ext_resource type="Script" uid="uid://d2bhja0jqwgce" path="res://map_editor/surface_stack_geometry.gd" id="1_stack"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nc6uw"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_np7ky"]
+flip_faces = true
+size = Vector2(1.5, 0.1)
+orientation = 2
+
+[node name="SurfaceStackGeometry" type="Node3D" unique_id=1282712790]
+script = ExtResource("1_stack")
+
+[node name="EditorLine" type="MeshInstance3D" parent="." unique_id=1403428747]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.4056048, 0)
+material_override = SubResource("StandardMaterial3D_nc6uw")
+mesh = SubResource("PlaneMesh_np7ky")

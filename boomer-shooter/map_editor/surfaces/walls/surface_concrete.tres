@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SurfaceDefinition" format=3 uid="uid://crbb4gtyyrcd4"]
+
+[ext_resource type="Script" uid="uid://c54irsxyg2yc1" path="res://map_editor/surface_definition.gd" id="1_surface"]
+[ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="2_holes"]
+
+[resource]
+script = ExtResource("1_surface")
+id = &"surface_concrete"
+display_name = "Concrete"
+modulate = Color(0.42, 0.43, 0.41, 1)
+roughness = 1.0
+random_hue = 0.01
+hole_atlas = ExtResource("2_holes")
+bullet_stopping_power = 100.0
+max_health = 200

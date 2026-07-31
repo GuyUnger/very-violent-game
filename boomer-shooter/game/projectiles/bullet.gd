@@ -8,9 +8,6 @@ var speed := 40.0
 @export var knock_back := 1
 @export var penetration_power := 0.0
 
-var track_in_event_store := false
-var source_id := 0
-var is_ghost := false
 var collision_mask := 1 + 4
 var enemy
 var target_position: Vector3:
@@ -37,21 +34,6 @@ func _ready() -> void:
 		for node in get_tree().get_nodes_in_group("npc_enemies"):
 			node._heard(heard_position)
 	
-	var from_position: Vector3 = global_position
-	
-	
-	if source_id != 0:
-		is_ghost = true
-	elif track_in_event_store:
-		source_id = EventStore.next_source_id()
-		EventStore.push_event(EventStoreCommandAddChild.new(get_parent().source_id, source_id, load(scene_file_path), global_transform))
-		EventStore.push_event(EventStoreCommandSet.new(source_id, "collision_mask", collision_mask))
-		EventStore.push_event(EventStoreCommandSet.new(source_id, "damage", damage))
-	
-	if source_id != 0:
-		EventStore.register_source(source_id, self)
-	
-
 	await get_tree().process_frame
 	
 	var query := PhysicsRayQueryParameters3D.new()
@@ -60,35 +42,18 @@ func _ready() -> void:
 	query.from = global_position
 	query.to = global_position + global_transform.basis.z.normalized() * 100.0
 	
-	if not is_ghost:
-		var trace_result := _trace_bullet_path(query)
-		target_position = trace_result["target_position"]
-		for impact in trace_result["impacts"]:
-			_apply_impact(
-				impact["collider"],
-				impact["normal"],
-				impact["position"],
-				impact["stops_bullet"])
-		
-		EventStore.push_event(EventStoreCommandSet.new(source_id, "target_position", target_position))
-	
-	if is_ghost:
-		$Fire.global_position = from_position
-		$Fire.pitch_scale = randf_range(1.0, 1.2)
-		$Fire.play()
+	var trace_result := _trace_bullet_path(query)
+	target_position = trace_result["target_position"]
+	for impact in trace_result["impacts"]:
+		_apply_impact(
+			impact["collider"],
+			impact["normal"],
+			impact["position"],
+			impact["stops_bullet"])
 	
 	if is_inside_tree():
 		await get_tree().create_timer(0.2).timeout
 		queue_free()
-
-#func _physics_process(delta: float) -> void:
-	#if not is_ghost:
-		#var direction = global_transform.basis.z.normalized()
-		#global_position += direction * delta * speed
-		
-		#if track_in_event_store:
-			#EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", global_transform))
-
 
 func _apply_impact(collider:Node3D, normal:Vector3, hit_position:Vector3, stops_bullet: bool = true) -> void:
 	#await get_tree().create_timer(position.distance_to(hit_position) / speed).timeout
@@ -98,7 +63,14 @@ func _apply_impact(collider:Node3D, normal:Vector3, hit_position:Vector3, stops_
 	if not is_instance_valid(collider):
 		return
 
-	if collider is Wall and not stops_bullet:
+	if enemy == null and collider is not Character:
+		Main.instance.try_spawn_portal_from_shot(hit_position, normal)
+
+	if (
+		collider.has_method("get_bullet_stopping_power")
+		and collider.has_method("hit")
+		and not stops_bullet
+	):
 		collider.hit(hit_position, normal, damage)
 	elif collider is Prop:
 		collider.hit(hit_position, normal, damage)
@@ -117,8 +89,9 @@ func _apply_impact(collider:Node3D, normal:Vector3, hit_position:Vector3, stops_
 		$HitMeat.play()
 		var x := preload("res://game/fx/blood_splat.tscn").instantiate()
 		x.top_level = true
-		x.global_position = hit_position
-		x.look_at_from_position(x.position, x.position + normal * 10.0)
+		x.look_at_from_position(
+			hit_position,
+			hit_position + normal * 10.0)
 		add_child(x)
 	
 		collider.hit(damage)
@@ -144,7 +117,7 @@ func _trace_bullet_path(query: PhysicsRayQueryParameters3D) -> Dictionary:
 
 		var collider = res.collider
 		var stops_bullet := true
-		if collider is Wall:
+		if collider.has_method("get_bullet_stopping_power"):
 			var stopping_power := _get_stopping_power(collider)
 			if remaining_penetration >= stopping_power:
 				remaining_penetration -= stopping_power

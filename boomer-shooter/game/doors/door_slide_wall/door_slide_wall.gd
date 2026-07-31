@@ -1,5 +1,5 @@
 class_name DoorSlideWall
-extends Node3DEventRegistered
+extends Node3D
 
 
 var _animation_tween: Tween
@@ -23,4 +23,3 @@ var activated: bool:
 func activate() -> void:
 	if not activated:
 		activated = true
-		EventStore.push_event(EventStoreCommandSet.new(EventStore.unique_source_id(self), "activated", true))

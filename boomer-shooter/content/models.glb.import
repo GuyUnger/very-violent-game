@@ -68,6 +68,15 @@ _subresources={
 "save_to_file/fallback_path": "res://models/home/counter_connected.res",
 "save_to_file/path": "uid://rpjvcwbjg3n"
 },
+"models_Mac10": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/guns/weapon_mac_10.res",
+"save_to_file/path": "uid://cb7pb30o6bva"
+},
 "models_MiniFridge": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
@@ -76,6 +85,15 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://models/home/prop_mini_fridge.res",
 "save_to_file/path": "uid://dpdc3qr1lxquj"
+},
+"models_P226": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://models/guns/weapon_p226.res",
+"save_to_file/path": "uid://bybxy64eq7eix"
 },
 "models_Table": {
 "generate/lightmap_uv": 0,

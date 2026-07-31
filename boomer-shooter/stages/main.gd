@@ -1,14 +1,18 @@
 class_name Main
 extends Node3D
 
+const PORTAL_PLACEMENT_HINT := "SHOOT THE FLOOR TO KILL MORE"
+
 signal enemy_killed
+signal all_enemies_killed
 
 static var instance
 static var hud
 
-var source_id := 1
-
 @export var time: float = 30.0
+@export_multiline var entry_hint_message := ""
+@export_range(0.0, 10.0, 0.1) var portal_placement_delay := 2.0
+@export_range(0.0, 30.0, 0.1) var portal_auto_spawn_delay := 5.0
 
 var total_enemies: int
 var actual_enemies: int
@@ -16,6 +20,9 @@ var enemies_left: int
 
 var max_enemies: int = 30
 var completed: bool= false
+var portal_spawned := false
+var portal_placement_enabled := false
+var hint_request_id := 0
 
 @export var track_num: int = 0
 @export var next_level: PackedScene
@@ -28,7 +35,6 @@ func _init() -> void:
 	
 
 func _ready() -> void:
-	EventStore.register_source(source_id, self)
 	get_tree().paused = true
 	
 	match Settings.difficulty:
@@ -49,7 +55,13 @@ func _ready() -> void:
 	enemy_killed.connect(_on_enemy_killed)
 	await get_tree().create_timer(0.3).timeout
 	get_tree().paused = false
+	show_hint(entry_hint_message, 2.0)
 	Transition.play_track(track_num)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("reset"):
+		get_tree().reload_current_scene()
 	
 
 func _on_enemy_killed() -> void:
@@ -68,35 +80,62 @@ func _on_enemy_killed() -> void:
 	if enemies_left == 0 and !completed:
 		$AudioKillComplete.play()
 		completed = true
-		spawn_portal()
+		all_enemies_killed.emit()
+		await get_tree().create_timer(portal_placement_delay).timeout
+		if not is_inside_tree() or portal_spawned:
+			return
+		portal_placement_enabled = true
+		show_hint(PORTAL_PLACEMENT_HINT, portal_auto_spawn_delay)
+		await get_tree().create_timer(portal_auto_spawn_delay).timeout
+		if not is_inside_tree() or portal_spawned:
+			return
+		if is_instance_valid(player):
+			spawn_portal(player.global_position, Vector3.UP)
 	else:
 		%AudioKill.pitch_scale = pitch
 		%AudioKill.play()
 
-func spawn_portal() -> void:
+
+func try_spawn_portal_from_shot(
+		hit_position: Vector3,
+		hit_normal: Vector3) -> void:
+	if not portal_placement_enabled or portal_spawned:
+		return
+	if hit_normal.dot(Vector3.UP) < 0.7:
+		return
+
+	spawn_portal(hit_position, hit_normal)
+
+
+func spawn_portal(hit_position: Vector3, hit_normal: Vector3) -> void:
+	portal_spawned = true
+	portal_placement_enabled = false
+	hide_hint()
 	var portal = preload("res://entities/portal.tscn").instantiate()
-	var portal_spawns := get_node_or_null("%PortalSpawns")
-	if portal_spawns:
-		var valid_spawns: Array[Node3D] = []
-		for child in portal_spawns.get_children():
-			if not (child is Node3D):
-				continue
-			var spawn_point := child as Node3D
-			if player and spawn_point.global_position.distance_to(player.global_position) < 1.0:
-				continue
-			valid_spawns.append(spawn_point)
-
-		if valid_spawns.is_empty():
-			for child in portal_spawns.get_children():
-				if child is Node3D:
-					valid_spawns.append(child)
-
-		if not valid_spawns.is_empty():
-			var chosen_spawn = valid_spawns.pick_random()
-			portal.global_transform = chosen_spawn.global_transform
-			
 	portal.portal_to = next_level
+	var portal_global_transform := Transform3D(
+		Basis.IDENTITY,
+		hit_position + hit_normal * 0.02)
+	portal.transform = global_transform.affine_inverse() * portal_global_transform
 	add_child(portal)
+
+
+func show_hint(message: String, duration: float = 2.0) -> void:
+	hint_request_id += 1
+	var request_id := hint_request_id
+	%Hint.text = message
+	%Hint.visible = not message.is_empty()
+	if message.is_empty() or duration <= 0.0:
+		return
+
+	await get_tree().create_timer(duration).timeout
+	if is_inside_tree() and request_id == hint_request_id:
+		%Hint.hide()
+
+
+func hide_hint() -> void:
+	hint_request_id += 1
+	%Hint.hide()
 
 
 static var player: Player

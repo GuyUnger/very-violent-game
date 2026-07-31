@@ -1,5 +1,5 @@
 class_name MeleeActivator
-extends Node3DEventRegistered
+extends Node3D
 
 var noise := FastNoiseLite.new()
 var noise_time := randf()*1000.0
@@ -32,7 +32,6 @@ func melee() -> void:
 
 func activate() -> void:
 	enabled = true
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "enabled", enabled))
 
 
 func _process(delta: float) -> void:

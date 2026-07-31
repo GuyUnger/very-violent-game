@@ -5,7 +5,7 @@ signal jumped
 
 const WALK_SPEED = 4.0
 const SPRINT_SPEED = 12.0
-const CROUCH_SPEED = 0.35
+const CROUCH_SPEED = 1.0
 const MOVE_ACCEL = 6.0
 const MOVE_DECEL = 13.0
 const AIR_ACCEL = 5.0
@@ -25,8 +25,6 @@ const CROUCH_HEIGHT_RATIO = 0.22
 @onready var aim_indicator: Crosshair = %Crosshair
 @onready var fps_weapon: Node3D = %FpsWeapon
 @onready var body_collision_shape: CollisionShape3D = $CollisionShape3D
-
-var source_id := 0
 
 var first_person: bool = true
 
@@ -69,6 +67,7 @@ var weapon:Weapon
 
 @export var starting_weapon:PackedScene
 @export var close_on_escape = false
+@export_range(0.0, 10.0, 0.1) var damage_cooldown := 1.0
 ## When disabled, the player's body stops colliding but movement and gravity continue.
 @export var physics_enabled := true:
 	set = set_physics_enabled
@@ -79,8 +78,6 @@ var weapon:Weapon
 
 var dead: bool = false
 var mounted_look_center := Vector2.ZERO
-
-var last_transform := Transform3D()
 
 var invincible_t: float = 0.0
 
@@ -96,7 +93,6 @@ var crouching_collision_position_y := 0.0
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	_apply_physics_enabled()
-	source_id = EventStore.next_source_id()
 	%EnemyFocus.material.set_shader_parameter("time", -0.05)
 	if body_collision_shape.shape is CapsuleShape3D:
 		body_collision_shape.shape = body_collision_shape.shape.duplicate()
@@ -106,13 +102,6 @@ func _ready() -> void:
 		crouching_collision_height = standing_collision_height * CROUCH_HEIGHT_RATIO
 		crouching_collision_position_y = standing_collision_position_y - (standing_collision_height - crouching_collision_height) * 0.5
 	
-	EventStore.push_event(
-		EventStoreCommandAddChild.new(
-			Main.instance.source_id, 
-			source_id, 
-			preload("res://game/npc/player_ghost/npc_player_ghost.tscn"),
-			global_transform))
-	
 	if starting_weapon:
 		var starting_weapon_instance := starting_weapon.instantiate()
 		if starting_weapon_instance is Weapon:
@@ -120,10 +109,6 @@ func _ready() -> void:
 		else:
 			push_warning("Player starting_weapon scene must have a Weapon root node.")
 			starting_weapon_instance.queue_free()
-	
-	match Settings.difficulty:
-		Settings.Difficulty.EASY:
-			health = 10
 	
 	Main.player = self
 	
@@ -231,13 +216,6 @@ func _process(delta: float) -> void:
 
 	process_targets()
 	process_target_indicators(delta)
-	
-	
-	var t = global_transform
-	if last_transform != t:
-		last_transform = t
-		t = t.rotated_local(Vector3.UP, PI * 0.5)
-		EventStore.push_event(EventStoreCommandSet.new(source_id, "global_transform", t))
 
 
 
@@ -436,7 +414,6 @@ func jump() -> void:
 	%AudioJump.play()
 	$AudioJump.play()
 	jumped.emit()
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "jump", true))
 	
 	if first_person:
 		cam.shake_land(0.4, 0.5)
@@ -447,7 +424,7 @@ func _try_break_wall_from_sprint(collision: KinematicCollision3D) -> void:
 		return
 
 	var collider := collision.get_collider()
-	if not ((collider is Wall) or (collider is Prop)):
+	if not collider or not collider.has_method("try_break_from_sprint_impact"):
 		return
 
 	var impact_direction := Vector3(velocity_prev.x, 0.0, velocity_prev.z)
@@ -742,7 +719,6 @@ func die() -> void:
 	while prev_dead_sound == dead_sound:
 		dead_sound = randi() % DEAD_SOUNDS.size()
 	
-	EventStore.push_event(EventStoreCommandSet.new(source_id, "dead", dead_sound))
 	$AudioDie.stream = DEAD_SOUNDS[dead_sound]
 	$AudioDie.play()
 	throw_weapon()
@@ -751,8 +727,6 @@ func die() -> void:
 	
 	await get_tree().create_timer(1.0).timeout
 	
-	# Restart without replaying the dead player's recorded run as a ghost.
-	EventStore.clear()
 	Transition.reload_current_scene(Color.RED)
 
 
@@ -783,4 +757,5 @@ func animate_crosshair() -> void:
 func hit(damage: int) -> void:
 	if invincible_t > 0.0:
 		return
+	invincible_t = damage_cooldown
 	super(damage)

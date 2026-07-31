@@ -38,6 +38,7 @@ var pickup_sounds_b: Array[AudioStream] = [
 ]
 
 @export var damage_scale: int = 1
+@export_range(1, 100, 1) var enemy_damage: int = 1
 
 
 func set_trigger_pressed(value:bool) -> void:
@@ -107,7 +108,6 @@ func shoot() -> void:
 		
 		player.cam.shake_rumble(0.3, 0.3, 16.0)
 		player.cam.shake_shock(0.2, 0.5)
-		projectile.track_in_event_store = true
 		projectile.position = player.cam.global_position
 		projectile.damage *= damage_scale
 		projectile.penetration_power = penetration_power
@@ -116,7 +116,7 @@ func shoot() -> void:
 	else:
 		var projectile := preload("res://game/projectiles/bullet.tscn").instantiate()
 		projectile.enemy = enemy
-		projectile.damage *= damage_scale
+		projectile.damage = enemy_damage
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
 		projectile.collision_mask = 1 + 2
 		projectile.position = global_position + Vector3.UP * 0.1
@@ -156,13 +156,19 @@ func throw(force:Vector3) -> void:
 	
 
 
+func activate_world_pickup() -> void:
+	trigger_pressed = false
+	player = null
+	enemy = null
+	velocity = Vector3.ZERO
+	since_thrown = 99.0
+	collision_mask = 1
+	collision_layer = 64
+	if ammo > 0:
+		$PickupGlow.show()
+
+
 func pickup(p_player: Player) -> void:
-	if pickup_sounds.size() == 0 or randf() < 0.05:
-		%AudioPickup.stream = pickup_sounds_b.pick_random()
-	else:
-		%AudioPickup.stream = pickup_sounds.pick_random()
-	%AudioPickup.play()
-	%AudioPickup.pitch_scale = 1.1
 	hide_glow()
 	player = p_player
 	enemy = null

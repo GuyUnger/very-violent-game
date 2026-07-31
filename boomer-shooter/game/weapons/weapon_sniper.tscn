@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://coaxw8ju8bkhn" path="res://game/weapons/weapon_sniper.gd" id="1_24slo"]
 [ext_resource type="Shader" uid="uid://20sgn88awuao" path="res://game/weapons/generic_object_material.gdshader" id="3_ffyc0"]
+[ext_resource type="AudioStream" uid="uid://ce5cixrowakj2" path="res://content/sfx/bolt_pull_back.wav" id="3_iln6h"]
 [ext_resource type="AudioStream" uid="uid://mbbbc4e813to" path="res://content/sfx/sniper_rifle.wav" id="4_brtfp"]
+[ext_resource type="AudioStream" uid="uid://bb8hid1nbpd4q" path="res://content/sfx/bolt_release.wav" id="4_phrwl"]
 [ext_resource type="Texture2D" uid="uid://mhntw7efhhta" path="res://textures/weapon_50_cal_aoe_map.png" id="4_uyr2e"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="5_brtfp"]
-[ext_resource type="ArrayMesh" uid="uid://wy78hei7stng" path="res://models/guns/weapon_50_cal.res" id="5_slsb3"]
+[ext_resource type="ArrayMesh" uid="uid://tfswmy0kyh4y" path="res://models/guns/weapon_50_cal.res" id="5_slsb3"]
 [ext_resource type="Material" uid="uid://c1m0dsyp0q6ke" path="res://game/weapons/model/mat_smg.tres" id="6_8hwx5"]
 [ext_resource type="PackedScene" uid="uid://mswr2wkg0tv7" path="res://game/weapons/model/weapon_shotgun_arm_l.glb" id="7_slsb3"]
 [ext_resource type="PackedScene" uid="uid://dqwnrxai3cxi8" path="res://game/weapons/model/weapon_shotgun_arm_r.glb" id="8_8hwx5"]
@@ -86,12 +88,11 @@ size = Vector3(0.005, 0.005, 100)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_24slo")
-fire_rate = 1.0
-auto = true
+fire_rate = 1.5
 hold_pose = 1
-recoil = 55.0
 penetration_power = 200.0
 ammo = 10
+enemy_damage = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=129808597]
 shape = SubResource("SphereShape3D_7w4b6")
@@ -99,6 +100,16 @@ shape = SubResource("SphereShape3D_7w4b6")
 [node name="AudioShoot" type="AudioStreamPlayer" parent="." unique_id=1925378542]
 unique_name_in_owner = true
 stream = ExtResource("4_brtfp")
+bus = &"SFX"
+
+[node name="AudioBoltPullBack" type="AudioStreamPlayer3D" parent="." unique_id=1719283973]
+unique_name_in_owner = true
+stream = ExtResource("3_iln6h")
+bus = &"SFX"
+
+[node name="AudioBoltRelease" type="AudioStreamPlayer3D" parent="." unique_id=410827599]
+unique_name_in_owner = true
+stream = ExtResource("4_phrwl")
 bus = &"SFX"
 
 [node name="WorldModel" type="Node3D" parent="." unique_id=1394172959]
@@ -131,6 +142,10 @@ instance_shader_parameters/wear_albedo = Color(0.62607956, 0.5551312, 0.49260992
 mesh = ExtResource("5_slsb3")
 skeleton = NodePath("")
 
+[node name="ShellEjection" type="Marker3D" parent="WorldModel/weapon_smg/SMG" unique_id=1006147127]
+unique_name_in_owner = true
+transform = Transform3D(-0.13129751, 4.004687e-08, 0.99134296, 0.98703825, -0.09308989, 0.13072738, 0.09228403, 0.99565756, 0.01222243, 0.030714564, -0.0021079108, -0.103645146)
+
 [node name="Handle" type="MeshInstance3D" parent="WorldModel/weapon_smg/SMG" unique_id=571465705]
 visible = false
 mesh = SubResource("ArrayMesh_lby0x")
@@ -143,7 +158,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, 0.022646101, -0.035015)
 
 [node name="weapon_shotgun_arm_r" parent="WorldModel/Hand" unique_id=1145909793 instance=ExtResource("8_8hwx5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.035015)
+transform = Transform3D(-0.13006797, 0.9915051, 0, -0.9915051, -0.13006797, 0, 0, 0, 1, 0.116912976, 0.0011492833, -0.04999876)
 
 [node name="Muzzleflash" parent="." unique_id=550914255 instance=ExtResource("9_suxt3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011707276, 0.80398816)

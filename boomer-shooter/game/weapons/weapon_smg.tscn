@@ -6,12 +6,12 @@
 [ext_resource type="AudioStream" uid="uid://c1umsegk5hevb" path="res://game/weapons/pickup_sfx/pickup_smg 02.wav" id="3_81lhf"]
 [ext_resource type="PackedScene" uid="uid://dqul5y672j5k2" path="res://game/weapons/model/weapon_smg_arm.glb" id="4_ujfyf"]
 [ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://game/weapons/model/muzzleflash.tscn" id="5_8w3g1"]
-[ext_resource type="ArrayMesh" uid="uid://3qnuikshcd6p" path="res://models/guns/weapon_smg.res" id="5_a5me7"]
 [ext_resource type="Shader" uid="uid://20sgn88awuao" path="res://game/weapons/generic_object_material.gdshader" id="5_ov2wc"]
-[ext_resource type="Texture2D" uid="uid://nf6me4j2nbl2" path="res://textures/weapon_smg_aoe_map.png" id="6_3wxce"]
+[ext_resource type="Texture2D" uid="uid://rg68es0t14go" path="res://textures/weapon_mac_10_aoe_map.png" id="6_3wxce"]
 [ext_resource type="Material" uid="uid://c1m0dsyp0q6ke" path="res://game/weapons/model/mat_smg.tres" id="6_ov2wc"]
 [ext_resource type="Script" uid="uid://dntd1fqlvxqh5" path="res://game/weapons/weapon_smg_animations.gd" id="6_yuge1"]
 [ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://content/sfx/gun_shot_smg.wav" id="7_bl6n7"]
+[ext_resource type="ArrayMesh" uid="uid://cb7pb30o6bva" path="res://models/guns/weapon_mac_10.res" id="7_tigwr"]
 [ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://game/weapons/pickup_glow.tscn" id="10_81lhf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
@@ -83,7 +83,8 @@ collision_mask = 0
 script = ExtResource("1_57hh3")
 fire_rate = 0.08
 auto = true
-recoil = 0.1
+recoil = 0.5
+penetration_power = 1.0
 ammo = 30
 pickup_sounds = Array[AudioStream]([ExtResource("2_pkk1y"), ExtResource("3_81lhf")])
 
@@ -121,28 +122,31 @@ mesh = SubResource("BoxMesh_3pcvd")
 [node name="weapon_smg" type="Node3D" parent="WorldModel" unique_id=1887486235]
 
 [node name="SMG" type="MeshInstance3D" parent="WorldModel/weapon_smg" unique_id=802055146]
+transform = Transform3D(-0.13129754, 0.98703843, 0.09228406, -0.99134314, -0.13072743, -0.012222476, -5.840408e-10, -0.09308994, 0.9956578, 0.07567644, 0.0076162424, 0.1374913)
 material_override = SubResource("ShaderMaterial_x6qdb")
-instance_shader_parameters/albedo = Color(0.22041348, 0.21233028, 0.18808046, 1)
+instance_shader_parameters/albedo = Color(0.2821722, 0.27269492, 0.24425715, 1)
 instance_shader_parameters/albedo2 = Color(0.81004107, 0, 0.2539025, 1)
-instance_shader_parameters/wear = 0.1310000062225
-instance_shader_parameters/wear_albedo = Color(0.38242704, 0.3671804, 0.31373894, 1)
-mesh = ExtResource("5_a5me7")
+instance_shader_parameters/wear = 0.0710000033725
+instance_shader_parameters/wear_albedo = Color(0.44265115, 0.42167556, 0.3658047, 1)
+mesh = ExtResource("7_tigwr")
 skeleton = NodePath("")
 
+[node name="ShellEjection" type="Marker3D" parent="WorldModel/weapon_smg/SMG" unique_id=1143028505]
+unique_name_in_owner = true
+transform = Transform3D(-0.13051759, 0.014289979, -0.99134296, 0.9913065, -0.014888629, -0.13072741, -0.016627848, -0.99978685, -0.01222252, -0.037776813, 0.029121868, -0.048428334)
+
 [node name="Handle" type="MeshInstance3D" parent="WorldModel/weapon_smg/SMG" unique_id=243665340]
+transform = Transform3D(0.9999998, -4.505027e-08, -2.810145e-09, 7.6784634e-11, 1, 0, 1.1006068e-10, 0, 1, -0.055706605, 0.029430598, -0.07891519)
 mesh = SubResource("ArrayMesh_lby0x")
 skeleton = NodePath("")
 
 [node name="Hand" parent="WorldModel/weapon_smg" unique_id=934641808 instance=ExtResource("4_ujfyf")]
 unique_name_in_owner = true
+transform = Transform3D(-0.13129754, 0.98703843, 0.09228406, -0.99134314, -0.13072743, -0.012222476, -5.840408e-10, -0.09308994, 0.9956578, 0.09305525, 0.00496261, 0.035292774)
 visible = false
 
-[node name="ShellEjection" type="Marker3D" parent="WorldModel" unique_id=1143028505]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00567615, 0.00567617)
-
 [node name="Muzzleflash" parent="." unique_id=1464695937 instance=ExtResource("5_8w3g1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.265738)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11599241, 0, 0.26951194)
 
 [node name="Animations" type="Node" parent="." unique_id=1859269143]
 script = ExtResource("6_yuge1")
