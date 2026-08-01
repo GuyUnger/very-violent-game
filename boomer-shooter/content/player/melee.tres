@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://d2fsf0rpmyygk"]
+
+[ext_resource type="AudioStream" uid="uid://8s1h31mso333" path="res://content/player/melee 01.wav" id="0_9jvuw"]
+[ext_resource type="AudioStream" uid="uid://71plply8oynv" path="res://content/player/melee 02.wav" id="1_302o3"]
+[ext_resource type="AudioStream" uid="uid://cu6m6imw7wsmi" path="res://content/player/melee 03.wav" id="2_p8hru"]
+[ext_resource type="AudioStream" uid="uid://pi847sqv5vwr" path="res://content/player/melee 04.wav" id="3_rmecj"]
+[ext_resource type="AudioStream" uid="uid://b7b0iddrsoi8s" path="res://content/player/melee 05.wav" id="4_o97xa"]
+[ext_resource type="AudioStream" uid="uid://ccxtg3wbnd4tr" path="res://content/player/melee 06.wav" id="5_g1y2z"]
+
+[resource]
+streams_count = 6
+stream_0/stream = ExtResource("0_9jvuw")
+stream_1/stream = ExtResource("1_302o3")
+stream_2/stream = ExtResource("2_p8hru")
+stream_3/stream = ExtResource("3_rmecj")
+stream_4/stream = ExtResource("4_o97xa")
+stream_5/stream = ExtResource("5_g1y2z")

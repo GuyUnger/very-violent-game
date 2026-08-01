@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dr77x2cvbnqwv"
+path="res://.godot/imported/Fridge Main Door.obj-945f094c34dbc1b51a4714e8b93789c9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Fridge Main Door.obj-945f094c34dbc1b51a4714e8b93789c9.mesh"]
+
+source_file="res://junk/models/home/Fridge Main Door.obj"
+dest_files=["res://.godot/imported/Fridge Main Door.obj-945f094c34dbc1b51a4714e8b93789c9.mesh", "res://.godot/imported/Fridge Main Door.obj-945f094c34dbc1b51a4714e8b93789c9.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

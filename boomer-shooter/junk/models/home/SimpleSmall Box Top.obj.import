@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdqsa5qteqy3k"
+path="res://.godot/imported/SimpleSmall Box Top.obj-9387cb1fbe68a179c290db96a3877f7c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SimpleSmall Box Top.obj-9387cb1fbe68a179c290db96a3877f7c.mesh"]
+
+source_file="res://junk/models/home/SimpleSmall Box Top.obj"
+dest_files=["res://.godot/imported/SimpleSmall Box Top.obj-9387cb1fbe68a179c290db96a3877f7c.mesh", "res://.godot/imported/SimpleSmall Box Top.obj-9387cb1fbe68a179c290db96a3877f7c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

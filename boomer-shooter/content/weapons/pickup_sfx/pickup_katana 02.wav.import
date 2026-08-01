@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://jclmgjq5a3ox"
+path="res://.godot/imported/pickup_katana 02.wav-f00c7d65143476afaef09cbf02ec0e59.sample"
+
+[deps]
+
+source_file="res://content/weapons/pickup_sfx/pickup_katana 02.wav"
+dest_files=["res://.godot/imported/pickup_katana 02.wav-f00c7d65143476afaef09cbf02ec0e59.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

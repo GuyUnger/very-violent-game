@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://knvaoh3jmvvl"]
+
+[ext_resource type="Script" uid="uid://bq3nuq2fgr8bf" path="res://content/fx/blood_splat.gd" id="1_7sl0c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tynb1"]
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="Curve" id="Curve_a77ay"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tynb1"]
+curve = SubResource("Curve_a77ay")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tynb1"]
+initial_velocity_min = 6.0
+initial_velocity_max = 10.0
+damping_curve = SubResource("CurveTexture_tynb1")
+
+[sub_resource type="SphereMesh" id="SphereMesh_a77ay"]
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
+[node name="Node3D" type="Node3D" unique_id=496460611]
+top_level = true
+script = ExtResource("1_7sl0c")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=890092537]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_tynb1")
+emitting = false
+amount = 3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_tynb1")
+draw_pass_1 = SubResource("SphereMesh_a77ay")

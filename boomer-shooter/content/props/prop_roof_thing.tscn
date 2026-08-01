@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dvpchx64kj01y"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop_bath_tub.tscn" id="1_5ujcn"]
+[ext_resource type="ArrayMesh" uid="uid://qdykxgbrbrx3" path="res://junk/models/home/Ladder 2.obj" id="2_5ujcn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umx4j"]
+size = Vector3(0.45750487, 1.4837325, 0.10828613)
+
+[node name="EntityKitchenOven" unique_id=58870841 instance=ExtResource("1_5ujcn")]
+
+[node name="MeshInstance3D2" parent="." index="0" unique_id=1141119635]
+mesh = ExtResource("2_5ujcn")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021735817, 0.75151, -0.002873525)
+shape = SubResource("BoxShape3D_umx4j")

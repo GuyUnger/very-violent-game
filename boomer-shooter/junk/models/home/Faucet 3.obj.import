@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dluiu0m7ivfnc"
+path="res://.godot/imported/Faucet 3.obj-f36f707728580755b24e2fb2316a90ea.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Faucet 3.obj-f36f707728580755b24e2fb2316a90ea.mesh"]
+
+source_file="res://junk/models/home/Faucet 3.obj"
+dest_files=["res://.godot/imported/Faucet 3.obj-f36f707728580755b24e2fb2316a90ea.mesh", "res://.godot/imported/Faucet 3.obj-f36f707728580755b24e2fb2316a90ea.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

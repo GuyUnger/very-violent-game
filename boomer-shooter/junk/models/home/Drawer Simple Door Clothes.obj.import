@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dd5gpsyp7k5"
+path="res://.godot/imported/Drawer Simple Door Clothes.obj-0c4584f1229b5bb7c32309d837d0c9af.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Drawer Simple Door Clothes.obj-0c4584f1229b5bb7c32309d837d0c9af.mesh"]
+
+source_file="res://junk/models/home/Drawer Simple Door Clothes.obj"
+dest_files=["res://.godot/imported/Drawer Simple Door Clothes.obj-0c4584f1229b5bb7c32309d837d0c9af.mesh", "res://.godot/imported/Drawer Simple Door Clothes.obj-0c4584f1229b5bb7c32309d837d0c9af.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

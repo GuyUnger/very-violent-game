@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dhenrkglup4oj"]
+
+[ext_resource type="Script" uid="uid://chanbmddvdcdy" path="res://content/fx/portal.gd" id="1_0u7og"]
+[ext_resource type="PackedScene" uid="uid://o2e7fhhb6vf8" path="res://content/fx/hole.tscn" id="2_0o1vm"]
+
+[sub_resource type="Gradient" id="Gradient_j5oi1"]
+offsets = PackedFloat32Array(0, 0.15057915, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_apoci"]
+gradient = SubResource("Gradient_j5oi1")
+fill_from = Vector2(0.50427353, 0.9002849)
+fill_to = Vector2(0.5099715, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5oi1"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("GradientTexture2D_apoci")
+emission_enabled = true
+emission = Color(0.5803922, 0, 0.5803922, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p4jbi"]
+top_radius = 1.5
+bottom_radius = 1.0
+radial_segments = 16
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_p4jbi"]
+
+[node name="Portal" type="Area3D" unique_id=122166312]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_0u7og")
+
+[node name="MeshInstance3D" parent="." unique_id=1890755884 instance=ExtResource("2_0o1vm")]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2076459250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99409103, 0)
+material_override = SubResource("StandardMaterial3D_j5oi1")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_p4jbi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1207290015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9927926, 0)
+shape = SubResource("CylinderShape3D_p4jbi")

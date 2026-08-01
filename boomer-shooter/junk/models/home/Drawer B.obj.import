@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c6auoma2xvtrd"
+path="res://.godot/imported/Drawer B.obj-0531d294ec2dc6c7561c95a1c2c4bce0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Drawer B.obj-0531d294ec2dc6c7561c95a1c2c4bce0.mesh"]
+
+source_file="res://junk/models/home/Drawer B.obj"
+dest_files=["res://.godot/imported/Drawer B.obj-0531d294ec2dc6c7561c95a1c2c4bce0.mesh", "res://.godot/imported/Drawer B.obj-0531d294ec2dc6c7561c95a1c2c4bce0.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

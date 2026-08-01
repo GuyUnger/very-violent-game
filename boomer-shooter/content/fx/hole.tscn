@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://o2e7fhhb6vf8"]
+
+[ext_resource type="Shader" uid="uid://c17nonyiiyigo" path="res://content/fx/portal.gdshader" id="1_swe3q"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rhodr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_apoci"]
+noise = SubResource("FastNoiseLite_rhodr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mal56"]
+render_priority = 0
+shader = ExtResource("1_swe3q")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_apoci")
+shader_parameter/layers = 16
+shader_parameter/depth_amount = 1.0
+shader_parameter/fade_amount = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_tklcm"]
+size = Vector2(3, 3)
+orientation = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" unique_id=1890755884]
+material_override = SubResource("ShaderMaterial_mal56")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_tklcm")

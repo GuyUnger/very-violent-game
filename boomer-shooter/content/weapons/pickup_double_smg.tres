@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cnly4hnjkugwu"]
+
+[ext_resource type="AudioStream" path="../weapons" id="0_megc4"]
+[ext_resource type="AudioStream" path="../weapons" id="1_cq6w5"]
+
+[resource]
+streams_count = 2
+stream_0/stream = ExtResource("0_megc4")
+stream_1/stream = ExtResource("1_cq6w5")

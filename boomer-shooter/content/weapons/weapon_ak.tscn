@@ -1,0 +1,172 @@
+[gd_scene format=4 uid="uid://c4hkc37sv7iyd"]
+
+[ext_resource type="Script" uid="uid://j801jgkt1mf" path="res://content/player/weapon.gd" id="1_euqui"]
+[ext_resource type="AudioStream" uid="uid://dlefj36iolvdv" path="res://content/weapons/pickup_sfx/pickup_smg 01.wav" id="2_t0px0"]
+[ext_resource type="AudioStream" uid="uid://c1umsegk5hevb" path="res://content/weapons/pickup_sfx/pickup_smg 02.wav" id="3_b0c4c"]
+[ext_resource type="AudioStream" uid="uid://dlklosv5cft1n" path="res://content/player/gun_shot_smg_rand.tres" id="4_n1xeq"]
+[ext_resource type="Shader" uid="uid://20sgn88awuao" path="res://content/weapons/generic_object_material.gdshader" id="5_c3jnh"]
+[ext_resource type="Texture2D" uid="uid://b01dn10cx1omh" path="res://content/weapons/textures/weapon_ak_aoe_map.png" id="6_euqui"]
+[ext_resource type="ArrayMesh" uid="uid://dr086t3cv1c1p" path="res://junk/models/guns/weapon_ak.res" id="7_euqui"]
+[ext_resource type="Material" uid="uid://c1m0dsyp0q6ke" path="res://content/weapons/model/mat_smg.tres" id="8_g5wwi"]
+[ext_resource type="PackedScene" uid="uid://mswr2wkg0tv7" path="res://content/weapons/model/weapon_shotgun_arm_l.glb" id="9_t0px0"]
+[ext_resource type="PackedScene" uid="uid://dn8qcdsnyofpu" path="res://content/weapons/model/muzzleflash.tscn" id="10_6qjfd"]
+[ext_resource type="PackedScene" uid="uid://dqwnrxai3cxi8" path="res://content/weapons/model/weapon_shotgun_arm_r.glb" id="10_b0c4c"]
+[ext_resource type="AudioStream" uid="uid://bw1o76708a7dx" path="res://junk/shared/sfx/gun_shot_smg.wav" id="12_63ykj"]
+[ext_resource type="PackedScene" uid="uid://cdy80iee3cmu0" path="res://content/weapons/pickup_glow.tscn" id="13_bix3s"]
+[ext_resource type="Script" uid="uid://7yaujdvmcgke" path="res://content/weapons/animations_ak.gd" id="14_t0px0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7w4b6"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ml3f"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ls1xp"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_on6gv"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3pcvd"]
+size = Vector3(0.005, 0.07, 0.04)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6qdb"]
+render_priority = 0
+shader = ExtResource("5_c3jnh")
+shader_parameter/aoe_texture = ExtResource("6_euqui")
+shader_parameter/size = Vector3(0, 0, 0)
+shader_parameter/roughness = 0.4770000226575
+shader_parameter/specular = 0.1530000072675
+shader_parameter/metallic = 0.8190000389025
+shader_parameter/max_y = 0.0
+shader_parameter/ao_light_affect = 0.999999977648
+shader_parameter/detail_scale = Vector2(1, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vix3x"]
+_surfaces = [{
+"aabb": AABB(0.01545962, -0.0026145142, 0.022859322, 0.017525215, 0.017525217, 0.017525213),
+"format": 34896613377,
+"index_count": 66,
+"index_data": PackedByteArray("CQAKAAYACgAHAAYACQAGAAUACgALAAcACQALAAoACwAIAAcADAAJAAUADAAFAAMACwAAAAgAAAAEAAgADQAMAAMADQAJAAwADQADAAEADQABAAIADgACAAQADQACAA4AAAAPAAQADgAEAA8ADwANAA4ADwAJAA0ACwAPAAAACQAPAAsA"),
+"lods": [0.008890281, PackedByteArray("AAABAAIAAAADAAEAAAACAAQAAAAFAAMAAAAGAAUAAAAHAAYAAAAEAAgAAAAIAAcAAAAAAAgA")],
+"name": "SMG",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("//8AAP9/AAAAAIHafSUAAAAA/38AAAAAAAD///9/AAAAAH0lfSUAAAAAgdqB2gAAAAD/f///AAAAAH0lgdoAAAAAAAD/fwAA/v+B2oHaAAD///9///8AAP//fSWB2gAA/v////9/AAD+/4HafSUAAP///38AAAAA//99JX0lAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lby0x"]
+resource_name = "weapon_smg_Cube_001"
+_surfaces = [{
+"aabb": AABB(0.01545962, -0.0026145142, 0.022859322, 0.017525215, 0.017525217, 0.017525213),
+"attribute_data": PackedByteArray("bpeDb52Fv4KdhVZ8nYUpiZ2F7XWdhYNvnYWSj52F/JWdhWWcnYXOom6XzqJul5KPbpf8lW6XZZxulymJbpe/gm6XVnxul+11DrKEeKO7po9pwkt/acLfiKO7hHhIq9+ISKtLfw6ypo8="),
+"format": 34896613399,
+"index_count": 66,
+"index_data": PackedByteArray("CwAMAAcADAAIAAcACwAHAAYADAANAAgADQAJAAgADQAKAAkADgALAAYADgAGAAMADwAOAAMADwADAAEADwABAAIADwACABAAEAACAAQAEAAEABEAAAARAAQAAAAEAAUAEgATABQAFAATABUAEgAUABYAEwASABcAFwASABgAEwAXABkA"),
+"lods": [0.008890281, PackedByteArray("AAABAAIAAAADAAEAAAACAAQAAAAEAAUAAAAGAAMAAAAHAAYAAAAIAAcAAAAJAAgAAAAKAAkA")],
+"material": ExtResource("8_g5wwi"),
+"name": "SMG",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("//8AAP9//78AAIHafSX/3wAA/38AAP//AAD///9//78AAH0lfSX/3wAAAAD/f/+/AACB2oHa/58AAP9///8AgAAAfSWB2v+fAAAAAP9//7///wAA/3//v/7/gdqB2v+f////f///AID//30lgdr/n/7/////f/+//v+B2n0l/9////9/AAD/////fSV9Jf/f//99JX0lNjP+/4Hagdo2M/7/gdp9JTYz/v////9/NjP///9/AAA2M///fSWB2jYz//8AAP9/NjP///9///82MwAA/3////9/////f////38AAP9/AAD/f////3//f///AAD/fwAA/38AAP9/////f/9///8AAP9/////f////3////9/AAD/f8k2myTJNpskyTabJMk2myTJNpskyTabJMk2myTJNpsk")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vix3x")
+
+[node name="WeaponSmg" type="CharacterBody3D" unique_id=394893205]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_euqui")
+fire_rate = 0.04
+auto = true
+hold_pose = 1
+recoil = 0.1
+penetration_power = 1.0
+ammo = 90
+pickup_sounds = Array[AudioStream]([ExtResource("2_t0px0"), ExtResource("3_b0c4c")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2058046379]
+shape = SubResource("SphereShape3D_7w4b6")
+
+[node name="AudioShoot" type="AudioStreamPlayer" parent="." unique_id=1664513758]
+unique_name_in_owner = true
+stream = ExtResource("4_n1xeq")
+volume_db = 5.0
+max_polyphony = 5
+bus = &"SFX"
+
+[node name="WorldModel" type="Node3D" parent="." unique_id=1727778807]
+
+[node name="RightHand" type="Marker3D" parent="WorldModel" unique_id=1125408121]
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.04912149, -0.06861538, -0.020460583)
+
+[node name="LeftHand" type="Marker3D" parent="WorldModel" unique_id=1564301264]
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.069731995, -0.098128475, -0.20322804)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel" unique_id=173441840]
+transform = Transform3D(0.9938602, 0.11064334, -4.836375e-09, -0.017638093, 0.15843515, -0.9872118, -0.10922842, 0.9811505, 0.15941392, -0.053730335, -0.07602807, -0.061199084)
+visible = false
+material_override = SubResource("StandardMaterial3D_6ml3f")
+mesh = SubResource("CylinderMesh_ls1xp")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel" unique_id=1439511002]
+transform = Transform3D(0.9938601, 0.01552669, 0.10954851, -0.017638091, 0.9996766, 0.018331066, -0.1092284, -0.020150721, 0.9938125, -0.06954096, -0.14958523, -0.19318072)
+visible = false
+material_override = SubResource("StandardMaterial3D_on6gv")
+mesh = SubResource("BoxMesh_3pcvd")
+
+[node name="weapon_smg" type="Node3D" parent="WorldModel" unique_id=1887486235]
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.059868786, -0.08400491, -0.115764245)
+
+[node name="SMG" type="MeshInstance3D" parent="WorldModel/weapon_smg" unique_id=802055146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.014308721, 0.23176476)
+material_override = SubResource("ShaderMaterial_x6qdb")
+instance_shader_parameters/albedo = Color(0.22041348, 0.21233028, 0.18808046, 1)
+instance_shader_parameters/albedo2 = Color(0.81004107, 0, 0.2539025, 1)
+instance_shader_parameters/wear = 0.1310000062225
+instance_shader_parameters/wear_albedo = Color(0.38242704, 0.3671804, 0.31373894, 1)
+mesh = ExtResource("7_euqui")
+skeleton = NodePath("")
+
+[node name="Handle" type="MeshInstance3D" parent="WorldModel/weapon_smg/SMG" unique_id=243665340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0096799135, -0.22166175)
+mesh = SubResource("ArrayMesh_lby0x")
+skeleton = NodePath("")
+
+[node name="Hand" type="Node3D" parent="WorldModel" unique_id=619874301]
+unique_name_in_owner = true
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.059868786, -0.08400491, -0.115764245)
+
+[node name="weapon_shotgun_arm_l" parent="WorldModel/Hand" unique_id=2028316359 instance=ExtResource("9_t0px0")]
+transform = Transform3D(0.08600178, -0.6205909, -0.7794062, -0.80918914, -0.4998948, 0.30874506, -0.5812246, 0.60413295, -0.5451668, 0.16432516, -0.05341707, 0.33094734)
+
+[node name="weapon_shotgun_arm_r" parent="WorldModel/Hand" unique_id=1809737912 instance=ExtResource("10_b0c4c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, 0.0007335562, 0.028258909)
+
+[node name="ShellEjection" type="Marker3D" parent="WorldModel" unique_id=1143028505]
+unique_name_in_owner = true
+transform = Transform3D(0.9938602, 0, 0.11064334, -0.017638093, 0.9872118, 0.1584352, -0.10922842, -0.15941396, 0.9811505, -0.059240755, -0.07750204, -0.11109991)
+
+[node name="Muzzleflash" parent="." unique_id=1464695937 instance=ExtResource("10_6qjfd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0058786273, 0.021714047, 0.52683616)
+
+[node name="AudioShootNPC" type="AudioStreamPlayer3D" parent="." unique_id=1677041107]
+unique_name_in_owner = true
+stream = ExtResource("12_63ykj")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="AudioPickup" type="AudioStreamPlayer" parent="." unique_id=1007823485]
+unique_name_in_owner = true
+
+[node name="PickupGlow" parent="." unique_id=1258914329 instance=ExtResource("13_bix3s")]
+modulate = Color(1, 0.650716, 0.226772, 1)
+
+[node name="Animations" type="Node" parent="." unique_id=745946214]
+script = ExtResource("14_t0px0")

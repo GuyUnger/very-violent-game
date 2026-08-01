@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://dnnn6tlrif4k8"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_item"]
+[ext_resource type="PackedScene" uid="uid://cj3dxp1r6cl3p" path="res://content/meta/player_spawn.tscn" id="3_player_spawn"]
+
+[sub_resource type="Resource" id="MapEditorItem_player_spawn"]
+script = ExtResource("2_item")
+id = &"player_spawn"
+display_name = "Player Spawn"
+category = 6
+scene = ExtResource("3_player_spawn")
+
+[resource]
+script = ExtResource("1_catalog")
+items = Array[ExtResource("2_item")]([SubResource("MapEditorItem_player_spawn")])

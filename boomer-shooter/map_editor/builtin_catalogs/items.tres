@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://dyqrvatyae2j3"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_item"]
+[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://content/weapons/weapon_smg.tscn" id="3_mac10"]
+[ext_resource type="PackedScene" uid="uid://crruv3fy0bbv7" path="res://content/weapons/weapon_revolver.tscn" id="4_p227"]
+
+[sub_resource type="Resource" id="MapEditorItem_mac10"]
+script = ExtResource("2_item")
+id = &"weapon_mac_10"
+display_name = "MAC10"
+category = 5
+scene = ExtResource("3_mac10")
+
+[sub_resource type="Resource" id="MapEditorItem_p227"]
+script = ExtResource("2_item")
+id = &"weapon_p227"
+display_name = "P227"
+category = 5
+scene = ExtResource("4_p227")
+
+[resource]
+script = ExtResource("1_catalog")
+items = Array[ExtResource("2_item")]([SubResource("MapEditorItem_mac10"), SubResource("MapEditorItem_p227")])

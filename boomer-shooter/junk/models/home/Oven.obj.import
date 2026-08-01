@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bhmsw0cd1wjig"
+path="res://.godot/imported/Oven.obj-c7545aeb01e43098feeb105163f15242.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Oven.obj-c7545aeb01e43098feeb105163f15242.mesh"]
+
+source_file="res://junk/models/home/Oven.obj"
+dest_files=["res://.godot/imported/Oven.obj-c7545aeb01e43098feeb105163f15242.mesh", "res://.godot/imported/Oven.obj-c7545aeb01e43098feeb105163f15242.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

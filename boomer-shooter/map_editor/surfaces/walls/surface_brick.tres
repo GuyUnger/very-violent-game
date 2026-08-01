@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="SurfaceDefinition" format=3 uid="uid://bwbpfcb1h1vqx"]
+
+[ext_resource type="Script" uid="uid://c54irsxyg2yc1" path="res://map_editor/surface_definition.gd" id="1_surface"]
+[ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="2_holes"]
+[ext_resource type="PackedScene" uid="uid://knvaoh3jmvvl" path="res://content/fx/wall_sparks.tscn" id="3_sparks"]
+[ext_resource type="AudioStream" uid="uid://cavtdu5mpdr6r" path="res://31622__srehpog__light_crate_smash1.wav" id="4_break"]
+
+[sub_resource type="Gradient" id="Gradient_brick"]
+colors = PackedColorArray(0.34158427, 0.34158427, 0.3415842, 1, 0.71010417, 0.71726394, 0.6962988, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_brick"]
+gradient = SubResource("Gradient_brick")
+fill_from = Vector2(0.5071225, 0)
+fill_to = Vector2(0.5099715, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_brick"]
+frequency = 0.1512
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_brick"]
+noise = SubResource("FastNoiseLite_brick")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_edge_brick"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_edge_brick"]
+noise = SubResource("FastNoiseLite_edge_brick")
+
+[resource]
+script = ExtResource("1_surface")
+id = &"wall_brick"
+display_name = "Brick"
+albedo = SubResource("GradientTexture2D_brick")
+metallic = 0.0510000024225
+specular = 0.6310000299725
+roughness = 0.9750000463125
+random_hue = 0.0130000006175
+tile_size = Vector2(4.133333, 8.470833)
+tile_bricks = true
+tile_seam_thickness = Vector2(0.04, 0.05)
+tile_outline_width = Vector2(0, 0.1)
+tile_outline_color = Color(0, 0, 0, 0.28627452)
+tile_outline_distortion = 0.2510000119225
+tile_outline_distortion_scale = Vector2(0.01, 0.01)
+tile_modulate = Color(0, 0, 0, 1)
+tile_variance = 0.52
+quad_outline_width = Vector2(0.04, 0.04)
+quad_outline_color = Color(0, 0, 0, 0.3882353)
+quad_outline_distortion = 0.0150000007125
+disorder = SubResource("NoiseTexture2D_brick")
+hole_atlas = ExtResource("2_holes")
+edge_noise_texture = SubResource("NoiseTexture2D_edge_brick")
+hole_uv_size = Vector2(0.3, 0.3)
+bullet_stopping_power = 100.0
+max_health = 200
+impact_effect = ExtResource("3_sparks")
+break_sound = ExtResource("4_break")

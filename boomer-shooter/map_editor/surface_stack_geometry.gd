@@ -111,6 +111,11 @@ func _add_layer_geometry(
 	geometry.name = "Layer%d_%s" % [layer_index, layer.surface.display_name]
 	geometry.size = size
 	geometry.is_floor = is_floor
+	geometry.is_wallpaper_layer = (
+		not is_floor
+		and surface_stack.layers.size() == 3
+		and layer_index != 1)
+	geometry.respond_to_map_editor_tools = show_editor_line
 	geometry.surface_definition = layer.surface
 	geometry.position = layer_position
 	geometry.rotation.y = layer_rotation

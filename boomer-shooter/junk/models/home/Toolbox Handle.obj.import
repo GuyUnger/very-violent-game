@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b51mf5lisv8yi"
+path="res://.godot/imported/Toolbox Handle.obj-43ccaef5bf0069a4efedc1b7546d3412.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Toolbox Handle.obj-43ccaef5bf0069a4efedc1b7546d3412.mesh"]
+
+source_file="res://junk/models/home/Toolbox Handle.obj"
+dest_files=["res://.godot/imported/Toolbox Handle.obj-43ccaef5bf0069a4efedc1b7546d3412.mesh", "res://.godot/imported/Toolbox Handle.obj-43ccaef5bf0069a4efedc1b7546d3412.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

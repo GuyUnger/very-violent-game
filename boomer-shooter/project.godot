@@ -15,7 +15,6 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="boomer shooter"
-run/main_scene="uid://17pis6wk3xdy"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -25,7 +24,7 @@ buses/default_bus_layout="uid://rlaf2xxjlhob"
 
 [autoload]
 
-Transition="*res://ui/level_between.tscn"
+Transition="*res://content/ui/level_between.tscn"
 
 [display]
 

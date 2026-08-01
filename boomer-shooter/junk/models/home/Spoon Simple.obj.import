@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dxjwcgthdg7k4"
+path="res://.godot/imported/Spoon Simple.obj-57e745c610724ed257a4736492006235.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Spoon Simple.obj-57e745c610724ed257a4736492006235.mesh"]
+
+source_file="res://junk/models/home/Spoon Simple.obj"
+dest_files=["res://.godot/imported/Spoon Simple.obj-57e745c610724ed257a4736492006235.mesh", "res://.godot/imported/Spoon Simple.obj-57e745c610724ed257a4736492006235.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

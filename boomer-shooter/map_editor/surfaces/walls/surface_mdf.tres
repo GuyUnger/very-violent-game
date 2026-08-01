@@ -1,27 +1,51 @@
 [gd_resource type="Resource" script_class="SurfaceDefinition" format=3 uid="uid://cvmj5qydx053g"]
 
 [ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="1_holes"]
-[ext_resource type="PackedScene" uid="uid://knvaoh3jmvvl" path="res://game/fx/wall_sparks.tscn" id="2_8iehc"]
+[ext_resource type="PackedScene" uid="uid://knvaoh3jmvvl" path="res://content/fx/wall_sparks.tscn" id="2_8iehc"]
 [ext_resource type="Script" uid="uid://c54irsxyg2yc1" path="res://map_editor/surface_definition.gd" id="2_surface"]
 
+[sub_resource type="Gradient" id="Gradient_mdf"]
+colors = PackedColorArray(0.5370113, 0.5370113, 0.5370113, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mdf"]
+gradient = SubResource("Gradient_mdf")
+fill_from = Vector2(0.46153846, 0)
+fill_to = Vector2(0.49287748, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mdf"]
+frequency = 0.0162
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mdf"]
 noise = SubResource("FastNoiseLite_mdf")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_edge_mdf"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_edge_mdf"]
+noise = SubResource("FastNoiseLite_edge_mdf")
 
 [resource]
 script = ExtResource("2_surface")
 id = &"wall_mdf"
 display_name = "MDF"
-modulate = Color(0.6834836, 0.5318478, 0.3132808, 1)
-tile_size = Vector2(7, 7)
-tile_seam_thickness = Vector2(0.03, 0.03)
-tile_variance = 0.35
-quad_outline_width = Vector2(0.03, 0.02)
-quad_outline_color = Color(0, 0, 0, 0.74509805)
-quad_outline_distortion = 0.022
+albedo = SubResource("GradientTexture2D_mdf")
+modulate = Color(0.9269379, 0.67533726, 0.5734759, 1)
+metallic = 0.011
+specular = 0.04
+roughness = 1.0
+random_hue = 0.1
+tile_size = Vector2(170.66667, 0.41666666)
+tile_outline_color = Color(0, 0, 0, 0)
+tile_modulate = Color(0, 0, 0, 1)
+tile_variance = 0.405
+quad_outline_width = Vector2(0.04, 0.04)
+quad_outline_color = Color(0, 0, 0, 0.1882353)
+quad_outline_distortion = 0.05
+quad_outline_distortion_scale = Vector2(1, 0.28)
 disorder = SubResource("NoiseTexture2D_mdf")
 hole_atlas = ExtResource("1_holes")
+edge_noise_texture = SubResource("NoiseTexture2D_edge_mdf")
+hole_uv_size = Vector2(0.3, 0.3)
 bullet_stopping_power = 0.0
 max_health = 50
 can_run_through = true

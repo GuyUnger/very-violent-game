@@ -50,6 +50,8 @@ var hit_count := 0
 var hit_data_image: Image
 var hit_data_texture: ImageTexture
 var damage_material: ShaderMaterial
+var is_wallpaper_layer := false
+var respond_to_map_editor_tools := false
 
 @onready var geometry: MeshInstance3D = $Geometry
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -59,6 +61,7 @@ var damage_material: ShaderMaterial
 func _ready() -> void:
 	health = surface_definition.max_health if surface_definition else 1
 	_update_geometry()
+	_connect_to_map_editor()
 
 
 func _notification(what: int) -> void:
@@ -68,6 +71,21 @@ func _notification(what: int) -> void:
 
 func _on_surface_definition_changed() -> void:
 	_queue_geometry_update()
+
+
+func _connect_to_map_editor() -> void:
+	if not respond_to_map_editor_tools or not is_instance_valid(MapEditor.instance):
+		return
+	var map_editor := MapEditor.instance
+	if not map_editor.tool_changed.is_connected(_on_map_editor_tool_changed):
+		map_editor.tool_changed.connect(_on_map_editor_tool_changed)
+	_on_map_editor_tool_changed(map_editor.active_category)
+
+
+func _on_map_editor_tool_changed(category: int) -> void:
+	visible = not (
+		is_wallpaper_layer
+		and category == MapEditorItem.Category.WALLS)
 
 
 func hit(

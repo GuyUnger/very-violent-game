@@ -19,3 +19,6 @@ enum Category {
 @export var surface: SurfaceDefinition
 @export var thumbnail: Texture2D
 @export var footprint := Vector2i.ONE
+## Local X/Z offset measured in tile widths. For example, (0, -0.5)
+## places the item on the back border of its tile.
+@export var placement_offset := Vector2.ZERO

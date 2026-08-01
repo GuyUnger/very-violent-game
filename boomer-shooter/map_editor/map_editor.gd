@@ -1,12 +1,20 @@
 class_name MapEditor
 extends Node3D
 
+signal tool_changed(category: int)
+
+static var instance: MapEditor
+
 const MAP_FORMAT_VERSION := 3
-const GAMEPLAY_SCENE := preload("res://stages/main.tscn")
+const GAMEPLAY_SCENE := preload("res://main/main.tscn")
 const SURFACE_STACK_SCENE := preload(
 	"res://map_editor/surface_stack_geometry.tscn")
+const PALETTE_BUTTON_SCENE := preload(
+	"res://map_editor/map_editor_palette_button.tscn")
 const WALLPAPER_SLOT_0_KEY := "wallpaper_slot_0_item_id"
 const WALLPAPER_SLOT_2_KEY := "wallpaper_slot_2_item_id"
+const FINE_GRID_DIVISIONS := 2
+const PLACEMENT_ROTATION_DRAG_THRESHOLD := 4.0
 
 @export var catalog: MapEditorCatalog
 @export_range(0.1, 10.0, 0.1) var grid_size := 1.5
@@ -25,6 +33,7 @@ const WALLPAPER_SLOT_2_KEY := "wallpaper_slot_2_item_id"
 @onready var meta: Node3D = %Meta
 @onready var wall_preview: Node3D = %WallPreview
 @onready var floor_preview: Node3D = %FloorPreview
+@onready var placed_item_preview: Node3D = %PlacedItemPreview
 @onready var top_down_view_button: Button = %TopDownViewButton
 @onready var isometric_view_button: Button = %IsometricViewButton
 @onready var save_button: Button = %SaveButton
@@ -46,8 +55,10 @@ var drawing_wall := false
 var drawing_floor := false
 var painting_wallpaper := false
 var erasing_wallpaper := false
-var rotating_placed_entity := false
-var rotating_entity_key := ""
+var rotating_placed_item := false
+var rotating_item_key := ""
+var rotating_item_dragged := false
+var rotating_item_press_position := Vector2.ZERO
 var deleting_walls := false
 var wall_start := Vector2i.ZERO
 var wall_end := Vector2i.ZERO
@@ -68,12 +79,24 @@ var delete_stroke_records: Array = []
 var floor_delete_stroke_records: Array = []
 var undo_redo := UndoRedo.new()
 var gameplay_instance: Node3D
+var restarting_playtest := false
 var detached_editor_world_nodes: Array[Node3D] = []
 var active_category := MapEditorItem.Category.WALLS
 var active_item: MapEditorItem
+var placement_rotation_y := 0.0
+var placed_item_preview_node: Node3D
 var palette_button_group := ButtonGroup.new()
 var stack_thumbnail_cache: Dictionary = {}
 var palette_generation := 0
+
+
+func _enter_tree() -> void:
+	instance = self
+
+
+func _exit_tree() -> void:
+	if instance == self:
+		instance = null
 
 
 func _ready() -> void:
@@ -120,12 +143,16 @@ func _process(_delta: float) -> void:
 		MapEditorItem.Category.ITEMS,
 		MapEditorItem.Category.META,
 	]:
-		var cell := _screen_to_floor_cell(mouse_position)
+		var placement_grid_size := _get_active_placement_grid_size()
+		var cell := _screen_to_floor_cell(
+			mouse_position, placement_grid_size)
 		mouse_ground_marker.position = Vector3(
-			(cell.x + 0.5) * grid_size,
+			(cell.x + 0.5) * placement_grid_size,
 			0.075,
-			(cell.y + 0.5) * grid_size)
+			(cell.y + 0.5) * placement_grid_size)
+		_update_placed_item_preview(cell)
 	else:
+		placed_item_preview.visible = false
 		var grid_point := _screen_to_grid_point(mouse_position)
 		mouse_ground_marker.position = Vector3(
 			grid_point.x * grid_size,
@@ -153,13 +180,16 @@ func _update_view_buttons(mode: int) -> void:
 
 
 func _select_category(category: int) -> void:
-	_finish_entity_rotation()
+	_finish_placed_item_rotation()
 	_cancel_wall()
 	_cancel_floor()
 	_finish_wallpaper_stroke()
 	_finish_delete_stroke()
 	active_category = category
 	active_item = null
+	placement_rotation_y = 0.0
+	_clear_placed_item_preview()
+	tool_changed.emit(active_category)
 	walls_category_button.button_pressed = category == MapEditorItem.Category.WALLS
 	wallpaper_category_button.button_pressed = (
 		category == MapEditorItem.Category.WALLPAPERS)
@@ -192,15 +222,13 @@ func _rebuild_palette() -> void:
 
 	var thumbnail_requests: Array = []
 	for item in category_items:
-		var button := Button.new()
-		button.custom_minimum_size = Vector2(128.0, 56.0)
-		button.focus_mode = Control.FOCUS_NONE
-		button.toggle_mode = true
+		var button := PALETTE_BUTTON_SCENE.instantiate() as Button
+		if not button:
+			push_error("Map editor palette button scene must have a Button root.")
+			return
 		button.button_group = palette_button_group
 		button.text = item.display_name
 		button.tooltip_text = String(item.id)
-		button.expand_icon = true
-		#button.icon_max_width = 48
 		if item.surface:
 			var cache_key := item.surface.get_instance_id()
 			if stack_thumbnail_cache.has(cache_key):
@@ -219,6 +247,8 @@ func _rebuild_palette() -> void:
 		if not active_item:
 			active_item = item
 			button.button_pressed = true
+
+	_rebuild_placed_item_preview()
 
 	if not thumbnail_requests.is_empty():
 		_render_stack_thumbnails(thumbnail_requests, current_generation)
@@ -241,10 +271,56 @@ func _render_stack_thumbnails(requests: Array, generation: int) -> void:
 func _select_palette_item(item: MapEditorItem) -> void:
 	_finish_wallpaper_stroke()
 	active_item = item
+	placement_rotation_y = 0.0
+	_rebuild_placed_item_preview()
+
+
+func _rebuild_placed_item_preview() -> void:
+	_clear_placed_item_preview()
+	if (
+		not active_item
+		or active_item.category not in [
+			MapEditorItem.Category.PROPS,
+			MapEditorItem.Category.NPCS,
+			MapEditorItem.Category.ITEMS,
+		]
+		or not active_item.scene
+	):
+		return
+
+	placed_item_preview_node = active_item.scene.instantiate() as Node3D
+	if not placed_item_preview_node:
+		push_warning("Map editor preview scene must have a Node3D root.")
+		return
+	placed_item_preview.add_child(placed_item_preview_node)
+	placed_item_preview.visible = true
+
+
+func _clear_placed_item_preview() -> void:
+	placed_item_preview.visible = false
+	if not placed_item_preview_node:
+		return
+	if placed_item_preview_node.get_parent() == placed_item_preview:
+		placed_item_preview.remove_child(placed_item_preview_node)
+	placed_item_preview_node.queue_free()
+	placed_item_preview_node = null
+
+
+func _update_placed_item_preview(cell: Vector2i) -> void:
+	if not placed_item_preview_node or rotating_placed_item:
+		placed_item_preview.visible = false
+		return
+	placed_item_preview.visible = true
+	_apply_placed_item_transform(placed_item_preview_node, {
+		"cell": cell,
+		"grid_divisions": _get_category_grid_divisions(active_category),
+		"placement_offset": active_item.placement_offset,
+		"rotation_y": placement_rotation_y,
+	}, grid_size)
 
 
 func save_map(path := map_file_path) -> Error:
-	_finish_entity_rotation()
+	_finish_placed_item_rotation()
 	_finish_wallpaper_stroke()
 	_finish_delete_stroke()
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -280,6 +356,7 @@ func save_map(path := map_file_path) -> Error:
 		saved_items.append({
 			"cell": record["cell"],
 			"item_id": record["item_id"],
+			"grid_divisions": record.get("grid_divisions", 1),
 			"rotation_y": record.get("rotation_y", 0.0),
 		})
 
@@ -365,6 +442,23 @@ func exit_playtest() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
+func restart_playtest(color := Color.RED) -> void:
+	if restarting_playtest or not gameplay_instance:
+		return
+	restarting_playtest = true
+	await Transition.close(color)
+	if not is_inside_tree():
+		return
+	exit_playtest()
+	await get_tree().process_frame
+	if not is_inside_tree():
+		return
+	play_map()
+	await get_tree().process_frame
+	await Transition.open()
+	restarting_playtest = false
+
+
 func _detach_editor_world() -> void:
 	detached_editor_world_nodes.clear()
 	var editor_world_nodes: Array[Node3D] = [
@@ -395,6 +489,7 @@ func _set_editor_enabled(enabled: bool) -> void:
 	meta.visible = enabled
 	wall_preview.visible = enabled
 	floor_preview.visible = enabled
+	placed_item_preview.visible = enabled and placed_item_preview_node != null
 	editor_ui.visible = enabled
 	camera.current = enabled
 	set_process_unhandled_input(enabled)
@@ -555,7 +650,9 @@ func _read_map_file(path: String) -> Dictionary:
 		):
 			push_error("Placed item is not in the catalogue: %s" % item_id)
 			return {"error": ERR_FILE_NOT_FOUND}
-		var item_key := _get_cell_key(cell)
+		var grid_divisions := maxi(
+			1, int(saved_item.get("grid_divisions", 1)))
+		var item_key := _get_placed_item_key(cell, grid_divisions)
 		if loaded_item_cells.has(item_key):
 			continue
 		loaded_item_cells[item_key] = true
@@ -565,6 +662,8 @@ func _read_map_file(path: String) -> Dictionary:
 			"item_id": item.id,
 			"category": item.category,
 			"scene": item.scene,
+			"grid_divisions": grid_divisions,
+			"placement_offset": item.placement_offset,
 			"rotation_y": float(saved_item.get("rotation_y", 0.0)),
 		})
 
@@ -637,29 +736,48 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 
+	if (
+		event is InputEventKey
+		and event.pressed
+		and not event.echo
+		and event.keycode == KEY_R
+		and active_category in [
+			MapEditorItem.Category.PROPS,
+			MapEditorItem.Category.NPCS,
+			MapEditorItem.Category.META,
+		]
+	):
+		_rotate_active_placement_90_degrees()
+		get_viewport().set_input_as_handled()
+		return
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if active_category in [
 			MapEditorItem.Category.NPCS,
+			MapEditorItem.Category.PROPS,
 			MapEditorItem.Category.META,
 		]:
 			if event.pressed:
 				var item_key := place_active_item(
-					_screen_to_floor_cell(event.position))
+					_screen_to_floor_cell(
+						event.position, _get_active_placement_grid_size()))
 				if not item_key.is_empty():
-					rotating_placed_entity = true
-					rotating_entity_key = item_key
-					_rotate_placed_entity_toward(event.position)
+					rotating_placed_item = true
+					rotating_item_key = item_key
+					rotating_item_dragged = false
+					rotating_item_press_position = event.position
 			else:
-				_rotate_placed_entity_toward(event.position)
-				_finish_entity_rotation()
+				if rotating_item_dragged:
+					_rotate_placed_item_toward(event.position)
+				_finish_placed_item_rotation()
 			get_viewport().set_input_as_handled()
 			return
 		if active_category in [
-			MapEditorItem.Category.PROPS,
 			MapEditorItem.Category.ITEMS,
 		]:
 			if event.pressed:
-				place_active_item(_screen_to_floor_cell(event.position))
+				place_active_item(_screen_to_floor_cell(
+					event.position, _get_active_placement_grid_size()))
 			get_viewport().set_input_as_handled()
 			return
 		if active_category == MapEditorItem.Category.WALLPAPERS:
@@ -696,7 +814,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			MapEditorItem.Category.META,
 		]:
 			if event.pressed:
-				delete_placed_item(_screen_to_floor_cell(event.position))
+				delete_placed_item(_screen_to_floor_cell(
+					event.position, _get_active_placement_grid_size()))
 			get_viewport().set_input_as_handled()
 			return
 		if active_category == MapEditorItem.Category.WALLPAPERS:
@@ -730,8 +849,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 
-	if event is InputEventMouseMotion and rotating_placed_entity:
-		_rotate_placed_entity_toward(event.position)
+	if event is InputEventMouseMotion and rotating_placed_item:
+		if (
+			not rotating_item_dragged
+			and event.position.distance_to(rotating_item_press_position)
+				>= PLACEMENT_ROTATION_DRAG_THRESHOLD
+		):
+			rotating_item_dragged = true
+		if rotating_item_dragged:
+			_rotate_placed_item_toward(event.position)
 		get_viewport().set_input_as_handled()
 		return
 
@@ -754,7 +880,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		_finish_entity_rotation()
+		_finish_placed_item_rotation()
 		_cancel_wall()
 		_cancel_floor()
 		_cancel_wallpaper_stroke()
@@ -873,7 +999,8 @@ func place_active_item(cell: Vector2i) -> String:
 		or not active_item.scene
 	):
 		return ""
-	var item_key := _get_cell_key(cell)
+	var grid_divisions := _get_category_grid_divisions(active_item.category)
+	var item_key := _get_placed_item_key(cell, grid_divisions)
 	if placed_item_nodes.has(item_key):
 		return ""
 	var record := {
@@ -882,7 +1009,9 @@ func place_active_item(cell: Vector2i) -> String:
 		"item_id": active_item.id,
 		"category": active_item.category,
 		"scene": active_item.scene,
-		"rotation_y": 0.0,
+		"grid_divisions": grid_divisions,
+		"placement_offset": active_item.placement_offset,
+		"rotation_y": placement_rotation_y,
 	}
 	undo_redo.create_action("Place %s" % active_item.display_name)
 	undo_redo.add_do_method(_create_placed_item_records.bind([record]))
@@ -891,32 +1020,56 @@ func place_active_item(cell: Vector2i) -> String:
 	return item_key
 
 
-func _rotate_placed_entity_toward(screen_position: Vector2) -> void:
-	if not rotating_placed_entity:
+func _rotate_placed_item_toward(screen_position: Vector2) -> void:
+	if not rotating_placed_item:
 		return
-	var placed_node := placed_item_nodes.get(rotating_entity_key) as Node3D
-	var record: Dictionary = placed_item_data.get(rotating_entity_key, {})
+	var placed_node := placed_item_nodes.get(rotating_item_key) as Node3D
+	var record: Dictionary = placed_item_data.get(rotating_item_key, {})
 	if not placed_node or record.is_empty():
-		_finish_entity_rotation()
+		_finish_placed_item_rotation()
 		return
 	var target := _screen_to_ground_position(screen_position)
-	var direction := target - placed_node.global_position
+	var placed_parent := placed_node.get_parent() as Node3D
+	if placed_parent:
+		target = placed_parent.to_local(target)
+	var cell: Vector2i = record["cell"]
+	var placement_grid_size := _get_record_placement_grid_size(record, grid_size)
+	var pivot := _get_placed_item_cell_centre(cell, placement_grid_size)
+	var direction := target - pivot
 	direction.y = 0.0
 	if direction.length_squared() < 0.000001:
 		return
 	var rotation_y := atan2(direction.x, direction.z)
-	placed_node.global_rotation.y = rotation_y
+	if record["category"] == MapEditorItem.Category.PROPS:
+		rotation_y = snappedf(rotation_y, PI * 0.5)
 	record["rotation_y"] = rotation_y
-	placed_item_data[rotating_entity_key] = record
+	_apply_placed_item_transform(placed_node, record, grid_size)
+	placed_item_data[rotating_item_key] = record
 
 
-func _finish_entity_rotation() -> void:
-	rotating_placed_entity = false
-	rotating_entity_key = ""
+func _finish_placed_item_rotation() -> void:
+	rotating_placed_item = false
+	rotating_item_key = ""
+	rotating_item_dragged = false
+
+
+func _rotate_active_placement_90_degrees() -> void:
+	placement_rotation_y = wrapf(placement_rotation_y + PI * 0.5, 0.0, TAU)
+	if not rotating_placed_item:
+		return
+	var placed_node := placed_item_nodes.get(rotating_item_key) as Node3D
+	var record: Dictionary = placed_item_data.get(rotating_item_key, {})
+	if not placed_node or record.is_empty():
+		return
+	record["rotation_y"] = wrapf(
+		float(record.get("rotation_y", 0.0)) + PI * 0.5, 0.0, TAU)
+	_apply_placed_item_transform(placed_node, record, grid_size)
+	placed_item_data[rotating_item_key] = record
 
 
 func delete_placed_item(cell: Vector2i) -> void:
-	var item_key := _get_cell_key(cell)
+	var grid_divisions := _get_category_grid_divisions(active_category)
+	var item_key := _get_placed_item_key(cell, grid_divisions)
 	var record: Dictionary = placed_item_data.get(item_key, {})
 	if record.is_empty() or record["category"] != active_category:
 		return
@@ -972,16 +1125,39 @@ func _instantiate_placed_item(
 		return null
 	if disable_processing:
 		placed_node.process_mode = Node.PROCESS_MODE_DISABLED
-	var cell: Vector2i = record["cell"]
-	placed_node.position = Vector3(
-		(cell.x + 0.5) * placement_grid_size,
-		0.0,
-		(cell.y + 0.5) * placement_grid_size)
-	placed_node.rotation.y = float(record.get("rotation_y", 0.0))
+	_apply_placed_item_transform(placed_node, record, placement_grid_size)
 	parent.add_child(placed_node)
 	if not disable_processing and placed_node is Weapon:
 		placed_node.activate_world_pickup()
 	return placed_node
+
+
+func _apply_placed_item_transform(
+	placed_node: Node3D,
+	record: Dictionary,
+	placement_grid_size: float,
+) -> void:
+	var cell: Vector2i = record["cell"]
+	var item_grid_size := _get_record_placement_grid_size(
+		record, placement_grid_size)
+	var rotation_y := float(record.get("rotation_y", 0.0))
+	var placement_offset: Vector2 = record.get(
+		"placement_offset", Vector2.ZERO)
+	var offset := Vector3(placement_offset.x, 0.0, placement_offset.y)
+	offset = offset.rotated(Vector3.UP, rotation_y) * item_grid_size
+	placed_node.position = (
+		_get_placed_item_cell_centre(cell, item_grid_size) + offset)
+	placed_node.rotation.y = rotation_y
+
+
+func _get_placed_item_cell_centre(
+	cell: Vector2i,
+	placement_grid_size: float,
+) -> Vector3:
+	return Vector3(
+		(cell.x + 0.5) * placement_grid_size,
+		0.0,
+		(cell.y + 0.5) * placement_grid_size)
 
 
 func create_wall(start: Vector2i, end: Vector2i) -> void:
@@ -1448,11 +1624,38 @@ func _screen_to_grid_point(screen_position: Vector2) -> Vector2i:
 		roundi(ground_position.z / grid_size))
 
 
-func _screen_to_floor_cell(screen_position: Vector2) -> Vector2i:
+func _screen_to_floor_cell(
+	screen_position: Vector2,
+	placement_grid_size := -1.0,
+) -> Vector2i:
+	if placement_grid_size <= 0.0:
+		placement_grid_size = grid_size
 	var ground_position := _screen_to_ground_position(screen_position)
 	return Vector2i(
-		floori(ground_position.x / grid_size),
-		floori(ground_position.z / grid_size))
+		floori(ground_position.x / placement_grid_size),
+		floori(ground_position.z / placement_grid_size))
+
+
+func _get_active_placement_grid_size() -> float:
+	return grid_size / float(_get_category_grid_divisions(active_category))
+
+
+func _get_category_grid_divisions(category: int) -> int:
+	if category in [
+		MapEditorItem.Category.PROPS,
+		MapEditorItem.Category.NPCS,
+		MapEditorItem.Category.ITEMS,
+	]:
+		return FINE_GRID_DIVISIONS
+	return 1
+
+
+func _get_record_placement_grid_size(
+	record: Dictionary,
+	base_grid_size: float,
+) -> float:
+	return base_grid_size / float(maxi(
+		1, int(record.get("grid_divisions", 1))))
 
 
 func _screen_to_ground_position(screen_position: Vector2) -> Vector3:
@@ -1489,6 +1692,10 @@ func _get_floor_cells(cell_min: Vector2i, cell_max: Vector2i) -> Array[Vector2i]
 
 func _get_cell_key(cell: Vector2i) -> String:
 	return "%d,%d" % [cell.x, cell.y]
+
+
+func _get_placed_item_key(cell: Vector2i, grid_divisions: int) -> String:
+	return "%d:%d,%d" % [grid_divisions, cell.x, cell.y]
 
 
 func _get_floor_key(cell_min: Vector2i, cell_max: Vector2i) -> String:

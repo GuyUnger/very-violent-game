@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_catalog"]
 [ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_item"]
+[ext_resource type="Resource" path="res://map_editor/builtin_catalogs/walls.tres" id="2_walls"]
+[ext_resource type="Resource" path="res://map_editor/builtin_catalogs/wall_papers.tres" id="3_wallpapers"]
+[ext_resource type="Resource" path="res://map_editor/builtin_catalogs/floors.tres" id="4_floors"]
+[ext_resource type="Resource" path="res://map_editor/builtin_catalogs/npcs.tres" id="5_npcs"]
+[ext_resource type="Resource" path="res://map_editor/builtin_catalogs/props.tres" id="6_props"]
+[ext_resource type="Resource" path="res://map_editor/builtin_catalogs/items.tres" id="7_items"]
+[ext_resource type="Resource" path="res://map_editor/builtin_catalogs/meta.tres" id="8_meta"]
 
 [resource]
 script = ExtResource("1_catalog")
+included_catalogs = Array[ExtResource("1_catalog")]([ExtResource("2_walls"), ExtResource("3_wallpapers"), ExtResource("4_floors"), ExtResource("5_npcs"), ExtResource("6_props"), ExtResource("7_items"), ExtResource("8_meta")])

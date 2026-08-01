@@ -60,7 +60,7 @@ catalog = ExtResource("4_catalog")
 transform = Transform3D(0.8660254, -0.46985188, 0.17099498, 0, 0.34198993, 0.9397036, -0.50000006, -0.8138072, 0.29617193, 0, 0, 0)
 
 [node name="Grid" type="MeshInstance3D" parent="." unique_id=1252028112]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.005, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.01, 0)
 mesh = SubResource("PlaneMesh_grid")
 
 [node name="MouseGroundMarker" type="MeshInstance3D" parent="." unique_id=352817191]
@@ -114,6 +114,9 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="FloorPreview" type="Node3D" parent="." unique_id=1106686798]
+unique_name_in_owner = true
+
+[node name="PlacedItemPreview" type="Node3D" parent="." unique_id=1811782715]
 unique_name_in_owner = true
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=78479095]
@@ -201,6 +204,10 @@ text = "Isometric"
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer" unique_id=1512198361]
 layout_mode = 2
 size_flags_vertical = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/MarginContainer" unique_id=423497720]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer/MarginContainer" unique_id=1967386196]
 layout_mode = 2

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b7vy0jn2108yg"
+path="res://.godot/imported/Bed Ac 1.obj-67fefde5b73d455fe24175617570bacd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bed Ac 1.obj-67fefde5b73d455fe24175617570bacd.mesh"]
+
+source_file="res://junk/models/home/Bed Ac 1.obj"
+dest_files=["res://.godot/imported/Bed Ac 1.obj-67fefde5b73d455fe24175617570bacd.mesh", "res://.godot/imported/Bed Ac 1.obj-67fefde5b73d455fe24175617570bacd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

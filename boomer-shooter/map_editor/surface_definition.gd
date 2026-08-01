@@ -3,7 +3,7 @@ class_name SurfaceDefinition
 extends Resource
 
 const GENERIC_OBJECT_SHADER := preload(
-	"res://stages/generic_object_wall_shader.gdshader")
+	"res://map_editor/generic_object_wall_shader.gdshader")
 
 @export_group("Identity")
 @export var id: StringName:

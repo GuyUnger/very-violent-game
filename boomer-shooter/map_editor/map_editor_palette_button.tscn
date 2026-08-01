@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://5oxy05aifuw2"]
+
+[node name="MapEditorPaletteButton" type="Button" unique_id=1919601719]
+custom_minimum_size = Vector2(128, 0)
+offset_right = 264.0
+offset_bottom = 300.0
+size_flags_vertical = 3
+focus_mode = 0
+toggle_mode = true
+text = "asdadas"
+icon_alignment = 1
+vertical_icon_alignment = 0

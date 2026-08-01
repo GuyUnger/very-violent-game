@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cwq68eljvu0jr"
+path="res://.godot/imported/Window Frame 1 C.obj-622b268580d5943ce1d90fa0cc85cdce.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Window Frame 1 C.obj-622b268580d5943ce1d90fa0cc85cdce.mesh"]
+
+source_file="res://junk/models/home/Window Frame 1 C.obj"
+dest_files=["res://.godot/imported/Window Frame 1 C.obj-622b268580d5943ce1d90fa0cc85cdce.mesh", "res://.godot/imported/Window Frame 1 C.obj-622b268580d5943ce1d90fa0cc85cdce.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://coaf4dlva5ii0"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop_bath_tub.tscn" id="1_6kpvl"]
+[ext_resource type="ArrayMesh" uid="uid://brdqrvkihanao" path="res://junk/models/home/Painting 3.obj" id="2_6kpvl"]
+[ext_resource type="AudioStream" uid="uid://hwlt383howk" path="res://junk/shared/sfx/wood_break.wav" id="3_6ihvn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umx4j"]
+size = Vector3(0.81, 0.4758413, 0.048227534)
+
+[node name="EntityWallPainting" unique_id=58870841 instance=ExtResource("1_6kpvl")]
+max_hp = 1
+can_run_through = true
+
+[node name="MeshInstance3D2" parent="." index="0" unique_id=1141119635]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 1, 0, 0, 0)
+mesh = ExtResource("2_6kpvl")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0043679327, -0.017277822)
+shape = SubResource("BoxShape3D_umx4j")
+
+[node name="HitSound" parent="." index="2" unique_id=1507396186]
+stream = ExtResource("3_6ihvn")

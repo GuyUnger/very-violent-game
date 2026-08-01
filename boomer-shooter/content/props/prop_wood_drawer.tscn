@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dsvlbb5aeixa6"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop_bath_tub.tscn" id="1_umx4j"]
+[ext_resource type="ArrayMesh" uid="uid://cjwsr6187agmr" path="res://junk/models/home/Drawer A.obj" id="2_s0q1d"]
+[ext_resource type="AudioStream" uid="uid://hwlt383howk" path="res://junk/shared/sfx/wood_break.wav" id="3_s0q1d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umx4j"]
+size = Vector3(1.435, 0.93237305, 0.71)
+
+[node name="EntityDrawer" unique_id=58870841 instance=ExtResource("1_umx4j")]
+can_run_through = true
+
+[node name="MeshInstance3D2" parent="." index="0" unique_id=1141119635]
+mesh = ExtResource("2_s0q1d")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47564375, 0)
+shape = SubResource("BoxShape3D_umx4j")
+
+[node name="HitSound" parent="." index="2" unique_id=1507396186]
+stream = ExtResource("3_s0q1d")

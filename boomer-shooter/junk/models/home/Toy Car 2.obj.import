@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dpfiw5opl8gxa"
+path="res://.godot/imported/Toy Car 2.obj-b5e0116415365d2d254019426b48e617.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Toy Car 2.obj-b5e0116415365d2d254019426b48e617.mesh"]
+
+source_file="res://junk/models/home/Toy Car 2.obj"
+dest_files=["res://.godot/imported/Toy Car 2.obj-b5e0116415365d2d254019426b48e617.mesh", "res://.godot/imported/Toy Car 2.obj-b5e0116415365d2d254019426b48e617.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

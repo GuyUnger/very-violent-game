@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://clr7q5covs1l6"
+path="res://.godot/imported/Drawer Ac 3 Old.obj-5caa89d891a8328b08c45e6dbe9bcece.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Drawer Ac 3 Old.obj-5caa89d891a8328b08c45e6dbe9bcece.mesh"]
+
+source_file="res://junk/models/home/Drawer Ac 3 Old.obj"
+dest_files=["res://.godot/imported/Drawer Ac 3 Old.obj-5caa89d891a8328b08c45e6dbe9bcece.mesh", "res://.godot/imported/Drawer Ac 3 Old.obj-5caa89d891a8328b08c45e6dbe9bcece.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

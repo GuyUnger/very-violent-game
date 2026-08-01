@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://c5f3guqjrh3wr"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_id7w0"]
+[ext_resource type="PackedScene" uid="uid://6s3vaif7lx5b" path="res://content/props/prop_toilet.tscn" id="3_b3suc"]
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop_bath_tub.tscn" id="4_b3suc"]
+[ext_resource type="PackedScene" uid="uid://cyhrnobk2m1m7" path="res://content/props/prop_wood_counter.tscn" id="5_xxk5k"]
+[ext_resource type="PackedScene" uid="uid://b20u0am1v3mlc" path="res://content/props/prop_kitchen_fridge.tscn" id="6_6jugw"]
+
+[sub_resource type="Resource" id="Resource_38m0r"]
+script = ExtResource("2_id7w0")
+id = &"toilet"
+display_name = "toilet"
+category = 3
+scene = ExtResource("3_b3suc")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_id7w0"]
+script = ExtResource("2_id7w0")
+id = &"bath_tub"
+display_name = "Bath Tub"
+category = 3
+scene = ExtResource("4_b3suc")
+placement_offset = Vector2(-0.45, 0.45)
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_jij0l"]
+script = ExtResource("2_id7w0")
+id = &"wood_counter"
+display_name = "Wood Counter"
+category = 3
+scene = ExtResource("5_xxk5k")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_8ahpe"]
+script = ExtResource("2_id7w0")
+id = &"mini_fridge"
+display_name = "Mini Fridge"
+category = 3
+scene = ExtResource("6_6jugw")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[resource]
+script = ExtResource("1_catalog")
+items = Array[ExtResource("2_id7w0")]([SubResource("Resource_38m0r"), SubResource("Resource_id7w0"), SubResource("Resource_jij0l"), SubResource("Resource_8ahpe")])

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bl3pe2gmt8g4a"
+path="res://.godot/imported/Smartphone 1.obj-ff53b84fd903613ac53b3441d90b27ad.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Smartphone 1.obj-ff53b84fd903613ac53b3441d90b27ad.mesh"]
+
+source_file="res://junk/models/home/Smartphone 1.obj"
+dest_files=["res://.godot/imported/Smartphone 1.obj-ff53b84fd903613ac53b3441d90b27ad.mesh", "res://.godot/imported/Smartphone 1.obj-ff53b84fd903613ac53b3441d90b27ad.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

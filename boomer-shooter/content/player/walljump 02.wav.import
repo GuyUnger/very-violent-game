@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c23gxwxdwcx33"
+path="res://.godot/imported/walljump 02.wav-bd92b4b855c577532565eedb513c6ca5.sample"
+
+[deps]
+
+source_file="res://content/player/walljump 02.wav"
+dest_files=["res://.godot/imported/walljump 02.wav-bd92b4b855c577532565eedb513c6ca5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

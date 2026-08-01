@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cj3dxp1r6cl3p"]
+
+[ext_resource type="Script" uid="uid://yxb78g7gi5r5" path="res://content/meta/player_spawn.gd" id="1_tgiq2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr7po"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nlwex"]
+size = Vector2(0.5, 0.1)
+
+[node name="PlayerSpawn" type="Node3D" unique_id=1919353634]
+script = ExtResource("1_tgiq2")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=487873744]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+text = "PLAYER SPAWN"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1585965417]
+transform = Transform3D(1.3113416e-07, 0, -0.99999994, 0, 1, 0, 1, 0, 1.3113416e-07, -0.0015689563, 0.025, 0.08004753)
+material_override = SubResource("StandardMaterial3D_hr7po")
+mesh = SubResource("PlaneMesh_nlwex")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=511856473]
+transform = Transform3D(0.30782226, 0.0074317874, -0.78798896, -0.0022877327, 0.9999723, 0.0058563286, 0.39400533, 5.144328e-10, 0.61566144, 0.08027094, 0.025461912, -0.03742888)
+material_override = SubResource("StandardMaterial3D_hr7po")
+mesh = SubResource("PlaneMesh_nlwex")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1614424344]
+transform = Transform3D(-0.29832768, -0.08171421, -0.7983264, 0.032724097, 0.9865334, -0.14989339, 0.3999121, -0.14168371, -0.58327246, -0.08105541, 0.025461912, -0.037428863)
+material_override = SubResource("StandardMaterial3D_hr7po")
+mesh = SubResource("PlaneMesh_nlwex")

@@ -8,4 +8,4 @@ enum Difficulty {
 }
 
 static var difficulty: int = Difficulty.REGULAR
-static var look_sensitivity: float = 1.0
+static var look_sensitivity: float = 0.33

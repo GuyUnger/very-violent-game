@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://fwnl7rq0n32l"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_item"]
+[ext_resource type="Resource" uid="uid://gg5nof2tqcyb" path="res://map_editor/surfaces/wall_papers/surface_plaster.tres" id="3_plaster"]
+
+[sub_resource type="Resource" id="MapEditorItem_plaster"]
+script = ExtResource("2_item")
+id = &"wallpaper_plaster"
+display_name = "Plaster"
+category = 4
+surface = ExtResource("3_plaster")
+
+[resource]
+script = ExtResource("1_catalog")
+items = Array[ExtResource("2_item")]([SubResource("MapEditorItem_plaster")])

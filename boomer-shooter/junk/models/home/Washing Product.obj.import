@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://clj5fi53ocmat"
+path="res://.godot/imported/Washing Product.obj-e8fcf8f5e227b7c73b06b161019bc13f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Washing Product.obj-e8fcf8f5e227b7c73b06b161019bc13f.mesh"]
+
+source_file="res://junk/models/home/Washing Product.obj"
+dest_files=["res://.godot/imported/Washing Product.obj-e8fcf8f5e227b7c73b06b161019bc13f.mesh", "res://.godot/imported/Washing Product.obj-e8fcf8f5e227b7c73b06b161019bc13f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
