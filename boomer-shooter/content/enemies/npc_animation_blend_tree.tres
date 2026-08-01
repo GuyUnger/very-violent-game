@@ -114,7 +114,6 @@ input_2/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3ocbx"]
 
 [resource]
-graph_offset = Vector2(-1569.54, -178.534)
 nodes/output/position = Vector2(880, 480)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_yj70c")
 nodes/Animation/position = Vector2(-880, 740)

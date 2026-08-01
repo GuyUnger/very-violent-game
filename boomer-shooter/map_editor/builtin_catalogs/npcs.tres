@@ -2,39 +2,8 @@
 
 [ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_catalog"]
 [ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_item"]
-[ext_resource type="PackedScene" uid="uid://0s22t0uld35g" path="res://content/enemies/npc_enemy_grunt.tscn" id="3_grunt"]
-[ext_resource type="PackedScene" uid="uid://v0boycsgos0n" path="res://content/enemies/npc_enemy_grunt_smg.tscn" id="4_grunt_smg"]
-[ext_resource type="PackedScene" uid="uid://b0mg37m0iryg8" path="res://content/enemies/npc_enemy_sniper.tscn" id="5_sniper"]
-[ext_resource type="PackedScene" uid="uid://bldqjyp2glnyx" path="res://content/enemies/npc_enemy_big_guy.tscn" id="6_big_guy"]
 [ext_resource type="PackedScene" uid="uid://cglxaun25ddhf" path="res://content/enemies/npc_turret.tscn" id="7_turret"]
-
-[sub_resource type="Resource" id="MapEditorItem_grunt"]
-script = ExtResource("2_item")
-id = &"entity_grunt"
-display_name = "Grunt"
-category = 2
-scene = ExtResource("3_grunt")
-
-[sub_resource type="Resource" id="MapEditorItem_grunt_smg"]
-script = ExtResource("2_item")
-id = &"entity_grunt_smg"
-display_name = "SMG Grunt"
-category = 2
-scene = ExtResource("4_grunt_smg")
-
-[sub_resource type="Resource" id="MapEditorItem_sniper"]
-script = ExtResource("2_item")
-id = &"entity_sniper"
-display_name = "Sniper"
-category = 2
-scene = ExtResource("5_sniper")
-
-[sub_resource type="Resource" id="MapEditorItem_big_guy"]
-script = ExtResource("2_item")
-id = &"entity_big_guy"
-display_name = "Big Guy"
-category = 2
-scene = ExtResource("6_big_guy")
+[ext_resource type="PackedScene" uid="uid://chn2y6gq7w43h" path="res://content/enemies/shared/npc_humandoid_girl.tscn" id="8_m2hoo"]
 
 [sub_resource type="Resource" id="MapEditorItem_turret"]
 script = ExtResource("2_item")
@@ -43,6 +12,14 @@ display_name = "Turret"
 category = 2
 scene = ExtResource("7_turret")
 
+[sub_resource type="Resource" id="Resource_u1q0x"]
+script = ExtResource("2_item")
+id = &"enemy_girl_skinny"
+display_name = "Girl Skinny"
+category = 2
+scene = ExtResource("8_m2hoo")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
 [resource]
 script = ExtResource("1_catalog")
-items = Array[ExtResource("2_item")]([SubResource("MapEditorItem_grunt"), SubResource("MapEditorItem_grunt_smg"), SubResource("MapEditorItem_sniper"), SubResource("MapEditorItem_big_guy"), SubResource("MapEditorItem_turret")])
+items = Array[ExtResource("2_item")]([SubResource("MapEditorItem_turret"), SubResource("Resource_u1q0x")])

@@ -510,9 +510,7 @@ func _can_stand_up() -> bool:
 
 
 func get_center_pos() -> Vector3:
-	if body_collision_shape:
-		return body_collision_shape.global_position
-	return super.get_center_pos()
+	return cam.global_position
 
 
 func process_jump_vel_boost() -> void:
@@ -699,7 +697,7 @@ static var DEAD_SOUNDS: Array = [
 	preload("res://content/player/die 01.wav"),
 ]
 
-func die() -> void:
+func die(_normal := Vector3.ZERO, _hit_shape: CollisionShape3D = null) -> void:
 	if dead:
 		return
 	dead = true
@@ -755,8 +753,8 @@ func animate_crosshair() -> void:
 	$AudioHit.play()
 
 
-func hit(damage: int) -> void:
+func hit(damage: float, normal := Vector3.ZERO, hit_shape: CollisionShape3D = null) -> void:
 	if invincible_t > 0.0:
 		return
 	invincible_t = damage_cooldown
-	super(damage)
+	super(damage, normal, hit_shape)

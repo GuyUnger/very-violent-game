@@ -10,6 +10,7 @@ var speed := 40.0
 
 var collision_mask := 1 + 4
 var enemy
+var shooter: Node3D
 var target_position: Vector3:
 	get:
 		return target_position
@@ -49,13 +50,19 @@ func _ready() -> void:
 			impact["collider"],
 			impact["normal"],
 			impact["position"],
+			impact["hit_shape"],
 			impact["stops_bullet"])
 	
 	if is_inside_tree():
 		await get_tree().create_timer(0.2).timeout
 		queue_free()
 
-func _apply_impact(collider:Node3D, normal:Vector3, hit_position:Vector3, stops_bullet: bool = true) -> void:
+func _apply_impact(
+		collider: Node3D,
+		normal: Vector3,
+		hit_position: Vector3,
+		hit_shape: CollisionShape3D,
+		stops_bullet: bool = true) -> void:
 	#await get_tree().create_timer(position.distance_to(hit_position) / speed).timeout
 	#set_physics_process(false)
 
@@ -94,7 +101,14 @@ func _apply_impact(collider:Node3D, normal:Vector3, hit_position:Vector3, stops_
 			hit_position + normal * 10.0)
 		add_child(x)
 	
-		collider.hit(damage)
+		var damage_event := DamageEvent.new()
+		damage_event.source = shooter
+		damage_event.shot_origin = global_position
+		damage_event.hit_position = hit_position
+		damage_event.hit_normal = normal
+		damage_event.hit_shape = hit_shape
+		damage_event.base_damage = damage
+		collider.hit_with_damage_event(damage_event)
 		if enemy and "last_hit_enemy" in collider:
 			collider.last_hit_enemy = enemy
 
@@ -106,6 +120,10 @@ func _trace_bullet_path(query: PhysicsRayQueryParameters3D) -> Dictionary:
 	var remaining_penetration := penetration_power
 	var current_from := query.from
 	var exclude: Array[RID] = []
+	if is_instance_valid(enemy):
+		for ally in get_tree().get_nodes_in_group("npc_enemies"):
+			if ally is CollisionObject3D:
+				exclude.append((ally as CollisionObject3D).get_rid())
 
 	while true:
 		query.from = current_from
@@ -130,6 +148,7 @@ func _trace_bullet_path(query: PhysicsRayQueryParameters3D) -> Dictionary:
 			"collider": collider,
 			"normal": res.normal,
 			"position": res.position,
+			"hit_shape": _get_collision_shape(collider, res.shape),
 			"stops_bullet": stops_bullet,
 		})
 
@@ -151,6 +170,16 @@ func _trace_bullet_path(query: PhysicsRayQueryParameters3D) -> Dictionary:
 		"target_position": final_target,
 		"impacts": impacts,
 	}
+
+
+func _get_collision_shape(collider: Node, shape_index: int) -> CollisionShape3D:
+	if collider is not CollisionObject3D or shape_index < 0:
+		return null
+	var collision_object := collider as CollisionObject3D
+	var owner_id: int = collision_object.shape_find_owner(shape_index)
+	if owner_id < 0:
+		return null
+	return collision_object.shape_owner_get_owner(owner_id) as CollisionShape3D
 
 
 func _get_stopping_power(collider: Node) -> float:

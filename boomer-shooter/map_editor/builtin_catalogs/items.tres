@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_item"]
 [ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://content/weapons/weapon_smg.tscn" id="3_mac10"]
 [ext_resource type="PackedScene" uid="uid://crruv3fy0bbv7" path="res://content/weapons/weapon_revolver.tscn" id="4_p227"]
+[ext_resource type="PackedScene" uid="uid://kjth5n3pmvxy" path="res://content/weapons/weapon_shotgun.tscn" id="5_shotgun"]
 
 [sub_resource type="Resource" id="MapEditorItem_mac10"]
 script = ExtResource("2_item")
@@ -19,6 +20,13 @@ display_name = "P227"
 category = 5
 scene = ExtResource("4_p227")
 
+[sub_resource type="Resource" id="MapEditorItem_shotgun"]
+script = ExtResource("2_item")
+id = &"weapon_shotgun"
+display_name = "Shotgun"
+category = 5
+scene = ExtResource("5_shotgun")
+
 [resource]
 script = ExtResource("1_catalog")
-items = Array[ExtResource("2_item")]([SubResource("MapEditorItem_mac10"), SubResource("MapEditorItem_p227")])
+items = Array[ExtResource("2_item")]([SubResource("MapEditorItem_mac10"), SubResource("MapEditorItem_p227"), SubResource("MapEditorItem_shotgun")])

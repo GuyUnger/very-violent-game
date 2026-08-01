@@ -3,12 +3,11 @@ extends CharacterBody3D
 
 const GRAVITY = 40.0
 
-@export var max_health: int = 2
-@export var health: int = 2
+@export var max_health := 2.0
+@export var health := 2.0
 
 var aim_dir: Vector3
 
-# Getter/Setter Utils
 var center_pos: Vector3:
 	get:
 		return get_center_pos()
@@ -28,13 +27,17 @@ var vel_hor: Vector2:
 		velocity.z = value.y
 
 
-func hit(damage: int) -> void:
+func hit(damage: float, normal := Vector3.ZERO, hit_shape: CollisionShape3D = null) -> void:
 	health -= damage
 	if health <= 0:
-		die()
+		die(normal, hit_shape)
 
 
-func die() -> void:
+func hit_with_damage_event(event: DamageEvent) -> void:
+	hit(event.get_damage(), event.hit_normal, event.hit_shape)
+
+
+func die(_normal := Vector3.ZERO, _hit_shape: CollisionShape3D = null) -> void:
 	hide()
 
 

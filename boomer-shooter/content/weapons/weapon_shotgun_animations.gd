@@ -1,6 +1,6 @@
 extends Node
 
-const ShellScene = preload("res://weapons/shell.tscn")
+const ShellScene = preload("res://content/weapons/shell.tscn")
 const ARM_NEUTRAL_POS := -0.035
 const ARM_END_POS := -0.114
 const LEVER_NEUTRAL_POS := 0.008

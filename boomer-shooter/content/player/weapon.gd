@@ -104,6 +104,7 @@ func shoot() -> void:
 
 	if player:
 		var projectile := preload("res://content/projectiles/bullet.tscn").instantiate()
+		projectile.shooter = player
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
 		
 		player.cam.shake_rumble(0.3, 0.3, 16.0)
@@ -116,6 +117,7 @@ func shoot() -> void:
 	else:
 		var projectile := preload("res://content/projectiles/bullet.tscn").instantiate()
 		projectile.enemy = enemy
+		projectile.shooter = enemy
 		projectile.damage = enemy_damage
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
 		projectile.collision_mask = 1 + 2

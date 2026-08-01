@@ -5,7 +5,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	%Time.text = str(ceili(Main.instance.time))
-	%Health.text = "Health: " + str(maxi(Main.instance.player.health, 0))
+	%Health.text = "Health: %.1f" % maxf(Main.instance.player.health, 0.0)
 	if Main.instance.player.weapon:
 		%Ammo.text = "Ammo: " + str(Main.instance.player.weapon.ammo)
 	else:

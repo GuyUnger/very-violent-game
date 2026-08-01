@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_item"]
 [ext_resource type="Resource" uid="uid://cvmj5qydx053g" path="res://map_editor/surfaces/walls/surface_mdf.tres" id="3_mdf"]
 [ext_resource type="Resource" uid="uid://crbb4gtyyrcd4" path="res://map_editor/surfaces/walls/surface_concrete.tres" id="4_concrete"]
-[ext_resource type="Resource" path="res://map_editor/surfaces/walls/surface_brick.tres" id="5_brick"]
+[ext_resource type="Resource" uid="uid://bwbpfcb1h1vqx" path="res://map_editor/surfaces/walls/surface_brick.tres" id="5_brick"]
 
 [sub_resource type="Resource" id="MapEditorItem_mdf"]
 script = ExtResource("2_item")

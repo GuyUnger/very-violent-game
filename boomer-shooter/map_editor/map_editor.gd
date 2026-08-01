@@ -11,6 +11,8 @@ const SURFACE_STACK_SCENE := preload(
 	"res://map_editor/surface_stack_geometry.tscn")
 const PALETTE_BUTTON_SCENE := preload(
 	"res://map_editor/map_editor_palette_button.tscn")
+const GRID_NAVIGATION_SCRIPT := preload(
+	"res://map_editor/grid_navigation.gd")
 const WALLPAPER_SLOT_0_KEY := "wallpaper_slot_0_item_id"
 const WALLPAPER_SLOT_2_KEY := "wallpaper_slot_2_item_id"
 const FINE_GRID_DIVISIONS := 2
@@ -414,6 +416,13 @@ func play_map() -> void:
 		push_error("stages/main.tscn is missing its gameplay SubViewport.")
 		main.free()
 		return
+	var grid_navigation := GRID_NAVIGATION_SCRIPT.new() as GridNavigation
+	grid_navigation.name = "GridNavigation"
+	grid_navigation.setup(
+		result["floor_records"],
+		result["wall_records"],
+		result["grid_size"])
+	gameplay_viewport.add_child(grid_navigation)
 
 	for record in result["wall_records"]:
 		_instantiate_wall(record, gameplay_viewport, result["grid_size"], false)
@@ -948,23 +957,35 @@ func create_floor(start: Vector2i, end: Vector2i) -> void:
 
 	var cell_min := Vector2i(mini(start.x, end.x), mini(start.y, end.y))
 	var cell_max := Vector2i(maxi(start.x, end.x), maxi(start.y, end.y))
-	for x in range(cell_min.x, cell_max.x + 1):
-		for y in range(cell_min.y, cell_max.y + 1):
-			if occupied_floor_cells.has(_get_cell_key(Vector2i(x, y))):
-				return
-
-	var records: Array = []
+	var created_records: Array = []
+	var replacement_records: Array = []
+	var previous_records: Array = []
 	for cell in _get_floor_cells(cell_min, cell_max):
-		records.append({
-			"key": _get_floor_key(cell, cell),
+		var floor_key := _get_floor_key(cell, cell)
+		var replacement := {
+			"key": floor_key,
 			"cell_min": cell,
 			"cell_max": cell,
 			"item_id": active_item.id,
 			"surface": active_item.surface,
-		})
-	undo_redo.create_action("Create Floor")
-	undo_redo.add_do_method(_create_floor_records.bind(records))
-	undo_redo.add_undo_method(_delete_floor_records.bind(records))
+		}
+		var previous: Dictionary = floor_data.get(floor_key, {})
+		if previous.is_empty():
+			created_records.append(replacement)
+		elif StringName(previous.get("item_id", &"")) != active_item.id:
+			previous_records.append(previous.duplicate(true))
+			replacement_records.append(replacement)
+
+	if created_records.is_empty() and replacement_records.is_empty():
+		return
+
+	undo_redo.create_action("Paint Floors")
+	if not created_records.is_empty():
+		undo_redo.add_do_method(_create_floor_records.bind(created_records))
+		undo_redo.add_undo_method(_delete_floor_records.bind(created_records))
+	if not replacement_records.is_empty():
+		undo_redo.add_do_method(_replace_floor_records.bind(replacement_records))
+		undo_redo.add_undo_method(_replace_floor_records.bind(previous_records))
 	undo_redo.commit_action()
 
 
@@ -1547,6 +1568,28 @@ func _create_floor_records(records: Array) -> void:
 		var floor_key: String = record["key"]
 		if floor_nodes.has(floor_key):
 			continue
+		var floor_node := _instantiate_floor(record, floors, grid_size)
+		if not floor_node:
+			continue
+		floor_nodes[floor_key] = floor_node
+		floor_data[floor_key] = record
+		for cell in _get_floor_cells(record["cell_min"], record["cell_max"]):
+			occupied_floor_cells[_get_cell_key(cell)] = floor_node
+
+
+func _replace_floor_records(records: Array) -> void:
+	for record in records:
+		var floor_key: String = record["key"]
+		var previous_node := floor_nodes.get(floor_key) as Node3D
+		var previous_record: Dictionary = floor_data.get(floor_key, {})
+		if previous_node:
+			for cell in _get_floor_cells(
+				previous_record["cell_min"], previous_record["cell_max"]):
+				occupied_floor_cells.erase(_get_cell_key(cell))
+			floor_nodes.erase(floor_key)
+			floor_data.erase(floor_key)
+			previous_node.queue_free()
+
 		var floor_node := _instantiate_floor(record, floors, grid_size)
 		if not floor_node:
 			continue
