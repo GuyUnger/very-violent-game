@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://6uofbinuniy"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_5kqee"]
+[ext_resource type="ArrayMesh" uid="uid://biycgdn7cpt7r" path="res://content/props/meshes/props_sofa_two_seater.res" id="2_5kqee"]
+[ext_resource type="PackedScene" uid="uid://dee43bmfuisuy" path="res://content/props/prop_sofa_leg.tscn" id="3_6phlt"]
+[ext_resource type="AudioStream" uid="uid://cyo32ki3op83o" path="res://content/weapons/sfx/bullet_hit_dull_0.wav" id="4_b2e6w"]
+[ext_resource type="AudioStream" uid="uid://ox78kp41q644" path="res://content/weapons/sfx/bullet_hit_dull_1.wav" id="5_p8le2"]
+[ext_resource type="AudioStream" uid="uid://csdump847w2l" path="res://content/weapons/sfx/bullet_hit_dull_2.wav" id="6_pkvot"]
+[ext_resource type="AudioStream" uid="uid://capra2tsmxuls" path="res://content/weapons/sfx/bullet_hit_dull_3.wav" id="7_a5ytc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(1.2650391, 0.20417587, 0.82682616)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b2e6w"]
+size = Vector3(0.25371093, 0.5633638, 0.78489256)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p8le2"]
+size = Vector3(1.2621582, 0.5471579, 0.17281982)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pkvot"]
+size = Vector3(1.2650391, 0.16361138, 0.7795019)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q54gn"]
+random_pitch = 1.0180676
+streams_count = 4
+stream_0/stream = ExtResource("4_b2e6w")
+stream_1/stream = ExtResource("5_p8le2")
+stream_2/stream = ExtResource("6_pkvot")
+stream_3/stream = ExtResource("7_a5ytc")
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_5kqee")]
+max_hp = 1000
+can_run_through = true
+climbable = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10647629, 0)
+mesh = ExtResource("2_5kqee")
+
+[node name="Leg" parent="Model/Nested" parent_id_path=PackedInt32Array(772001303) index="0" unique_id=1793053961 instance=ExtResource("3_6phlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.098076254, 0, 0.032093376)
+
+[node name="Leg2" parent="Model/Nested" parent_id_path=PackedInt32Array(772001303) index="1" unique_id=70723895 instance=ExtResource("3_6phlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.590417, 0, 0.032093376)
+
+[node name="Leg3" parent="Model/Nested" parent_id_path=PackedInt32Array(772001303) index="2" unique_id=397303410 instance=ExtResource("3_6phlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.590417, 0, 0.6649668)
+
+[node name="Leg4" parent="Model/Nested" parent_id_path=PackedInt32Array(772001303) index="3" unique_id=1756037665 instance=ExtResource("3_6phlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09822862, 0, 0.6649668)
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84710425, 0.37491235, 0.376709)
+shape = SubResource("BoxShape3D_3pyl4")
+debug_color = Color(0, 11.708403, 13.469126, 1)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2" unique_id=1729263464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.088241994, 0.38447165, 0.3535254)
+shape = SubResource("BoxShape3D_b2e6w")
+debug_color = Color(0, 11.708403, 13.469126, 1)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="3" unique_id=494315926]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.599248, 0.38447165, 0.3535254)
+shape = SubResource("BoxShape3D_b2e6w")
+debug_color = Color(0, 11.708403, 13.469126, 1)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." index="4" unique_id=85237684]
+transform = Transform3D(1, 4.117138e-10, 2.5315361e-11, -4.1248677e-10, 0.99781424, 0.066080734, 1.9462329e-12, -0.066080734, 0.99781424, 0.84165525, 0.72438824, 0.12712786)
+shape = SubResource("BoxShape3D_p8le2")
+debug_color = Color(0, 11.708403, 13.469126, 1)
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="." index="5" unique_id=1193838956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84710425, 0.18814754, 0.3530469)
+shape = SubResource("BoxShape3D_pkvot")
+debug_color = Color(0, 11.708403, 13.469126, 1)
+
+[node name="HitSound" parent="." index="6" unique_id=1507396186]
+stream = SubResource("AudioStreamRandomizer_q54gn")

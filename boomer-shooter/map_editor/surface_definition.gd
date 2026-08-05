@@ -4,6 +4,8 @@ extends Resource
 
 const GENERIC_OBJECT_SHADER := preload(
 	"res://map_editor/generic_object_wall_shader.gdshader")
+const DEFAULT_BLOOD_NOISE_TEXTURE := preload(
+	"res://content/fx/blood_noise_texture.tres")
 
 @export_group("Identity")
 @export var id: StringName:
@@ -80,6 +82,8 @@ const GENERIC_OBJECT_SHADER := preload(
 	set(value): hole_atlas = value; emit_changed()
 @export var edge_noise_texture: Texture2D:
 	set(value): edge_noise_texture = value; emit_changed()
+@export var blood_noise_texture: Texture2D = DEFAULT_BLOOD_NOISE_TEXTURE:
+	set(value): blood_noise_texture = value; emit_changed()
 @export var hole_atlas_grid := Vector2i.ONE:
 	set(value): hole_atlas_grid = value; emit_changed()
 @export var hole_uv_size := Vector2(0.08, 0.08):
@@ -129,6 +133,7 @@ func apply_to_material(material: ShaderMaterial) -> void:
 	_set_texture_if_present(material, "disorder", disorder)
 	_set_texture_if_present(material, "hole_atlas", hole_atlas)
 	_set_texture_if_present(material, "edge_noise_texture", edge_noise_texture)
+	_set_texture_if_present(material, "blood_noise_texture", blood_noise_texture)
 	material.set_shader_parameter("metalic", metallic)
 	material.set_shader_parameter("specular", specular)
 	material.set_shader_parameter("roughness", roughness)

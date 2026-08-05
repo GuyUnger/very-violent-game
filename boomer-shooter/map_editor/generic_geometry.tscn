@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://burcrs8e4hft" path="res://map_editor/generic_geometry.gd" id="1_geometry"]
 [ext_resource type="Shader" uid="uid://806x6fsb5w6d" path="res://map_editor/generic_object_wall_shader.gdshader" id="3_1qsaj"]
 [ext_resource type="Resource" uid="uid://crbb4gtyyrcd4" path="res://map_editor/surfaces/walls/surface_concrete.tres" id="3_surface"]
+[ext_resource type="Texture2D" uid="uid://yuia4i2xhxsw" path="res://content/fx/blood_noise_texture.tres" id="4_17kpp"]
 [ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="4_ll8gs"]
+[ext_resource type="Texture2D" path="res://map_editor/break_edge_noise.tres" id="5_break_edge_noise"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_17kpp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jqoqk"]
 render_priority = 0
 shader = ExtResource("3_1qsaj")
 shader_parameter/metalic = 0.0
@@ -39,6 +41,11 @@ shader_parameter/broken = 0.0
 shader_parameter/break_edge_width = 0.12
 shader_parameter/edge_noise_scale = Vector2(5, 5)
 shader_parameter/edge_noise_strength = 0.08
+shader_parameter/edge_noise_texture = ExtResource("5_break_edge_noise")
+shader_parameter/blood_splat_count = 0
+shader_parameter/blood_noise_texture = ExtResource("4_17kpp")
+shader_parameter/blood_uv_size = Vector2(0.3, 0.3)
+shader_parameter/blood_color = Color(0.9, 0.005, 0.008, 0.9)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tklcm"]
 resource_local_to_scene = true
@@ -49,14 +56,17 @@ resource_local_to_scene = true
 size = Vector3(1.5, 2.4, 0.025)
 
 [node name="GenericGeometry" type="StaticBody3D" unique_id=1375637369]
-collision_layer = 17
+collision_layer = 21
+collision_mask = 5
 script = ExtResource("1_geometry")
 surface_definition = ExtResource("3_surface")
 
 [node name="Geometry" type="MeshInstance3D" parent="." unique_id=1746620242]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
-material_override = SubResource("ShaderMaterial_17kpp")
+material_override = SubResource("ShaderMaterial_jqoqk")
 instance_shader_parameters/modulate = Vector3(0.42, 0.43, 0.41)
+instance_shader_parameters/opening_enabled = 0.0
+instance_shader_parameters/opening_rect = Vector4(0, 0, 0, 0)
 mesh = SubResource("PlaneMesh_tklcm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=785443002]

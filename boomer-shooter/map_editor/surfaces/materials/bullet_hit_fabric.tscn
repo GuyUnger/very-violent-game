@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dwboy51rum53a"]
+
+[sub_resource type="Gradient" id="Gradient_pyelk"]
+offsets = PackedFloat32Array(0.5748792, 0.6425121)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tklcm"]
+gradient = SubResource("Gradient_pyelk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tklcm"]
+top_radius = 0.0
+
+[node name="BulletHitFabric" type="Node3D" unique_id=1266740879]
+
+[node name="Decal" type="Decal" parent="." unique_id=1407230886]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+size = Vector3(0.05, 0.05, 0.05)
+texture_albedo = SubResource("GradientTexture2D_tklcm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=944818152]
+transform = Transform3D(0.1, 0, 0, 0, -1.0927847e-08, -0.1, 0, 0.25, -4.371139e-09, 0, -0.0011639837, 0.25682253)
+visible = false
+mesh = SubResource("CylinderMesh_tklcm")

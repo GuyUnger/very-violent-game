@@ -2,6 +2,7 @@ class_name Player
 extends Character
 
 signal jumped
+signal damaged(amount: float)
 
 const WALK_SPEED = 4.0
 const SPRINT_SPEED = 12.0
@@ -11,28 +12,21 @@ const MOVE_DECEL = 13.0
 const AIR_ACCEL = 5.0
 const AIR_DECEL = 1.0
 const JUMP_STRENGTH = 12.0
-const STAND_CAMERA_HEIGHT = 1.5
-const CROUCH_CAMERA_HEIGHT = 0.4
-const CROUCH_HEIGHT_RATIO = 0.22
 
 
 # References
 @onready var cam: Cam = %Cam
-@onready var ray_cam: RayCast3D = %RayCam
-@onready var ray_aim_cam: RayCast3D = %RayAimCam
-@onready var ray_aim_player: RayCast3D = %RayAimPlayer
 @onready var model: Node3D = %Model
 @onready var aim_indicator: Crosshair = %Crosshair
 @onready var fps_weapon: Node3D = %FpsWeapon
 @onready var body_collision_shape: CollisionShape3D = $CollisionShape3D
-
-var first_person: bool = true
+@onready var ray_down = $RayDown
 
 # Camera
 var look_angle: Vector2
 var cam_pos: Vector3
 var floor_pos: Vector3
-var cam_distance: float = 3.0
+var height := 0.0
 
 # Jumping
 var allow_jump: bool = true
@@ -46,11 +40,9 @@ var allow_walljump: bool = false
 # Shooting
 
 var input_direction: Vector2
-var aim_target: Node3D
 var aim_point: Vector3
 var look_angle_prev: Vector2
 var look_vel: Vector2 = Vector2.ZERO
-@export var target_range_over_distance: Curve
 
 var since_secondary_pressed: float = 999.0
 var melee_reload_t: float = 0.0
@@ -76,6 +68,10 @@ var weapon:Weapon
 @export var mounted_x_bounds := Vector2(-45.0, 45.0)
 @export var mounted_y_bounds := Vector2(-30.0, 30.0)
 
+@export_category("Collision")
+@export_range(0.1, 4.0, 0.05, "or_greater") var standing_height := 1.5
+@export_range(0.1, 4.0, 0.05, "or_greater") var crouching_height := 0.5
+
 var dead: bool = false
 var mounted_look_center := Vector2.ZERO
 
@@ -83,6 +79,7 @@ var invincible_t: float = 0.0
 
 var last_hit_enemy
 var crouching := false
+var climbing := false
 var standing_collision_height := 0.0
 var standing_collision_position_y := 0.0
 var crouching_collision_height := 0.0
@@ -93,15 +90,7 @@ var crouching_collision_position_y := 0.0
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	_apply_physics_enabled()
-	%EnemyFocus.material.set_shader_parameter("time", -0.05)
-	if body_collision_shape.shape is CapsuleShape3D:
-		body_collision_shape.shape = body_collision_shape.shape.duplicate()
-		var capsule := body_collision_shape.shape as CapsuleShape3D
-		standing_collision_height = capsule.height
-		standing_collision_position_y = body_collision_shape.position.y
-		crouching_collision_height = standing_collision_height * CROUCH_HEIGHT_RATIO
-		crouching_collision_position_y = standing_collision_position_y - (standing_collision_height - crouching_collision_height) * 0.5
-	
+
 	if starting_weapon:
 		var starting_weapon_instance := starting_weapon.instantiate()
 		if starting_weapon_instance is Weapon:
@@ -119,14 +108,12 @@ func _ready() -> void:
 		_capture_mounted_look_center()
 	
 	cam.reparent(get_parent())
-	ray_cam.reparent(get_parent())
-	
-	%Person.visible = not first_person
 
 #endregion
 
 #region Processing
 
+var last_camp_up_ := 0.0
 
 func _process(delta: float) -> void:
 	if dead:
@@ -142,10 +129,7 @@ func _process(delta: float) -> void:
 	%Crosshair.visible = weapon != null
 	
 	#if Input.is_action_just_pressed("toggle_view"):
-	
-	model_position = lerp(model_position, global_position, delta * 30.0)
-	model.global_position = model_position
-	
+
 	#region Camera
 	# Apply look_vel (controller input)
 	look_angle += look_vel * 5.0 * delta
@@ -163,54 +147,24 @@ func _process(delta: float) -> void:
 	cam.rotation.x = ease(absf(look_angle.y), -1.2) * sign(look_angle.y) - 0.2
 	cam.rotation.x = look_angle.y
 	
-	# Camera distance
-	var cam_distance_to: float = 2.0 + ease(sin(melee_reload_t * PI * 0.7), 0.7) * 1.5
-	var cam_up: float = 1.0
-	
-	if first_person:
-		cam_distance_to = 0.0
-		cam_up = CROUCH_CAMERA_HEIGHT if crouching else STAND_CAMERA_HEIGHT
-	
-	var view_up_close_in: float = clampf(-look_angle.y + 1.3, 0.0, 1.0)
-	view_up_close_in = ease(view_up_close_in, -2.0)
-	view_up_close_in = remap(view_up_close_in, 0.0, 1.0, 0.9, 1.0)
-	cam_distance_to *= view_up_close_in
-	
-	# Camera Up
-	%RayUp.global_position.y = floor_pos.y + 1.0
-	%RayUp.force_raycast_update()
-	if %RayUp.is_colliding():
-		cam_up = minf(cam_up,
-				%RayUp.get_collision_point().y - %RayUp.global_position.y)
-	
-	# Camera collide with walls
-	ray_cam.position = position + Vector3.UP * cam_up
-	ray_cam.target_position = cam.basis.z * 4.0
-	ray_cam.force_raycast_update()
-	if ray_cam.is_colliding():
-		cam_distance_to = minf(
-				cam_distance_to,
-				ray_cam.get_collision_point().distance_to(ray_cam.position) - 0.2)
-	cam_distance = minf(cam_distance, cam_distance_to)
-	cam_distance = move_toward(cam_distance, cam_distance_to, delta * 10.0)
-	
+	var cam_up := global_position.y
+
+
 	# Apply cam position
-	if is_on_floor():
+	if is_on_floor_ex():
 		floor_pos = global_position
 	
 	
-	var cam_pos_to: Vector3 = model.global_position
-	if first_person:
-		cam_pos.y = cam_pos_to.y
-		if is_on_floor():
-			cam_pos.y += sin(walk_cycle * PI) * vel_hor.length() * 0.01
-			cam_pos_to += transform.basis.z * cos(walk_cycle * PI * 0.5) * vel_hor.length() * 0.01
-	else:
-		cam_pos_to.y = lerp(cam_pos_to.y, clampf(floor_pos.y, position.y - 4.0, position.y + 2.0), 0.3)
+	var cam_pos_to: Vector3 = global_position
+	if is_on_floor_ex():
+		cam_pos.y += sin(walk_cycle * PI) * vel_hor.length() * 0.01
+		cam_pos_to += transform.basis.z * cos(walk_cycle * PI * 0.5) * vel_hor.length() * 0.01
 	cam_pos.x = cam_pos_to.x
 	cam_pos.z = cam_pos_to.z
-	cam_pos.y = lerp(cam_pos.y, cam_pos_to.y, delta * 30.0)
-	cam.global_position = cam_pos + Vector3.UP * cam_up + cam.basis.z * cam_distance
+	cam_pos.y = lerp(last_camp_up_, cam_pos_to.y, delta * 30.0)
+	cam.global_position = cam_pos
+	
+	last_camp_up_ = cam_pos.y
 	#endregion
 	
 
@@ -224,8 +178,7 @@ func _physics_process(delta: float) -> void:
 		if last_hit_enemy:
 			cam.camera.fov = lerp(cam.camera.fov, 60.0, delta * 5.0)
 			
-			%EnemyFocus.material.set_shader_parameter("time",
-					lerp(%EnemyFocus.material.get_shader_parameter("time"), 0.15, delta * 5.0))
+		
 		else:
 			cam.camera.fov = lerp(cam.camera.fov, 120.0, delta * 5.0)
 		return
@@ -251,10 +204,19 @@ func _physics_process(delta: float) -> void:
 			"left", "right",
 			"forward", "backward")
 	
+	if ray_down.is_colliding():
+		var collider = ray_down.get_collider()
+		if collider.get("climbable"):
+			climbing = true
+		else:
+			climbing = false
+	else:
+		climbing = false
+	
 	_process_movement(delta)
 	_process_melee(delta)
 	
-	if is_on_floor():
+	if is_on_floor_ex():
 		if since_on_floor > 0.2:
 			_on_land()
 		since_on_floor = 0.0
@@ -301,6 +263,9 @@ func throw_weapon() -> void:
 
 #region Movement
 
+func is_on_floor_ex() -> bool:
+	return true
+
 func _process_movement(delta:float) -> void:
 	if mounted:
 		input_direction = Vector2.ZERO
@@ -325,42 +290,54 @@ func _process_movement(delta:float) -> void:
 	var accel: float
 	if input_direction == Vector2.ZERO:
 		# Decelerate
-		accel = MOVE_DECEL if is_on_floor() else AIR_DECEL
+		accel = MOVE_DECEL if is_on_floor_ex() else AIR_DECEL
 	else:
 		# Accelerate
-		accel = MOVE_ACCEL if is_on_floor() else AIR_ACCEL
+		accel = MOVE_ACCEL if is_on_floor_ex() else AIR_ACCEL
 	vel_hor_to(input_direction * move_speed, accel * delta)
 	
+	
+	if climbing:
+		if crouching:
+			position.y = standing_height - 0.3
+		else:
+			position.y = standing_height + 0.3
+	elif crouching:
+		position.y = crouching_height
+	else:
+		position.y = standing_height
+		
+	
 	# Gravity
-	var gravity_scale: float = 1.0
-	if absf(velocity.y) < 3.0:
-		# Hovering at jump peak
-		gravity_scale = 0.5
-	if velocity.y < 0.2:
-		gravity_scale *= 1.0 - melee_reload_t
-	velocity.y -= GRAVITY * delta * gravity_scale
+	#var gravity_scale: float = 1.0
+	# absf(velocity.y) < 3.0:
+	#	# Hovering at jump peak
+	#	gravity_scale = 0.5
+	#if velocity.y < 0.2:
+	#	gravity_scale *= 1.0 - melee_reload_t
+	#velocity.y -= GRAVITY * delta * gravity_scale
 	
 	
 	# Jumping
-	if (	is_jump_just_pressed(0.2) and since_on_floor < 0.1
-			and allow_jump):
-		jump()
-	if allow_jump_release and not Input.is_action_pressed("jump"):
-		# Stop jumping
-		allow_jump_release = false
-		if velocity.y > 0.0:
-			velocity.y *= 0.5
-	if not allow_jump and is_on_floor() and not allow_jump_release:
-		# Reset jump state
-		allow_jump = true
+	#if (	is_jump_just_pressed(0.2) and since_on_floor < 0.1
+	#		and allow_jump):
+	#	jump()
+	#if allow_jump_release and not Input.is_action_pressed("jump"):
+	#	# Stop jumping
+	#	allow_jump_release = false
+	#	if velocity.y > 0.0:
+	#		velocity.y *= 0.5
+	#if not allow_jump and is_on_floor() and not allow_jump_release:
+	#	# Reset jump state
+	#	allow_jump = true
 	
 	# Jump velocity boost
-	process_jump_vel_boost()
+	#process_jump_vel_boost()
 	
 	# Apply movement
 	apply_move_and_slide()
 	
-	if is_on_floor():
+	if is_on_floor_ex():
 		walk_cycle += delta * vel_hor.length() / maxf(move_speed, 0.001) * 5.0
 		
 		if walk_cycle > walk_cycle_next_step:
@@ -371,9 +348,7 @@ func _process_movement(delta:float) -> void:
 func _on_land() -> void:
 	%AudioLand.play()
 	cam.shake_shock(0.2, maxf(0.0, (-velocity_prev.y * 0.2 - 3.0)))
-	
-	if first_person:
-		cam.shake_land(0.5, minf(absf(velocity_prev.y) / 20.0, 2.0))
+	cam.shake_land(0.5, minf(absf(velocity_prev.y) / 20.0, 2.0))
 
 
 func _on_step(left: bool) -> void:
@@ -414,9 +389,7 @@ func jump() -> void:
 	%AudioJump.play()
 	$AudioJump.play()
 	jumped.emit()
-	
-	if first_person:
-		cam.shake_land(0.4, 0.5)
+	cam.shake_land(0.4, 0.5)
 
 
 func _try_break_wall_from_sprint(collision: KinematicCollision3D) -> void:
@@ -492,15 +465,10 @@ func _update_crouch_state(delta: float) -> void:
 	var wants_to_crouch := Input.is_action_pressed("crouch")
 	if wants_to_crouch:
 		crouching = true
-	elif _can_stand_up():
+	#elif _can_stand_up():
+	else:
 		crouching = false
 
-	if body_collision_shape.shape is CapsuleShape3D:
-		var capsule := body_collision_shape.shape as CapsuleShape3D
-		var target_height := crouching_collision_height if crouching else standing_collision_height
-		var target_position_y := crouching_collision_position_y if crouching else standing_collision_position_y
-		capsule.height = lerp(capsule.height, target_height, delta * 16.0)
-		body_collision_shape.position.y = lerp(body_collision_shape.position.y, target_position_y, delta * 16.0)
 
 
 func _can_stand_up() -> bool:
@@ -521,7 +489,7 @@ func process_jump_vel_boost() -> void:
 		move_speed = SPRINT_SPEED
 
 	if (	allow_jump_vel_boost
-			and not is_on_floor()
+			and not is_on_floor_ex()
 			and is_jump_just_pressed()
 			and input_direction != Vector2.ZERO
 			and vel_hor.length() > move_speed * 0.2):
@@ -533,76 +501,13 @@ func process_jump_vel_boost() -> void:
 #region Targetting
 
 func process_targets() -> void:
-	if first_person:
-		aim_target = null
-		aim_dir = -cam.global_basis.z
-		aim_point = cam.global_position + cam.basis.z * 100.0
-		#printt(aim_dir)
-		return
-	# Aim target
-	if not weapon:
-		return
-	var target_range_sq: float = weapon.target_range ** 2
-	
-	ray_aim_player.global_rotation = Vector3.ZERO
-	aim_target = null
-	var aimables: Array[Node] = get_tree().get_nodes_in_group("aimables")
-	var highest_fitness: float = -INF
-	
-	ray_aim_cam.rotation.x = 0.0
-	
-	# Aim up a bit
-	ray_aim_cam.rotation.x += 0.1
-	
-	ray_aim_cam.force_raycast_update()
-	if ray_aim_cam.is_colliding():
-		aim_point = ray_aim_cam.get_collision_point()
-	else:
-		aim_point = cam.position - ray_aim_cam.global_basis.z * 100.0
-	
-	aim_dir = center_pos.direction_to(aim_point)
-	var aim_dir_flat: Vector3 = (aim_dir * Vector3(1.0, 0.8, 1.0)).normalized()
-	
-	for aimable: Node in aimables:
-		# In range
-		var dist_sq: float = global_position.distance_squared_to(aimable.global_position)
-		if dist_sq > target_range_sq:
-			continue
-		
-		# Check dot product
-		var target_width = 1.0 - target_range_over_distance.sample_baked(dist_sq / target_range_sq)
-		target_width = -0.5 + pow(target_width, 0.2) * 1.5
-		var aimable_dir_flat: Vector3 = center_pos.direction_to(aimable.center_pos)
-		aimable_dir_flat = (aimable_dir_flat * Vector3(1.0, 0.5, 1.0)).normalized()
-		var dot_product: float = aimable_dir_flat.dot(aim_dir_flat)
-		if dot_product < target_width:
-			continue
-		
-		# Check obstructions
-		ray_aim_player.target_position = aimable.center_pos - ray_aim_player.global_position
-		ray_aim_player.force_raycast_update()
-		if ray_aim_player.is_colliding() and ray_aim_player.get_collider() != aimable:
-			continue
-		
-		# Check greater fitness
-		var fitness: float = (dot_product - target_width) / 0.1
-		if dist_sq < 5.0 ** 2.0:
-			fitness *= 1.2
-		if fitness < highest_fitness:
-			continue
-		highest_fitness = fitness
-		aim_target = aimable
-	
-	if aim_target:
-		aim_dir = center_pos.direction_to(aim_target.center_pos)
-		#printt(aim_dir)
+	aim_dir = -cam.global_basis.z
+	aim_point = cam.global_position + aim_dir * 100.0
 
 
 func process_target_indicators(delta: float) -> void:
-	# Aim target
-	var aim_target_point = aim_target.center_pos if aim_target else aim_point
-	var aim_pos: Vector2 = cam.camera.unproject_position(aim_target_point)
-	aim_indicator.process(aim_pos, delta, aim_target)
+	var aim_pos: Vector2 = cam.camera.unproject_position(aim_point)
+	aim_indicator.process(aim_pos, delta, null)
 
 #endregion
 
@@ -701,7 +606,7 @@ func die(_normal := Vector3.ZERO, _hit_shape: CollisionShape3D = null) -> void:
 	if dead:
 		return
 	dead = true
-	Main.hud.hide()
+	Main.hud.hide_gameplay_ui()
 	%Crosshair.hide()
 	
 	if DEAD_SOUNDS.size() == 1:
@@ -715,8 +620,6 @@ func die(_normal := Vector3.ZERO, _hit_shape: CollisionShape3D = null) -> void:
 		$AudioDie.stream = DEAD_SOUNDS[dead_sound]
 		$AudioDie.play()
 	throw_weapon()
-	first_person = false
-	#%Person.visible = not first_person
 	
 	await get_tree().create_timer(1.0).timeout
 
@@ -757,4 +660,5 @@ func hit(damage: float, normal := Vector3.ZERO, hit_shape: CollisionShape3D = nu
 	if invincible_t > 0.0:
 		return
 	invincible_t = damage_cooldown
+	damaged.emit(damage)
 	super(damage, normal, hit_shape)

@@ -29,6 +29,7 @@ var trigger_pressed:bool :
 
 var total_recoil: float = 0.0
 var since_thrown: float = 99.0
+var enemy_projectile_player_collision_chance := 1.0
 
 @export var pickup_sounds: Array[AudioStream]
 var pickup_sounds_b: Array[AudioStream] = [
@@ -37,8 +38,8 @@ var pickup_sounds_b: Array[AudioStream] = [
 	preload("res://content/weapons/pickup_sfx/pickup_default 04.wav"),
 ]
 
-@export var damage_scale: int = 1
-@export_range(1, 100, 1) var enemy_damage: int = 1
+@export_range(0.0, 100.0, 0.1) var damage := 1.0
+@export_range(0.0, 100.0, 0.1) var enemy_damage := 1.0
 
 
 func set_trigger_pressed(value:bool) -> void:
@@ -58,13 +59,15 @@ func _physics_process(delta: float) -> void:
 	if player and player.dead:
 		return
 
-	if velocity != Vector3.ZERO:
+	if not player and not enemy:
 		since_thrown += delta
 		velocity.y -= 9.8 * delta
 		move_and_slide()
-		rotation.y += delta * 10.0
 		if is_on_floor():
-			velocity -= velocity * 4.0 * delta
+			velocity.x -= velocity.x * 4.0 * delta
+			velocity.z -= velocity.z * 4.0 * delta
+		else:
+			rotation.y += delta * 10.0
 		return
 	
 	if reload_t > 0.0:
@@ -78,7 +81,7 @@ func _physics_process(delta: float) -> void:
 			if ammo <= 0:
 				if is_instance_valid(player):
 					player.throw_weapon()
-	else:
+	elif ammo > 0:
 		if since_primary_pressed < 0.2 and reload_t <= 0.0:
 			shoot()
 			if ammo <= 0:
@@ -90,27 +93,50 @@ func _physics_process(delta: float) -> void:
 		%Hand.visible = player != null
 
 func shoot() -> void:
+	if ammo <= 0:
+		return
 	ammo -= 1
 	reload_t = fire_rate
 	if has_node("Animations"):
 		$Animations.shoot()
 	if has_node("Muzzleflash"):
 		$Muzzleflash.shoot()
-	
+
+	if player:
+		player.cam.shake_rumble(0.3, 0.3, 16.0)
+		player.cam.shake_shock(0.2, 0.5)
+
+	for _projectile_index in _get_projectile_count():
+		_spawn_projectile(_get_projectile_spread())
+
+	if player:
+		%AudioShoot.play()
+	else:
+		%AudioShootNPC.play()
+
+	total_recoil = recoil
+
+
+func _get_projectile_count() -> int:
+	return 1
+
+
+func _get_projectile_spread() -> float:
+	return total_recoil
+
+
+func _spawn_projectile(spread: float) -> void:
 	var r = Vector3(
-		randf_range(-total_recoil, total_recoil), 
-		randf_range(-total_recoil, total_recoil) * 0.4,
-		randf_range(-total_recoil, total_recoil)) * 0.5
+		randf_range(-spread, spread),
+		randf_range(-spread, spread) * 0.4,
+		randf_range(-spread, spread)) * 0.5
 
 	if player:
 		var projectile := preload("res://content/projectiles/bullet.tscn").instantiate()
 		projectile.shooter = player
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
-		
-		player.cam.shake_rumble(0.3, 0.3, 16.0)
-		player.cam.shake_shock(0.2, 0.5)
 		projectile.position = player.cam.global_position
-		projectile.damage *= damage_scale
+		projectile.damage = damage
 		projectile.penetration_power = penetration_power
 		Main.instance.add_child(projectile)
 		#projectile.collision_mask = 1 + 4
@@ -120,18 +146,14 @@ func shoot() -> void:
 		projectile.shooter = enemy
 		projectile.damage = enemy_damage
 		projectile.look_at_from_position(Vector3.ZERO, -aim_dir + r, Vector3.UP)
-		projectile.collision_mask = 1 + 2
+		projectile.collision_mask = 1 + 2 + Bullet.NONBLOCKING_PROP_LAYER
+		if randf() > enemy_projectile_player_collision_chance:
+			projectile.collision_mask &= ~2
 		projectile.position = global_position + Vector3.UP * 0.1
 		projectile.penetration_power = penetration_power
 	
 		Main.instance.add_child(projectile)
-	
-	if player:
-		%AudioShoot.play()
-	else:
-		%AudioShootNPC.play()
-		
-	total_recoil = recoil
+
 
 func throw(force:Vector3) -> void:
 	var had_holder := player != null or enemy != null

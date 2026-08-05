@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dd18yfqnrvuq7"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_q17k2"]
+[ext_resource type="PackedScene" uid="uid://c4jrqhu06lb5a" path="res://map_editor/generic_geometry.tscn" id="2_q17k2"]
+[ext_resource type="Texture2D" uid="uid://yuia4i2xhxsw" path="res://content/fx/blood_noise_texture.tres" id="3_22icd"]
+[ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="4_tlaov"]
+[ext_resource type="Script" uid="uid://c54irsxyg2yc1" path="res://map_editor/surface_definition.gd" id="5_5wo8e"]
+
+[sub_resource type="Resource" id="Resource_76e4l"]
+script = ExtResource("5_5wo8e")
+id = &"surface_concrete"
+display_name = "Concrete"
+modulate = Color(0.4392157, 1, 1, 1)
+metallic = 1.0
+specular = 1.0
+roughness = 0.16
+random_hue = 0.01
+hole_atlas = ExtResource("4_tlaov")
+hole_uv_size = Vector2(0.3, 0.3)
+bullet_stopping_power = 0.0
+max_health = 200
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(0.51, 0.605, 0.695)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_q17k2")]
+max_hp = 5
+can_run_through = true
+
+[node name="GenericGeometry" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1375637369 instance=ExtResource("2_q17k2")]
+size = Vector2(0.6, 1)
+surface_definition = SubResource("Resource_76e4l")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+shape = SubResource("BoxShape3D_3pyl4")
+disabled = true

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dbw3i1ouiatoh"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_1txc6"]
+[ext_resource type="ArrayMesh" uid="uid://cxphcksmd8j67" path="res://content/props/meshes/props_chair_stool_tall_swivel.res" id="2_1txc6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(0.51, 0.605, 0.695)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_1txc6")]
+max_hp = 5
+can_run_through = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+mesh = ExtResource("2_1txc6")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+shape = SubResource("BoxShape3D_3pyl4")

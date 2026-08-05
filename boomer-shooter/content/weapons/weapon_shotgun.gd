@@ -2,9 +2,9 @@ class_name WeaponShotgun
 extends Weapon
 
 
-func shoot() -> void:
-	ammo += 15
-	for i in 16:
-		total_recoil = 0.4
-		super()
-		await get_tree().process_frame
+func _get_projectile_count() -> int:
+	return 16
+
+
+func _get_projectile_spread() -> float:
+	return 0.4

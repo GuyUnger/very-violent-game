@@ -15,8 +15,21 @@ const GRID_NAVIGATION_SCRIPT := preload(
 	"res://map_editor/grid_navigation.gd")
 const WALLPAPER_SLOT_0_KEY := "wallpaper_slot_0_item_id"
 const WALLPAPER_SLOT_2_KEY := "wallpaper_slot_2_item_id"
+const WALLPAPER_SEPARATION := 0.0375 
+const OPENING_ITEM_KEY := "opening_item_id"
 const FINE_GRID_DIVISIONS := 2
+const PROP_GRID_DIVISIONS := 8
 const PLACEMENT_ROTATION_DRAG_THRESHOLD := 4.0
+const MAP_DIRECTORY := "user://maps"
+const GRID_SURFACE_OFFSET := 0.01
+const AUTHORED_ROOT_TRANSFORM_META := &"map_editor_authored_root_transform"
+
+enum FileMenuAction {
+	NEW,
+	RENAME,
+	SAVE,
+	LOAD,
+}
 
 @export var catalog: MapEditorCatalog
 @export_range(0.1, 10.0, 0.1) var grid_size := 1.5
@@ -27,8 +40,10 @@ const PLACEMENT_ROTATION_DRAG_THRESHOLD := 4.0
 @onready var camera_rig: MapEditorCamera = $CameraRig
 @onready var grid: MeshInstance3D = $Grid
 @onready var mouse_ground_marker: MeshInstance3D = %MouseGroundMarker
+@onready var prop_cell_marker: MeshInstance3D = %PropCellMarker
 @onready var walls: Node3D = %Walls
 @onready var floors: Node3D = %Floors
+@onready var ceilings: Node3D = %Ceilings
 @onready var npcs: Node3D = %Npcs
 @onready var props: Node3D = %Props
 @onready var items: Node3D = %Items
@@ -38,13 +53,22 @@ const PLACEMENT_ROTATION_DRAG_THRESHOLD := 4.0
 @onready var placed_item_preview: Node3D = %PlacedItemPreview
 @onready var top_down_view_button: Button = %TopDownViewButton
 @onready var isometric_view_button: Button = %IsometricViewButton
-@onready var save_button: Button = %SaveButton
-@onready var load_button: Button = %LoadButton
+@onready var file_menu: PopupMenu = %FileMenu
+@onready var current_map_label: Label = %CurrentMapLabel
+@onready var file_dialog_overlay: Control = %FileDialogOverlay
+@onready var file_dialog_title: Label = %FileDialogTitle
+@onready var new_map_name: LineEdit = %NewMapName
+@onready var saved_map_list: ItemList = %SavedMapList
+@onready var file_dialog_error: Label = %FileDialogError
+@onready var file_dialog_confirm: Button = %FileDialogConfirm
+@onready var file_dialog_cancel: Button = %FileDialogCancel
 @onready var play_button: Button = %PlayButton
 @onready var editor_ui: CanvasLayer = $CanvasLayer
 @onready var walls_category_button: Button = %WallsCategoryButton
 @onready var wallpaper_category_button: Button = %WallPaperCategoryButton
+@onready var openings_category_button: Button = %OpeningsCategoryButton
 @onready var floors_category_button: Button = %FloorsCategoryButton
+@onready var ceilings_category_button: Button = %CeilingsCategoryButton
 @onready var npcs_category_button: Button = %NpcsCategoryButton
 @onready var items_category_button: Button = %ItemsCategoryButton
 @onready var props_category_button: Button = %PropsCategoryButton
@@ -62,8 +86,11 @@ var rotating_item_key := ""
 var rotating_item_dragged := false
 var rotating_item_press_position := Vector2.ZERO
 var deleting_walls := false
+var previewing_wall_delete := false
 var wall_start := Vector2i.ZERO
 var wall_end := Vector2i.ZERO
+var wall_delete_start := Vector2i.ZERO
+var wall_delete_end := Vector2i.ZERO
 var wallpaper_start := Vector2i.ZERO
 var wallpaper_end := Vector2i.ZERO
 var floor_start := Vector2i.ZERO
@@ -73,12 +100,16 @@ var wall_edge_data: Dictionary = {}
 var occupied_floor_cells: Dictionary = {}
 var floor_data: Dictionary = {}
 var floor_nodes: Dictionary = {}
+var occupied_ceiling_cells: Dictionary = {}
+var ceiling_data: Dictionary = {}
+var ceiling_nodes: Dictionary = {}
 var placed_item_data: Dictionary = {}
 var placed_item_nodes: Dictionary = {}
 var preview_material: StandardMaterial3D
 var occupied_preview_material: StandardMaterial3D
-var delete_stroke_records: Array = []
+var delete_preview_material: StandardMaterial3D
 var floor_delete_stroke_records: Array = []
+var ceiling_delete_stroke_records: Array = []
 var undo_redo := UndoRedo.new()
 var gameplay_instance: Node3D
 var restarting_playtest := false
@@ -90,6 +121,7 @@ var placed_item_preview_node: Node3D
 var palette_button_group := ButtonGroup.new()
 var stack_thumbnail_cache: Dictionary = {}
 var palette_generation := 0
+var file_dialog_action := -1
 
 
 func _enter_tree() -> void:
@@ -108,20 +140,34 @@ func _ready() -> void:
 	preview_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	preview_material.albedo_color = Color(0.35, 0.75, 1.0, 0.55)
 	preview_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	preview_material.no_depth_test = true
 	occupied_preview_material = preview_material.duplicate() as StandardMaterial3D
 	occupied_preview_material.albedo_color = Color(1.0, 0.65, 0.15, 0.65)
+	delete_preview_material = preview_material.duplicate() as StandardMaterial3D
+	delete_preview_material.albedo_color = Color(1.0, 0.1, 0.1, 0.7)
 
 	top_down_view_button.pressed.connect(_show_top_down_view)
 	isometric_view_button.pressed.connect(_show_isometric_view)
-	save_button.pressed.connect(save_map)
-	load_button.pressed.connect(load_map)
+	file_menu.id_pressed.connect(_on_file_menu_action)
+	file_dialog_confirm.pressed.connect(_confirm_file_dialog)
+	file_dialog_cancel.pressed.connect(_close_file_dialog)
+	new_map_name.text_submitted.connect(
+		func(_text: String) -> void: _confirm_file_dialog())
+	saved_map_list.item_selected.connect(
+		func(_index: int) -> void: file_dialog_confirm.disabled = false)
+	saved_map_list.item_activated.connect(
+		func(_index: int) -> void: _confirm_file_dialog())
 	play_button.pressed.connect(play_map)
 	walls_category_button.pressed.connect(
 		_select_category.bind(MapEditorItem.Category.WALLS))
 	wallpaper_category_button.pressed.connect(
 		_select_category.bind(MapEditorItem.Category.WALLPAPERS))
+	openings_category_button.pressed.connect(
+		_select_category.bind(MapEditorItem.Category.OPENINGS))
 	floors_category_button.pressed.connect(
 		_select_category.bind(MapEditorItem.Category.FLOORS))
+	ceilings_category_button.pressed.connect(
+		_select_category.bind(MapEditorItem.Category.CEILINGS))
 	npcs_category_button.pressed.connect(
 		_select_category.bind(MapEditorItem.Category.NPCS))
 	items_category_button.pressed.connect(
@@ -133,13 +179,184 @@ func _ready() -> void:
 	camera_rig.view_mode_changed.connect(_update_view_buttons)
 	_update_view_buttons(camera_rig.view_mode)
 	_select_category(MapEditorItem.Category.WALLS)
+	_update_current_map_label()
+
+
+func _on_file_menu_action(action_id: int) -> void:
+	match action_id:
+		FileMenuAction.NEW:
+			_open_new_map_dialog()
+		FileMenuAction.RENAME:
+			_open_rename_map_dialog()
+		FileMenuAction.SAVE:
+			save_map()
+		FileMenuAction.LOAD:
+			_open_load_map_dialog()
+
+
+func _open_new_map_dialog() -> void:
+	file_dialog_action = FileMenuAction.NEW
+	file_dialog_title.text = "New Map"
+	new_map_name.show()
+	saved_map_list.hide()
+	file_dialog_error.text = ""
+	file_dialog_confirm.text = "Create"
+	file_dialog_confirm.disabled = false
+	new_map_name.text = ""
+	file_dialog_overlay.show()
+	new_map_name.grab_focus()
+
+
+func _open_load_map_dialog() -> void:
+	file_dialog_action = FileMenuAction.LOAD
+	file_dialog_title.text = "Load Map"
+	new_map_name.hide()
+	saved_map_list.show()
+	file_dialog_error.text = ""
+	file_dialog_confirm.text = "Load"
+	saved_map_list.clear()
+
+	var directory := DirAccess.open(MAP_DIRECTORY)
+	if directory:
+		var file_names := Array(directory.get_files())
+		file_names.sort()
+		for file_name_value in file_names:
+			var file_name := String(file_name_value)
+			if file_name.get_extension().to_lower() != "map":
+				continue
+			var item_index := saved_map_list.add_item(file_name.get_basename())
+			saved_map_list.set_item_metadata(
+				item_index, MAP_DIRECTORY.path_join(file_name))
+
+	file_dialog_confirm.disabled = saved_map_list.item_count == 0
+	if saved_map_list.item_count == 0:
+		file_dialog_error.text = "No saved maps yet."
+	file_dialog_overlay.show()
+	if saved_map_list.item_count > 0:
+		saved_map_list.select(0)
+		saved_map_list.grab_focus()
+
+
+func _open_rename_map_dialog() -> void:
+	file_dialog_action = FileMenuAction.RENAME
+	file_dialog_title.text = "Rename Map"
+	new_map_name.show()
+	saved_map_list.hide()
+	file_dialog_error.text = ""
+	file_dialog_confirm.text = "Rename"
+	file_dialog_confirm.disabled = false
+	new_map_name.text = map_file_path.get_file().get_basename()
+	file_dialog_overlay.show()
+	new_map_name.grab_focus()
+	new_map_name.select_all()
+
+
+func _confirm_file_dialog() -> void:
+	match file_dialog_action:
+		FileMenuAction.NEW:
+			_create_named_map()
+		FileMenuAction.LOAD:
+			_load_selected_map()
+		FileMenuAction.RENAME:
+			_rename_current_map()
+
+
+func _create_named_map() -> void:
+	var requested_name := new_map_name.text.strip_edges()
+	if requested_name.is_empty():
+		file_dialog_error.text = "Give your map a name."
+		return
+	var file_name := requested_name.validate_filename()
+	if file_name.is_empty():
+		file_dialog_error.text = "That name cannot be used."
+		return
+	var directory_error := DirAccess.make_dir_recursive_absolute(
+		ProjectSettings.globalize_path(MAP_DIRECTORY))
+	if directory_error != OK:
+		file_dialog_error.text = "The maps folder could not be created."
+		return
+	var path := MAP_DIRECTORY.path_join(file_name + ".map")
+	if FileAccess.file_exists(path):
+		file_dialog_error.text = "A map with that name already exists."
+		return
+
+	new_map()
+	map_file_path = path
+	if save_map() != OK:
+		file_dialog_error.text = "The map could not be saved."
+		return
+	_update_current_map_label()
+	_close_file_dialog()
+
+
+func _load_selected_map() -> void:
+	var selected_items := saved_map_list.get_selected_items()
+	if selected_items.is_empty():
+		file_dialog_error.text = "Choose a map to load."
+		return
+	var path := String(saved_map_list.get_item_metadata(selected_items[0]))
+	if load_map(path) != OK:
+		file_dialog_error.text = "The map could not be loaded."
+		return
+	map_file_path = path
+	_update_current_map_label()
+	_close_file_dialog()
+
+
+func _rename_current_map() -> void:
+	if not FileAccess.file_exists(map_file_path):
+		file_dialog_error.text = "Save this map before renaming it."
+		return
+	var requested_name := new_map_name.text.strip_edges()
+	if requested_name.is_empty():
+		file_dialog_error.text = "Give your map a name."
+		return
+	var file_name := requested_name.validate_filename()
+	if file_name.is_empty():
+		file_dialog_error.text = "That name cannot be used."
+		return
+	var renamed_path := map_file_path.get_base_dir().path_join(file_name + ".map")
+	if renamed_path == map_file_path:
+		_close_file_dialog()
+		return
+	if FileAccess.file_exists(renamed_path):
+		file_dialog_error.text = "A map with that name already exists."
+		return
+
+	var rename_error := DirAccess.rename_absolute(
+		ProjectSettings.globalize_path(map_file_path),
+		ProjectSettings.globalize_path(renamed_path))
+	if rename_error != OK:
+		file_dialog_error.text = "The map could not be renamed."
+		return
+	map_file_path = renamed_path
+	_update_current_map_label()
+	_close_file_dialog()
+
+
+func _close_file_dialog() -> void:
+	file_dialog_action = -1
+	file_dialog_overlay.hide()
+
+
+func _update_current_map_label() -> void:
+	current_map_label.text = map_file_path.get_file().get_basename()
 
 
 func _process(_delta: float) -> void:
-	if gameplay_instance or not camera.current:
+	if gameplay_instance or not camera.current or file_dialog_overlay.visible:
 		return
 	var mouse_position := get_viewport().get_mouse_position()
-	if active_category in [
+	prop_cell_marker.visible = active_category == MapEditorItem.Category.PROPS
+	if active_category == MapEditorItem.Category.OPENINGS:
+		placed_item_preview.visible = false
+		var edge := _get_nearest_grid_edge(mouse_position)
+		var edge_centre := (Vector2(edge[0]) + Vector2(edge[1])) * 0.5
+		mouse_ground_marker.position = Vector3(
+			edge_centre.x * grid_size,
+			0.075,
+			edge_centre.y * grid_size)
+	elif active_category in [
 		MapEditorItem.Category.PROPS,
 		MapEditorItem.Category.NPCS,
 		MapEditorItem.Category.ITEMS,
@@ -152,13 +369,26 @@ func _process(_delta: float) -> void:
 			(cell.x + 0.5) * placement_grid_size,
 			0.075,
 			(cell.y + 0.5) * placement_grid_size)
+		if active_category == MapEditorItem.Category.PROPS:
+			prop_cell_marker.position = Vector3(
+				(cell.x + 0.5) * placement_grid_size,
+				GRID_SURFACE_OFFSET + 0.01,
+				(cell.y + 0.5) * placement_grid_size)
+			prop_cell_marker.scale = Vector3(
+				placement_grid_size, 1.0, placement_grid_size)
+			var item_key := _get_placed_item_key(
+				cell, _get_category_grid_divisions(active_category))
+			prop_cell_marker.material_override = (
+				occupied_preview_material
+				if placed_item_nodes.has(item_key)
+				else preview_material)
 		_update_placed_item_preview(cell)
 	else:
 		placed_item_preview.visible = false
 		var grid_point := _screen_to_grid_point(mouse_position)
 		mouse_ground_marker.position = Vector3(
 			grid_point.x * grid_size,
-			0.075,
+			_get_placement_plane_height() + 0.075,
 			grid_point.y * grid_size)
 
 
@@ -190,12 +420,23 @@ func _select_category(category: int) -> void:
 	active_category = category
 	active_item = null
 	placement_rotation_y = 0.0
+	camera_rig.orthographic_top_down = category not in [
+		MapEditorItem.Category.WALLS,
+		MapEditorItem.Category.WALLPAPERS,
+		MapEditorItem.Category.OPENINGS,
+	]
 	_clear_placed_item_preview()
 	tool_changed.emit(active_category)
 	walls_category_button.button_pressed = category == MapEditorItem.Category.WALLS
 	wallpaper_category_button.button_pressed = (
 		category == MapEditorItem.Category.WALLPAPERS)
+	openings_category_button.button_pressed = (
+		category == MapEditorItem.Category.OPENINGS)
 	floors_category_button.button_pressed = category == MapEditorItem.Category.FLOORS
+	ceilings_category_button.button_pressed = (
+		category == MapEditorItem.Category.CEILINGS)
+	ceilings.visible = category == MapEditorItem.Category.CEILINGS
+	grid.position.y = _get_placement_plane_height() + GRID_SURFACE_OFFSET
 	npcs_category_button.button_pressed = category == MapEditorItem.Category.NPCS
 	items_category_button.button_pressed = category == MapEditorItem.Category.ITEMS
 	props_category_button.button_pressed = category == MapEditorItem.Category.PROPS
@@ -294,6 +535,8 @@ func _rebuild_placed_item_preview() -> void:
 	if not placed_item_preview_node:
 		push_warning("Map editor preview scene must have a Node3D root.")
 		return
+	placed_item_preview_node.set_meta(
+		AUTHORED_ROOT_TRANSFORM_META, placed_item_preview_node.transform)
 	placed_item_preview.add_child(placed_item_preview_node)
 	placed_item_preview.visible = true
 
@@ -315,8 +558,8 @@ func _update_placed_item_preview(cell: Vector2i) -> void:
 	placed_item_preview.visible = true
 	_apply_placed_item_transform(placed_item_preview_node, {
 		"cell": cell,
+		"category": active_category,
 		"grid_divisions": _get_category_grid_divisions(active_category),
-		"placement_offset": active_item.placement_offset,
 		"rotation_y": placement_rotation_y,
 	}, grid_size)
 
@@ -343,11 +586,21 @@ func save_map(path := map_file_path) -> Error:
 			saved_wall[WALLPAPER_SLOT_0_KEY] = record[WALLPAPER_SLOT_0_KEY]
 		if record.has(WALLPAPER_SLOT_2_KEY):
 			saved_wall[WALLPAPER_SLOT_2_KEY] = record[WALLPAPER_SLOT_2_KEY]
+		if record.has(OPENING_ITEM_KEY):
+			saved_wall[OPENING_ITEM_KEY] = record[OPENING_ITEM_KEY]
 		saved_walls.append(saved_wall)
 	var saved_floors: Array = []
 	for record_value in floor_data.values():
 		var record: Dictionary = record_value
 		saved_floors.append({
+			"cell_min": record["cell_min"],
+			"cell_max": record["cell_max"],
+			"item_id": record["item_id"],
+		})
+	var saved_ceilings: Array = []
+	for record_value in ceiling_data.values():
+		var record: Dictionary = record_value
+		saved_ceilings.append({
 			"cell_min": record["cell_min"],
 			"cell_max": record["cell_max"],
 			"item_id": record["item_id"],
@@ -367,11 +620,24 @@ func save_map(path := map_file_path) -> Error:
 		"grid_size": grid_size,
 		"walls": saved_walls,
 		"floors": saved_floors,
+		"ceilings": saved_ceilings,
 		"placed_items": saved_items,
 	}
 	file.store_string(var_to_str(map_data))
 	print("Saved map to ", path)
 	return OK
+
+
+func new_map() -> void:
+	_cancel_wall()
+	_cancel_floor()
+	_cancel_wall_delete()
+	_cancel_wallpaper_stroke()
+	_finish_placed_item_rotation()
+	floor_delete_stroke_records.clear()
+	ceiling_delete_stroke_records.clear()
+	_clear_all_structures()
+	undo_redo.clear_history()
 
 
 func load_map(path := map_file_path) -> Error:
@@ -388,6 +654,7 @@ func load_map(path := map_file_path) -> Error:
 	_update_grid_shader()
 	_create_wall_records(result["wall_records"])
 	_create_floor_records(result["floor_records"])
+	_create_ceiling_records(result["ceiling_records"])
 	_create_placed_item_records(result["placed_item_records"])
 	undo_redo.clear_history()
 	print("Loaded map from ", path)
@@ -428,6 +695,8 @@ func play_map() -> void:
 		_instantiate_wall(record, gameplay_viewport, result["grid_size"], false)
 	for record in result["floor_records"]:
 		_instantiate_floor(record, gameplay_viewport, result["grid_size"])
+	for record in result["ceiling_records"]:
+		_instantiate_ceiling(record, gameplay_viewport, result["grid_size"])
 	for record in result["placed_item_records"]:
 		_instantiate_placed_item(
 			record, gameplay_viewport, result["grid_size"], false)
@@ -471,7 +740,7 @@ func restart_playtest(color := Color.RED) -> void:
 func _detach_editor_world() -> void:
 	detached_editor_world_nodes.clear()
 	var editor_world_nodes: Array[Node3D] = [
-		walls, floors, npcs, props, items, meta]
+		walls, floors, ceilings, npcs, props, items, meta]
 	for editor_world_node in editor_world_nodes:
 		if editor_world_node.get_parent() != self:
 			continue
@@ -490,8 +759,11 @@ func _reattach_editor_world() -> void:
 func _set_editor_enabled(enabled: bool) -> void:
 	grid.visible = enabled
 	mouse_ground_marker.visible = enabled
+	prop_cell_marker.visible = (
+		enabled and active_category == MapEditorItem.Category.PROPS)
 	walls.visible = enabled
 	floors.visible = enabled
+	ceilings.visible = enabled and active_category == MapEditorItem.Category.CEILINGS
 	npcs.visible = enabled
 	props.visible = enabled
 	items.visible = enabled
@@ -504,8 +776,6 @@ func _set_editor_enabled(enabled: bool) -> void:
 	set_process_unhandled_input(enabled)
 	camera_rig.set_process(enabled)
 	camera_rig.set_process_unhandled_input(enabled)
-
-
 func _read_map_file(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
 		push_error("Map file does not exist: %s" % path)
@@ -553,8 +823,9 @@ func _read_map_file(path: String) -> Dictionary:
 			or item.category != MapEditorItem.Category.WALLS
 			or not item.surface
 		):
-			push_error("Saved wall item is not in the catalogue: %s" % item_id)
-			return {"error": ERR_FILE_NOT_FOUND}
+			push_warning(
+				"Skipping saved wall item that is not in the catalogue: %s" % item_id)
+			continue
 
 		var edge_key := _get_edge_key(point_a, point_b)
 		if loaded_edge_keys.has(edge_key):
@@ -577,9 +848,24 @@ func _read_map_file(path: String) -> Dictionary:
 				or wallpaper_item.category != MapEditorItem.Category.WALLPAPERS
 				or not wallpaper_item.surface
 			):
-				push_error("Saved wallpaper item is not in the catalogue: %s" % wallpaper_id)
-				return {"error": ERR_FILE_NOT_FOUND}
+				push_warning(
+					"Skipping saved wallpaper item that is not in the catalogue: %s"
+					% wallpaper_id)
+				continue
 			wall_record[wallpaper_key] = wallpaper_id
+		if saved_wall.has(OPENING_ITEM_KEY):
+			var opening_id := StringName(saved_wall[OPENING_ITEM_KEY])
+			var opening_item := catalog.get_item(opening_id) if catalog else null
+			if (
+				not opening_item
+				or opening_item.category != MapEditorItem.Category.OPENINGS
+				or not opening_item.opening
+			):
+				push_warning(
+					"Skipping saved opening item that is not in the catalogue: %s"
+					% opening_id)
+			else:
+				wall_record[OPENING_ITEM_KEY] = opening_id
 		wall_records.append(wall_record)
 
 	var saved_floors: Variant = map_data.get("floors", [])
@@ -606,8 +892,10 @@ func _read_map_file(path: String) -> Dictionary:
 			or floor_item.category != MapEditorItem.Category.FLOORS
 			or not floor_item.surface
 		):
-			push_error("Saved floor item is not in the catalogue: %s" % floor_item_id)
-			return {"error": ERR_FILE_NOT_FOUND}
+			push_warning(
+				"Skipping saved floor item that is not in the catalogue: %s"
+				% floor_item_id)
+			continue
 		var bounds_min := Vector2i(
 			mini(cell_min.x, cell_max.x), mini(cell_min.y, cell_max.y))
 		var bounds_max := Vector2i(
@@ -623,6 +911,51 @@ func _read_map_file(path: String) -> Dictionary:
 				"cell_max": cell,
 				"item_id": floor_item.id,
 				"surface": floor_item.surface,
+			})
+
+	var saved_ceilings: Variant = map_data.get("ceilings", [])
+	if not saved_ceilings is Array:
+		push_error("Map ceilings must be stored as an Array: %s" % path)
+		return {"error": ERR_PARSE_ERROR}
+
+	var ceiling_records: Array = []
+	var loaded_ceiling_keys: Dictionary = {}
+	for saved_ceiling_value in saved_ceilings:
+		if not saved_ceiling_value is Dictionary:
+			push_error("Invalid ceiling entry in map: %s" % path)
+			return {"error": ERR_PARSE_ERROR}
+		var saved_ceiling: Dictionary = saved_ceiling_value
+		var cell_min: Variant = saved_ceiling.get("cell_min")
+		var cell_max: Variant = saved_ceiling.get("cell_max")
+		var ceiling_item_id := StringName(saved_ceiling.get("item_id", &""))
+		if not cell_min is Vector2i or not cell_max is Vector2i:
+			push_error("Ceiling bounds must be Vector2i values: %s" % path)
+			return {"error": ERR_PARSE_ERROR}
+		var ceiling_item := catalog.get_item(ceiling_item_id) if catalog else null
+		if (
+			not ceiling_item
+			or ceiling_item.category != MapEditorItem.Category.CEILINGS
+			or not ceiling_item.surface
+		):
+			push_warning(
+				"Skipping saved ceiling item that is not in the catalogue: %s"
+				% ceiling_item_id)
+			continue
+		var bounds_min := Vector2i(
+			mini(cell_min.x, cell_max.x), mini(cell_min.y, cell_max.y))
+		var bounds_max := Vector2i(
+			maxi(cell_min.x, cell_max.x), maxi(cell_min.y, cell_max.y))
+		for cell in _get_floor_cells(bounds_min, bounds_max):
+			var ceiling_key := _get_floor_key(cell, cell)
+			if loaded_ceiling_keys.has(ceiling_key):
+				continue
+			loaded_ceiling_keys[ceiling_key] = true
+			ceiling_records.append({
+				"key": ceiling_key,
+				"cell_min": cell,
+				"cell_max": cell,
+				"item_id": ceiling_item.id,
+				"surface": ceiling_item.surface,
 			})
 
 	var loaded_grid_size := float(map_data.get("grid_size", grid_size))
@@ -657,8 +990,9 @@ func _read_map_file(path: String) -> Dictionary:
 			]
 			or not item.scene
 		):
-			push_error("Placed item is not in the catalogue: %s" % item_id)
-			return {"error": ERR_FILE_NOT_FOUND}
+			push_warning(
+				"Skipping placed item that is not in the catalogue: %s" % item_id)
+			continue
 		var grid_divisions := maxi(
 			1, int(saved_item.get("grid_divisions", 1)))
 		var item_key := _get_placed_item_key(cell, grid_divisions)
@@ -672,7 +1006,6 @@ func _read_map_file(path: String) -> Dictionary:
 			"category": item.category,
 			"scene": item.scene,
 			"grid_divisions": grid_divisions,
-			"placement_offset": item.placement_offset,
 			"rotation_y": float(saved_item.get("rotation_y", 0.0)),
 		})
 
@@ -681,6 +1014,7 @@ func _read_map_file(path: String) -> Dictionary:
 		"grid_size": loaded_grid_size,
 		"wall_records": wall_records,
 		"floor_records": floor_records,
+		"ceiling_records": ceiling_records,
 		"placed_item_records": placed_item_records,
 	}
 
@@ -689,6 +1023,8 @@ func _clear_all_structures() -> void:
 	for child in walls.get_children():
 		child.queue_free()
 	for child in floors.get_children():
+		child.queue_free()
+	for child in ceilings.get_children():
 		child.queue_free()
 	for child in npcs.get_children():
 		child.queue_free()
@@ -703,6 +1039,9 @@ func _clear_all_structures() -> void:
 	occupied_floor_cells.clear()
 	floor_nodes.clear()
 	floor_data.clear()
+	occupied_ceiling_cells.clear()
+	ceiling_nodes.clear()
+	ceiling_data.clear()
 	placed_item_data.clear()
 	placed_item_nodes.clear()
 
@@ -717,7 +1056,23 @@ func _update_grid_shader() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if file_dialog_overlay.visible:
+		if (
+			event is InputEventKey
+			and event.pressed
+			and not event.echo
+			and event.keycode == KEY_ESCAPE
+		):
+			_close_file_dialog()
+			get_viewport().set_input_as_handled()
+		return
+
 	if event is InputEventKey and event.pressed and not event.echo and event.ctrl_pressed:
+		if event.keycode == KEY_N:
+			_open_new_map_dialog()
+			get_viewport().set_input_as_handled()
+			return
+
 		if event.keycode == KEY_Z:
 			_finish_delete_stroke()
 			if event.shift_pressed:
@@ -741,7 +1096,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 
 		if event.keycode == KEY_O:
-			load_map()
+			_open_load_map_dialog()
 			get_viewport().set_input_as_handled()
 			return
 
@@ -761,6 +1116,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if active_category == MapEditorItem.Category.OPENINGS:
+			if event.pressed and active_item and active_item.opening:
+				_set_opening_at_screen_position(event.position, false)
+			get_viewport().set_input_as_handled()
+			return
 		if active_category in [
 			MapEditorItem.Category.NPCS,
 			MapEditorItem.Category.PROPS,
@@ -800,6 +1160,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not active_item or active_category not in [
 			MapEditorItem.Category.WALLS,
 			MapEditorItem.Category.FLOORS,
+			MapEditorItem.Category.CEILINGS,
 		]:
 			return
 		if event.pressed:
@@ -816,6 +1177,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if active_category == MapEditorItem.Category.OPENINGS:
+			if event.pressed:
+				_set_opening_at_screen_position(event.position, true)
+			get_viewport().set_input_as_handled()
+			return
 		if active_category in [
 			MapEditorItem.Category.NPCS,
 			MapEditorItem.Category.PROPS,
@@ -837,6 +1203,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if active_category not in [
 			MapEditorItem.Category.WALLS,
 			MapEditorItem.Category.FLOORS,
+			MapEditorItem.Category.CEILINGS,
 		]:
 			return
 		deleting_walls = event.pressed
@@ -844,7 +1211,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			_cancel_wall()
 			_cancel_floor()
 			if active_category == MapEditorItem.Category.WALLS:
-				_delete_wall_at_screen_position(event.position)
+				_begin_wall_delete(_screen_to_grid_point(event.position))
+			elif active_category == MapEditorItem.Category.CEILINGS:
+				_delete_ceiling_at_screen_position(event.position)
 			else:
 				_delete_floor_at_screen_position(event.position)
 		else:
@@ -882,7 +1251,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event is InputEventMouseMotion and deleting_walls:
 		if active_category == MapEditorItem.Category.WALLS:
-			_delete_wall_at_screen_position(event.position)
+			_update_wall_delete(_screen_to_grid_point(event.position))
+		elif active_category == MapEditorItem.Category.CEILINGS:
+			_delete_ceiling_at_screen_position(event.position)
 		else:
 			_delete_floor_at_screen_position(event.position)
 		get_viewport().set_input_as_handled()
@@ -893,6 +1264,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_cancel_wall()
 		_cancel_floor()
 		_cancel_wallpaper_stroke()
+		_cancel_wall_delete()
 		get_viewport().set_input_as_handled()
 
 
@@ -949,12 +1321,17 @@ func _cancel_floor() -> void:
 func create_floor(start: Vector2i, end: Vector2i) -> void:
 	if (
 		not active_item
-		or active_item.category != MapEditorItem.Category.FLOORS
+		or active_item.category not in [
+			MapEditorItem.Category.FLOORS,
+			MapEditorItem.Category.CEILINGS,
+		]
 		or not active_item.surface
 	):
-		push_warning("Select a floor from the Floors palette first.")
+		push_warning("Select a floor or ceiling surface first.")
 		return
 
+	var is_ceiling := active_item.category == MapEditorItem.Category.CEILINGS
+	var target_data := ceiling_data if is_ceiling else floor_data
 	var cell_min := Vector2i(mini(start.x, end.x), mini(start.y, end.y))
 	var cell_max := Vector2i(maxi(start.x, end.x), maxi(start.y, end.y))
 	var created_records: Array = []
@@ -969,7 +1346,7 @@ func create_floor(start: Vector2i, end: Vector2i) -> void:
 			"item_id": active_item.id,
 			"surface": active_item.surface,
 		}
-		var previous: Dictionary = floor_data.get(floor_key, {})
+		var previous: Dictionary = target_data.get(floor_key, {})
 		if previous.is_empty():
 			created_records.append(replacement)
 		elif StringName(previous.get("item_id", &"")) != active_item.id:
@@ -979,13 +1356,21 @@ func create_floor(start: Vector2i, end: Vector2i) -> void:
 	if created_records.is_empty() and replacement_records.is_empty():
 		return
 
-	undo_redo.create_action("Paint Floors")
-	if not created_records.is_empty():
-		undo_redo.add_do_method(_create_floor_records.bind(created_records))
-		undo_redo.add_undo_method(_delete_floor_records.bind(created_records))
-	if not replacement_records.is_empty():
-		undo_redo.add_do_method(_replace_floor_records.bind(replacement_records))
-		undo_redo.add_undo_method(_replace_floor_records.bind(previous_records))
+	undo_redo.create_action("Paint Ceilings" if is_ceiling else "Paint Floors")
+	if is_ceiling:
+		if not created_records.is_empty():
+			undo_redo.add_do_method(_create_ceiling_records.bind(created_records))
+			undo_redo.add_undo_method(_delete_ceiling_records.bind(created_records))
+		if not replacement_records.is_empty():
+			undo_redo.add_do_method(_replace_ceiling_records.bind(replacement_records))
+			undo_redo.add_undo_method(_replace_ceiling_records.bind(previous_records))
+	else:
+		if not created_records.is_empty():
+			undo_redo.add_do_method(_create_floor_records.bind(created_records))
+			undo_redo.add_undo_method(_delete_floor_records.bind(created_records))
+		if not replacement_records.is_empty():
+			undo_redo.add_do_method(_replace_floor_records.bind(replacement_records))
+			undo_redo.add_undo_method(_replace_floor_records.bind(previous_records))
 	undo_redo.commit_action()
 
 
@@ -998,7 +1383,10 @@ func _rebuild_floor_preview() -> void:
 	preview.mesh = mesh
 	preview.material_override = preview_material
 	preview.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	preview.position = bounds["position"] + Vector3.DOWN * 0.02
+	preview.position = bounds["position"] + (
+		Vector3.UP * (wall_height + 0.02)
+		if active_category == MapEditorItem.Category.CEILINGS
+		else Vector3.DOWN * 0.02)
 	floor_preview.add_child(preview)
 
 
@@ -1031,7 +1419,6 @@ func place_active_item(cell: Vector2i) -> String:
 		"category": active_item.category,
 		"scene": active_item.scene,
 		"grid_divisions": grid_divisions,
-		"placement_offset": active_item.placement_offset,
 		"rotation_y": placement_rotation_y,
 	}
 	undo_redo.create_action("Place %s" % active_item.display_name)
@@ -1144,6 +1531,7 @@ func _instantiate_placed_item(
 	if not placed_node:
 		push_warning("Map editor item scene must have a Node3D root.")
 		return null
+	placed_node.set_meta(AUTHORED_ROOT_TRANSFORM_META, placed_node.transform)
 	if disable_processing:
 		placed_node.process_mode = Node.PROCESS_MODE_DISABLED
 	_apply_placed_item_transform(placed_node, record, placement_grid_size)
@@ -1162,13 +1550,16 @@ func _apply_placed_item_transform(
 	var item_grid_size := _get_record_placement_grid_size(
 		record, placement_grid_size)
 	var rotation_y := float(record.get("rotation_y", 0.0))
-	var placement_offset: Vector2 = record.get(
-		"placement_offset", Vector2.ZERO)
-	var offset := Vector3(placement_offset.x, 0.0, placement_offset.y)
-	offset = offset.rotated(Vector3.UP, rotation_y) * item_grid_size
-	placed_node.position = (
-		_get_placed_item_cell_centre(cell, item_grid_size) + offset)
-	placed_node.rotation.y = rotation_y
+	var placement_transform := Transform3D(
+		Basis(Vector3.UP, rotation_y),
+		_get_placed_item_cell_centre(cell, item_grid_size))
+	if record["category"] == MapEditorItem.Category.PROPS:
+		var authored_transform: Transform3D = placed_node.get_meta(
+			AUTHORED_ROOT_TRANSFORM_META, Transform3D.IDENTITY)
+		placed_node.transform = placement_transform * authored_transform
+	else:
+		placed_node.position = placement_transform.origin
+		placed_node.rotation.y = rotation_y
 
 
 func _get_placed_item_cell_centre(
@@ -1261,26 +1652,41 @@ func _clear_preview() -> void:
 		child.queue_free()
 
 
-func _delete_wall_at_screen_position(screen_position: Vector2) -> void:
-	var ray_origin := camera.project_ray_origin(screen_position)
-	var ray_end := ray_origin + camera.project_ray_normal(screen_position) * 1000.0
-	var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	query.collide_with_areas = false
-	var hit := get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
-		return
+func _begin_wall_delete(grid_point: Vector2i) -> void:
+	previewing_wall_delete = true
+	wall_delete_start = grid_point
+	wall_delete_end = grid_point
+	_rebuild_wall_delete_preview()
 
-	var wall := _get_placed_wall_for_node(hit.get("collider") as Node)
-	if not wall:
-		return
 
-	var edge_key: String = occupied_wall_edges.find_key(wall)
-	var record: Dictionary = wall_edge_data.get(edge_key, {})
-	if record.is_empty():
-		return
+func _update_wall_delete(grid_point: Vector2i) -> void:
+	wall_delete_end = _lock_to_axis(wall_delete_start, grid_point)
+	_rebuild_wall_delete_preview()
 
-	delete_stroke_records.append(record.duplicate())
-	_delete_wall_records([record])
+
+func _rebuild_wall_delete_preview() -> void:
+	_clear_preview()
+	for edge in _get_wall_edges(wall_delete_start, wall_delete_end):
+		var edge_key := _get_edge_key(edge[0], edge[1])
+		if not wall_edge_data.has(edge_key):
+			continue
+		var placement := _get_edge_placement(edge[0], edge[1])
+		var preview := MeshInstance3D.new()
+		var mesh := BoxMesh.new()
+		mesh.size = Vector3(grid_size, wall_height, 0.1)
+		preview.mesh = mesh
+		preview.material_override = delete_preview_material
+		preview.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		preview.position = (
+			placement.position + Vector3.UP * wall_height * 0.5)
+		preview.rotation.y = placement.rotation
+		wall_preview.add_child(preview)
+
+
+func _cancel_wall_delete() -> void:
+	previewing_wall_delete = false
+	deleting_walls = false
+	_clear_preview()
 
 
 func _begin_wallpaper_stroke(
@@ -1375,7 +1781,8 @@ func _rebuild_wallpaper_preview() -> void:
 		var mesh := BoxMesh.new()
 		mesh.size = Vector3(grid_size, wall_height, 0.09)
 		preview.mesh = mesh
-		preview.material_override = preview_material
+		preview.material_override = (
+			delete_preview_material if erasing_wallpaper else preview_material)
 		preview.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		preview.position = placement.position + Vector3.UP * wall_height * 0.5
 		preview.rotation.y = placement.rotation
@@ -1422,15 +1829,22 @@ func _delete_floor_at_screen_position(screen_position: Vector2) -> void:
 	_delete_floor_records([record])
 
 
+func _delete_ceiling_at_screen_position(screen_position: Vector2) -> void:
+	var cell := _screen_to_floor_cell(screen_position)
+	var ceiling_key := _get_floor_key(cell, cell)
+	var record: Dictionary = ceiling_data.get(ceiling_key, {})
+	if record.is_empty():
+		return
+	ceiling_delete_stroke_records.append(record.duplicate())
+	_delete_ceiling_records([record])
+
+
 func _finish_delete_stroke() -> void:
 	deleting_walls = false
-	if not delete_stroke_records.is_empty():
-		var wall_records := delete_stroke_records.duplicate(true)
-		delete_stroke_records.clear()
-		undo_redo.create_action("Delete Walls")
-		undo_redo.add_do_method(_delete_wall_records.bind(wall_records))
-		undo_redo.add_undo_method(_create_wall_records.bind(wall_records))
-		undo_redo.commit_action(false)
+	if previewing_wall_delete:
+		previewing_wall_delete = false
+		delete_wall(wall_delete_start, wall_delete_end)
+		_clear_preview()
 
 	if not floor_delete_stroke_records.is_empty():
 		var deleted_floors := floor_delete_stroke_records.duplicate(true)
@@ -1438,6 +1852,14 @@ func _finish_delete_stroke() -> void:
 		undo_redo.create_action("Delete Floors")
 		undo_redo.add_do_method(_delete_floor_records.bind(deleted_floors))
 		undo_redo.add_undo_method(_create_floor_records.bind(deleted_floors))
+		undo_redo.commit_action(false)
+
+	if not ceiling_delete_stroke_records.is_empty():
+		var deleted_ceilings := ceiling_delete_stroke_records.duplicate(true)
+		ceiling_delete_stroke_records.clear()
+		undo_redo.create_action("Delete Ceilings")
+		undo_redo.add_do_method(_delete_ceiling_records.bind(deleted_ceilings))
+		undo_redo.add_undo_method(_create_ceiling_records.bind(deleted_ceilings))
 		undo_redo.commit_action(false)
 
 
@@ -1510,6 +1932,10 @@ func _instantiate_wall(
 	wall.size = Vector2(placement_grid_size, wall_height)
 	wall.is_floor = false
 	wall.show_editor_line = show_editor_helpers
+	if record.has(OPENING_ITEM_KEY):
+		var opening_item := catalog.get_item(record[OPENING_ITEM_KEY]) if catalog else null
+		if opening_item and opening_item.opening:
+			wall.opening_definition = opening_item.opening
 	var placement := _get_edge_placement(
 		record["point_a"],
 		record["point_b"],
@@ -1548,7 +1974,87 @@ func _make_wallpaper_layer(item_id: StringName) -> SurfaceLayerDefinition:
 		return null
 	var layer := SurfaceLayerDefinition.new()
 	layer.surface = item.surface
+	layer.spacing_from_previous = WALLPAPER_SEPARATION
 	return layer
+
+
+func _set_opening_at_screen_position(
+		screen_position: Vector2,
+		erase: bool
+	) -> void:
+	var edge_key := _get_wall_edge_at_screen_position(screen_position)
+	if edge_key.is_empty():
+		return
+	var record: Dictionary = wall_edge_data.get(edge_key, {})
+	if record.is_empty():
+		return
+	var previous_had_opening := record.has(OPENING_ITEM_KEY)
+	var previous_item_id := StringName(record.get(OPENING_ITEM_KEY, &""))
+	if erase and not previous_had_opening:
+		return
+	if not erase and previous_had_opening and previous_item_id == active_item.id:
+		return
+	undo_redo.create_action("Remove Opening" if erase else "Place Opening")
+	undo_redo.add_do_method(_set_wall_opening.bind(
+		edge_key, &"" if erase else active_item.id, not erase))
+	undo_redo.add_undo_method(_set_wall_opening.bind(
+		edge_key, previous_item_id, previous_had_opening))
+	undo_redo.commit_action()
+
+
+func _get_wall_edge_at_screen_position(screen_position: Vector2) -> String:
+	var edge := _get_nearest_grid_edge(screen_position)
+	var edge_key := _get_edge_key(edge[0], edge[1])
+	return edge_key if wall_edge_data.has(edge_key) else ""
+
+
+func _get_nearest_grid_edge(screen_position: Vector2) -> Array:
+	var ground_position := _screen_to_ground_position(screen_position)
+	var grid_position := Vector2(
+		ground_position.x / grid_size,
+		ground_position.z / grid_size)
+	var cell := Vector2i(
+		floori(grid_position.x),
+		floori(grid_position.y))
+	var candidate_edges: Array = [
+		[cell, cell + Vector2i.RIGHT],
+		[cell + Vector2i.DOWN, cell + Vector2i.ONE],
+		[cell, cell + Vector2i.DOWN],
+		[cell + Vector2i.RIGHT, cell + Vector2i.ONE],
+	]
+	var nearest_edge: Array = candidate_edges[0]
+	var nearest_distance := INF
+	for edge in candidate_edges:
+		var closest_point := Geometry2D.get_closest_point_to_segment(
+			grid_position,
+			Vector2(edge[0]),
+			Vector2(edge[1]))
+		var distance := grid_position.distance_squared_to(closest_point)
+		if distance < nearest_distance:
+			nearest_distance = distance
+			nearest_edge = edge
+	return nearest_edge
+
+
+func _set_wall_opening(
+		edge_key: String,
+		item_id: StringName,
+		has_opening: bool
+	) -> void:
+	var record: Dictionary = wall_edge_data.get(edge_key, {})
+	var wall := occupied_wall_edges.get(edge_key) as SurfaceStackGeometry
+	if record.is_empty() or not wall:
+		return
+	if has_opening:
+		var item := catalog.get_item(item_id) if catalog else null
+		if not item or not item.opening:
+			return
+		record[OPENING_ITEM_KEY] = item_id
+		wall.opening_definition = item.opening
+	else:
+		record.erase(OPENING_ITEM_KEY)
+		wall.opening_definition = null
+	wall_edge_data[edge_key] = record
 
 
 func _delete_wall_records(records: Array) -> void:
@@ -1642,6 +2148,86 @@ func _delete_floor_records(records: Array) -> void:
 		floor_node.queue_free()
 
 
+func _create_ceiling_records(records: Array) -> void:
+	for record in records:
+		var ceiling_key: String = record["key"]
+		if ceiling_nodes.has(ceiling_key):
+			continue
+		var ceiling_node := _instantiate_ceiling(record, ceilings, grid_size)
+		if not ceiling_node:
+			continue
+		ceiling_nodes[ceiling_key] = ceiling_node
+		ceiling_data[ceiling_key] = record
+		for cell in _get_floor_cells(record["cell_min"], record["cell_max"]):
+			occupied_ceiling_cells[_get_cell_key(cell)] = ceiling_node
+
+
+func _replace_ceiling_records(records: Array) -> void:
+	for record in records:
+		var ceiling_key: String = record["key"]
+		var previous_node := ceiling_nodes.get(ceiling_key) as Node3D
+		var previous_record: Dictionary = ceiling_data.get(ceiling_key, {})
+		if previous_node:
+			for cell in _get_floor_cells(
+				previous_record["cell_min"], previous_record["cell_max"]):
+				occupied_ceiling_cells.erase(_get_cell_key(cell))
+			ceiling_nodes.erase(ceiling_key)
+			ceiling_data.erase(ceiling_key)
+			previous_node.queue_free()
+
+		var ceiling_node := _instantiate_ceiling(record, ceilings, grid_size)
+		if not ceiling_node:
+			continue
+		ceiling_nodes[ceiling_key] = ceiling_node
+		ceiling_data[ceiling_key] = record
+		for cell in _get_floor_cells(record["cell_min"], record["cell_max"]):
+			occupied_ceiling_cells[_get_cell_key(cell)] = ceiling_node
+
+
+func _instantiate_ceiling(
+		record: Dictionary,
+		parent: Node,
+		placement_grid_size: float
+	) -> SurfaceStackGeometry:
+	var bounds := _get_floor_bounds(
+		record["cell_min"], record["cell_max"], placement_grid_size)
+	var ceiling_node := SURFACE_STACK_SCENE.instantiate() as SurfaceStackGeometry
+	if not ceiling_node:
+		return null
+	ceiling_node.surface_stack = _build_ceiling_surface_stack(record["surface"])
+	ceiling_node.size = bounds["size"]
+	ceiling_node.is_floor = true
+	ceiling_node.position = bounds["position"] + Vector3.UP * wall_height
+	ceiling_node.rotation.x = PI
+	parent.add_child(ceiling_node)
+	return ceiling_node
+
+
+func _build_ceiling_surface_stack(
+		surface: SurfaceDefinition
+	) -> SurfaceStackDefinition:
+	var layer := SurfaceLayerDefinition.new()
+	layer.surface = surface
+	var result := SurfaceStackDefinition.new()
+	result.id = StringName("ceiling_%s" % surface.id)
+	result.display_name = surface.display_name
+	result.layers = [layer]
+	return result
+
+
+func _delete_ceiling_records(records: Array) -> void:
+	for record in records:
+		var ceiling_key: String = record["key"]
+		var ceiling_node := ceiling_nodes.get(ceiling_key) as Node3D
+		if not ceiling_node:
+			continue
+		for cell in _get_floor_cells(record["cell_min"], record["cell_max"]):
+			occupied_ceiling_cells.erase(_get_cell_key(cell))
+		ceiling_nodes.erase(ceiling_key)
+		ceiling_data.erase(ceiling_key)
+		ceiling_node.queue_free()
+
+
 func _get_placed_floor_for_node(node: Node) -> Node3D:
 	var current := node
 	while current and current != floors:
@@ -1684,8 +2270,9 @@ func _get_active_placement_grid_size() -> float:
 
 
 func _get_category_grid_divisions(category: int) -> int:
+	if category == MapEditorItem.Category.PROPS:
+		return PROP_GRID_DIVISIONS
 	if category in [
-		MapEditorItem.Category.PROPS,
 		MapEditorItem.Category.NPCS,
 		MapEditorItem.Category.ITEMS,
 	]:
@@ -1704,8 +2291,17 @@ func _get_record_placement_grid_size(
 func _screen_to_ground_position(screen_position: Vector2) -> Vector3:
 	var ray_origin := camera.project_ray_origin(screen_position)
 	var ray_direction := camera.project_ray_normal(screen_position)
-	var distance := -ray_origin.y / ray_direction.y
+	var distance := (
+		_get_placement_plane_height() - ray_origin.y
+	) / ray_direction.y
 	return ray_origin + ray_direction * distance
+
+
+func _get_placement_plane_height() -> float:
+	return (
+		wall_height
+		if active_category == MapEditorItem.Category.CEILINGS
+		else 0.0)
 
 
 func _get_floor_bounds(

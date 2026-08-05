@@ -23,5 +23,4 @@ func knock_back(force) -> void:
 	
 func die(_normal := Vector3.ZERO, _hit_shape: CollisionShape3D = null) -> void:
 	set_physics_process(false)
-	remove_from_group("aimables")
 	died.emit()

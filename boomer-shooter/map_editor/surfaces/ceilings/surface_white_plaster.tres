@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SurfaceDefinition" format=3 uid="uid://nvnwnhfxb8u0"]
+
+[ext_resource type="Texture2D" uid="uid://yuia4i2xhxsw" path="res://content/fx/blood_noise_texture.tres" id="1_uk1mi"]
+[ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="2_m22cc"]
+[ext_resource type="Script" uid="uid://c54irsxyg2yc1" path="res://map_editor/surface_definition.gd" id="3_g4ju8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qb1no"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ioxkb"]
+noise = SubResource("FastNoiseLite_qb1no")
+
+[resource]
+script = ExtResource("3_g4ju8")
+id = &"floor_concrete"
+display_name = "Concrete"
+tile_variance = 0.35
+quad_outline_width = Vector2(0.03, 0.02)
+quad_outline_color = Color(0, 0, 0, 0.74509805)
+quad_outline_distortion = 0.022
+disorder = SubResource("NoiseTexture2D_ioxkb")
+hole_atlas = ExtResource("2_m22cc")
+bullet_stopping_power = 10.0

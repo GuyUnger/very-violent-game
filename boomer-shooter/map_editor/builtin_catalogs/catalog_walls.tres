@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://bfam7qc2bs5pg"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_26wrs"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_ltwjy"]
+[ext_resource type="Resource" uid="uid://cvmj5qydx053g" path="res://map_editor/surfaces/walls/surface_mdf.tres" id="3_4yx8s"]
+[ext_resource type="Resource" uid="uid://crbb4gtyyrcd4" path="res://map_editor/surfaces/walls/surface_concrete.tres" id="4_eddtb"]
+[ext_resource type="Resource" uid="uid://bwbpfcb1h1vqx" path="res://map_editor/surfaces/walls/surface_brick.tres" id="5_2hwf1"]
+
+[sub_resource type="Resource" id="MapEditorItem_mdf"]
+script = ExtResource("2_ltwjy")
+id = &"wall_mdf"
+display_name = "MDF"
+surface = ExtResource("3_4yx8s")
+
+[sub_resource type="Resource" id="MapEditorItem_concrete"]
+script = ExtResource("2_ltwjy")
+id = &"wall_concrete"
+display_name = "Concrete"
+surface = ExtResource("4_eddtb")
+
+[sub_resource type="Resource" id="MapEditorItem_brick"]
+script = ExtResource("2_ltwjy")
+id = &"wall_brick"
+display_name = "Brick"
+surface = ExtResource("5_2hwf1")
+
+[resource]
+script = ExtResource("1_26wrs")
+items = Array[ExtResource("2_ltwjy")]([SubResource("MapEditorItem_mdf"), SubResource("MapEditorItem_concrete"), SubResource("MapEditorItem_brick")])

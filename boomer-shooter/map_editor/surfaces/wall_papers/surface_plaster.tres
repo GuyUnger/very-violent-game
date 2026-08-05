@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="SurfaceDefinition" format=3 uid="uid://gg5nof2tqcyb"]
 
+[ext_resource type="Texture2D" uid="uid://yuia4i2xhxsw" path="res://content/fx/blood_noise_texture.tres" id="1_4ggqo"]
 [ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="1_d61va"]
 [ext_resource type="Script" uid="uid://c54irsxyg2yc1" path="res://map_editor/surface_definition.gd" id="1_surface"]
 [ext_resource type="PackedScene" uid="uid://knvaoh3jmvvl" path="res://content/fx/wall_sparks.tscn" id="2_11tf4"]
@@ -12,9 +13,9 @@ modulate = Color(2.7915835e-06, 0.6972702, 0.8069395, 1)
 roughness = 0.95
 random_hue = 0.015
 hole_atlas = ExtResource("1_d61va")
-hole_uv_size = Vector2(0.1, 0.1)
+hole_uv_size = Vector2(0.3, 0.3)
 hole_size_random_range = Vector2(1, 2)
 bullet_stopping_power = 0.0
-max_health = 20
+max_health = 100
 can_run_through = true
 impact_effect = ExtResource("2_11tf4")

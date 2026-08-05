@@ -16,7 +16,7 @@ signal view_mode_changed(mode: int)
 
 @export_range(0.01, 4.0, 0.01) var drag_speed := 1.0
 @export_range(0.1, 20.0, 0.1) var zoom_step := 2.0
-@export_range(1.0, 100.0, 0.5) var minimum_zoom_distance := 6.0
+@export_range(1.0, 100.0, 0.5) var minimum_zoom_distance := 3.0
 @export_range(1.0, 200.0, 0.5) var maximum_zoom_distance := 60.0
 @export_range(1.0, 200.0, 0.5) var zoom_distance := 22.0:
 	set(value):
@@ -28,6 +28,12 @@ signal view_mode_changed(mode: int)
 @export_range(1.0, 120.0, 1.0) var field_of_view := 100.0
 @export_range(10.0, 360.0, 5.0) var rotation_speed_degrees := 180.0
 
+var orthographic_top_down := false:
+	set(value):
+		orthographic_top_down = value
+		if is_node_ready():
+			_apply_camera_projection()
+
 @onready var camera: Camera3D = %Camera
 
 var dragging := false
@@ -36,8 +42,6 @@ var stored_isometric_basis := Basis.IDENTITY
 
 
 func _ready() -> void:
-	camera.projection = Camera3D.PROJECTION_PERSPECTIVE
-	camera.fov = field_of_view
 	stored_isometric_basis = global_basis
 	_apply_view_mode()
 
@@ -158,12 +162,14 @@ func _apply_view_mode() -> void:
 		global_basis = Basis.IDENTITY
 	elif applied_view_mode == ViewMode.TOP_DOWN:
 		global_basis = stored_isometric_basis
+	_apply_camera_projection()
 	_apply_camera_transform()
 	applied_view_mode = view_mode
 	view_mode_changed.emit(view_mode)
 
 
 func _apply_camera_transform() -> void:
+	_apply_camera_projection()
 	match view_mode:
 		ViewMode.ISOMETRIC:
 			camera.position = isometric_camera_position.normalized() * zoom_distance
@@ -171,3 +177,15 @@ func _apply_camera_transform() -> void:
 		ViewMode.TOP_DOWN:
 			camera.position = Vector3.UP * zoom_distance
 			camera.rotation_degrees = Vector3(-90.0, 0.0, 0.0)
+
+
+func _apply_camera_projection() -> void:
+	if view_mode == ViewMode.TOP_DOWN and orthographic_top_down:
+		camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+		camera.size = (
+			2.0
+			* zoom_distance
+			* tan(deg_to_rad(field_of_view) * 0.5))
+	else:
+		camera.projection = Camera3D.PROJECTION_PERSPECTIVE
+		camera.fov = field_of_view

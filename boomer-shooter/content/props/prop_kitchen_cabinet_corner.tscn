@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dngi5br0eomqg"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_yyp1n"]
+[ext_resource type="ArrayMesh" uid="uid://cwadhvasqir6o" path="res://content/props/meshes/props_cabinet_corner.res" id="2_yyp1n"]
+[ext_resource type="ArrayMesh" uid="uid://bxu02skdom6yt" path="res://content/props/meshes/props_counter_top_corner.res" id="3_t6yeg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(0.7306494, 0.9245703, 0.71554196)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t6yeg"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_830jo"]
+flip_faces = true
+size = Vector2(0.4, 0.06)
+orientation = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7qd63"]
+flip_faces = true
+size = Vector2(0.22, 0.06)
+orientation = 2
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_yyp1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.094, 0, 0.094)
+max_hp = 5
+can_run_through = true
+climbable = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+mesh = ExtResource("2_yyp1n")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="1" unique_id=1811425046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019, 0.863, 0.019)
+mesh = ExtResource("3_t6yeg")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012785643, 0.45879316, 0.010270983)
+shape = SubResource("BoxShape3D_3pyl4")
+
+[node name="EditorLine" type="MeshInstance3D" parent="." index="4" unique_id=388220894]
+transform = Transform3D(0.7071067, -0.7071068, 4.371139e-08, 3.090862e-08, -3.0908616e-08, -1, 0.7071068, 0.7071067, 1.3510586e-15, -2.8293416e-09, 0.9297278, -1.7490206e-16)
+material_override = SubResource("StandardMaterial3D_t6yeg")
+mesh = SubResource("PlaneMesh_830jo")
+
+[node name="EditorLine2" type="MeshInstance3D" parent="EditorLine" index="0" unique_id=1496014572]
+transform = Transform3D(0.70710677, 0.70710677, -5.5962683e-16, -0.70710677, 0.70710677, -5.9056645e-23, -2.201655e-15, -2.201655e-15, 1, 0.09328728, 0.0932873, 0)
+material_override = SubResource("StandardMaterial3D_t6yeg")
+mesh = SubResource("PlaneMesh_7qd63")
+skeleton = NodePath("../..")
+
+[node name="EditorLine3" type="MeshInstance3D" parent="EditorLine" index="1" unique_id=828075683]
+transform = Transform3D(0.7071067, -0.7071068, -1.9106853e-15, 0.7071068, 0.7071067, 3.5527137e-15, -5.754369e-15, -1.3510588e-15, 1, 0.104426116, -0.08493319, 0)
+material_override = SubResource("StandardMaterial3D_t6yeg")
+mesh = SubResource("PlaneMesh_7qd63")
+skeleton = NodePath("../..")

@@ -60,13 +60,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000782948, 0.00282902, -0.
 [node name="weapon_shotgun" parent="WorldModel/ShotgunContainer" unique_id=1037512156 instance=ExtResource("3_ri3d7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104513, -0.00626397, -0.10006051)
 
-[node name="Shotty" parent="WorldModel/ShotgunContainer/weapon_shotgun" index="0"]
+[node name="Shotty" parent="WorldModel/ShotgunContainer/weapon_shotgun" index="0" unique_id=1857433649]
 material_override = ExtResource("10_4p3ji")
 
-[node name="ShottyHandle" parent="WorldModel/ShotgunContainer/weapon_shotgun/Shotty" index="0"]
+[node name="ShottyHandle" parent="WorldModel/ShotgunContainer/weapon_shotgun/Shotty" index="0" unique_id=41249306]
 surface_material_override/0 = ExtResource("10_4p3ji")
 
-[node name="ShottyReloadThingy" parent="WorldModel/ShotgunContainer/weapon_shotgun/Shotty" index="1"]
+[node name="ShottyReloadThingy" parent="WorldModel/ShotgunContainer/weapon_shotgun/Shotty" index="1" unique_id=1629030392]
 surface_material_override/0 = ExtResource("10_4p3ji")
 
 [node name="Hand" type="Node3D" parent="WorldModel/ShotgunContainer" unique_id=2062600662]

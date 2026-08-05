@@ -2,13 +2,14 @@ class_name Bullet
 extends Node3D
 
 const PENETRATION_TRACE_EPSILON := 0.001
+const NONBLOCKING_PROP_LAYER := 1 << 7
 
 var speed := 40.0
 @export var damage := 1
 @export var knock_back := 1
 @export var penetration_power := 0.0
 
-var collision_mask := 1 + 4
+var collision_mask := 1 + 4 + NONBLOCKING_PROP_LAYER
 var enemy
 var shooter: Node3D
 var target_position: Vector3:
@@ -74,7 +75,8 @@ func _apply_impact(
 		Main.instance.try_spawn_portal_from_shot(hit_position, normal)
 
 	if (
-		collider.has_method("get_bullet_stopping_power")
+		collider is not Character
+		and collider.has_method("get_bullet_stopping_power")
 		and collider.has_method("hit")
 		and not stops_bullet
 	):

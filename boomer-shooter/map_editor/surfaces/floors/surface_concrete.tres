@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="SurfaceDefinition" format=3 uid="uid://ctrl3mktc7nlv"]
 
+[ext_resource type="Texture2D" uid="uid://yuia4i2xhxsw" path="res://content/fx/blood_noise_texture.tres" id="1_mdtpm"]
 [ext_resource type="Script" uid="uid://c54irsxyg2yc1" path="res://map_editor/surface_definition.gd" id="1_surface"]
 [ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="2_holes"]
 

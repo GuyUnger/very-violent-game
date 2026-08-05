@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cypawspyuk387"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_lbi7n"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lbi7n"]
+height = 1.0
+radial_segments = 16
+rings = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(0.22, 0.155, 0.165)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_lbi7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
+max_hp = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+transform = Transform3D(-8.742278e-09, 0.2, 0, -0.2, -8.742278e-09, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("CylinderMesh_lbi7n")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_3pyl4")

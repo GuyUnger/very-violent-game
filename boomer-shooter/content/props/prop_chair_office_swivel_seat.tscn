@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dif20xpk7uwdy"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_nbulq"]
+[ext_resource type="ArrayMesh" uid="uid://dps6bx6dqlgpf" path="res://content/props/meshes/props_office_chair_swivel_seat.res" id="4_dsf5b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vyfkt"]
+size = Vector3(0.6141046, 0.06552246, 0.5301203)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ofexq"]
+size = Vector3(0.573326, 0.27803832, 0.101886615)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f6ory"]
+size = Vector3(0.08931717, 0.33196548, 0.041173205)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_nbulq")]
+collision_layer = 128
+collision_mask = 128
+max_hp = 11111
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1449051968]
+mesh = ExtResource("4_dsf5b")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.061842456, 0.002364844)
+shape = SubResource("BoxShape3D_vyfkt")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="2" unique_id=1932818779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002138555, 0.3076599, -0.25578558)
+shape = SubResource("BoxShape3D_ofexq")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." index="3" unique_id=1686091123]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0014193356, 0.16652317, -0.35243756)
+shape = SubResource("BoxShape3D_f6ory")

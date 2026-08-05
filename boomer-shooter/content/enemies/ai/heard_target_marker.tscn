@@ -1,37 +1,35 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://brd5sf6v2awr6"]
 
-[ext_resource type="Script" path="res://content/enemies/ai/heard_target_marker.gd" id="1_marker"]
+[ext_resource type="Script" uid="uid://c4jfibbsd5ppi" path="res://content/enemies/ai/heard_target_marker.gd" id="1_marker"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_marker"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlwex"]
 transparency = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(1, 0.18, 0.03, 0.82)
+albedo_color = Color(1, 0, 0, 0.27450982)
 emission_enabled = true
-emission = Color(1, 0.05, 0.01, 1)
-emission_energy_multiplier = 3.0
-no_depth_test = true
+emission = Color(1, 0, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_marker"]
-material = SubResource("StandardMaterial3D_marker")
-radius = 0.13
-height = 0.26
+[sub_resource type="CylinderMesh" id="CylinderMesh_tklcm"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+cap_top = false
+cap_bottom = false
 
-[node name="HeardTargetMarker" type="Node3D"]
+[node name="HeardTargetMarker" type="Node3D" unique_id=657110345]
 script = ExtResource("1_marker")
 
-[node name="Visual" type="Node3D" parent="."]
-position = Vector3(0, 1, 0)
+[node name="Visual" type="Node3D" parent="." unique_id=777061110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Sphere" type="MeshInstance3D" parent="Visual"]
-cast_shadow = 0
-mesh = SubResource("SphereMesh_marker")
-
-[node name="Label" type="Label3D" parent="Visual"]
-position = Vector3(0, 0.28, 0)
+[node name="Label" type="Label3D" parent="Visual" unique_id=580025341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
 billboard = 1
 no_depth_test = true
+modulate = Color(1, 0.25, 0.05, 1)
 text = "?"
 font_size = 48
-outline_size = 12
-modulate = Color(1, 0.25, 0.05, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual" unique_id=1169199850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5305146, 0)
+material_override = SubResource("StandardMaterial3D_nlwex")
+mesh = SubResource("CylinderMesh_tklcm")

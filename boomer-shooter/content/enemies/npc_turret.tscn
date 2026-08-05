@@ -34,7 +34,7 @@ height = 0.3
 radial_segments = 8
 rings = 4
 
-[node name="NPCEnemyTurret" type="CharacterBody3D" groups=["aimables", "npc_enemies"]]
+[node name="NPCEnemyTurret" type="CharacterBody3D" groups=["npc_enemies"]]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_dhxo6")

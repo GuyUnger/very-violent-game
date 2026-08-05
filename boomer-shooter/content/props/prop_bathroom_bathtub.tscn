@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cqqby0pevda20"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_ose7d"]
+[ext_resource type="ArrayMesh" uid="uid://cody16t3qdr6o" path="res://content/props/meshes/props_bathtub.res" id="2_ose7d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(1.9853895, 0.605, 0.846465)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_ose7d")]
+max_hp = 5
+climbable = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+mesh = ExtResource("2_ose7d")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0004107952, 0.299008, 0.0016942322)
+shape = SubResource("BoxShape3D_3pyl4")

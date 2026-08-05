@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cyp38nlw6fq4i" path="res://map_editor/map_editor.gd" id="1_editor"]
 [ext_resource type="Shader" uid="uid://cloixyvtqjaa0" path="res://map_editor/map_editor_grid.gdshader" id="2_grid"]
 [ext_resource type="Resource" uid="uid://fob2y8mijrk4" path="res://map_editor/default_map_editor_catalog.tres" id="4_catalog"]
+[ext_resource type="Environment" uid="uid://dwy0mt1yukigj" path="res://junk/shared/environment/environment.tres" id="5_gjvg8"]
 [ext_resource type="Script" uid="uid://dcyq6d321ce5k" path="res://map_editor/stack_thumbnail_renderer.gd" id="5_thumbnail_renderer"]
 [ext_resource type="Theme" uid="uid://bqdn1hl5c7fvl" path="res://map_editor/theme/space_worm_theme.tres" id="6_wu3br"]
 
@@ -34,12 +35,14 @@ height = 0.15
 radial_segments = 12
 rings = 6
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_prop_cell_marker"]
+size = Vector2(1, 1)
+
 [sub_resource type="Environment" id="Environment_thumbnail"]
 background_mode = 1
 background_color = Color(0.075, 0.08, 0.09, 1)
-ambient_light_source = 3
+ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.65
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toolbar"]
 bg_color = Color(0.075, 0.08, 0.09, 0.96)
@@ -52,12 +55,29 @@ border_color = Color(0.22, 0.24, 0.27, 1)
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_categories"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_file_dialog"]
+bg_color = Color(0.075, 0.08, 0.09, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.33, 0.37, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="MapEditor" type="Node3D" unique_id=93832437]
 script = ExtResource("1_editor")
 catalog = ExtResource("4_catalog")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2034690492]
-transform = Transform3D(0.8660254, -0.46985188, 0.17099498, 0, 0.34198993, 0.9397036, -0.50000006, -0.8138072, 0.29617193, 0, 0, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=309609112]
+environment = ExtResource("5_gjvg8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=2034690492]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 1
 
 [node name="Grid" type="MeshInstance3D" parent="." unique_id=1252028112]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.01, 0)
@@ -67,6 +87,12 @@ mesh = SubResource("PlaneMesh_grid")
 unique_name_in_owner = true
 cast_shadow = 0
 mesh = SubResource("SphereMesh_mouse_marker")
+
+[node name="PropCellMarker" type="MeshInstance3D" parent="." unique_id=1329677236]
+unique_name_in_owner = true
+visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_prop_cell_marker")
 
 [node name="StackThumbnailRenderer" type="SubViewport" parent="." unique_id=2045145889]
 unique_name_in_owner = true
@@ -78,11 +104,6 @@ script = ExtResource("5_thumbnail_renderer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="StackThumbnailRenderer" unique_id=65660945]
 environment = SubResource("Environment_thumbnail")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="StackThumbnailRenderer" unique_id=1755948146]
-transform = Transform3D(0.90630776, 0.1786062, -0.38302222, 0, 0.90630776, 0.42261827, 0.42261827, -0.38302222, 0.8213937, 0, 0, 0)
-light_energy = 0.8
-shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="StackThumbnailRenderer" unique_id=1994028708]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
@@ -96,6 +117,9 @@ size = 1.15
 unique_name_in_owner = true
 
 [node name="Floors" type="Node3D" parent="." unique_id=965676723]
+unique_name_in_owner = true
+
+[node name="Ceilings" type="Node3D" parent="." unique_id=1967844837]
 unique_name_in_owner = true
 
 [node name="Npcs" type="Node3D" parent="." unique_id=404840810]
@@ -151,21 +175,31 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 6
 
+[node name="CurrentMapLabel" type="Label" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer" unique_id=753317775]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "map"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer" unique_id=2084348283]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="SaveButton" type="Button" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer" unique_id=783873413]
-unique_name_in_owner = true
+[node name="FileMenuBar" type="MenuBar" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer" unique_id=8654324]
 layout_mode = 2
 focus_mode = 0
-text = "Save"
 
-[node name="LoadButton" type="Button" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer" unique_id=1094275590]
+[node name="FileMenu" type="PopupMenu" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer/FileMenuBar" unique_id=1136077643]
 unique_name_in_owner = true
-layout_mode = 2
-focus_mode = 0
-text = "Load"
+item_count = 4
+item_0/text = "New"
+item_0/id = 0
+item_1/text = "Rename"
+item_1/id = 1
+item_2/text = "Save"
+item_2/id = 2
+item_3/text = "Load"
+item_3/id = 3
 
 [node name="ToolbarSpacer" type="Control" parent="CanvasLayer/VBoxContainer/Toolbar/MarginContainer/HBoxContainer" unique_id=1667329782]
 layout_mode = 2
@@ -242,6 +276,14 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_categories")
 text = "Wall papers"
 
+[node name="OpeningsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=862648381]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "Openings"
+
 [node name="FloorsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1929483592]
 unique_name_in_owner = true
 layout_mode = 2
@@ -249,6 +291,14 @@ focus_mode = 0
 toggle_mode = true
 button_group = SubResource("ButtonGroup_categories")
 text = "Floors"
+
+[node name="CeilingsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1997118240]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_categories")
+text = "Ceilings"
 
 [node name="NpcsCategoryButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=108872072]
 unique_name_in_owner = true
@@ -296,3 +346,87 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
+
+[node name="FileDialogOverlay" type="Control" parent="CanvasLayer" unique_id=1112462230]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_wu3br")
+
+[node name="DimBackground" type="ColorRect" parent="CanvasLayer/FileDialogOverlay" unique_id=2144046898]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.015, 0.018, 0.022, 0.72)
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/FileDialogOverlay" unique_id=87135044]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DialogPanel" type="PanelContainer" parent="CanvasLayer/FileDialogOverlay/CenterContainer" unique_id=1538028085]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_file_dialog")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel" unique_id=1338834193]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel/MarginContainer" unique_id=2043508187]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FileDialogTitle" type="Label" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel/MarginContainer/VBoxContainer" unique_id=460288282]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "New Map"
+
+[node name="NewMapName" type="LineEdit" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel/MarginContainer/VBoxContainer" unique_id=65839497]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Map name"
+select_all_on_focus = true
+
+[node name="SavedMapList" type="ItemList" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel/MarginContainer/VBoxContainer" unique_id=2005812128]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+allow_reselect = true
+
+[node name="FileDialogError" type="Label" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel/MarginContainer/VBoxContainer" unique_id=2036648783]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.42, 0.38, 1)
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel/MarginContainer/VBoxContainer" unique_id=1326254739]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="FileDialogCancel" type="Button" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel/MarginContainer/VBoxContainer/Buttons" unique_id=1229690519]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"
+
+[node name="FileDialogConfirm" type="Button" parent="CanvasLayer/FileDialogOverlay/CenterContainer/DialogPanel/MarginContainer/VBoxContainer/Buttons" unique_id=641068675]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create"

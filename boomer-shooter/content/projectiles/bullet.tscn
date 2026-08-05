@@ -19,7 +19,7 @@ size = Vector3(0.1, 1, 0.1)
 
 [node name="Bullet" type="Node3D" unique_id=1819612846]
 script = ExtResource("1_2dqbx")
-damage = 2
+damage = 1
 
 [node name="Mesh" type="Node3D" parent="." unique_id=1574667648]
 

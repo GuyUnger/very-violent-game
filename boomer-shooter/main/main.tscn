@@ -3,12 +3,22 @@
 [ext_resource type="Script" uid="uid://cj7scnl02hmwg" path="res://main/main.gd" id="1_0oqm6"]
 [ext_resource type="PackedScene" uid="uid://n2142e5rpapd" path="res://content/player/player.tscn" id="2_43f5m"]
 [ext_resource type="Script" uid="uid://8gh7wu8tphq3" path="res://main/hud.gd" id="3_7iyax"]
-[ext_resource type="Environment" uid="uid://dwy0mt1yukigj" path="res://junk/shared/environment/environment.tres" id="3_fejr8"]
 [ext_resource type="AudioStream" uid="uid://lc5v3oph86at" path="res://junk/game/count_down.wav" id="4_0oqm6"]
 [ext_resource type="AudioStream" uid="uid://bi4e28jxmil2m" path="res://junk/game/kill 01.wav" id="6_byaf2"]
 [ext_resource type="AudioStream" uid="uid://bpy78hrxwsp4t" path="res://junk/game/all_kills.wav" id="7_byaf2"]
+[ext_resource type="Script" uid="uid://dvuv38bui2qqe" path="res://content/fx/blood_system.gd" id="8_blood_system"]
+[ext_resource type="Shader" uid="uid://dbof0ewsj1yib" path="res://main/screen_space_effects.gdshader" id="9_screen_effects"]
+[ext_resource type="Script" uid="uid://0jakh8hf5x6n" path="res://main/screen_space_effects.gd" id="10_screen_effects_script"]
+[ext_resource type="Texture2D" uid="uid://bh4fib3sax34h" path="res://main/damage_mist_noise.tres" id="11_damage_mist_noise"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tklcm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_screen_effects"]
+shader = ExtResource("9_screen_effects")
+shader_parameter/mist_noise_texture = ExtResource("11_damage_mist_noise")
+shader_parameter/chromatic_aberration = 0.002
+shader_parameter/damage_intensity = 0.0
+shader_parameter/damage_color = Color(1, 0, 0, 1)
 
 [node name="Main" type="Node3D" unique_id=245061433]
 script = ExtResource("1_0oqm6")
@@ -36,8 +46,8 @@ render_target_update_mode = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground" unique_id=1475527764]
 shape = SubResource("WorldBoundaryShape3D_tklcm")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=904615459]
-environment = ExtResource("3_fejr8")
+[node name="BloodSystem" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1308051265 groups=["blood_system"]]
+script = ExtResource("8_blood_system")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1174169434]
 layer = 8
@@ -141,6 +151,18 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 22
 text = "0/5"
 horizontal_alignment = 1
+
+[node name="ScreenSpaceEffects" type="ColorRect" parent="HUD" unique_id=882327962]
+unique_name_in_owner = true
+z_index = -1
+material = SubResource("ShaderMaterial_screen_effects")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_screen_effects_script")
 
 [node name="AudioKill" type="AudioStreamPlayer" parent="." unique_id=493423656]
 unique_name_in_owner = true

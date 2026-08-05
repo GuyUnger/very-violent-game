@@ -3,6 +3,9 @@ render_mode cull_disabled;
 
 uniform sampler2D albedo : source_color, repeat_disable;
 instance uniform vec3 modulate : source_color = vec3(1.0);
+instance uniform float opening_enabled = 0.0;
+instance uniform vec4 opening_rect = vec4(0.0);
+instance uniform float editor_wall_base_only = 0.0;
 uniform sampler2D texture_aoe : source_color;
 uniform float metalic : hint_range(0.0, 1.0) = 0.5;
 uniform float specular : hint_range(0.0, 1.0) = 0.5;
@@ -54,6 +57,14 @@ uniform float broken = 0.0;
 uniform float break_edge_width = 0.12;
 uniform vec2 edge_noise_scale = vec2(5.0, 5.0);
 uniform float edge_noise_strength = 0.08;
+group_uniforms;
+
+group_uniforms blood;
+uniform sampler2D blood_splats : filter_nearest, repeat_disable;
+uniform int blood_splat_count = 0;
+uniform sampler2D blood_noise_texture : filter_linear_mipmap, repeat_enable;
+uniform vec2 blood_uv_size = vec2(0.3, 0.3);
+uniform vec4 blood_color : source_color = vec4(0.9, 0.005, 0.008, 0.9);
 group_uniforms;
 
 uniform float contact_height = -999.0;
@@ -220,13 +231,75 @@ float get_broken_edge_alpha(vec2 uv) {
 		edge_distance);
 }
 
+float get_blood_mask(vec2 uv, bool front_facing) {
+	float painted_blood = 0.0;
+	ivec2 blood_texture_size = textureSize(blood_splats, 0);
+	vec2 chunk_size = max(wall_chunk_size, vec2(0.0001));
+	float chunk_min_dimension = min(chunk_size.x, chunk_size.y);
+	vec2 chunk_aspect = chunk_size / chunk_min_dimension;
+
+	for (int splat_index = 0; splat_index < blood_splat_count; splat_index++) {
+		ivec2 splat_pixel = ivec2(
+			splat_index % blood_texture_size.x,
+			 splat_index / blood_texture_size.x);
+		vec4 splat_data = texelFetch(blood_splats, splat_pixel, 0);
+		float splat_side = step(0.5, splat_data.b);
+		float rendered_side = front_facing ? 1.0 : 0.0;
+		if (abs(splat_side - rendered_side) > 0.5) {
+			continue;
+		}
+		float splat_seed = fract(splat_data.b * 2.0);
+		float size_scale = mix(0.7, 1.35, splat_data.a);
+		vec2 splat_uv = (
+			(uv - splat_data.rg) * chunk_aspect
+			/ (blood_uv_size * size_scale));
+		float rotation = splat_seed * TAU;
+		float sin_theta = sin(rotation);
+		float cos_theta = cos(rotation);
+		splat_uv = vec2(
+			cos_theta * splat_uv.x - sin_theta * splat_uv.y,
+			sin_theta * splat_uv.x + cos_theta * splat_uv.y);
+
+		float radius = length(splat_uv);
+		vec2 blood_noise_uv = (
+			splat_uv * 1.75
+			+ vec2(splat_seed * 17.0, splat_seed * 31.0));
+		float edge_noise = texture(blood_noise_texture, blood_noise_uv).r;
+		float noisy_edge = 0.47 + (edge_noise - 0.5) * 0.22;
+		float splat = 1.0 - smoothstep(
+			noisy_edge - 0.07,
+			noisy_edge + 0.04,
+			radius);
+		painted_blood = max(painted_blood, splat);
+	}
+
+	return painted_blood;
+}
+
 void vertex() {
 	local_surface_position = VERTEX.xz;
 	node_random_seed = hash_position(NODE_POSITION_WORLD);
 }
 
 void fragment() {
+	if (!FRONT_FACING) {
+		NORMAL = -NORMAL;
+	}
+
 	vec2 boundary_uv = UV;
+	float height_from_bottom = 1.0 - boundary_uv.y;
+	if (editor_wall_base_only > 0.5 && height_from_bottom > 0.5) {
+		discard;
+	}
+	if (
+		opening_enabled > 0.5
+		&& boundary_uv.x >= opening_rect.x
+		&& boundary_uv.x <= opening_rect.x + opening_rect.z
+		&& boundary_uv.y >= opening_rect.y
+		&& boundary_uv.y <= opening_rect.y + opening_rect.w
+	) {
+		discard;
+	}
 	vec2 surface_uv = local_surface_position;
 	vec2 procedural_uv = surface_uv;
 	procedural_uv += (texture(disorder, surface_uv).r * 2.0 - 1.0) * 0.001;
@@ -273,6 +346,9 @@ void fragment() {
 	float signed_hue_seed = node_random_seed * 2.0 - 1.0;
 	hsv.x = fract(hsv.x + signed_hue_seed * random_hue * 0.5);
 	ALBEDO = hsv_to_rgb(hsv);
+	float blood_mask = get_blood_mask(boundary_uv, FRONT_FACING);
+	ALBEDO = mix(ALBEDO, blood_color.rgb, blood_mask * blood_color.a);
+	ROUGHNESS = mix(ROUGHNESS, 0.72, blood_mask);
 
 	AO = aoe_color.r;
 

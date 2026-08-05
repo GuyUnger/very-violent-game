@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b6b43kqjygo88"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_afjoe"]
+[ext_resource type="ArrayMesh" uid="uid://c7owu6rudb8pb" path="res://content/props/meshes/props_bathroom_sink_simple.res" id="2_afjoe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(0.64269775, 0.11496216, 0.45182616)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_afjoe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581, 0)
+collision_layer = 128
+collision_mask = 128
+max_hp = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+mesh = ExtResource("2_afjoe")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28228882, 0.27610087, 0.18831542)
+shape = SubResource("BoxShape3D_3pyl4")

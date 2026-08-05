@@ -11,7 +11,7 @@ extends Resource
 			surface.changed.connect(_on_surface_changed)
 		emit_changed()
 
-@export_range(0.001, 1.0, 0.001) var spacing_from_previous := 0.06:
+@export_range(0.001, 1.0, 0.001) var spacing_from_previous := 0.0375:
 	set(value): spacing_from_previous = value; emit_changed()
 
 

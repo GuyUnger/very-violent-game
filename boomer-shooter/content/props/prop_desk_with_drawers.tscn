@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bx4ti28mt6sdr"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_021tf"]
+[ext_resource type="ArrayMesh" uid="uid://csdav5oiayrah" path="res://content/props/meshes/props_desk_with_drawers.res" id="2_om37w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umx4j"]
+size = Vector3(1.2039648, 0.02950877, 0.4264624)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_021tf"]
+size = Vector3(0.036064446, 0.7633494, 0.4220935)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_om37w"]
+size = Vector3(0.40250975, 0.38349408, 0.4220935)
+
+[node name="EntityKitchenSink" unique_id=58870841 instance=ExtResource("1_021tf")]
+max_hp = 5
+climbable = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1025911833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00037649274, 0.00037646294, 0)
+mesh = ExtResource("2_om37w")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5650098, 0.77827215, 0.17531863)
+shape = SubResource("BoxShape3D_umx4j")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2" unique_id=2092826966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01894039, 0.38276893, 0.17313418)
+shape = SubResource("BoxShape3D_021tf")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="3" unique_id=1159854735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1432564, 0.38276893, 0.17313418)
+shape = SubResource("BoxShape3D_021tf")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." index="4" unique_id=239790275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20207623, 0.5720289, 0.17313418)
+shape = SubResource("BoxShape3D_om37w")

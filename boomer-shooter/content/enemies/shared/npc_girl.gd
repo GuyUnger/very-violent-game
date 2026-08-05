@@ -1,4 +1,3 @@
-@tool
 extends NPCEnemy
 class_name NPCHumanoidGirl
 
@@ -25,6 +24,7 @@ class_name NPCHumanoidGirl
 @onready var look_at_right_hand = $Characters/Armature/Skeleton3D/LookAtModifierRightHand
 @onready var right_arm_ik = $Characters/Armature/Skeleton3D/TwoBoneIK3D
 @onready var target_marker = $TargetMarker
+@onready var right_hand_target_marker = $RightHandTargetMarker
 @onready var right_arm_attachment = $Characters/Armature/Skeleton3D/BoneAttachmentRightHand
 @onready var physics_bone_simulator = $Characters/Armature/Skeleton3D/PhysicalBoneSimulator3D
 @onready var skeleton = $Characters/Armature/Skeleton3D
@@ -35,6 +35,7 @@ class_name NPCHumanoidGirl
 
 var delta_sum_ := 0.0
 var hitbox_to_physical_bone: Dictionary
+var right_hand_ik_obstructed := false
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -71,7 +72,7 @@ func set_cuts(value: int) -> void:
 
 
 func set_target(node: Node3D) -> void:
-	target = node
+	super(node)
 
 
 func _physics_process(delta: float) -> void:
@@ -95,6 +96,8 @@ func _physics_process(delta: float) -> void:
 
 	if target:
 		target_marker.position = to_local(target.get_center_pos())
+	if not right_hand_ik_obstructed:
+		right_hand_target_marker.global_position = target_marker.global_position
 
 
 func look_at_node_y_axis_lerp(
@@ -130,7 +133,7 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		return
 	
-	var d: float = target_marker.global_position.distance_to(right_arm_attachment.global_position)
+	var d: float = right_hand_target_marker.global_position.distance_to(right_arm_attachment.global_position)
 	
 	right_arm_ik.set_indexed("settings/0/end_bone/length", lerp(0.33, 0.0, d * 0.1))
 
@@ -152,11 +155,11 @@ func _process(delta: float) -> void:
 
 func _on_combat_posture_changed(posture: CombatPosture) -> void:
 	match posture:
-		CombatPosture.SITTING:
+		CombatPosture.PRONE:
 			$Characters/AnimationPlayer.play(
 				"npc_girl_skinny/Sitting Idle",
 				0.5)
-		CombatPosture.CROUCHING:
+		CombatPosture.CROUCHED:
 			$Characters/AnimationPlayer.play(
 				"npc_girl_skinny/Crouch Idle",
 				0.5)
@@ -171,6 +174,18 @@ func set_ik_enabled(value: bool) -> void:
 	look_at_head.active = false
 	look_at_right_hand.active = value
 	right_arm_ik.active = value
+
+
+func set_right_hand_ik_collision_point(collision_point: Vector3) -> void:
+	super(collision_point)
+	right_hand_ik_obstructed = true
+	right_hand_target_marker.global_position = collision_point
+
+
+func clear_right_hand_ik_collision() -> void:
+	super()
+	right_hand_ik_obstructed = false
+	right_hand_target_marker.global_position = target_marker.global_position
 
 
 func die(normal := Vector3.ZERO, hit_shape: CollisionShape3D = null) -> void:
@@ -189,7 +204,7 @@ func begin_rag_doll(normal, hit_shape) -> void:
 	physics_bone_simulator.physical_bones_start_simulation()
 
 	await get_tree().physics_frame
-	impact_bone.apply_central_impulse(-normal * 10.0)
+	impact_bone.apply_central_impulse(-normal * 1.0)
 
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(4.0).timeout
 	physics_bone_simulator.physical_bones_stop_simulation()

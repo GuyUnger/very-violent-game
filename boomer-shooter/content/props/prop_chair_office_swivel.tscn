@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dw035llomoapj"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_vyfkt"]
+[ext_resource type="Script" uid="uid://bx70d02nkis2s" path="res://content/props/prop_chair_office_swivel.gd" id="2_f6ory"]
+[ext_resource type="ArrayMesh" uid="uid://i727j4n2o61b" path="res://content/props/meshes/props_office_chair_swivel.res" id="2_vyfkt"]
+[ext_resource type="PackedScene" uid="uid://dif20xpk7uwdy" path="res://content/props/prop_chair_office_swivel_seat.tscn" id="4_f6ory"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(0.6141046, 0.15210938, 0.57543087)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_vyfkt")]
+script = ExtResource("2_f6ory")
+max_hp = 11111
+remote_character_body_on_hit = true
+
+[node name="Legs" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+mesh = ExtResource("2_vyfkt")
+
+[node name="Seat" parent="Model/Nested" parent_id_path=PackedInt32Array(772001303) index="0" unique_id=691913132 instance=ExtResource("4_f6ory")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28361917, 0.35412347, 0.2640581)
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28492892, 0.072562695, 0.30494443)
+shape = SubResource("BoxShape3D_3pyl4")

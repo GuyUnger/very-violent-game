@@ -1,0 +1,161 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://c5f3guqjrh3wr"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_xvlwe"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_8ns80"]
+[ext_resource type="PackedScene" uid="uid://6s3vaif7lx5b" path="res://content/props/prop_bathroom_toilet.tscn" id="3_fp3gi"]
+[ext_resource type="PackedScene" uid="uid://cjfi6tjhkd464" path="res://content/props/prop_group_bathroom_sink_mirror.tscn" id="4_eh4c1"]
+[ext_resource type="PackedScene" uid="uid://cqqby0pevda20" path="res://content/props/prop_bathroom_bathtub.tscn" id="5_eh4c1"]
+[ext_resource type="PackedScene" uid="uid://cypawspyuk387" path="res://content/props/prop_bathroom_toilet_paper_roll.tscn" id="6_xvlwe"]
+[ext_resource type="PackedScene" uid="uid://6uofbinuniy" path="res://content/props/prop_sofa_two_seater.tscn" id="7_8ns80"]
+[ext_resource type="PackedScene" uid="uid://dngi5br0eomqg" path="res://content/props/prop_kitchen_cabinet_corner.tscn" id="8_fp3gi"]
+[ext_resource type="PackedScene" uid="uid://dir547hv5hvwv" path="res://content/props/prop_kitchen_cabinet.tscn" id="9_wf4dy"]
+[ext_resource type="PackedScene" uid="uid://u5lhkgktuorr" path="res://content/props/prop_bed_single.tscn" id="10_uplc3"]
+[ext_resource type="PackedScene" uid="uid://d2nguv8gvg1w3" path="res://content/props/prop_bedroom_nightstand.tscn" id="11_pucs2"]
+[ext_resource type="PackedScene" uid="uid://bx4ti28mt6sdr" path="res://content/props/prop_desk_with_drawers.tscn" id="12_0kc4q"]
+[ext_resource type="PackedScene" uid="uid://dythsinysl1o4" path="res://content/props/prop_sofa_one_seater.tscn" id="13_12ond"]
+[ext_resource type="PackedScene" uid="uid://dbw3i1ouiatoh" path="res://content/props/prop_chair_stool_tall_swivel.tscn" id="14_blmro"]
+[ext_resource type="PackedScene" uid="uid://dw035llomoapj" path="res://content/props/prop_chair_office_swivel.tscn" id="15_5snrx"]
+[ext_resource type="PackedScene" uid="uid://bs8841jet5cgb" path="res://content/props/prop_group_sink_simple_with_mirror.tscn" id="16_jgxsi"]
+[ext_resource type="PackedScene" uid="uid://dfp21ggkwq67v" path="res://content/props/prop_chair_tall.tscn" id="17_s1axt"]
+[ext_resource type="PackedScene" uid="uid://daqnv0ejcyxay" path="res://content/props/prop_table_tall_small_square.tscn" id="18_1c2o2"]
+[ext_resource type="PackedScene" uid="uid://hj5k42iuve4d" path="res://content/props/prop_kitchen_chair.tscn" id="19_vtleb"]
+
+[sub_resource type="Resource" id="Resource_38m0r"]
+script = ExtResource("2_8ns80")
+id = &"toilet"
+display_name = "Bathroom Toilet"
+category = 3
+scene = ExtResource("3_fp3gi")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_dbnd3"]
+script = ExtResource("2_8ns80")
+id = &"bathroom_kitchen_sink_standing"
+display_name = "Bathroom Sink Standing"
+category = 3
+scene = ExtResource("4_eh4c1")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_ose7d"]
+script = ExtResource("2_8ns80")
+id = &"bathroom_bathtub"
+display_name = "Bathroom Bathtub"
+category = 3
+scene = ExtResource("5_eh4c1")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_skqc5"]
+script = ExtResource("2_8ns80")
+id = &"bathroom_toilet_paper_roll"
+display_name = "Bathroom Toilet Paper Roll"
+category = 3
+scene = ExtResource("6_xvlwe")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_5kqee"]
+script = ExtResource("2_8ns80")
+id = &"softa_two_seater"
+display_name = "Sofa Two Seater"
+category = 3
+scene = ExtResource("7_8ns80")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_22m0a"]
+script = ExtResource("2_8ns80")
+id = &"kitchen_cabinet_corner"
+display_name = "Kitchen Cabinet Corner"
+category = 3
+scene = ExtResource("8_fp3gi")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_fp3gi"]
+script = ExtResource("2_8ns80")
+id = &"kitchen_cabinet"
+display_name = "Kitchen Cabinet"
+category = 3
+scene = ExtResource("9_wf4dy")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_dcyqx"]
+script = ExtResource("2_8ns80")
+id = &"bed_single"
+display_name = "Bed Single"
+category = 3
+scene = ExtResource("10_uplc3")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_jqcsl"]
+script = ExtResource("2_8ns80")
+id = &"bedroom_nightstand"
+display_name = "Bedroom Nightstand"
+category = 3
+scene = ExtResource("11_pucs2")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_021tf"]
+script = ExtResource("2_8ns80")
+id = &"prop_desk_with_drawers"
+display_name = "Desk with Drawers"
+category = 3
+scene = ExtResource("12_0kc4q")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_lqdka"]
+script = ExtResource("2_8ns80")
+id = &"prop_sofa_one_seater"
+display_name = "Sofa One Seater"
+category = 3
+scene = ExtResource("13_12ond")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_1txc6"]
+script = ExtResource("2_8ns80")
+id = &"prop_chair_tall_swivel"
+display_name = "Chair Tall Swivel"
+category = 3
+scene = ExtResource("14_blmro")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_jgxsi"]
+script = ExtResource("2_8ns80")
+id = &"prop_chair_office_swivel"
+display_name = "Chair Office Swivel"
+category = 3
+scene = ExtResource("15_5snrx")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_gjvg8"]
+script = ExtResource("2_8ns80")
+id = &"prop_sink_simple"
+display_name = "Sink Simple"
+category = 3
+scene = ExtResource("16_jgxsi")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_br32f"]
+script = ExtResource("2_8ns80")
+id = &"prop_chair_tall"
+display_name = "Chair Tall"
+category = 3
+scene = ExtResource("17_s1axt")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_1h2t6"]
+script = ExtResource("2_8ns80")
+id = &"prop_table_tall_small_square"
+display_name = "Table Tall Small Square"
+category = 3
+scene = ExtResource("18_1c2o2")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[sub_resource type="Resource" id="Resource_1h2v4"]
+script = ExtResource("2_8ns80")
+id = &"prop_kitchen_chair"
+display_name = "Chair Kitchen"
+category = 3
+scene = ExtResource("19_vtleb")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[resource]
+script = ExtResource("1_xvlwe")
+items = Array[ExtResource("2_8ns80")]([SubResource("Resource_38m0r"), SubResource("Resource_dbnd3"), SubResource("Resource_ose7d"), SubResource("Resource_skqc5"), SubResource("Resource_5kqee"), SubResource("Resource_22m0a"), SubResource("Resource_fp3gi"), SubResource("Resource_dcyqx"), SubResource("Resource_jqcsl"), SubResource("Resource_021tf"), SubResource("Resource_lqdka"), SubResource("Resource_1txc6"), SubResource("Resource_jgxsi"), SubResource("Resource_gjvg8"), SubResource("Resource_br32f"), SubResource("Resource_1h2t6"), SubResource("Resource_1h2v4")])

@@ -34,9 +34,8 @@ collision_mask = 0
 script = ExtResource("1_5ro7y")
 fire_rate = 0.3
 recoil = 1.0
-ammo = 12
+ammo = 99
 pickup_sounds = Array[AudioStream]([ExtResource("2_enli4"), ExtResource("3_4mobr")])
-damage_scale = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1810910289]
 shape = SubResource("BoxShape3D_lea5y")

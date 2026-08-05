@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://b4wf514jb5q76"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_rif8r"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_twsnk"]
+[ext_resource type="Resource" uid="uid://ctrl3mktc7nlv" path="res://map_editor/surfaces/floors/surface_concrete.tres" id="3_2ol8f"]
+[ext_resource type="Resource" uid="uid://nvnwnhfxb8u0" path="res://map_editor/surfaces/ceilings/surface_white_plaster.tres" id="4_4n7b3"]
+
+[sub_resource type="Resource" id="MapEditorItem_concrete"]
+script = ExtResource("2_twsnk")
+id = &"ceiling_concrete"
+display_name = "Concrete"
+category = 8
+surface = ExtResource("3_2ol8f")
+
+[sub_resource type="Resource" id="Resource_wcm3a"]
+script = ExtResource("2_twsnk")
+id = &"Plaster White"
+display_name = "Plaster White"
+category = 8
+surface = ExtResource("4_4n7b3")
+metadata/_custom_type_script = "uid://2q3o78kknsxr"
+
+[resource]
+script = ExtResource("1_rif8r")
+items = Array[ExtResource("2_twsnk")]([SubResource("MapEditorItem_concrete"), SubResource("Resource_wcm3a")])

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bs8841jet5cgb"]
+
+[ext_resource type="PackedScene" uid="uid://c04h15ytwp76g" path="res://content/props/prop_group.tscn" id="1_0jdb2"]
+[ext_resource type="PackedScene" uid="uid://dd18yfqnrvuq7" path="res://content/props/prop_bathroom_mirror.tscn" id="2_8nro1"]
+[ext_resource type="PackedScene" uid="uid://b6b43kqjygo88" path="res://content/props/prop_sink_simple.tscn" id="3_0jdb2"]
+
+[node name="PropGroup" unique_id=259084699 instance=ExtResource("1_0jdb2")]
+
+[node name="StaticBody3D2" parent="." index="0" unique_id=58870841 instance=ExtResource("2_8nro1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29083037, 0.97214246, -0.035480753)
+
+[node name="StaticBody3D3" parent="." index="1" unique_id=1183306867 instance=ExtResource("3_0jdb2")]

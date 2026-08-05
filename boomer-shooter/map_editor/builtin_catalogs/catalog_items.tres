@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://dyqrvatyae2j3"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_oq1x5"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_kfnkl"]
+[ext_resource type="PackedScene" uid="uid://fk2ws4nkdayk" path="res://content/weapons/weapon_smg.tscn" id="3_ncir0"]
+[ext_resource type="PackedScene" uid="uid://crruv3fy0bbv7" path="res://content/weapons/weapon_revolver.tscn" id="4_dwlsx"]
+[ext_resource type="PackedScene" uid="uid://kjth5n3pmvxy" path="res://content/weapons/weapon_shotgun.tscn" id="5_jajhw"]
+
+[sub_resource type="Resource" id="MapEditorItem_mac10"]
+script = ExtResource("2_kfnkl")
+id = &"weapon_mac_10"
+display_name = "MAC10"
+category = 5
+scene = ExtResource("3_ncir0")
+
+[sub_resource type="Resource" id="MapEditorItem_p227"]
+script = ExtResource("2_kfnkl")
+id = &"weapon_p227"
+display_name = "P227"
+category = 5
+scene = ExtResource("4_dwlsx")
+
+[sub_resource type="Resource" id="MapEditorItem_shotgun"]
+script = ExtResource("2_kfnkl")
+id = &"weapon_shotgun"
+display_name = "Shotgun"
+category = 5
+scene = ExtResource("5_jajhw")
+
+[resource]
+script = ExtResource("1_oq1x5")
+items = Array[ExtResource("2_kfnkl")]([SubResource("MapEditorItem_mac10"), SubResource("MapEditorItem_p227"), SubResource("MapEditorItem_shotgun")])

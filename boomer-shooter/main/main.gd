@@ -108,6 +108,7 @@ func try_spawn_portal_from_shot(
 
 
 func spawn_portal(hit_position: Vector3, hit_normal: Vector3) -> void:
+	return
 	portal_spawned = true
 	portal_placement_enabled = false
 	hide_hint()

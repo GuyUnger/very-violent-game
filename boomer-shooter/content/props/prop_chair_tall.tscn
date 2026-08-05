@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dfp21ggkwq67v"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_br32f"]
+[ext_resource type="ArrayMesh" uid="uid://cb63tdl1jiwip" path="res://content/props/meshes/props_chair_tall.res" id="2_br32f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(0.46563476, 0.9724219, 0.45345214)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_br32f")]
+max_hp = 5
+fall_over_on_collision = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+mesh = ExtResource("2_br32f")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18328735, 0.48271894, 0.1777368)
+shape = SubResource("BoxShape3D_3pyl4")
+
+[node name="CenterOfGravity" parent="." index="4" unique_id=1735235713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19576907, 0.9525837, -0.045361042)

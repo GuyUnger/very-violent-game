@@ -1,0 +1,255 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cajx5okn1qgx8"
+path="res://.godot/imported/props.glb-de8843c3b9bec4e34e853e294fd5d924.scn"
+
+[deps]
+
+source_file="res://content/props/props.glb"
+dest_files=["res://.godot/imported/props.glb-de8843c3b9bec4e34e853e294fd5d924.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"meshes": {
+"props_bathroom_sink_simple": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_bathroom_sink_simple.res",
+"save_to_file/path": "uid://c7owu6rudb8pb"
+},
+"props_bathroom_sink_standing": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_bathroom_sink_standing.res",
+"save_to_file/path": "uid://6k7qadgt6rob"
+},
+"props_bed_single": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_bed_single.res",
+"save_to_file/path": "uid://cd3tiavwrnrrl"
+},
+"props_bedroom_night_stand": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_bedroom_night_stand.res",
+"save_to_file/path": "uid://dgbmfbitl3kt5"
+},
+"props_cabinet": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_cabinet.res",
+"save_to_file/path": "uid://7ii80xb638ve"
+},
+"props_cabinet_corner": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_cabinet_corner.res",
+"save_to_file/path": "uid://cwadhvasqir6o"
+},
+"props_chair_stool_tall_swivel": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_chair_stool_tall_swivel.res",
+"save_to_file/path": "uid://cxphcksmd8j67"
+},
+"props_chair_tall": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_chair_tall.res",
+"save_to_file/path": "uid://cb63tdl1jiwip"
+},
+"props_counter_top": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_counter_top.res",
+"save_to_file/path": "uid://dhqsmn14l5fjg"
+},
+"props_counter_top_corner": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_counter_top_corner.res",
+"save_to_file/path": "uid://bxu02skdom6yt"
+},
+"props_desk_with_drawers": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_desk_with_drawers.res",
+"save_to_file/path": "uid://csdav5oiayrah"
+},
+"props_dish_washer": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_dish_washer.res",
+"save_to_file/path": "uid://p4ffv1qx2nqt"
+},
+"props_kitchen_chair": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_kitchen_chair.res",
+"save_to_file/path": "uid://crle1ltu7dod5"
+},
+"props_kitchen_table_small": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_kitchen_table_small.res",
+"save_to_file/path": "uid://bhesu4en5rrfl"
+},
+"props_kitchen_table_small_square": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_kitchen_table_small_square.res",
+"save_to_file/path": "uid://bx3hnol6m85me"
+},
+"props_lamp": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_lamp.res",
+"save_to_file/path": "uid://4aalvrhhlw5n"
+},
+"props_office_chair_swivel": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_office_chair_swivel.res",
+"save_to_file/path": "uid://i727j4n2o61b"
+},
+"props_office_chair_swivel_seat": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_office_chair_swivel_seat.res",
+"save_to_file/path": "uid://1lovh0uuo5ii"
+},
+"props_sofa_leg": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_sofa_leg.res",
+"save_to_file/path": "uid://che6jyml4kanx"
+},
+"props_sofa_one_seater": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_sofa_one_seater.res",
+"save_to_file/path": "uid://nc7vtk7vhppo"
+},
+"props_sofa_two_seater": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_sofa_two_seater.res",
+"save_to_file/path": "uid://biycgdn7cpt7r"
+},
+"props_table_tall_small_square": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_table_tall_small_square.res",
+"save_to_file/path": "uid://734o4iytnqly"
+},
+"props_toilet": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://content/props/meshes/props_toilet.res",
+"save_to_file/path": "uid://fqlm4wwt85ld"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1
+gltf/texture_map_mode=1

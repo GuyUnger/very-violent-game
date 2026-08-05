@@ -8,6 +8,7 @@ var shot_delay_left := 0.0
 var waiting_for_shot := false
 var burst_shots_left := 0
 var use_move_attack_interval := false
+var blind_fire := false
 
 
 func setup(p_npc) -> void:
@@ -18,14 +19,22 @@ func setup(p_npc) -> void:
 		weapon.hide_glow()
 
 
-func begin(p_use_move_attack_interval := false) -> bool:
+func begin(
+		p_use_move_attack_interval := false,
+		p_blind_fire := false
+	) -> bool:
 	if not is_instance_valid(weapon):
 		return false
 	use_move_attack_interval = p_use_move_attack_interval
+	blind_fire = p_blind_fire
 	target_lock = npc.target_lock_time
 	shot_delay_left = 0.0
 	waiting_for_shot = false
 	burst_shots_left = _roll_burst_shots()
+	weapon.enemy_projectile_player_collision_chance = (
+		1.0 - npc.blind_fire_miss_chance
+		if blind_fire
+		else 1.0)
 	weapon.trigger_pressed = false
 	return true
 
@@ -62,6 +71,7 @@ func stop() -> void:
 	waiting_for_shot = false
 	if is_instance_valid(weapon):
 		weapon.trigger_pressed = false
+		weapon.enemy_projectile_player_collision_chance = 1.0
 
 
 func throw_weapon() -> void:

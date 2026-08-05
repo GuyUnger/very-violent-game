@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MapEditorCatalog" format=3 uid="uid://dih4qps44yxbx"]
+
+[ext_resource type="Script" uid="uid://duwili65wf03o" path="res://map_editor/map_editor_catalog.gd" id="1_5e6pc"]
+[ext_resource type="Script" uid="uid://2q3o78kknsxr" path="res://map_editor/map_editor_item.gd" id="2_1hphs"]
+[ext_resource type="Resource" uid="uid://ctrl3mktc7nlv" path="res://map_editor/surfaces/floors/surface_concrete.tres" id="3_t14in"]
+
+[sub_resource type="Resource" id="MapEditorItem_concrete"]
+script = ExtResource("2_1hphs")
+id = &"floor_concrete"
+display_name = "Concrete"
+category = 1
+surface = ExtResource("3_t14in")
+
+[resource]
+script = ExtResource("1_5e6pc")
+items = Array[ExtResource("2_1hphs")]([SubResource("MapEditorItem_concrete")])

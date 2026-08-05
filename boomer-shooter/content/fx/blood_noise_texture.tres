@@ -1,0 +1,19 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://yuia4i2xhxsw"]
+
+[sub_resource type="Gradient" id="Gradient_wu3br"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5720339)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_blood"]
+seed = 1847
+frequency = 0.0044
+fractal_octaves = 4
+fractal_lacunarity = 2.1
+fractal_gain = 0.55
+
+[resource]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_blood")
+color_ramp = SubResource("Gradient_wu3br")
+seamless = true

@@ -27,17 +27,17 @@ func is_node_visible(node: Node3D) -> bool:
 
 	var target_position := node.global_position + Vector3.UP
 	if node is Character:
-		target_position = node.global_position + Vector3.UP * 0.9
+		target_position = (node as Character).get_center_pos()
 
 	var query := PhysicsRayQueryParameters3D.new()
 	query.from = vision.global_position
 	query.to = target_position
 	query.collide_with_bodies = true
 	query.collide_with_areas = false
-	query.collision_mask = VISION_OPAQUE_COLLISION_LAYER + 2 + 8
+	query.collision_mask = VISION_OPAQUE_COLLISION_LAYER
 
 	var result: Dictionary = npc.get_world_3d().direct_space_state.intersect_ray(query)
-	var visible: bool = not result.is_empty() and result.collider == node
+	var visible := result.is_empty()
 	_update_debug_line(
 		query.from,
 		result.position if not result.is_empty() else target_position,

@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="SurfaceDefinition" format=3 uid="uid://cvmj5qydx053g"]
 
 [ext_resource type="Texture2D" uid="uid://dpec3ab8haabq" path="res://bullet_hole_atlas.png" id="1_holes"]
+[ext_resource type="Texture2D" uid="uid://yuia4i2xhxsw" path="res://content/fx/blood_noise_texture.tres" id="1_qu0dq"]
 [ext_resource type="PackedScene" uid="uid://knvaoh3jmvvl" path="res://content/fx/wall_sparks.tscn" id="2_8iehc"]
 [ext_resource type="Script" uid="uid://c54irsxyg2yc1" path="res://map_editor/surface_definition.gd" id="2_surface"]
 

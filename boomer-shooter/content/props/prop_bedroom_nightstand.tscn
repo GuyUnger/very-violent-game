@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d2nguv8gvg1w3"]
+
+[ext_resource type="PackedScene" uid="uid://xybty0fcyef3" path="res://content/props/prop.tscn" id="1_aw5su"]
+[ext_resource type="ArrayMesh" uid="uid://dgbmfbitl3kt5" path="res://content/props/meshes/props_bedroom_night_stand.res" id="2_ro56m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pyl4"]
+size = Vector3(0.40553224, 0.6616846, 0.39927003)
+
+[node name="StaticBody3D" unique_id=58870841 instance=ExtResource("1_aw5su")]
+max_hp = 5
+fall_over_on_collision = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" parent_id_path=PackedInt32Array(1028250517) index="0" unique_id=1464729248]
+transform = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, 0, 0)
+mesh = ExtResource("2_ro56m")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1392700997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1873413, 0.33025244, 0.18597485)
+shape = SubResource("BoxShape3D_3pyl4")
+debug_color = Color(0, 11.708403, 13.469126, 1)

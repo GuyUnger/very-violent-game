@@ -2,9 +2,9 @@ extends Character
 class_name NPC
 
 enum CombatPosture {
-	DEFAULT,
-	CROUCHING,
-	SITTING,
+	STANDING,
+	CROUCHED,
+	PRONE,
 }
 
 enum BodyPart {
@@ -19,10 +19,11 @@ const NPC_BRAIN_SCRIPT = preload("res://content/enemies/ai/npc_brain.gd")
 const NPC_COMBAT_SCRIPT = preload("res://content/enemies/ai/npc_combat.gd")
 const NPC_PERCEPTION_SCRIPT = preload("res://content/enemies/ai/npc_perception.gd")
 const NPC_NAVIGATION_SCRIPT = preload("res://content/enemies/ai/npc_navigation.gd")
+const VISION_OPAQUE_COLLISION_LAYER := 1 << 4
 
 signal died
 signal heard(sound_position: Vector3)
-signal told_enemy_position(enemy: Node3D)
+signal told_enemy_position(position: Vector3)
 signal spotted_enemy(enemy: Character)
 signal combat_posture_changed(posture: CombatPosture)
 
@@ -33,19 +34,21 @@ signal combat_posture_changed(posture: CombatPosture)
 @export var surprised_time := 1.0
 @export_range(0.0, 2.0, 0.01) var attack_vertical_spread := 0.35
 @export_range(0, 100, 1) var intentional_misses_remaining := 1
+@export_range(0.0, 1.0, 0.01) var blind_fire_miss_chance := 0.5
 @export var auto_burst_shot_range := Vector2i(3, 6)
 @export var ignore_player_hearing := false
 @export var draw_debug_vision_ray := false
-@export_range(0.0, 20.0, 0.1) var sitting_distance_threshold := 1.0
-@export_range(0.0, 20.0, 0.1) var crouching_distance_threshold := 2.0
+@export_range(0.0, 1000.0, 0.1) var bullet_stopping_power := 0.0
+@export_range(0.0, 20.0, 0.1) var prone_distance_threshold := 1.0
+@export_range(0.0, 20.0, 0.1) var crouched_distance_threshold := 2.0
 @export_group("Navigation")
 @export var navigation_enabled := true
 @export_group("Damage Multipliers")
-@export_range(0.0, 10.0, 0.05) var head_damage_multiplier := 4.0
-@export_range(0.0, 10.0, 0.05) var torso_damage_multiplier := 1.0
-@export_range(0.0, 10.0, 0.05) var arm_damage_multiplier := 0.25
-@export_range(0.0, 10.0, 0.05) var upper_leg_damage_multiplier := 0.5
-@export_range(0.0, 10.0, 0.05) var lower_leg_damage_multiplier := 0.5
+@export_range(0.0, 10.0, 0.05) var damage_multiplier_head := 4.0
+@export_range(0.0, 10.0, 0.05) var damage_multiplier_torso := 3.0
+@export_range(0.0, 10.0, 0.05) var damage_multiplier_arm := 0.5
+@export_range(0.0, 10.0, 0.05) var damage_multiplier_upper_leg := 2.0
+@export_range(0.0, 10.0, 0.05) var damage_multiplier_lower_leg := 2.0
 @export_group("")
 @export var moving_to: Node3D
 @export var looking_at: Vector3
@@ -63,13 +66,15 @@ var knock_back_force := Vector3.ZERO
 var knock_back_tween_: Tween
 var target_turn_tween: Tween
 var hit_tween_: Tween
-var combat_posture := CombatPosture.DEFAULT:
+var combat_posture := CombatPosture.STANDING:
 	set = set_combat_posture
 var brain
 var perception
 var combat
 var navigation
 var hitbox_to_body_part: Dictionary = {}
+var right_hand_obstruction_timer: Timer
+var right_hand_ik_obstruction_latched := false
 
 
 func _ready() -> void:
@@ -94,6 +99,16 @@ func _ready() -> void:
 	add_child(brain)
 	brain.setup(self, perception, combat)
 
+	right_hand_obstruction_timer = Timer.new()
+	right_hand_obstruction_timer.name = "RightHandObstructionTimer"
+	right_hand_obstruction_timer.wait_time = 1.0
+	right_hand_obstruction_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	right_hand_obstruction_timer.timeout.connect(
+		_poll_right_hand_ik_obstruction)
+	add_child(right_hand_obstruction_timer)
+	if is_instance_valid(target):
+		right_hand_obstruction_timer.start()
+
 
 func set_holes(value: int) -> void:
 	holes = value
@@ -104,7 +119,15 @@ func set_cuts(value: int) -> void:
 
 
 func set_target(node: Node3D) -> void:
+	if target == node:
+		return
 	target = node
+	clear_right_hand_ik_collision()
+	if is_instance_valid(right_hand_obstruction_timer):
+		if is_instance_valid(target):
+			right_hand_obstruction_timer.start()
+		else:
+			right_hand_obstruction_timer.stop()
 
 
 func set_combat_posture(value: CombatPosture) -> void:
@@ -189,8 +212,23 @@ func _heard(sound_position: Vector3) -> void:
 	heard.emit(sound_position)
 
 
-func _told_enemy_position(enemy: Node3D) -> void:
-	told_enemy_position.emit(enemy)
+func _told_enemy_position(position: Vector3) -> void:
+	if ignore_player_hearing:
+		return
+	told_enemy_position.emit(position)
+
+
+func alert_other_enemies(position: Vector3) -> void:
+	for node in get_tree().get_nodes_in_group(&"npc_enemies"):
+		var other := node as NPC
+		if (
+			not other
+			or other == self
+			or other.health <= 0.0
+			or other.get_viewport() != get_viewport()
+		):
+			continue
+		other._told_enemy_position(position)
 
 
 func _on_spotted_enemy(enemy: Character) -> void:
@@ -206,6 +244,59 @@ func play_alert_sound() -> void:
 func start_move_and_attack(enemy: Node3D) -> void:
 	if brain:
 		brain.start_move_and_attack(enemy)
+
+
+func set_right_hand_ik_collision_point(_collision_point: Vector3) -> void:
+	right_hand_ik_obstruction_latched = true
+
+
+func clear_right_hand_ik_collision() -> void:
+	right_hand_ik_obstruction_latched = false
+
+
+func raycast_weapon_emit_to_vision() -> Dictionary:
+	if (
+		not perception
+		or not is_instance_valid(perception.vision)
+		or not combat
+		or not is_instance_valid(combat.weapon)
+	):
+		return {}
+
+	var emit_position: Vector3 = (
+		combat.weapon.global_position + Vector3.UP * 0.1)
+	var vision_position: Vector3 = perception.vision.global_position
+	if emit_position.is_equal_approx(vision_position):
+		return {}
+
+	var query := PhysicsRayQueryParameters3D.create(
+		emit_position,
+		vision_position)
+	query.collision_mask = VISION_OPAQUE_COLLISION_LAYER
+	query.collide_with_bodies = true
+	query.collide_with_areas = false
+	query.exclude = [get_rid()]
+	return get_world_3d().direct_space_state.intersect_ray(query)
+
+
+func _poll_right_hand_ik_obstruction() -> void:
+	if health <= 0.0 or not is_instance_valid(target):
+		clear_right_hand_ik_collision()
+		right_hand_obstruction_timer.stop()
+		return
+	if right_hand_ik_obstruction_latched:
+		return
+
+	var obstruction := raycast_weapon_emit_to_vision()
+	if obstruction.is_empty():
+		clear_right_hand_ik_collision()
+	else:
+		set_right_hand_ik_collision_point(obstruction.position)
+		right_hand_obstruction_timer.stop()
+
+
+func get_bullet_stopping_power() -> float:
+	return bullet_stopping_power
 
 
 func melee() -> void:
@@ -245,26 +336,37 @@ func hit_with_damage_event(event: DamageEvent) -> void:
 	var body_part: BodyPart = hitbox_to_body_part.get(
 		event.hit_shape, BodyPart.TORSO)
 	event.body_part_multiplier = get_body_part_damage_multiplier(body_part)
+	_request_blood_spray(event)
 	hit(event.get_damage(), event.hit_normal, event.hit_shape)
+
+
+func _request_blood_spray(event: DamageEvent) -> void:
+	var spray_direction := event.hit_position - event.shot_origin
+	if spray_direction.is_zero_approx():
+		spray_direction = -event.hit_normal
+	for node in get_tree().get_nodes_in_group("blood_system"):
+		var blood_system := node as BloodSystem
+		if blood_system and blood_system.get_viewport() == get_viewport():
+			blood_system.request_spray(event.hit_position, spray_direction, self)
+			return
 
 
 func get_body_part_damage_multiplier(body_part: BodyPart) -> float:
 	match body_part:
 		BodyPart.HEAD:
-			return head_damage_multiplier
+			return damage_multiplier_head
 		BodyPart.ARM:
-			return arm_damage_multiplier
+			return damage_multiplier_arm
 		BodyPart.UPPER_LEG:
-			return upper_leg_damage_multiplier
+			return damage_multiplier_upper_leg
 		BodyPart.LOWER_LEG:
-			return lower_leg_damage_multiplier
+			return damage_multiplier_lower_leg
 		_:
-			return torso_damage_multiplier
+			return damage_multiplier_torso
 
 
 func die(
 		_normal := Vector3.ZERO,
 		_hit_shape: CollisionShape3D = null) -> void:
-	remove_from_group("aimables")
 	died.emit()
 	Main.instance.enemy_killed.emit()
